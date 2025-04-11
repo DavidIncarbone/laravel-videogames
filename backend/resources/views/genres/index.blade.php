@@ -17,20 +17,20 @@
             </thead>
             <tbody>
 
-                @foreach ($genres as $technology)
+                @foreach ($genres as $genre)
                     <tr>
-                        <td>{{ $technology->name }}</td>
+                        <td>{{ $genre->name }}</td>
                         @php
                             $maxWords = 15;
-                            $words = explode(' ', $technology->description);
+                            $words = explode(' ', $genre->description);
                             $shortenedDescription = implode(' ', array_slice($words, 0, $maxWords));
                         @endphp
                         <td>{{ $shortenedDescription }}...</td>
                         <td class="d-flex justify-content-center gap-3">
-                            <a id="technology-details-btn" href="{{ route('admin.genres.show', $technology) }}"
+                            <a id="genre-details-btn" href="{{ route('admin.genres.show', $genre) }}"
                                 class="btn btn-info">Dettagli</a>
-                            <a class="btn btn-warning" href="{{ route('admin.genres.edit', $technology) }}">Modifica</a>
-                            <button technology="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <a class="btn btn-warning" href="{{ route('admin.genres.edit', $genre) }}">Modifica</a>
+                            <button genre="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 Elimina
                             </button>
@@ -45,10 +45,10 @@
 
     <x-modal>
         <x-slot:deleteBtn>
-            <form action="{{ route('admin.genres.destroy', $technology) }}" method="POST">
+            <form action="{{ route('admin.genres.destroy', $genre) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
+                <input console="submit" value="Elimina definitivamente" class="btn btn-danger">
             </form>
 
         </x-slot>

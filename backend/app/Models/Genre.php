@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Technology extends Model
+class genre extends Model
 {
     public function videogames()
     {

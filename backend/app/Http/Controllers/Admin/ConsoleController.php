@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Type;
+use App\Models\console;
 
-class TypeController extends Controller
+class consoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $console = Type::all();
+        $console = console::all();
         return view("console/index", compact("console"));
     }
 
@@ -28,45 +28,45 @@ class TypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Type $type)
+    public function store(Request $request, console $console)
     {
         $data = $request->all();
-        $newType = new Type;
-        $newType->name = $data["name"];
-        $newType->description = $data["description"];
-        $newType->save();
-        return redirect()->route("admin.console.show", $newType);
+        $newconsole = new console;
+        $newconsole->name = $data["name"];
+        $newconsole->description = $data["description"];
+        $newconsole->save();
+        return redirect()->route("admin.console.show", $newconsole);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Type $type)
+    public function show(console $console)
     {
-        return view("console.show", compact("type"));
+        return view("console.show", compact("console"));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Type $type)
+    public function edit(console $console)
     {
-        $console = Type::all();
+        $console = console::all();
 
-        return view("console.edit", compact("type", "console"));
+        return view("console.edit", compact("console", "console"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Type $type)
+    public function update(Request $request, console $console)
     {
         $data = $request->all();
 
-        $type->name = $data["name"];
-        $type->description = $data["description"];
+        $console->name = $data["name"];
+        $console->description = $data["description"];
 
-        $type->update();
+        $console->update();
 
         return redirect()->route("admin.console.index");
     }
@@ -74,9 +74,9 @@ class TypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Type $type)
+    public function destroy(console $console)
     {
-        $type->delete();
+        $console->delete();
 
         return redirect()->route("admin.console.index");
     }

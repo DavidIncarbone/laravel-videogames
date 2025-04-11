@@ -22,19 +22,19 @@
                         <h2>{{ $videogame->name }}</h2>
                         <div>
                             <a class="btn btn-warning" href="{{ route('admin.videogames.edit', $videogame) }}">Modifica</a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <button console="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 Elimina
                             </button>
                         </div>
                     </div>
-                    <p><strong>Tipo:</strong> {{ $videogame->type->name }}</p>
+                    <p><strong>Tipo:</strong> {{ $videogame->console->name }}</p>
 
                     <div class="mb-3">
 
-                        @foreach ($videogame->genres as $technology)
-                            <a href="{{ route('admin.genres.show', $technology) }}" class="badge text-decoration-none"
-                                style="background-color: {{ $technology->color }}">{{ $technology->name }}</a>
+                        @foreach ($videogame->genres as $genre)
+                            <a href="{{ route('admin.genres.show', $genre) }}" class="badge text-decoration-none"
+                                style="background-color: {{ $genre->color }}">{{ $genre->name }}</a>
                         @endforeach
                     </div>
                     <p><strong>Cliente:</strong> {{ $videogame->customer }}</p>

@@ -19,7 +19,7 @@
 
         <div class="mb-2">
             <label for="name">{{ __('Name') }}</label>
-            <input class="form-control" type="text" name="name" id="name" autocomplete="name"
+            <input class="form-control" console="text" name="name" id="name" autocomplete="name"
                 value="{{ old('name', $user->name) }}" required autofocus>
             @error('name')
                 <span class="invalid-feedback" role="alert">
@@ -33,7 +33,7 @@
                 {{ __('Email') }}
             </label>
 
-            <input id="email" name="email" type="email" class="form-control"
+            <input id="email" name="email" console="email" class="form-control"
                 value="{{ old('email', $user->email) }}" required autocomplete="username" />
 
             @error('email')
@@ -62,7 +62,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-4">
-            <button class="btn btn-primary" type="submit">{{ __('Save') }}</button>
+            <button class="btn btn-primary" console="submit">{{ __('Save') }}</button>
 
             @if (session('status') === 'profile-updated')
                 <script>

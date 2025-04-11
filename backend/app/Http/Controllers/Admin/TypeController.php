@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Technology;
+use App\Models\genre;
 
-class TechnologyController extends Controller
+class genreController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $genres = Technology::all();
+        $genres = genre::all();
 
         return view("genres/index", compact("genres"));
     }
@@ -32,44 +32,44 @@ class TechnologyController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $newTechnology = new Technology;
-        $newTechnology->name = $data["name"];
-        $newTechnology->description = $data["description"];
-        $newTechnology->color = $data["color"];
+        $newgenre = new genre;
+        $newgenre->name = $data["name"];
+        $newgenre->description = $data["description"];
+        $newgenre->color = $data["color"];
 
-        $newTechnology->save();
+        $newgenre->save();
 
-        return redirect()->route("admin.genres.show", $newTechnology);
+        return redirect()->route("admin.genres.show", $newgenre);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Technology $technology)
+    public function show(genre $genre)
     {
-        return view("genres.show", compact("technology"));
+        return view("genres.show", compact("genre"));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Technology $technology)
+    public function edit(genre $genre)
     {
-        return view("genres.edit", compact("technology"));
+        return view("genres.edit", compact("genre"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Technology $technology)
+    public function update(Request $request, genre $genre)
     {
         $data = $request->all();
 
-        $technology->name = $data["name"];
-        $technology->description = $data["description"];
-        $technology->color = $data["color"];
+        $genre->name = $data["name"];
+        $genre->description = $data["description"];
+        $genre->color = $data["color"];
 
-        $technology->update();
+        $genre->update();
 
         return redirect()->route("admin.genres.index");
     }
@@ -77,9 +77,9 @@ class TechnologyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Technology $technology)
+    public function destroy(genre $genre)
     {
-        $technology->delete();
+        $genre->delete();
 
         return redirect()->route("admin.genres.index");
     }

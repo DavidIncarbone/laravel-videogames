@@ -31,7 +31,7 @@
                 @foreach ($videogames as $videogame)
                     <tr>
                         <td>{{ $videogame->name }}</td>
-                        <td>{{ $videogame->type->name }}</td>
+                        <td>{{ $videogame->console->name }}</td>
                         <td>{{ $videogame->customer }}</td>
                         <td>{{ $videogame->period }}</td>
                         @php
@@ -44,7 +44,7 @@
                             <a id="videogame-details-btn" href="{{ route('admin.videogames.show', $videogame) }}"
                                 class="btn btn-info">Dettagli</a>
                             <a class="btn btn-warning" href="{{ route('admin.videogames.edit', $videogame) }}">Modifica</a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <button console="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 Elimina
                             </button>

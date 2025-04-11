@@ -17,20 +17,20 @@
             </thead>
             <tbody>
 
-                @foreach ($console as $type)
+                @foreach ($console as $console)
                     <tr>
-                        <td>{{ $type->name }}</td>
+                        <td>{{ $console->name }}</td>
                         @php
                             $maxWords = 20;
-                            $words = explode(' ', $type->description);
+                            $words = explode(' ', $console->description);
                             $shortenedDescription = implode(' ', array_slice($words, 0, $maxWords));
                         @endphp
                         <td>{{ $shortenedDescription }}...</td>
                         <td class="d-flex justify-content-center gap-3">
-                            <a id="type-details-btn" href="{{ route('admin.console.show', $type) }}"
+                            <a id="console-details-btn" href="{{ route('admin.console.show', $console) }}"
                                 class="btn btn-info">Dettagli</a>
-                            <a class="btn btn-warning" href="{{ route('admin.console.edit', $type) }}">Modifica</a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <a class="btn btn-warning" href="{{ route('admin.console.edit', $console) }}">Modifica</a>
+                            <button console="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 Elimina
                             </button>
@@ -45,10 +45,10 @@
 
     <x-modal>
         <x-slot:deleteBtn>
-            <form action="{{ route('admin.console.destroy', $type) }}" method="POST">
+            <form action="{{ route('admin.console.destroy', $console) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
+                <input console="submit" value="Elimina definitivamente" class="btn btn-danger">
             </form>
             <x-slot:delete>Elimina la console </x-slot>
             <x-slot:wantDelete>Vuoi eliminare la console?</x-slot>

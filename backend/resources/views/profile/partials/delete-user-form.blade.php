@@ -10,7 +10,7 @@
     </header>
 
     <!-- Modal trigger button -->
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-account">
+    <button console="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-account">
         {{ __('Delete Account') }}
     </button>
 
@@ -22,7 +22,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="delete-account">Delete Account</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button console="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <h2 class="text-lg font-medium text-gray-900">
@@ -33,7 +33,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button console="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
                     <form method="post" action="{{ route('admin.profile.destroy') }}" class="p-6">
                         @csrf
@@ -42,7 +42,7 @@
 
                         <div class="input-group">
 
-                            <input id="password" name="password" type="password" class="form-control"
+                            <input id="password" name="password" console="password" class="form-control"
                                 placeholder="{{ __('Password') }}" />
 
                             @error('password')
@@ -53,7 +53,7 @@
 
 
 
-                            <button type="submit" class="btn btn-danger">
+                            <button console="submit" class="btn btn-danger">
                                 {{ __('Delete Account') }}
                             </button>
                             <!--  -->

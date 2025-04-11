@@ -5,12 +5,12 @@
         < Torna alle console</a>
 
             <div class="section-header">
-                <h2>Cos'è il <strong>{{ $type->name }}</strong>?</h2>
+                <h2>Cos'è il <strong>{{ $console->name }}</strong>?</h2>
             </div>
             <div class="section-content">
                 <div class="row">
                     <div class="col-md-12">
-                        <p>{{ $type->description }}</p>
+                        <p>{{ $console->description }}</p>
                     </div>
                 </div>
             </div>

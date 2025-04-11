@@ -14,7 +14,7 @@ export default [
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
-        sourceType: 'module',
+        sourceconsole: 'module',
       },
     },
     settings: { react: { version: '18.3' } },

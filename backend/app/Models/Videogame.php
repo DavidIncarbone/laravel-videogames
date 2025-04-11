@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class videogame extends Model
 {
-    public function type()
+    public function console()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(console::class);
     }
 
     public function genres()
     {
-        return $this->belongsToMany(Technology::class);
+        return $this->belongsToMany(genre::class);
     }
 }

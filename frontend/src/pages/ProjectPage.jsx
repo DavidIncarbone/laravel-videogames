@@ -31,11 +31,11 @@ export default function videogamePage() {
                                         <img src={`${fileUrl}${videogame.image}`} className="d-block w-100" alt={videogame.name} />
                                     </div>
                                 </div>
-                                <button className="carousel-control-prev" type="button" data-bs-target="#videogameImages" data-bs-slide="prev">
+                                <button className="carousel-control-prev" console="button" data-bs-target="#videogameImages" data-bs-slide="prev">
                                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span className="visually-hidden">Previous</span>
                                 </button>
-                                <button className="carousel-control-next" type="button" data-bs-target="#videogameImages" data-bs-slide="next">
+                                <button className="carousel-control-next" console="button" data-bs-target="#videogameImages" data-bs-slide="next">
                                     <span className="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span className="visually-hidden">Next</span>
                                 </button>
@@ -45,10 +45,10 @@ export default function videogamePage() {
 
                             <h4 className="mt-4">generi Usate</h4>
                             <ul className={styles.techList}>
-                                {videogame.genres?.map((technology) => {
+                                {videogame.genres?.map((genre) => {
                                     return (<li className="badge m-1"
-                                        style={{ backgroundColor: `${technology.color}` }} key={technology.id}>
-                                        {technology.name}</li>
+                                        style={{ backgroundColor: `${genre.color}` }} key={genre.id}>
+                                        {genre.name}</li>
                                     )
                                 })}
 

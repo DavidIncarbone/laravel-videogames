@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\videogame;
-use App\Models\Type;
-use App\Models\Technology;
+use App\Models\console;
+use App\Models\genre;
 use Illuminate\Support\Facades\Storage;
 
 class videogameController extends Controller
@@ -24,8 +24,8 @@ class videogameController extends Controller
 
     public function create()
     {
-        $console = Type::all();
-        $genres = Technology::all();
+        $console = console::all();
+        $genres = genre::all();
 
         return view("videogames.create", compact("console", "genres"));
     }
@@ -38,7 +38,7 @@ class videogameController extends Controller
 
 
         $newvideogame->name = $data["name"];
-        $newvideogame->type_id = $data["type_id"];
+        $newvideogame->console_id = $data["console_id"];
         $newvideogame->customer = $data["customer"];
         $newvideogame->period = $data["period"];
         $newvideogame->summary = $data["summary"];
@@ -70,8 +70,8 @@ class videogameController extends Controller
 
     public function edit(videogame $videogame)
     {
-        $console = Type::all();
-        $genres = Technology::all();
+        $console = console::all();
+        $genres = genre::all();
         return view("videogames.edit", compact("videogame", "console", "genres"));
     }
 
@@ -82,7 +82,7 @@ class videogameController extends Controller
         $data = $request->all();
 
         $videogame->name = $data["name"];
-        $videogame->type_id = $data["type_id"];
+        $videogame->console_id = $data["console_id"];
         $videogame->customer = $data["customer"];
         $videogame->period = $data["period"];
         $videogame->summary = $data["summary"];

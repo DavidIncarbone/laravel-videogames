@@ -38,23 +38,23 @@
                          <form>
                              <div class="mb-3">
                                  <label for="username" class="form-label">Nome utente</label>
-                                 <input type="text" class="form-control" id="username" value="Nome Utente" disabled>
+                                 <input console="text" class="form-control" id="username" value="Nome Utente" disabled>
                              </div>
                              <div class="mb-3">
                                  <label for="email" class="form-label">Email</label>
-                                 <input type="email" class="form-control" id="email" value="utente@esempio.com"
+                                 <input console="email" class="form-control" id="email" value="utente@esempio.com"
                                      disabled>
                              </div>
                              <div class="mb-3">
                                  <label for="profession" class="form-label">Professione</label>
-                                 <input type="text" class="form-control" id="profession" value="Sviluppatore Web"
+                                 <input console="text" class="form-control" id="profession" value="Sviluppatore Web"
                                      disabled>
                              </div>
                              <div class="mb-3">
                                  <label for="bio" class="form-label">Bio</label>
                                  <textarea class="form-control" id="bio" rows="4" disabled>Appassionato di genere, sviluppo web e design. Sempre alla ricerca di nuove sfide.</textarea>
                              </div>
-                             <button type="submit" class="btn btn-success">Salva Modifiche</button>
+                             <button console="submit" class="btn btn-success">Salva Modifiche</button>
                          </form>
                      </div>
                  </div>
