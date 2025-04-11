@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('videogames', function (Blueprint $table) {
+        Schema::create('genres', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->decimal("price", 10, 2);
-            $table->year("year_of_publication");
-            $table->integer("pegi");
-            $table->string("cover");
-            $table->json("genre_ids");
-            $table->json("console_ids");
             $table->timestamps();
         });
     }
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('videogames');
+        Schema::dropIfExists('genres');
     }
 };

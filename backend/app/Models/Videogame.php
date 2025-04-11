@@ -9,6 +9,7 @@ class videogame extends Model
 
     protected $casts = [
         'console_ids' => 'array',
+        'genre_ids' => 'array'
     ];
 
 
