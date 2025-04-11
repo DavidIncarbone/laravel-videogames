@@ -1,0 +1,24 @@
+.loaderContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.7);
+
+}
+
+.spinner {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.3rem;
+    color: #007bff;
+
+}
+
+.loadingText {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #007bff;
+    font-weight: 600;
+}
