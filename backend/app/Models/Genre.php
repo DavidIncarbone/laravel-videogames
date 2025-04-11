@@ -8,6 +8,6 @@ class genre extends Model
 {
     public function videogames()
     {
-        return $this->belongsToMany(videogame::class);
+        return $this->belongsToMany(Videogame::class);
     }
 }

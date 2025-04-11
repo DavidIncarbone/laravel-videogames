@@ -9,6 +9,6 @@ class console extends Model
 
     public function videogames()
     {
-        return $this->hasMany(videogame::class);
+        return $this->belongsToMany(Videogame::class);
     }
 }
