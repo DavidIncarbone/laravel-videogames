@@ -1,6 +1,6 @@
 {
     "name": "laravel/laravel",
-    "console": "videogame",
+    "type": "videogame",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": [
         "laravel",

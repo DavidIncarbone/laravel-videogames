@@ -8,7 +8,7 @@ return [
         'pegi' => 12,
         'cover' => 'https://example.com/covers/zelda.jpg',
         'genre_ids' => [1, 2],  // Action, Adventure
-        'console_ids' => [3],    // Nintendo Switch
+        'type_ids' => [3],    // Nintendo Switch
     ],
     [
         'name' => 'Elden Ring',
@@ -17,7 +17,7 @@ return [
         'pegi' => 16,
         'cover' => 'https://example.com/covers/elden_ring.jpg',
         'genre_ids' => [3, 4],  // RPG, Fantasy
-        'console_ids' => [1, 2, 4], // PS5, Xbox Series X, Steam Deck
+        'type_ids' => [1, 2, 4], // PS5, Xbox Series X, Steam Deck
     ],
     [
         'name' => 'Minecraft',
@@ -26,7 +26,7 @@ return [
         'pegi' => 7,
         'cover' => 'https://example.com/covers/minecraft.jpg',
         'genre_ids' => [8, 9],  // Sandbox, Survival
-        'console_ids' => [3, 5, 6], // Switch, PS4, Xbox One
+        'type_ids' => [3, 5, 6], // Switch, PS4, Xbox One
     ],
     [
         'name' => 'FIFA 24',
@@ -35,7 +35,7 @@ return [
         'pegi' => 3,
         'cover' => 'https://example.com/covers/fifa24.jpg',
         'genre_ids' => [6],  // Sports
-        'console_ids' => [1, 2, 5], // PS5, Xbox Series X, PS4
+        'type_ids' => [1, 2, 5], // PS5, Xbox Series X, PS4
     ],
     [
         'name' => 'Call of Duty: Modern Warfare III',
@@ -44,7 +44,7 @@ return [
         'pegi' => 18,
         'cover' => 'https://example.com/covers/cod_mw3.jpg',
         'genre_ids' => [7],  // FPS
-        'console_ids' => [1, 2], // PS5, Xbox Series X
+        'type_ids' => [1, 2], // PS5, Xbox Series X
     ],
     // Aggiungi altri videogiochi qui...
 ];

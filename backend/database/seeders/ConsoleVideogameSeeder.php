@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\type\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Videogame;
-use App\Models\Console;
+use App\Models\type;
 
-class ConsoleVideogameSeeder extends Seeder
+class typeVideogameSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,7 +20,7 @@ class ConsoleVideogameSeeder extends Seeder
 
         foreach ($videogames as $videogame) {
 
-            $videogame->console()->attach($videogame["console_ids"]);
+            $videogame->type()->attach($videogame["type_ids"]);
         };
     }
 }

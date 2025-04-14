@@ -17,7 +17,7 @@
             <a href="{{ route('admin.videogames.index') }}" class="nav-link text-white">Gestisci i videogiochi</a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.console.index') }}" class="nav-link text-white">Gestisci console</a>
+            <a href="{{ route('admin.type.index') }}" class="nav-link text-white">Gestisci type</a>
         </li>
         <li class="nav-item">
             <a href="{{ route('admin.genres.index') }}" class="nav-link text-white">Gestisci generi</a>

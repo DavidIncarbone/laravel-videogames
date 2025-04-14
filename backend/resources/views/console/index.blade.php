@@ -3,34 +3,34 @@
 @section('content')
     <section id="videogames" class="my-5">
 
-        <h1 class="text-center p-3">Lista delle console</h1>
+        <h1 class="text-center p-3">Lista delle type</h1>
 
-        <a class="btn btn-primary" href="{{ route('admin.console.create') }}">Aggiungi console</a>
+        <a class="btn btn-primary" href="{{ route('admin.type.create') }}">Aggiungi type</a>
 
         <table class="table table-bordered table-striped my-3">
             <thead>
                 <tr class="text-center">
-                    <th>console</th>
+                    <th>type</th>
                     <th>Descrizione</th>
                     <th>Opzioni</th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach ($console as $console)
+                @foreach ($type as $type)
                     <tr>
-                        <td>{{ $console->name }}</td>
+                        <td>{{ $type->name }}</td>
                         @php
                             $maxWords = 20;
-                            $words = explode(' ', $console->description);
+                            $words = explode(' ', $type->description);
                             $shortenedDescription = implode(' ', array_slice($words, 0, $maxWords));
                         @endphp
                         <td>{{ $shortenedDescription }}...</td>
                         <td class="d-flex justify-content-center gap-3">
-                            <a id="console-details-btn" href="{{ route('admin.console.show', $console) }}"
+                            <a id="type-details-btn" href="{{ route('admin.type.show', $type) }}"
                                 class="btn btn-info">Dettagli</a>
-                            <a class="btn btn-warning" href="{{ route('admin.console.edit', $console) }}">Modifica</a>
-                            <button console="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <a class="btn btn-warning" href="{{ route('admin.type.edit', $type) }}">Modifica</a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 Elimina
                             </button>
@@ -45,13 +45,13 @@
 
     <x-modal>
         <x-slot:deleteBtn>
-            <form action="{{ route('admin.console.destroy', $console) }}" method="POST">
+            <form action="{{ route('admin.type.destroy', $type) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <input console="submit" value="Elimina definitivamente" class="btn btn-danger">
+                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
             </form>
-            <x-slot:delete>Elimina la console </x-slot>
-            <x-slot:wantDelete>Vuoi eliminare la console?</x-slot>
+            <x-slot:delete>Elimina la type </x-slot>
+            <x-slot:wantDelete>Vuoi eliminare la type?</x-slot>
 
         </x-slot>
 

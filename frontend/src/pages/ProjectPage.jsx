@@ -11,7 +11,7 @@ export default function videogamePage() {
 
     const { videogame, fetchvideogame, isLoading, fileUrl } = useGlobalContext();
     const { id } = useParams();
-    console.log(id);
+    type.log(id);
 
     // Dichiaro le funzioni
 
@@ -31,11 +31,11 @@ export default function videogamePage() {
                                         <img src={`${fileUrl}${videogame.image}`} className="d-block w-100" alt={videogame.name} />
                                     </div>
                                 </div>
-                                <button className="carousel-control-prev" console="button" data-bs-target="#videogameImages" data-bs-slide="prev">
+                                <button className="carousel-control-prev" type="button" data-bs-target="#videogameImages" data-bs-slide="prev">
                                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span className="visually-hidden">Previous</span>
                                 </button>
-                                <button className="carousel-control-next" console="button" data-bs-target="#videogameImages" data-bs-slide="next">
+                                <button className="carousel-control-next" type="button" data-bs-target="#videogameImages" data-bs-slide="next">
                                     <span className="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span className="visually-hidden">Next</span>
                                 </button>

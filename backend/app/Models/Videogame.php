@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class videogame extends Model
+class Videogame extends Model
 {
 
     protected $casts = [
-        'console_ids' => 'array',
+        'type_ids' => 'array',
         'genre_ids' => 'array'
     ];
 
 
-    public function console()
+    public function consoles()
     {
         return $this->belongsToMany(Console::class);
     }

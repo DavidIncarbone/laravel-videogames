@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\type\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Videogame;
 
@@ -25,7 +25,7 @@ class VideogamesSeederTable extends Seeder
             $newVideogame->pegi = $videogame["pegi"];
             $newVideogame->cover = $videogame["cover"];
             $newVideogame->genre_ids = $videogame["genre_ids"];
-            $newVideogame->console_ids = $videogame["console_ids"];
+            $newVideogame->type_ids = $videogame["type_ids"];
 
             $newVideogame->save();
         }

@@ -1,15 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
-    <a href="{{ route('admin.console.index') }}" class="btn btn-primary my-3">
-        < Torna alle console</a>
+    <a href="{{ route('admin.type.index') }}" class="btn btn-primary my-3">
+        < Torna alle type</a>
 
-            <h1 class="text-center py-5">Aggiungi console</h1>
+            <h1 class="text-center py-5">Aggiungi type</h1>
 
             <x-miniform>
                 <x-slot:method></x-slot>
-                <x-slot:action>{{ route('admin.console.store') }}</x-slot>
-                <x-slot:subject>console</x-slot>
+                <x-slot:action>{{ route('admin.type.store') }}</x-slot>
+                <x-slot:subject>type</x-slot>
                 <x-slot:actionTodo>aggiungere</x-slot>
                 <x-slot:inputName>name</x-slot>
                 <x-slot:name></x-slot>

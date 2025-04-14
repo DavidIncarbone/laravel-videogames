@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class console extends Model
+class Console extends Model
 {
 
     public function videogames()

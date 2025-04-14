@@ -48,7 +48,7 @@
             <form action="{{ route('admin.genres.destroy', $genre) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <input console="submit" value="Elimina definitivamente" class="btn btn-danger">
+                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
             </form>
 
         </x-slot>

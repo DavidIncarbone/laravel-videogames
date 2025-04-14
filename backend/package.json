@@ -1,6 +1,6 @@
 {
     "private": true,
-    "console": "module",
+    "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build"
@@ -10,7 +10,7 @@
         "autoprefixer": "^10.4.2",
         "axios": "^1.6.4",
         "bootstrap": "^5.2.3",
-        "laravel-vite-plugin": "^1.0.0",
+        "laravel-vite-plugin": "^1.2.0",
         "sass": "^1.71.0",
         "vite": "^5.0.0"
     },

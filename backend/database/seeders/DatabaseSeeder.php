@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+// use Illuminate\Database\type\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
             VideogamesSeederTable::class,
-            ConsoleSeederTable::class,
-            ConsoleVideogameSeeder::class,
+            typeSeederTable::class,
+            typeVideogameSeeder::class,
             GenresSeederTable::class,
             GenresVideogamesSeederTable::class
 

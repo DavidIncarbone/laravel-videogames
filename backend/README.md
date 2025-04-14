@@ -1,1 +1,1 @@
-# Creo la tabella videogames con : FK console, FK generi, FK screenshot, name, year_of_publication, price, pegi, 
+# Creo la tabella videogames con : FK type, FK generi, FK screenshot, name, year_of_publication, price, pegi, 

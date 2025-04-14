@@ -22,13 +22,13 @@
                         <h2>{{ $videogame->name }}</h2>
                         <div>
                             <a class="btn btn-warning" href="{{ route('admin.videogames.edit', $videogame) }}">Modifica</a>
-                            <button console="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 Elimina
                             </button>
                         </div>
                     </div>
-                    <p><strong>Tipo:</strong> {{ $videogame->console->name }}</p>
+                    <p><strong>Tipo:</strong> {{ $videogame->type->name }}</p>
 
                     <div class="mb-3">
 

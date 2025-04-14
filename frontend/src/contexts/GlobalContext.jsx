@@ -30,23 +30,23 @@ const GlobalProvider = ({ children }) => {
     const fetchvideogames = () => {
         axios.get(apiUrl + endpoint).then((res) => {
             setIsLoading(false);
-            console.log(res.data.data);
+            type.log(res.data.data);
             setvideogames(res.data.data);
 
         }).catch((err) => {
-            console.log(err);
+            type.log(err);
         }).finally(() => {
-            console.log("Chiamata effettuata", videogames);
+            type.log("Chiamata effettuata", videogames);
         });
     };
 
     const fetchvideogame = (id) => {
         axios.get(apiUrl + videogameEndpoint + id).then((res) => {
             setIsLoading(false);
-            console.log(res.data);
+            type.log(res.data);
             setvideogame(res.data.data)
         }).catch((err) => {
-            console.log(err);
+            type.log(err);
         })
     }
 

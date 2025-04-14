@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer("pegi");
             $table->string("cover");
             $table->json("genre_ids");
-            $table->json("console_ids");
+            $table->json("type_ids");
             $table->timestamps();
         });
     }

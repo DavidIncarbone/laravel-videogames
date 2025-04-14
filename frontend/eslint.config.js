@@ -14,7 +14,7 @@ export default [
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
-        sourceconsole: 'module',
+        sourcetype: 'module',
       },
     },
     settings: { react: { version: '18.3' } },
@@ -28,7 +28,7 @@ export default [
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
-      "react/prop-console": 0,
+      "react/prop-type": 0,
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': [
         'warn',
