@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\genre;
+use App\Models\Genre;
 
-class genreController extends Controller
+class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $genres = genre::all();
+        $genres = Genre::all();
 
         return view("genres/index", compact("genres"));
     }
@@ -32,14 +32,13 @@ class genreController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $newgenre = new genre;
-        $newgenre->name = $data["name"];
-        $newgenre->description = $data["description"];
-        $newgenre->color = $data["color"];
+        $newGenre = new genre;
+        $newGenre->name = $data["name"];
 
-        $newgenre->save();
 
-        return redirect()->route("admin.genres.show", $newgenre);
+        $newGenre->save();
+
+        return redirect()->route("admin.genres.index", $newGenre);
     }
 
     /**
@@ -66,8 +65,7 @@ class genreController extends Controller
         $data = $request->all();
 
         $genre->name = $data["name"];
-        $genre->description = $data["description"];
-        $genre->color = $data["color"];
+
 
         $genre->update();
 

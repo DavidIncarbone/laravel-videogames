@@ -14,10 +14,10 @@
             <a href="{{ route('admin.profile.index') }}" class="nav-link text-white">Gestisci Profilo</a>
         </li> --}}
         <li class="nav-item">
-            <a href="{{ route('admin.videogames.index') }}" class="nav-link text-white">Gestisci i videogiochi</a>
+            <a href="{{ route('admin.videogames.index') }}" class="nav-link text-white">Gestisci videogiochi</a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.type.index') }}" class="nav-link text-white">Gestisci type</a>
+            <a href="{{ route('admin.consoles.index') }}" class="nav-link text-white">Gestisci console</a>
         </li>
         <li class="nav-item">
             <a href="{{ route('admin.genres.index') }}" class="nav-link text-white">Gestisci generi</a>
