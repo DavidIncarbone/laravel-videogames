@@ -22,11 +22,13 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
 
+            PegisSeederTable::class,
             VideogamesSeederTable::class,
             ConsoleSeederTable::class,
             ConsoleVideogameSeeder::class,
             GenresSeederTable::class,
-            GenresVideogamesSeederTable::class
+            GenresVideogamesSeederTable::class,
+
 
         ]);
     }

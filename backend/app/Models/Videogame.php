@@ -22,4 +22,10 @@ class Videogame extends Model
     {
         return $this->belongsToMany(Genre::class);
     }
+
+    public function pegi()
+    {
+
+        return $this->belongsTo(Pegi::class);
+    }
 }

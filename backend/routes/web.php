@@ -11,8 +11,8 @@ Route::get("/", function () {
     return redirect()->route("admin.home");
 });
 
-Route::middleware(["auth", "verified"])
-    ->name("admin.")
+Route::/*middleware(["auth", "verified"])
+    ->*/name("admin.")
     ->prefix("admin")
     ->group(function () {
         Route::get('/', function () {

@@ -1,7 +1,3 @@
-@php
-    $pegies = config('pegies');
-@endphp
-
 @extends('layouts.master');
 
 @section('content')
@@ -43,8 +39,8 @@
         <x-slot:year_of_publication>{{ now()->year }}</x-slot>
         <x-slot:price></x-slot:price>
         <x-slot:pegi>
-            @foreach ($pegies as $pegi)
-                <option>{{ $pegi }}</option>
+            @foreach ($pegis as $pegi)
+                <option value="{{ $pegi->id }}">{{ $pegi->age }}</option>
             @endforeach
         </x-slot>
         <x-slot:description></x-slot>

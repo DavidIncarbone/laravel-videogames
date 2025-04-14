@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\videogame;
 use App\Models\Console;
 use App\Models\Genre;
+use App\Models\Pegi;
 use Illuminate\Support\Facades\Storage;
 
 class VideogameController extends Controller
@@ -26,8 +27,9 @@ class VideogameController extends Controller
     {
         $consoles = Console::all();
         $genres = Genre::all();
+        $pegis = Pegi::all();
 
-        return view("videogames.create", compact("consoles", "genres"));
+        return view("videogames.create", compact("consoles", "genres", "pegis"));
     }
 
 
@@ -45,7 +47,7 @@ class VideogameController extends Controller
         // dd($data);
 
         $newVideogame->name = $data["name"];
-        $newVideogame->pegi = $data["pegi"];
+        $newVideogame->pegi_id = $data["pegi"];
         $newVideogame->price = $data["price"];
         $newVideogame->console_ids = $data["console_ids"];
         $newVideogame->genre_ids = $data["genre_ids"];
@@ -82,9 +84,9 @@ class VideogameController extends Controller
 
     public function edit(videogame $videogame)
     {
-        $type = type::all();
+        $consoles = Console::all();
         $genres = Genre::all();
-        return view("videogames.edit", compact("videogame", "type", "genres"));
+        return view("videogames.edit", compact("videogame", "consoles", "genres"));
     }
 
 

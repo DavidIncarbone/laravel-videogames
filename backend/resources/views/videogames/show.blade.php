@@ -28,18 +28,23 @@
                             </button>
                         </div>
                     </div>
-                    <p><strong>Tipo:</strong> {{ $videogame->type->name }}</p>
+                    <p><strong>Disponibile per:</strong></p>
+                    <ul>
+                        @foreach ($videogame->consoles as $console)
+                            <li>{{ $console->name }}</li>
+                        @endforeach
+                    </ul>
 
                     <div class="mb-3">
-
+                        <p><strong>Genere:</strong></p>
                         @foreach ($videogame->genres as $genre)
-                            <a href="{{ route('admin.genres.show', $genre) }}" class="badge text-decoration-none"
-                                style="background-color: {{ $genre->color }}">{{ $genre->name }}</a>
+                            <a href="{{ route('admin.genres.show', $genre) }}"
+                                class="text-decoration-none text-dark">{{ $genre->name }}</a>
                         @endforeach
                     </div>
-                    <p><strong>Cliente:</strong> {{ $videogame->customer }}</p>
-                    <p><strong>Periodo di Realizzazione:</strong> {{ $videogame->period }}</p>
-                    <p><strong>Descrizione:</strong>{{ $videogame->summary }} </p>
+                    <p><strong>Casa produttrice:</strong> {{ $videogame->publisher }}</p>
+                    <p><strong>Anno di uscita:</strong> {{ $videogame->year_of_publication }}</p>
+                    <p><strong>Descrizione:</strong>{{ $videogame->description }} </p>
                 </div>
             </div>
 
