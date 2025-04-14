@@ -12,7 +12,7 @@
             <div class="row">
                 <!-- videogame Image -->
                 <div class="col-md-6 " style=" height:50vh">
-                    <img src="{{ asset('storage/' . $videogame->image) }}" alt="{{ $videogame->name }}"
+                    <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
                         class="rounded shadow-lg show-card-container">
                 </div>
 
@@ -42,15 +42,11 @@
                                 class="text-decoration-none text-dark">{{ $genre->name }}</a>
                         @endforeach
                     </div>
+                    <p><strong>PEGI</strong> {{ $videogame->pegi->age }}</p>
                     <p><strong>Casa produttrice:</strong> {{ $videogame->publisher }}</p>
                     <p><strong>Anno di uscita:</strong> {{ $videogame->year_of_publication }}</p>
                     <p><strong>Descrizione:</strong>{{ $videogame->description }} </p>
                 </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="mt-4">
-                <a href="{{ $videogame->link }}" class="btn btn-success" target="_blank">Visita il Sito del videogioco</a>
             </div>
         </section>
     </div>
