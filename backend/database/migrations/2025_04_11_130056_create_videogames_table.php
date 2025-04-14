@@ -18,8 +18,10 @@ return new class extends Migration
             $table->year("year_of_publication");
             $table->integer("pegi");
             $table->string("cover");
+            $table->longtext("description");
+            $table->string("publisher");
             $table->json("genre_ids");
-            $table->json("type_ids");
+            $table->json("console_ids");
             $table->timestamps();
         });
     }

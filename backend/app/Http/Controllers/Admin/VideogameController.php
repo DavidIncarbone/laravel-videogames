@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\videogame;
-use App\Models\type;
+use App\Models\Console;
 use App\Models\Genre;
 use Illuminate\Support\Facades\Storage;
 
-class videogameController extends Controller
+class VideogameController extends Controller
 {
 
     public function index()
@@ -24,37 +24,49 @@ class videogameController extends Controller
 
     public function create()
     {
-        $type = type::all();
+        $consoles = Console::all();
         $genres = Genre::all();
 
-        return view("videogames.create", compact("type", "genres"));
+        return view("videogames.create", compact("consoles", "genres"));
     }
 
 
     public function store(Request $request)
+
     {
+
+        $request->validate([
+            'price' => ['numeric', 'min:0', 'regex:/^\d+(\.\d{1,2})?$/'],
+        ]);
+
         $data = $request->all();
-        $newvideogame = new videogame();
+        $newVideogame = new Videogame();
 
+        // dd($data);
 
-        $newvideogame->name = $data["name"];
-        $newvideogame->type_id = $data["type_id"];
-        $newvideogame->customer = $data["customer"];
-        $newvideogame->period = $data["period"];
-        $newvideogame->summary = $data["summary"];
-        $newvideogame->link = $data["link"];
+        $newVideogame->name = $data["name"];
+        $newVideogame->pegi = $data["pegi"];
+        $newVideogame->price = $data["price"];
+        $newVideogame->console_ids = $data["console_ids"];
+        $newVideogame->genre_ids = $data["genre_ids"];
+        $newVideogame->publisher = $data["publisher"];
+        $newVideogame->year_of_publication = $data["year_of_publication"];
+        $newVideogame->description = $data["description"];
 
-        if (array_key_exists("image", $data)) {
-            $image_url = Storage::putFile("videogames", $data["image"]);
-            $newvideogame->image = $image_url;
+        if (array_key_exists("cover", $data)) {
+            $cover_url = Storage::putFile("videogames", $data["cover"]);
+            $newVideogame->cover = $cover_url;
         }
 
-        $newvideogame->save();
+        $newVideogame->save();
 
-        if ($request->has("genres")) {
-            $newvideogame->genres()->attach($data["genres"]);
+        if ($request->has("genre_ids")) {
+            $newVideogame->genres()->attach($data["genre_ids"]);
         }
-        return redirect()->route("admin.videogames.show", $newvideogame);
+        if ($request->has("console_ids")) {
+            $newVideogame->consoles()->attach($data["console_ids"]);
+        }
+        return redirect()->route("admin.videogames.show", $newVideogame);
     }
 
     /**

@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\type\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Models\type;
 
-class typeSeederTable extends Seeder
+use Illuminate\Database\Seeder;
+use App\Models\Console;
+
+class ConsoleSeederTable extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,15 +14,15 @@ class typeSeederTable extends Seeder
     public function run(): void
     {
 
-        $type = config("type");
+        $consoles = config("consoles");
 
-        foreach ($type as $currenttype) {
+        foreach ($consoles as $console) {
 
-            $newtype = new type;
+            $newConsole = new Console;
 
-            $newtype->name = $currenttype;
+            $newConsole->name = $console;
 
-            $newtype->save();
+            $newConsole->save();
         }
     }
 }
