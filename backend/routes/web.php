@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\videogameController;
 use App\Http\Controllers\Admin\ConsoleController;
 use App\Http\Controllers\Admin\GenreController;
+use App\Http\Controllers\Admin\PegiController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,7 +22,8 @@ Route::/*middleware(["auth", "verified"])
         Route::resource("profile", ProfileController::class);
         Route::resource("videogames", videogameController::class);
         Route::resource("consoles", ConsoleController::class);
-        Route::resource("genres", genreController::class);
+        Route::resource("genres", GenreController::class);
+        Route::resource("pegis", PegiController::class);
     });
 
 

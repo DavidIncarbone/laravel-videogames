@@ -24,8 +24,8 @@
                         <td class="d-flex justify-content-center gap-3">
 
                             <a class="btn btn-warning" href="{{ route('admin.genres.edit', $genre) }}">Modifica</a>
-                            <button genre="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-genre-id="{{ $genre->id }}">
                                 Elimina
                             </button>
 
@@ -39,7 +39,7 @@
 
     <x-modal>
         <x-slot:deleteBtn>
-            <form action="{{ route('admin.genres.destroy', $genre) }}" method="POST">
+            <form id="deletegenreForm" action="{{ route('admin.genres.destroy', $genre) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
@@ -50,4 +50,16 @@
         <x-slot:wantDelete>Vuoi eliminare il genere?</x-slot>
 
     </x-modal>
+
+    @push('scripts')
+        <script>
+            const deleteModal = document.getElementById('exampleModal');
+            deleteModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const genreId = button.getAttribute('data-genre-id');
+                const form = document.getElementById('deletegenreForm');
+                form.action = `/admin/genres/${genreId}`;
+            });
+        </script>
+    @endpush
 @endsection

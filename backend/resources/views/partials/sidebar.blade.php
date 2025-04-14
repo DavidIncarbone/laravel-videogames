@@ -22,6 +22,9 @@
         <li class="nav-item">
             <a href="{{ route('admin.genres.index') }}" class="nav-link text-white">Gestisci generi</a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.pegis.index') }}" class="nav-link text-white">Gestisci PEGI</a>
+        </li>
         @auth
             <li class="nav-item">
 
