@@ -44,7 +44,7 @@
             @endforeach
         </x-slot>
         <x-slot:description></x-slot>
-        <x-slot:image>
+        <x-slot:cover>
 
             <div class="form-control mb-3 d-flex flex-column">
                 <label for="cover">Cover</label>

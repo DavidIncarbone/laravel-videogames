@@ -42,7 +42,7 @@
             <textarea name="description" id="summary" width="100%" rows="5">{{ $description }}</textarea>
         </div>
 
-        {{ $image }}
+        {{ $cover }}
 
 
 

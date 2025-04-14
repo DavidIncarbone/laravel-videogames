@@ -46,8 +46,8 @@ class VideogameController extends Controller
 
         // dd($data);
 
-        $newVideogame->name = $data["name"];
         $newVideogame->pegi_id = $data["pegi"];
+        $newVideogame->name = $data["name"];
         $newVideogame->price = $data["price"];
         $newVideogame->console_ids = $data["console_ids"];
         $newVideogame->genre_ids = $data["genre_ids"];
@@ -86,7 +86,8 @@ class VideogameController extends Controller
     {
         $consoles = Console::all();
         $genres = Genre::all();
-        return view("videogames.edit", compact("videogame", "consoles", "genres"));
+        $pegis = Pegi::all();
+        return view("videogames.edit", compact("videogame", "consoles", "genres", "pegis"));
     }
 
 
@@ -95,38 +96,46 @@ class VideogameController extends Controller
 
         $data = $request->all();
 
+        $videogame->pegi_id = $data["pegi"];
         $videogame->name = $data["name"];
-        $videogame->type_id = $data["type_id"];
-        $videogame->customer = $data["customer"];
-        $videogame->period = $data["period"];
-        $videogame->summary = $data["summary"];
-        $videogame->link = $data["link"];
+        $videogame->console_ids = $data["console_ids"];
+        $videogame->genre_ids = $data["genre_ids"];
+        $videogame->publisher = $data["publisher"];
+        $videogame->year_of_publication = $data["year_of_publication"];
+        $videogame->description = $data["description"];
+
 
         // dd($data);
 
-        if (array_key_exists("image", $data)) {
+        if (array_key_exists("cover", $data)) {
 
-            if ($videogame->image) {
+            if ($videogame->cover) {
 
-                Storage::delete($videogame->image);
-                $img_url = Storage::putFile("videogames", $data["image"]);
-                $videogame->image = $img_url;
+                Storage::delete($videogame->cover);
+                $cover_url = Storage::putFile("videogames", $data["cover"]);
+                $videogame->cover = $cover_url;
             } else {
-                $img_url = Storage::putFile("videogames", $data["image"]);
-                $videogame->image = $img_url;
+                $cover_url = Storage::putFile("videogames", $data["cover"]);
+                $videogame->cover = $cover_url;
             }
         } else {
 
-            Storage::delete($videogame->image);
-            $videogame->image = null;
+            Storage::delete($videogame->cover);
+            $videogame->cover = null;
         }
 
         $videogame->update();
 
-        if ($request->has("genres")) {
-            $videogame->genres()->sync($data["genres"]);
+        if ($request->has("genre_ids")) {
+            $videogame->genres()->sync($data["genre_ids"]);
         } else {
             $videogame->genres()->detach();
+        }
+
+        if ($request->has("console_ids")) {
+            $videogame->consoles()->sync($data["console_ids"]);
+        } else {
+            $videogame->consoles()->detach();
         }
 
         return redirect()->route("admin.videogames.show", $videogame);
