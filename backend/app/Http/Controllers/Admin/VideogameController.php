@@ -91,7 +91,7 @@ class VideogameController extends Controller
     }
 
 
-    public function update(Request $request, videogame $videogame)
+    public function update(Request $request, Videogame $videogame)
     {
 
         $data = $request->all();
@@ -109,19 +109,8 @@ class VideogameController extends Controller
 
         if (array_key_exists("cover", $data)) {
 
-            if ($videogame->cover) {
-
-                Storage::delete($videogame->cover);
-                $cover_url = Storage::putFile("videogames", $data["cover"]);
-                $videogame->cover = $cover_url;
-            } else {
-                $cover_url = Storage::putFile("videogames", $data["cover"]);
-                $videogame->cover = $cover_url;
-            }
-        } else {
-
-            Storage::delete($videogame->cover);
-            $videogame->cover = null;
+            $cover_url = Storage::putFile("videogames", $data["cover"]);
+            $videogame->cover = $cover_url;
         }
 
         $videogame->update();

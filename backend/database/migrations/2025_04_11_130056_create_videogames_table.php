@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal("price", 10, 2);
             $table->year("year_of_publication");
             $table->integer("pegi")->nullable();
-            $table->string("cover");
+            $table->string("cover")->nullable();
             $table->longtext("description");
             $table->string("publisher");
             $table->json("genre_ids");

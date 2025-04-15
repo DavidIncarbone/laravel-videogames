@@ -21,8 +21,9 @@ class ConsoleSeederTable extends Seeder
             $newConsole = new Console;
 
             $newConsole->name = $console;
+            $newConsole->logo =
 
-            $newConsole->save();
+                $newConsole->save();
         }
     }
 }

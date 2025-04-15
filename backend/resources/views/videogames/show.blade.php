@@ -20,13 +20,7 @@
                 <div class="col-md-6">
                     <div class="d-flex justify-content-between">
                         <h2>{{ $videogame->name }}</h2>
-                        <div>
-                            <a class="btn btn-warning" href="{{ route('admin.videogames.edit', $videogame) }}">Modifica</a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Elimina
-                            </button>
-                        </div>
+
                     </div>
                     <p><strong>Disponibile per:</strong></p>
                     <ul>
@@ -38,11 +32,13 @@
                     <div class="mb-3">
                         <p><strong>Genere:</strong></p>
                         @foreach ($videogame->genres as $genre)
-                            <a href="{{ route('admin.genres.show', $genre) }}"
-                                class="text-decoration-none text-dark">{{ $genre->name }}</a>
+                            <li class="text-decoration-none text-dark">{{ $genre->name }}</li>
                         @endforeach
                     </div>
-                    <p><strong>PEGI</strong> {{ $videogame->pegi->age }}</p>
+                    <div style="width:50px; height:50px" class="mb-3">
+                        <img src="{{ asset('storage/' . $videogame->pegi->logo . '.png') }}"
+                            alt="{{ 'PEGI ' . $videogame->pegi->age }}">
+                    </div>
                     <p><strong>Casa produttrice:</strong> {{ $videogame->publisher }}</p>
                     <p><strong>Anno di uscita:</strong> {{ $videogame->year_of_publication }}</p>
                     <p><strong>Descrizione:</strong>{{ $videogame->description }} </p>

@@ -1,1 +1,10 @@
-# Creo la tabella videogames con : FK type, FK generi, FK screenshot, name, year_of_publication, price, pegi, 
+## STEP DI OGGI
+
+
+# Inserire i loghi per le console
+# Inserire tutti i controlli nei form sia lato view che controller
+# Incrementare il numero di videogames e mostrarli in view con la paginazione
+# Implementare un menu a tendina nella sidebar per le entità secondarie
+# Sistemare la pagina di dettaglio
+# Sistemare la dashboard
+# Fare refactory del codice
