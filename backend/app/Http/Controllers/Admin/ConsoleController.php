@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Console;
+use Illuminate\Support\Facades\Storage;
 
 class ConsoleController extends Controller
 {
@@ -34,6 +35,12 @@ class ConsoleController extends Controller
         $newConsole = new Console;
         $newConsole->name = $data["name"];
 
+        if (array_key_exists("logo", $data)) {
+
+            $logo_url = Storage::putFile("img/consoles", $data["logo"]);
+            $newConsole->logo = $logo_url;
+        }
+
         $newConsole->save();
         return redirect()->route("admin.consoles.index", $newConsole);
     }
@@ -62,9 +69,15 @@ class ConsoleController extends Controller
     public function update(Request $request, Console $console)
     {
         $data = $request->all();
+        // dd($data);
 
         $console->name = $data["name"];
 
+        if (array_key_exists("logo", $data)) {
+
+            $logo_url = Storage::putFile("img/consoles", $data["logo"]);
+            $console->logo = $logo_url;
+        }
 
         $console->update();
 
