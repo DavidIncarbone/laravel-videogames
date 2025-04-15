@@ -14,7 +14,7 @@
     </div>
 
     <!-- Table of videogames -->
-    <section id="videogames" class="my-5">
+    <section id="videogames" class="my-3">
         <table class="table table-bordered table-striped">
             <thead class="">
                 <tr class="text-center">
@@ -30,6 +30,7 @@
                     <tr>
                         <td>{{ $videogame->name }}</td>
                         <td>
+
                             @foreach ($videogame->consoles as $console)
                                 {{ $console->name }}
 
@@ -42,9 +43,6 @@
 
                             {{ $videogame->year_of_publication }}
                         </td>
-
-
-
                         </td>
                         <td class="d-flex gap-3">
                             <a id="videogame-details-btn" href="{{ route('admin.videogames.show', $videogame) }}"

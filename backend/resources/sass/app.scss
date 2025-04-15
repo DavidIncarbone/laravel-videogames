@@ -156,6 +156,12 @@ form textarea {
     margin: 0 auto;
 }
 
+// SHOW
+
+#console-logo {
+    object-fit: contain;
+}
+
 /* Responsività per schermi più piccoli */
 @media (max-width: 768px) {
     .wrapper {
