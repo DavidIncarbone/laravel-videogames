@@ -2,7 +2,7 @@
     $routeName = Route::currentRouteName();
 @endphp
 
-<nav class="sidebar bg-dark text-white p-4">
+<nav class="sidebar bg-dark text-white p-4 overflow-y-auto">
     <ul class="nav flex-column">
         {{-- Dashboard --}}
         <li>
@@ -34,16 +34,15 @@
                     <ul class="nav flex-column small">
                         <li class="nav-item">
                             <a href="{{ route('admin.videogames.index') }}"
-                                class="nav-link text-white d-flex {{ $routeName === 'admin.videogames.index' ? 'active-navlink' : '' }}">
-                                <i class="bi bi-list-ul me-2"></i>
+                                class="nav-link text-white d-flex{{ $routeName === 'admin.videogames.index' ? 'active-navlink' : '' }}">
+                                <i class="bi bi-list-ul me-2 mt-1"></i>
                                 <div>Tutti i videogiochi</div>
-
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.videogames.create') }}"
-                                class="nav-link text-white d-flex{{ $routeName === 'admin.videogames.create' ? 'active-navlink' : '' }}">
-                                <i class="bi bi-plus-square me-2"></i>
+                                class="nav-link text-white d-flex {{ $routeName === 'admin.videogames.create' ? 'active-navlink' : '' }}">
+                                <i class="bi bi-plus-square me-2 mt-1"></i>
                                 <div>Aggiungi videogioco</div>
                             </a>
                         </li>
@@ -66,15 +65,16 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.consoles.index') }}"
                                 class="nav-link text-white d-flex {{ $routeName === 'admin.consoles.index' ? 'active-navlink' : '' }}">
-                                <i class="bi bi-list-ul me-2"></i>
+                                <i class="bi bi-list-ul me-2 mt-1"></i>
                                 <div>Tutte le consoles</div>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.consoles.create') }}"
-                                class="nav-link text-white d-flex{{ $routeName === 'admin.consoles.create' ? 'active-navlink' : '' }}">
-                                <i class="bi bi-plus-square me-2"></i>
-                                <div>Aggiungi console</div>
+                                class="nav-link text-white d-flex {{ $routeName === 'admin.consoles.create' ? 'active-navlink' : '' }}">
+                                <i class="bi bi-plus-square me-2 mt-1"></i>
+                                <span>Aggiungi console</span>
+
                             </a>
                         </li>
                     </ul>

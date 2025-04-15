@@ -184,18 +184,7 @@ form textarea {
 
 // Sidebar responsive
 
-.translate-x-minus-100 {
-    transform: translateX(-100%);
-}
 
-.active-navlink {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-left: 4px solid #0d6efd;
-}
-
-.object-fit-cover {
-    object-fit: cover;
-}
 
 @media (min-width: 992px) {
     #responsiveSidebar {
