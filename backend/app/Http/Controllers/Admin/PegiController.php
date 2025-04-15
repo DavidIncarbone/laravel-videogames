@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Pegi;
+use Illuminate\Support\Facades\Storage;
 
 class PegiController extends Controller
 {
@@ -32,11 +33,17 @@ class PegiController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        // dd($data);
 
 
         $newPegi = new Pegi;
 
         $newPegi->age = $data["age"];
+
+        if (array_key_exists("logo", $data)) {
+            $logo_url = Storage::putFile("img/pegis", $data["logo"]);
+            $newPegi->logo = $logo_url;
+        }
 
         $newPegi->save();
 
@@ -68,6 +75,11 @@ class PegiController extends Controller
         $data = $request->all();
 
         $pegi->age = $data["age"];
+
+        if (array_key_exists("logo", $data)) {
+            $logo_url = Storage::putFile("img/pegis", $data["logo"]);
+            $pegi->logo = $logo_url;
+        }
 
         $pegi->update();
 

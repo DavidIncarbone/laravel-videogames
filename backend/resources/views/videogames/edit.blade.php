@@ -36,12 +36,12 @@
         <x-slot:year_of_publication>{{ $videogame->year_of_publication }}</x-slot>
         <x-slot:description>{{ $videogame->description }}</x-slot>
         <x-slot:cover>
-            <div class="form-control mb-3 d-flex flex-column">
-                <label for="cover">Immagine del videogioco</label>
+            <div class="form-control mb-3 d-flex flex-column gap-1">
+                <label for="cover">Cover del videogioco</label>
                 <input type="file" id="cover" name="cover">
                 @if ($videogame->cover)
                     <div class="d-flex gap-3 align-items-center mt-3">
-                        <div>Immagine attuale:</div>
+                        <div>Cover attuale:</div>
                         <div class="" id="post-image" style="width: 100px; height:50px">
                             <img class="" src="{{ asset('storage/' . $videogame->cover) }}"
                                 alt="{{ $videogame->name }}">

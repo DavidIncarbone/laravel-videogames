@@ -1,19 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
-    <header class="header mt-5">
+    <header class="header my-3">
         <h1>Lista dei videogiochi</h1>
-        <p>Scopri i dettagli dei miei videogiochi più recenti.</p>
     </header>
 
-    <div class="d-flex gap-3 py-4">
+    <div class="d-flex gap-3 py-2">
         <a class="btn btn-primary" href="{{ route('admin.videogames.create') }}">Aggiungi un nuovo videogioco</a>
-
-
-
     </div>
 
-    <!-- Table of videogames -->
     <section id="videogames" class="my-3">
         <table class="table table-bordered table-striped">
             <thead class="">

@@ -19,9 +19,8 @@
             @if ($console->logo)
                 <div class="d-flex gap-3 align-items-center">
                     <div>Logo attuale:</div>
-                    <div class="" id="post-image" style="width: 100px; height:50px">
-                        <img id="console-logo" class="" src="{{ asset('storage/' . $console->logo) }}"
-                            alt="{{ $console->name }}">
+                    <div id="post-image" style="width: 100px; height:50px">
+                        <img id="console-logo" src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}">
                     </div>
                 </div>
             @endif

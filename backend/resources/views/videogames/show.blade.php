@@ -26,7 +26,8 @@
                     </div>
                     <div class="mb-3 d-flex gap-5">
                         <div style="width:50px; height:50px">
-                            <img src="{{ asset('storage/' . $videogame->pegi->logo . '.png') }}"
+
+                            <img src="{{ asset('storage/' . $videogame->pegi->logo) }}"
                                 alt="{{ 'PEGI ' . $videogame->pegi->age }}">
                         </div>
                         <div>

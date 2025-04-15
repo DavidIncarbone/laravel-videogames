@@ -1,34 +1,36 @@
 @extends('layouts.master')
 
 @section('content')
-    <section id="videogames" class="my-5">
+    <section id="videogames">
 
-        <h1 class="text-center p-3">Lista delle generi</h1>
+        <header class="header my-3">
+            <h1>Lista dei generi</h1>
+        </header>
+        <div>
+            <a class="btn btn-primary" href="{{ route('admin.genres.create') }}">Aggiungi genere</a>
+        </div>
 
-        <a class="btn btn-primary" href="{{ route('admin.genres.create') }}">Aggiungi genere</a>
-
-        <table class="table table-bordered table-striped my-3">
+        <table class="table table-bordered table-striped my-3 w-100 m-auto">
             <thead>
                 <tr class="text-center">
-                    <th>Genere</th>
-
-                    <th>Opzioni</th>
+                    <th>Generi</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($genres as $genre)
                     <tr>
-                        <td class="text-center">{{ $genre->name }}</td>
-
-                        <td class="d-flex justify-content-center gap-3">
-
-                            <a class="btn btn-warning" href="{{ route('admin.genres.edit', $genre) }}">Modifica</a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-genre-id="{{ $genre->id }}">
-                                Elimina
-                            </button>
-
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                <div style="width:150px;">{{ $genre->name }}</div>
+                                <div class="d-flex gap-3">
+                                    <a class="btn btn-warning" href="{{ route('admin.genres.edit', $genre) }}">Modifica</a>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal" data-genre-id="{{ $genre->id }}">
+                                        Elimina
+                                    </button>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

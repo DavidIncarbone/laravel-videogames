@@ -1,12 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div><a href="{{ route('admin.genres.index') }}" class="btn btn-primary my-3">
-            < Torna ai generi</a>
-    </div>
-
-
-    <h1 class="text-center py-5">Aggiungi genere</h1>
+    <h1 class="text-center py-3">Aggiungi genere</h1>
 
     <form action="{{ route('admin.genres.store') }}" method="POST">
 

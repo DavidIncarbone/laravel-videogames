@@ -3,15 +3,17 @@
 @section('content')
     <section id="videogames" class="">
 
-        <h1 class="text-center p-3">Lista delle consoles</h1>
+        <header class="header my-3">
+            <h1>Lista delle consoles</h1>
+        </header>
 
-        <div class="d-flex justify-content-center">
+        <div class="r">
 
             <a class="btn btn-primary" href="{{ route('admin.consoles.create') }}">Aggiungi console</a>
 
         </div>
 
-        <table class="table table-bordered table-striped my-3 w-50 m-auto">
+        <table class="table table-bordered table-striped my-3 m-auto">
             <thead>
                 <tr class="text-center">
                     <th>Console</th>
@@ -22,13 +24,15 @@
                 @foreach ($consoles as $console)
                     <tr>
                         <td class="">
-                            <div class="d-flex gap-3 align-items-center">
-                                <div id="post-image" style="width: 100px; height:50px">
-                                    <img id="console-logo" class="" src="{{ asset('storage/' . $console->logo) }}"
-                                        alt="{{ $console->name }}">
-                                </div>
-                                <div style="width:150px">
-                                    {{ $console->name }}
+                            <div class="d-flex justify-content-around gap-3 align-items-center">
+                                <div class="d-flex align-items-center gap-5">
+                                    <div id="post-image" style="width: 100px; height:50px">
+                                        <img id="console-logo" class="" src="{{ asset('storage/' . $console->logo) }}"
+                                            alt="{{ $console->name }}">
+                                    </div>
+                                    <div style="width:150px">
+                                        {{ $console->name }}
+                                    </div>
                                 </div>
                                 <div>
                                     <a class="btn btn-warning"
