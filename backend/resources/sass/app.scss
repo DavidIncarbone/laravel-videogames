@@ -54,6 +54,11 @@ img {
     border-radius: 5px;
 }
 
+.active-navlink {
+    background-color: #575757;
+    border-radius: 5px;
+}
+
 
 .content {
     margin-left: 250px;
@@ -175,6 +180,30 @@ form textarea {
 
 #eye:hover {
     color: #0dcaf0;
+}
+
+// Sidebar responsive
+
+.translate-x-minus-100 {
+    transform: translateX(-100%);
+}
+
+.active-navlink {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid #0d6efd;
+}
+
+@media (min-width: 992px) {
+    #openSidebarBtn {
+        display: none !important;
+    }
+
+    #responsiveSidebar {
+        transform: none !important;
+        position: static !important;
+        height: auto;
+        width: auto;
+    }
 }
 
 /* Responsività per schermi più piccoli */

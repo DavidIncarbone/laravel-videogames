@@ -1,10 +1,7 @@
 @php
-    $isVideogamesActive = str_starts_with(Route::currentRouteName(), 'admin.videogames');
-    $isConsolesActive = str_starts_with(Route::currentRouteName(), 'admin.consoles');
-    $isGenresActive = str_starts_with(Route::currentRouteName(), 'admin.genres');
-    $isPegisActive = str_starts_with(Route::currentRouteName(), 'admin.pegis');
+    $routeName = Route::currentRouteName();
 @endphp
-<!-- Sidebar -->
+
 <nav class="sidebar bg-dark text-white p-4">
     <ul class="nav flex-column">
         {{-- Dashboard --}}
@@ -36,13 +33,17 @@
                 <div class="ps-3">
                     <ul class="nav flex-column small">
                         <li class="nav-item">
-                            <a href="{{ route('admin.videogames.index') }}" class="nav-link text-white">
-                                <i class="bi bi-list-ul me-2"></i> Tutti i videogiochi
+                            <a href="{{ route('admin.videogames.index') }}"
+                                class="nav-link text-white d-flex{{ $routeName === 'admin.videogames.index' ? 'active-navlink' : '' }}">
+                                <i class="bi bi-list-ul me-2"></i>
+                                <div>Tutti i videogiochi</div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.videogames.create') }}" class="nav-link text-white">
-                                <i class="bi bi-plus-square me-2"></i> Aggiungi videogioco
+                            <a href="{{ route('admin.videogames.create') }}"
+                                class="nav-link text-white d-flex{{ $routeName === 'admin.videogames.create' ? 'active-navlink' : '' }}">
+                                <i class="bi bi-plus-square me-2"></i>
+                                <div>Aggiungi videogioco</div>
                             </a>
                         </li>
                     </ul>
@@ -62,13 +63,17 @@
                 <div class="ps-3">
                     <ul class="nav flex-column small">
                         <li class="nav-item">
-                            <a href="{{ route('admin.consoles.index') }}" class="nav-link text-white">
-                                <i class="bi bi-list-ul me-2"></i> Tutte le consoles
+                            <a href="{{ route('admin.consoles.index') }}"
+                                class="nav-link text-white d-flex {{ $routeName === 'admin.consoles.index' ? 'active-navlink' : '' }}">
+                                <i class="bi bi-list-ul me-2"></i>
+                                <div>Tutte le consoles</div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.consoles.create') }}" class="nav-link text-white">
-                                <i class="bi bi-plus-square me-2"></i> Aggiungi console
+                            <a href="{{ route('admin.consoles.create') }}"
+                                class="nav-link text-white d-flex{{ $routeName === 'admin.consoles.create' ? 'active-navlink' : '' }}">
+                                <i class="bi bi-plus-square me-2"></i>
+                                <div>Aggiungi console</div>
                             </a>
                         </li>
                     </ul>
@@ -88,12 +93,14 @@
                 <div class="ps-3">
                     <ul class="nav flex-column small">
                         <li class="nav-item">
-                            <a href="{{ route('admin.genres.index') }}" class="nav-link text-white">
+                            <a href="{{ route('admin.genres.index') }}"
+                                class="nav-link text-white {{ $routeName === 'admin.genres.index' ? 'active-navlink' : '' }}">
                                 <i class="bi bi-list-ul me-2"></i> Tutti i generi
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.genres.create') }}" class="nav-link text-white">
+                            <a href="{{ route('admin.genres.create') }}"
+                                class="nav-link text-white {{ $routeName === 'admin.genres.create' ? 'active-navlink' : '' }}">
                                 <i class="bi bi-plus-square me-2"></i> Aggiungi genere
                             </a>
                         </li>
@@ -114,12 +121,14 @@
                 <div class="ps-3">
                     <ul class="nav flex-column small">
                         <li class="nav-item">
-                            <a href="{{ route('admin.pegis.index') }}" class="nav-link text-white">
+                            <a href="{{ route('admin.pegis.index') }}"
+                                class="nav-link text-white {{ $routeName === 'admin.pegis.index' ? 'active-navlink' : '' }}">
                                 <i class="bi bi-list-ul me-2"></i> Tutti i PEGI
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.pegis.create') }}" class="nav-link text-white">
+                            <a href="{{ route('admin.pegis.create') }}"
+                                class="nav-link text-white {{ $routeName === 'admin.pegis.create' ? 'active-navlink' : '' }}">
                                 <i class="bi bi-plus-square me-2"></i> Aggiungi PEGI
                             </a>
                         </li>
@@ -143,30 +152,29 @@
     </ul>
 </nav>
 
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const collapseElements = document.querySelectorAll('.collapse');
 
         collapseElements.forEach(collapse => {
-            const icon = collapse.previousElementSibling.querySelector('i.bi');
+            const icons = collapse.previousElementSibling.querySelectorAll('i.bi');
+            const toggleIcon = icons[icons.length - 1];
 
-            if (!icon) return;
+            if (!toggleIcon) return;
 
             collapse.addEventListener('show.bs.collapse', function() {
-                icon.classList.remove('bi-caret-right-fill');
-                icon.classList.add('bi-caret-down-fill');
+                toggleIcon.classList.remove('bi-caret-right-fill');
+                toggleIcon.classList.add('bi-caret-down-fill');
             });
 
             collapse.addEventListener('hide.bs.collapse', function() {
-                icon.classList.remove('bi-caret-down-fill');
-                icon.classList.add('bi-caret-right-fill');
+                toggleIcon.classList.remove('bi-caret-down-fill');
+                toggleIcon.classList.add('bi-caret-right-fill');
             });
 
-            // All'avvio, se è aperto, aggiorna l'icona
             if (collapse.classList.contains('show')) {
-                icon.classList.remove('bi-caret-right-fill');
-                icon.classList.add('bi-caret-down-fill');
+                toggleIcon.classList.remove('bi-caret-right-fill');
+                toggleIcon.classList.add('bi-caret-down-fill');
             }
         });
     });

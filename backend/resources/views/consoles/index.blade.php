@@ -4,7 +4,7 @@
     <section id="videogames" class="">
 
         <header class="header my-3">
-            <h1>Lista delle consoles</h1>
+            <h1 class="">Lista delle consoles</h1>
         </header>
         <table class="table table-bordered table-striped my-3 m-auto">
             <thead>
