@@ -4,6 +4,9 @@
     <section id="videogames" class="">
 
         <header class="header my-3">
+            <button id="hamburgerBtn" class="btn btn-outline-dark">
+                <i class="bi bi-list fs-4"></i>
+            </button>
             <h1 class="">Lista delle consoles</h1>
         </header>
         <table class="table table-bordered table-striped my-3 m-auto">

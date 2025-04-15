@@ -15,10 +15,6 @@
 @extends('layouts.master')
 
 @section('content')
-    @include('partials.sidebar')
-
-
-
     <!-- Contenuto principale -->
     <div class="flex-grow-1 p-4">
         <div class="header d-flex justify-content-between align-items-center mb-4">

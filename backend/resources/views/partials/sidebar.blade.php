@@ -34,9 +34,10 @@
                     <ul class="nav flex-column small">
                         <li class="nav-item">
                             <a href="{{ route('admin.videogames.index') }}"
-                                class="nav-link text-white d-flex{{ $routeName === 'admin.videogames.index' ? 'active-navlink' : '' }}">
+                                class="nav-link text-white d-flex {{ $routeName === 'admin.videogames.index' ? 'active-navlink' : '' }}">
                                 <i class="bi bi-list-ul me-2"></i>
                                 <div>Tutti i videogiochi</div>
+
                             </a>
                         </li>
                         <li class="nav-item">

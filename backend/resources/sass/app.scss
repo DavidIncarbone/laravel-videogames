@@ -193,18 +193,23 @@ form textarea {
     border-left: 4px solid #0d6efd;
 }
 
-@media (min-width: 992px) {
-    #openSidebarBtn {
-        display: none !important;
-    }
+.object-fit-cover {
+    object-fit: cover;
+}
 
+@media (min-width: 992px) {
     #responsiveSidebar {
         transform: none !important;
         position: static !important;
         height: auto;
-        width: auto;
+    }
+
+    #hamburgerBtn,
+    #closeSidebarBtn {
+        display: none !important;
     }
 }
+
 
 /* Responsività per schermi più piccoli */
 @media (max-width: 768px) {
@@ -221,5 +226,22 @@ form textarea {
 
     .content {
         margin-left: 0;
+    }
+}
+
+
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    #videogame-details img {
+        width: 100%;
+        height: auto;
     }
 }
