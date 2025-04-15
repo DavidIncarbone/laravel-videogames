@@ -54,6 +54,7 @@ img {
     border-radius: 5px;
 }
 
+
 .content {
     margin-left: 250px;
 }
@@ -160,6 +161,20 @@ form textarea {
 
 #console-logo {
     object-fit: contain;
+}
+
+#pencil:hover {
+
+    color: orange;
+
+}
+
+#trash:hover {
+    color: red;
+}
+
+#eye:hover {
+    color: #0dcaf0;
 }
 
 /* Responsività per schermi più piccoli */

@@ -6,44 +6,48 @@
         <header class="header my-3">
             <h1>Lista delle consoles</h1>
         </header>
-
-        <div class="r">
-
-            <a class="btn btn-primary" href="{{ route('admin.consoles.create') }}">Aggiungi console</a>
-
-        </div>
-
         <table class="table table-bordered table-striped my-3 m-auto">
             <thead>
                 <tr class="text-center">
+                    <th></th>
                     <th>Console</th>
+                    <th>Logo</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($consoles as $console)
                     <tr>
-                        <td class="">
+
+                        <td class="d-flex align-items-center justify-content-center gap-1 " style="height:66px;">
+                            <a class=" text-decoration-none text-dark" href="{{ route('admin.consoles.edit', $console) }}">
+                                <i id="pencil" class="bi bi-pencil"></i>
+                            </a>
+                            <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-console-id="{{ $console->id }}">
+                                <i id="trash" class="bi bi-trash"></i>
+                            </button>
+                        </td>
+
+                        <td>
                             <div class="d-flex justify-content-around gap-3 align-items-center">
                                 <div class="d-flex align-items-center gap-5">
-                                    <div id="post-image" style="width: 100px; height:50px">
-                                        <img id="console-logo" class="" src="{{ asset('storage/' . $console->logo) }}"
-                                            alt="{{ $console->name }}">
-                                    </div>
-                                    <div style="width:150px">
+
+                                    <div style="width:150px" class="text-center">
                                         {{ $console->name }}
                                     </div>
                                 </div>
-                                <div>
-                                    <a class="btn btn-warning"
-                                        href="{{ route('admin.consoles.edit', $console) }}">Modifica</a>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal" data-console-id="{{ $console->id }}">
-                                        Elimina
-                                    </button>
-                                </div>
+
                             </div>
 
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-center">
+                                <div id="post-image" style="width: 100px; height:50px">
+                                    <img id="console-logo" class="" src="{{ asset('storage/' . $console->logo) }}"
+                                        alt="{{ $console->name }}">
+                                </div>
+                            </div>
                         </td>
 
                     </tr>

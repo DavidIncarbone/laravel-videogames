@@ -1,18 +1,19 @@
 @extends('layouts.master')
 
 @section('content')
-    <section id="videogames">
+    <section id="pegis">
 
         <header class="header my-3">
             <h1>Lista dei PEGI</h1>
         </header>
 
-        <a class="btn btn-primary" href="{{ route('admin.pegis.create') }}">Aggiungi PEGI</a>
-
         <table class="table table-bordered table-striped my-3">
             <thead>
                 <tr class="text-center">
-                    <th>PEGI</th>
+                    <th></th>
+                    <th>Logo</th>
+                    <th>Età minima (anni)</th>
+
 
                 </tr>
             </thead>
@@ -20,6 +21,15 @@
 
                 @foreach ($pegis as $pegi)
                     <tr>
+                        <td class="d-flex align-items-center justify-content-center gap-1 " style="height:66px;">
+                            <a class=" text-decoration-none text-dark" href="{{ route('admin.pegis.edit', $pegi) }}">
+                                <i id="pencil" class="bi bi-pencil"></i>
+                            </a>
+                            <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-pegi-id="{{ $pegi->id }}">
+                                <i id="trash" class="bi bi-trash"></i>
+                            </button>
+                        </td>
                         <td>
                             <div class="d-flex align-items-center justify-content-around">
 
@@ -29,23 +39,20 @@
                                             alt="{{ 'PEGI' . $pegi->age }}">
 
                                     </div>
-                                    <div class="d-flex align-items-center">Età minima: {{ $pegi->age }}</div>
+
                                 </div>
-                                <div>
-                                    <a class="btn btn-warning" href="{{ route('admin.pegis.edit', $pegi) }}">Modifica</a>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal" data-pegi-id="{{ $pegi->id }}">
-                                        Elimina
-                                    </button>
-                                </div>
+
+                        </td>
+
+                        <td class="">
+
+                            <div class="d-flex justify-content-center align-items-center" style="height:50px">
+                                <div>{{ $pegi->age }}</div>
                             </div>
-                        </td>
-
-                        <td class="d-flex justify-content-center gap-3">
-
-
 
                         </td>
+
+
                     </tr>
                 @endforeach
 

@@ -1,7 +1,13 @@
 @php
-    use App\Models\videogame;
+    use App\Models\Videogame;
+    use App\Models\Console;
+    use App\Models\Genre;
+    use App\Models\Pegi;
 
-    $videogameCount = videogame::all()->count();
+    $videogamesCount = Videogame::all()->count();
+    $consolesCount = Console::all()->count();
+    $genresCount = Genre::all()->count();
+    $pegisCount = Pegi::all()->count();
 
 @endphp
 
@@ -25,8 +31,8 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">videogiochi completati</h5>
-                        <p class="card-text"><strong>{{ $videogameCount }}</strong></p>
+                        <h5 class="card-title">Videogiochi</h5>
+                        <p class="card-text"><strong>{{ $videogamesCount }}</strong></p>
                     </div>
                 </div>
             </div>
@@ -34,8 +40,8 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Nuovi contatti</h5>
-                        <p class="card-text"></p>
+                        <h5 class="card-title">Consoles</h5>
+                        <p class="card-text"><strong>{{ $consolesCount }}</strong></p>
                     </div>
                 </div>
             </div>
@@ -43,8 +49,16 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Impostazioni</h5>
-                        <p class="card-text"></p>
+                        <h5 class="card-title">Generi</h5>
+                        <p class="card-text"><strong>{{ $genresCount }}</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">PEGI</h5>
+                        <p class="card-text"><strong>{{ $pegisCount }}</strong></p>
                     </div>
                 </div>
             </div>

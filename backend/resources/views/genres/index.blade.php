@@ -6,35 +6,36 @@
         <header class="header my-3">
             <h1>Lista dei generi</h1>
         </header>
-        <div>
-            <a class="btn btn-primary" href="{{ route('admin.genres.create') }}">Aggiungi genere</a>
-        </div>
 
         <table class="table table-bordered table-striped my-3 w-100 m-auto">
             <thead>
                 <tr class="text-center">
-                    <th>Generi</th>
+                    <th></th>
+                    <th>Genere</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($genres as $genre)
                     <tr>
+
+                        <td class="d-flex align-items-center justify-content-center gap-1 " style="height:66px;">
+                            <a class=" text-decoration-none text-dark" href="{{ route('admin.genres.edit', $genre) }}">
+                                <i id="pencil" class="bi bi-pencil"></i>
+                            </a>
+                            <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-genre-id="{{ $genre->id }}">
+                                <i id="trash" class="bi bi-trash"></i>
+                            </button>
+                        </td>
                         <td>
-                            <div class="d-flex justify-content-around">
-                                <div style="width:150px;">{{ $genre->name }}</div>
-                                <div class="d-flex gap-3">
-                                    <a class="btn btn-warning" href="{{ route('admin.genres.edit', $genre) }}">Modifica</a>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal" data-genre-id="{{ $genre->id }}">
-                                        Elimina
-                                    </button>
-                                </div>
+                            <div class="d-flex justify-content-center">
+                                <div style="width:150px;" class="text-center">{{ $genre->name }}</div>
+
                             </div>
                         </td>
                     </tr>
                 @endforeach
-
             </tbody>
         </table>
     </section>
