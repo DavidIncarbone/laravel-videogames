@@ -4,9 +4,7 @@
     <section id="videogames" class="">
 
         <header class="header my-3">
-            <button id="hamburgerBtn" class="btn btn-outline-dark">
-                <i class="bi bi-list fs-4"></i>
-            </button>
+
             <h1 class="">Lista delle consoles</h1>
         </header>
         <table class="table table-bordered table-striped my-3 m-auto">
@@ -47,7 +45,7 @@
                         <td>
                             <div class="d-flex justify-content-center">
                                 <div id="post-image" style="width: 100px; height:50px">
-                                    <img id="console-logo" class="" src="{{ asset('storage/' . $console->logo) }}"
+                                    <img id="logo" class="" src="{{ asset('storage/' . $console->logo) }}"
                                         alt="{{ $console->name }}">
                                 </div>
                             </div>

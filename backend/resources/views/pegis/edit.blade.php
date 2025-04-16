@@ -19,7 +19,7 @@
                 <div class="d-flex align-items-center">
                     <div>Logo attuale:</div>
                     <div id="post-image" style="width: 100px; height:50px">
-                        <img id="console-logo" src="{{ asset('storage/' . $pegi->logo) }}" alt="{{ 'PEGI' . $pegi->age }}">
+                        <img id="logo" src="{{ asset('storage/' . $pegi->logo) }}" alt="{{ 'PEGI' . $pegi->age }}">
                     </div>
                 </div>
             @endif

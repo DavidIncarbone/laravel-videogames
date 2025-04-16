@@ -20,7 +20,7 @@
                 <div class="d-flex gap-3 align-items-center">
                     <div>Logo attuale:</div>
                     <div id="post-image" style="width: 100px; height:50px">
-                        <img id="console-logo" src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}">
+                        <img id="logo" src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}">
                     </div>
                 </div>
             @endif

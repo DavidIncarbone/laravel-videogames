@@ -7,6 +7,8 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
+// GENERAL
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
@@ -27,6 +29,10 @@ img {
     min-height: 100vh;
 }
 
+
+
+// SIDEBAR
+
 .sidebar {
     width: 250px;
     position: fixed;
@@ -43,7 +49,7 @@ img {
 }
 
 .nav-link {
-    color: #fff;
+
     padding: 10px 20px;
     text-transform: uppercase;
     font-weight: bold;
@@ -68,6 +74,8 @@ img {
     font-size: 1.8rem;
     font-weight: bold;
 }
+
+// SHOW
 
 .card {
     margin-bottom: 20px;
@@ -98,7 +106,9 @@ img {
     border: 3px solid #ddd;
 }
 
-/* Profilo - stile specifico */
+// PROFILE
+
+
 .profile-card .card-body {
     padding: 20px;
     text-align: center;
@@ -108,7 +118,9 @@ img {
     border-radius: 50%;
 }
 
-/* Modifica dei form */
+// FORM
+
+
 form input,
 form textarea {
     background-color: #f9f9f9;
@@ -126,6 +138,8 @@ form textarea {
 #videogame-details-btn {
     height: 35px;
 }
+
+// SECONDARY SHOW
 
 
 .section-header {
@@ -162,9 +176,9 @@ form textarea {
     margin: 0 auto;
 }
 
-// SHOW
+// OTHERS
 
-#console-logo {
+#logo {
     object-fit: contain;
 }
 
@@ -182,25 +196,9 @@ form textarea {
     color: #0dcaf0;
 }
 
-// Sidebar responsive
+// RESPONSIVE
 
 
-
-@media (min-width: 992px) {
-    #responsiveSidebar {
-        transform: none !important;
-        position: static !important;
-        height: auto;
-    }
-
-    #hamburgerBtn,
-    #closeSidebarBtn {
-        display: none !important;
-    }
-}
-
-
-/* Responsività per schermi più piccoli */
 @media (max-width: 768px) {
     .wrapper {
         flex-direction: column;
@@ -209,18 +207,59 @@ form textarea {
     .sidebar {
         width: 100%;
         height: auto;
-        position: static;
+        // position: static;
+        position: fixed;
         margin-bottom: 20px;
+        padding: 1rem;
+        z-index: 1020;
+
+    }
+
+    .sidebar h3 {
+
+        font-size: 1.25rem;
+    }
+
+    .sidebar-header-sticky {
+        position: sticky;
+        top: 0;
+        background-color: #212529;
+        z-index: 1020;
+        padding: 1rem 0;
+    }
+
+
+    #mobileSidebarMenu {
+        margin-top: 1rem;
     }
 
     .content {
         margin-left: 0;
+        margin-top: 5rem;
+    }
+
+    th,
+    td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    #comma {
+        display: none;
+    }
+
+    #icons {
+        flex-direction: column;
+        width: 50px;
+        height: 100%
     }
 }
 
 
 
 @media (max-width: 576px) {
+
+
     h1 {
         font-size: 1.5rem;
     }

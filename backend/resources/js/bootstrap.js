@@ -32,3 +32,33 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const collapseElements = document.querySelectorAll('.collapse');
+    // console.log(collapseElements);
+
+    collapseElements.forEach(collapse => {
+        const icons = collapse.previousElementSibling.querySelectorAll('i.bi');
+        // console.log(icons);
+        const toggleIcon = icons[icons.length - 1];
+        // console.log(toggleIcon);
+
+        if (!toggleIcon) return;
+
+        collapse.addEventListener('show.bs.collapse', function () {
+            toggleIcon.classList.remove('bi-caret-right-fill');
+            toggleIcon.classList.add('bi-caret-down-fill');
+        });
+
+        collapse.addEventListener('hide.bs.collapse', function () {
+            toggleIcon.classList.remove('bi-caret-down-fill');
+            toggleIcon.classList.add('bi-caret-right-fill');
+        });
+
+        if (collapse.classList.contains('show')) {
+            toggleIcon.classList.remove('bi-caret-right-fill');
+            toggleIcon.classList.add('bi-caret-down-fill');
+        }
+    });
+});

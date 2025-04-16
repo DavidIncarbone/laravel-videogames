@@ -20,21 +20,23 @@
 
                 @foreach ($videogames as $videogame)
                     <tr>
-                        <td class="d-flex align-items-center justify-content-around">
-                            <a id="videogame-details-btn" href="{{ route('admin.videogames.show', $videogame) }}"
-                                class="text-decoration-none text-dark d-flex align-items-center">
-                                <i id="eye" class="bi bi-eye"></i>
-                            </a>
+                        <td>
+                            <div id="icons" class="d-flex align-items-center justify-content-around">
+                                <a href="{{ route('admin.videogames.show', $videogame) }}"
+                                    class="text-decoration-none text-dark d-flex align-items-center">
+                                    <i id="eye" class="bi bi-eye"></i>
+                                </a>
 
-                            <a class=" text-decoration-none text-dark"
-                                href="{{ route('admin.videogames.edit', $videogame) }}">
-                                <i id="pencil" class="bi bi-pencil"></i>
-                            </a>
+                                <a class=" text-decoration-none text-dark"
+                                    href="{{ route('admin.videogames.edit', $videogame) }}">
+                                    <i id="pencil" class="bi bi-pencil"></i>
+                                </a>
 
-                            <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-videogame-id="{{ $videogame->id }}">
-                                <i id="trash" class="bi bi-trash"></i>
-                            </button>
+                                <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" data-videogame-id="{{ $videogame->id }}">
+                                    <i id="trash" class="bi bi-trash"></i>
+                                </button>
+                            </div>
 
 
                         </td>
@@ -46,14 +48,14 @@
 
 
                                 @if (!$loop->last)
-                                    ,
+                                    <span id="comma">,</span>
                                 @endif
                             @endforeach
                         <td class="text-center">
 
                             {{ $videogame->year_of_publication }}
                         </td>
-                        </td>
+
 
                     </tr>
                 @endforeach

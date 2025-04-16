@@ -35,7 +35,7 @@
 
                                 <div class="d-flex">
                                     <div id="post-image" style="width: 100px; height:50px">
-                                        <img id="console-logo" class="" src="{{ asset('storage/' . $pegi->logo) }}"
+                                        <img id="logo" class="" src="{{ asset('storage/' . $pegi->logo) }}"
                                             alt="{{ 'PEGI' . $pegi->age }}">
 
                                     </div>
