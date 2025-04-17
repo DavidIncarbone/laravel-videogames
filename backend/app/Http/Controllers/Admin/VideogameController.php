@@ -160,6 +160,7 @@ class VideogameController extends Controller
         $consoles = Console::all();
         $genres = Genre::all();
         $pegis = Pegi::all();
+        // $videogame->genre_ids = $videogame->genres->pluck('id')->toArray();
         return view("videogames.edit", compact("videogame", "consoles", "genres", "pegis"));
     }
 
@@ -181,7 +182,7 @@ class VideogameController extends Controller
 
             'price' => ['required', 'numeric', 'min:0.01'],
 
-            'pegi' => ['required', 'exists:pegis,id'],
+            'pegi_id' => ['required', 'exists:pegis,id'],
 
             'description' => ['required', 'string', 'min:10', 'max:500'],
 
@@ -224,8 +225,8 @@ class VideogameController extends Controller
 
 
             // PEGI
-            'pegi.required' => 'Seleziona un\' età minima.',
-            'pegi.exists' => 'L\' età minima selezionata non è vailda.',
+            'pegi_id.required' => 'Seleziona un\' età minima.',
+            'pegi_id.exists' => 'L\' età minima selezionata non è vailda.',
 
             // Descrizione
             'description.required' => 'La descrizione è obbligatoria.',
@@ -241,7 +242,7 @@ class VideogameController extends Controller
 
         $data = $request->all();
 
-        $videogame->pegi_id = $data["pegi"];
+        $videogame->pegi_id = $data["pegi_id"];
         $videogame->name = $data["name"];
         $videogame->console_ids = $data["console_ids"];
         $videogame->genre_ids = $data["genre_ids"];

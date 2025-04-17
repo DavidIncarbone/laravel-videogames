@@ -20,7 +20,7 @@
     {{ $genres }}
     <div class="form-control mb-3 d-flex flex-column p-3">
         <label for="publisher">Casa produttrice*</label>
-        <label for="name" id="input-info">min. 1 max. 255 caratteri</label>
+        <label for="publisher" id="input-info">min. 1 max. 255 caratteri</label>
 
         <div class="d-flex flex-column">
             <input type="text" name="publisher" id="publisher" value="{{ $publisher }}"
@@ -41,7 +41,8 @@
             <div class="d-flex flex-column ">
                 <div>
                     <input type="number" id="year_of_publication" name="year_of_publication" step="1"
-                        class="me-1" value="{{ $year_of_publication }}" placeholder="Inserisci anno">
+                        class="me-1" value="{{ old('year_of_publication', $year_of_publication) }}"
+                        placeholder="Inserisci anno">
                     <div>
                         @error('year_of_publication')
                             <small class="text-danger">{{ $message }}</small>
@@ -59,8 +60,8 @@
                 </div>
                 <div class="d-flex flex-column">
                     <div>
-                        <input type="number" id="price" name="price" step="0.01" value="{{ $price }}"
-                            placeholder="Inserisci prezzo">
+                        <input type="number" id="price" name="price" step="0.01"
+                            value="{{ old('price', $price) }}" placeholder="Inserisci prezzo">
                         <div>
                             @error('price')
                                 <small class="text-danger">{{ $message }}</small>
@@ -75,19 +76,17 @@
                 <label for="pegi">Pegi*</label>
                 <div id="pegi" class="d-flex flex-column" style="height:40px">
                     <div id="pegi-select">
-                        <select name="pegi" id="pegi">
+                        <select name="pegi_id" id="pegi">
                             <option value="" default>Seleziona PEGI</option>
                             {{ $pegi }}
                         </select>
                         <div class="d-flex justify-content-end ">
-                            @error('pegi')
+                            @error('pegi_id')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -103,6 +102,29 @@
         </div>
     </div>
     {{ $cover }}
-    <input type="submit" value="{{ $btnAction }}" class="btn btn-success">
+    <div>
+        <input type="submit" value="{{ $btnAction }}" class="btn btn-success">
+        <button type="button" onclick="clearForm()" class="btn btn-danger">Svuota tutto</button>
+    </div>
 
 </form>
+
+{{-- SCRIPT --}}
+
+<script>
+    function clearForm() {
+        const form = document.querySelector('form');
+
+        // Svuota tutti i campi input/textarea/select
+        form.querySelectorAll('input, textarea, select').forEach(field => {
+            if (field.name === '_method' || field.name === '_token') return;
+            if (field.type === 'checkbox' || field.type === 'radio') {
+                field.checked = false;
+            } else if (field.tagName.toLowerCase() === 'select') {
+                field.selectedIndex = 0;
+            } else if (field.type !== "submit") {
+                field.value = '';
+            }
+        });
+    }
+</script>
