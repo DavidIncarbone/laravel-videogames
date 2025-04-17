@@ -19,7 +19,7 @@
          </div>
 
          <div class="row">
-             <div class="col-md-4">
+             <div class="col-lg-4">
                  <div class="card">
                      <div class="card-body text-center">
                          <img src="https://via.placeholder.com/150" alt="Foto Profilo" class="rounded-circle mb-3"
@@ -31,7 +31,7 @@
                  </div>
              </div>
 
-             <div class="col-md-8">
+             <div class="col-lg-8">
                  <div class="card">
                      <div class="card-body">
                          <h5 class="card-title">Informazioni Personali</h5>

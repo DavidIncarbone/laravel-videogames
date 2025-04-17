@@ -23,7 +23,7 @@ export default function videogamePage() {
             {isLoading ? <Loader /> :
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-8">
+                        <div className="col-lg-8">
                             <h1 className={styles.videogameTitle}>{videogame.name}</h1>
                             <div id="videogameImages" className={`carousel slide ${styles.carousel}`} data-bs-ride="carousel">
                                 <div className="carousel-inner">

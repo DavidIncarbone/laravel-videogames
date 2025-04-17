@@ -55,8 +55,6 @@
 
                             {{ $videogame->year_of_publication }}
                         </td>
-
-
                     </tr>
                 @endforeach
 
@@ -78,15 +76,14 @@
 
     </x-modal>
 
-    @push('scripts')
-        <script>
-            const deleteModal = document.getElementById('exampleModal');
-            deleteModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget;
-                const videogameId = button.getAttribute('data-videogame-id');
-                const form = document.getElementById('deletevideogameForm');
-                form.action = `/admin/videogames/${videogameId}`;
-            });
-        </script>
-    @endpush
+
+    <script>
+        const deleteModal = document.getElementById('exampleModal');
+        deleteModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const videogameId = button.getAttribute('data-videogame-id');
+            const form = document.getElementById('deletevideogameForm');
+            form.action = `/admin/videogames/${videogameId}`;
+        });
+    </script>
 @endsection

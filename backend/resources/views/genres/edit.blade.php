@@ -10,11 +10,18 @@
 
         @method('PUT')
 
-        <div class="form-control d-flex flex-column gap-2 pb-3 mb-3">
-            <label for="name">Modifica il nome del genere</label>
-            <input type="text" name="name" id="name" value="{{ $genre->name }}">
+        <div class="mb-3">
+            <small>I campi contrassegnati con * sono obbligatori</small>
         </div>
 
+        <div class="form-control d-flex flex-column gap-2 pb-3 mb-3">
+            <label for="name">Modifica il nome del genere*</label>
+            <input type="text" name="name" id="name" value="{{ old('name', $genre->name) }}"
+                placeholder="Inserisci qui il nome del genere">
+            @error('name')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
         <input type="submit" value="Salva modifiche" class="btn btn-success">
     </form>
 @endsection

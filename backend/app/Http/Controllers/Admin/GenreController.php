@@ -31,6 +31,32 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
+
+        // VALIDATION
+
+        // Name
+
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+                'alpha',
+
+            ],
+        ], [
+            'name.required' => 'Il campo nome è obbligatorio.',
+            'name.string' => 'Il campo nome deve essere una stringa.',
+            'name.min' => 'Il campo nome deve contenere almeno :min caratteri.',
+            'name.max' => 'Il campo nome non può superare i :max caratteri.',
+            'name.alpha' => 'Il campo nome può contenere solo lettere e spazi.',
+
+        ]);
+
+
+
+
         $data = $request->all();
         $newGenre = new genre;
         $newGenre->name = $data["name"];
@@ -62,11 +88,32 @@ class GenreController extends Controller
      */
     public function update(Request $request, genre $genre)
     {
+
+        // VALIDATION
+
+        // Name
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+                'alpha',
+            ],
+        ], [
+            'name.required' => 'Il campo nome è obbligatorio.',
+            'name.string' => 'Il campo nome deve essere una stringa.',
+            'name.min' => 'Il campo nome deve contenere almeno :min caratteri.',
+            'name.max' => 'Il campo nome non può superare i :max caratteri.',
+            'name.alpha' => 'Il campo nome può contenere solo lettere e spazi.',
+
+        ]);
+
+        // DATABASE
+
+
         $data = $request->all();
-
         $genre->name = $data["name"];
-
-
         $genre->update();
 
         return redirect()->route("admin.genres.index");

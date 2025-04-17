@@ -32,6 +32,36 @@ class PegiController extends Controller
      */
     public function store(Request $request)
     {
+
+        // VALIDATION
+
+        // Age
+        $request->validate([
+            'age' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:100',
+
+            ],
+        ], [
+            'age.required' => 'Il campo età è obbligatorio.',
+            'age.string' => 'Il campo età deve essere un numero.',
+            'age.min' => 'L\'età minima non può essere inferiore ad :min anno.',
+            'age.max' => 'L\'età massima non può essere superiore a :max anni.',
+
+
+        ]);
+
+        // Logo
+
+        $request->validate([
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ], [
+            'logo.image' => 'Il file caricato deve essere un\'immagine.',
+            'logo.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
+            'logo.max' => 'La dimensione massima dell\'immagine è di 2MB.',
+        ]);
         $data = $request->all();
         // dd($data);
 
@@ -72,6 +102,34 @@ class PegiController extends Controller
      */
     public function update(Request $request, Pegi $pegi)
     {
+
+        // VALIDATION
+
+        // Age
+        $request->validate([
+            'age' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:50',
+
+            ],
+        ], [
+            'age.required' => 'Il campo nome è obbligatorio.',
+            'age.numeric' => 'Il campo nome deve essere un numero.',
+            'age.min' => 'L\'età minima non può essere inferiore ad :min anno.',
+            'age.max' => 'L\'età massima non può essere superiore a :max anni.',
+        ]);
+
+        // Logo
+
+        $request->validate([
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ], [
+            'logo.image' => 'Il file caricato deve essere un\'immagine.',
+            'logo.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
+            'logo.max' => 'La dimensione massima dell\'immagine è di 2MB.',
+        ]);
         $data = $request->all();
 
         $pegi->age = $data["age"];

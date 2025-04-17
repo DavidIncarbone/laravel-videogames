@@ -31,6 +31,38 @@ class ConsoleController extends Controller
      */
     public function store(Request $request, Console $console)
     {
+
+        // VALIDATION
+
+        // Name
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+                'regex:/^[\pL\pN\s\-.,!?()\'"]+$/u',
+            ],
+        ], [
+            'name.required' => 'Il campo nome è obbligatorio.',
+            'name.string' => 'Il campo nome deve essere una stringa.',
+            'name.min' => 'Il campo nome deve contenere almeno :min caratteri.',
+            'name.max' => 'Il campo nome non può superare i :max caratteri.',
+            'name.regex' => 'Il nome può contenere lettere, numeri ed i seguenti caratteri: - . , ! ? ( ) \' "',
+
+        ]);
+
+        // Logo
+
+        $request->validate([
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ], [
+            'logo.image' => 'Il file caricato deve essere un\'immagine.',
+            'logo.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
+            'logo.max' => 'La dimensione massima dell\'immagine è di 2MB.',
+        ]);
+
+
         $data = $request->all();
         $newConsole = new Console;
         $newConsole->name = $data["name"];
@@ -68,6 +100,37 @@ class ConsoleController extends Controller
      */
     public function update(Request $request, Console $console)
     {
+        // VALIDATION
+
+        // Name
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+                'regex:/^[\pL\pN\s\-.,!?()\'"]+$/u',
+            ],
+        ], [
+            'name.required' => 'Il campo nome è obbligatorio.',
+            'name.string' => 'Il campo nome deve essere una stringa.',
+            'name.min' => 'Il campo nome deve contenere almeno :min caratteri.',
+            'name.max' => 'Il campo nome non può superare i :max caratteri.',
+            'name.regex' => 'Il nome può contenere lettere, numeri ed i seguenti caratteri: - . , ! ? ( ) \' "',
+
+        ]);
+
+        // Logo
+
+        $request->validate([
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ], [
+            'logo.image' => 'Il file caricato deve essere un\'immagine.',
+            'logo.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
+            'logo.max' => 'La dimensione massima dell\'immagine è di 2MB.',
+        ]);
+
+
         $data = $request->all();
         // dd($data);
 

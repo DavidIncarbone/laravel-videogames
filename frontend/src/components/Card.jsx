@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Card({ data, fileUrl }) {
     return (
-        <div className="col-md-4 mb-4">
+        <div className="col-lg-4 mb-4">
             <div className="card shadow" style={{ height: "50vh" }} >
                 <div className="h-50">
                     <img src={`${fileUrl}${data.image}`} className="card-img-top overflow-y-hidden" alt={data.name} />

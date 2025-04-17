@@ -1,49 +1,108 @@
-@extends('layouts.master')
+<form action="{{ $route }}" method="POST" enctype="multipart/form-data" class="mb-3">
 
-@section('content')
-    <form action="{{ $route }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    {{ $method }}
 
-        @csrf
-        {{ $method }}
+    <div class="mb-1">
+        <small id="form-info">I campi contrassegnati con * sono obbligatori</small>
+    </div>
 
-        <div class="form-control mb-3 d-flex flex-column">
-            <label for="name">Nome del videogioco</label>
-            <input type="text" name="name" id="name" value="{{ $name }}">
-        </div>
-        {{ $console }}
-        {{ $genres }}
-        <div class="form-control mb-3 d-flex flex-column">
-            <label for="publisher">Casa produttrice</label>
-            <input type="text" name="publisher" id="publisher" value="{{ $publisher }}">
-        </div>
+    <div class="form-control mb-3 d-flex flex-column p-3">
+        <label for="name">Nome del videogioco*</label>
+        <label for="name" id="input-info">min. 1 max. 255 caratteri</label>
+        <input type="text" name="name" id="name" value="{{ $name }}"
+            placeholder="Inserisci quì il nome del videogioco">
+        @error('name')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+    </div>
+    {{ $console }}
+    {{ $genres }}
+    <div class="form-control mb-3 d-flex flex-column p-3">
+        <label for="publisher">Casa produttrice*</label>
+        <label for="name" id="input-info">min. 1 max. 255 caratteri</label>
 
-
-        <div class="form-control mb-3 d-flex flex-column flex-md-row gap-3">
-            <div class="d-flex me-3 gap-3">
-                <label for="year-picker">Anno di pubblicazione</label>
-                <input type="number" name="year_of_publication" id="year-picker" min="1900" max="{{ now()->year }}"
-                    value="{{ $year_of_publication }}">
-            </div>
-            <div class="d-flex me-3">
-                <label for="price" class="me-3">Prezzo</label>
-                <input type="number" id="price" name="price" min="0" step="0.01" class="me-1"
-                    value={{ $price }}>
-                <label for="price">€</label>
-            </div>
-            <div class="d-flex gap-3 pb-3 pb-md-0">
-                <label for="pegi">Pegi</label>
-                <select name="pegi" id="pegi">
-                    {{ $pegi }}
-                </select>
+        <div class="d-flex flex-column">
+            <input type="text" name="publisher" id="publisher" value="{{ $publisher }}"
+                placeholder="Inserisci quì la casa produttrice">
+            <div>
+                @error('publisher')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
             </div>
         </div>
+    </div>
+    <div class="form-control mb-3 d-flex flex-column flex-lg-row gap-5 gap-lg-3 p-3">
+        <div class="d-flex justify-content-between me-3 " style="height:40px">
+            <div class="d-flex flex-column">
+                <label for="year_of_publication" class="me-3">Anno di pubblicazione*</label>
+                <label for="year_of_publication" id="input-info">1970 - Anno attuale</label>
+            </div>
+            <div class="d-flex flex-column ">
+                <div>
+                    <input type="number" id="year_of_publication" name="year_of_publication" step="1"
+                        class="me-1" value="{{ $year_of_publication }}" placeholder="Inserisci anno">
+                    <div>
+                        @error('year_of_publication')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
 
-        <div class="form-control mb-3 d-flex flex-column">
-            <label for="summary">Descrizione</label>
-            <textarea name="description" id="summary" width="100%" rows="5">{{ $description }}</textarea>
+            </div>
         </div>
-        {{ $cover }}
-        <input type="submit" value="{{ $btnAction }}" class="btn btn-success">
+        <div class="d-flex flex-column flex-lg-row gap-3">
+            <div class="d-flex justify-content-between me-3 " style="height:40px">
+                <div class="d-flex flex-column">
+                    <label for="price" class="me-3">Prezzo (€)*</label>
+                    <label for="price" id="input-info">min. 0.01€</label>
+                </div>
+                <div class="d-flex flex-column">
+                    <div>
+                        <input type="number" id="price" name="price" step="0.01" value="{{ $price }}"
+                            placeholder="Inserisci prezzo">
+                        <div>
+                            @error('price')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
 
-    </form>
-@endsection
+                </div>
+            </div>
+
+            <div class="d-flex gap-0 gap-lg-3">
+                <label for="pegi">Pegi*</label>
+                <div id="pegi" class="d-flex flex-column" style="height:40px">
+                    <div id="pegi-select">
+                        <select name="pegi" id="pegi">
+                            <option value="" default>Seleziona PEGI</option>
+                            {{ $pegi }}
+                        </select>
+                        <div class="d-flex justify-content-end ">
+                            @error('pegi')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mb-3 d-flex flex-column p-3">
+        <label for="summary">Descrizione*</label>
+        <label for="name" id="input-info">min. 10 max. 500 characters</label>
+        <textarea name="description" id="summary" width="100%" placeholder="Inserisci quì la descrizione del videogioco">{{ $description }}</textarea>
+        <div>
+            @error('description')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+    </div>
+    {{ $cover }}
+    <input type="submit" value="{{ $btnAction }}" class="btn btn-success">
+
+</form>

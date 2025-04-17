@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container-fluid px-3 px-md-5 py-4">
+    <div class="container-fluid px-3 px-lg-5 py-4">
         <!-- Header -->
-        <header class="mb-4 text-center text-md-start">
+        <header class="mb-4 text-center text-lg-start">
             <h1 class="fs-2">{{ $videogame->name }}</h1>
             <p class="text-muted">Esplora i dettagli completi del mio videogioco.</p>
         </header>

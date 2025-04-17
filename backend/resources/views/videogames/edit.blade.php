@@ -55,7 +55,7 @@
         <x-slot:pegi>
 
             @foreach ($pegis as $pegi)
-                <option value="{{ $pegi->id }}" {{ $videogame->pegi_id === $pegi->id ? 'selected' : '' }}>
+                <option value="{{ old('pegi_id', $videogame->pegi_id) === $pegi->id ? 'selected' : '' }}">
                     {{ $pegi->age }}</option>
             @endforeach
 

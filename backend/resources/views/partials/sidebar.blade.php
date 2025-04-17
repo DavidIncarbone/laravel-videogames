@@ -2,12 +2,12 @@
     $routeName = Route::currentRouteName();
 @endphp
 
-<nav class="sidebar bg-dark text-white p-2 p-md-4">
+<nav class="sidebar bg-dark text-white p-2 p-lg-4">
 
     {{-- Dashboard --}}
-    <div class="sidebar-header-sticky d-flex align-items-center gap-3 mb-0 mb-md-3">
+    <div class="sidebar-header-sticky d-flex align-items-center gap-3 mb-0 mb-lg-3">
         <div>
-            <button class="btn btn-outline-light d-md-none" type="button" id="mobileSidebarToggle">
+            <button class="btn btn-outline-light d-lg-none" type="button" id="mobileSidebarToggle">
                 <i class="bi bi-list"></i>
             </button>
         </div>
@@ -21,7 +21,7 @@
     </div>
 
     <ul class="nav flex-column">
-        <div id="mobileSidebarMenu" class="d-none d-md-block mt-md-5 z-1020">
+        <div id="mobileSidebarMenu" class="d-none d-lg-block mt-lg-5 z-1020">
 
             {{-- Portfolio --}}
             <li>
@@ -168,10 +168,37 @@
 </nav>
 
 <script>
+    // TOGGLE ICONS
     document.addEventListener('DOMContentLoaded', function() {
+        const collapseElements = document.querySelectorAll('.collapse');
+        collapseElements.forEach(collapse => {
+            const icons = collapse.previousElementSibling.querySelectorAll('i.bi');
+            const toggleIcon = icons[icons.length - 1];
+            // console.log(toggleIcon);
+
+            if (!toggleIcon) return;
+
+            collapse.addEventListener('show.bs.collapse', function() {
+                toggleIcon.classList.remove('bi-caret-right-fill');
+                toggleIcon.classList.add('bi-caret-down-fill');
+            });
+
+            collapse.addEventListener('hide.bs.collapse', function() {
+                toggleIcon.classList.remove('bi-caret-down-fill');
+                toggleIcon.classList.add('bi-caret-right-fill');
+            });
+
+            if (collapse.classList.contains('show')) {
+                toggleIcon.classList.remove('bi-caret-right-fill');
+                toggleIcon.classList.add('bi-caret-down-fill');
+            }
+        });
+
+        // MOBILE HAM MENU
+
         const toggleBtn = document.getElementById('mobileSidebarToggle');
         const mobileMenu = document.getElementById('mobileSidebarMenu');
-        console.log(mobileMenu);
+        // console.log(mobileMenu);
 
         toggleBtn.addEventListener('click', function() {
             mobileMenu.classList.toggle('d-none');

@@ -24,7 +24,7 @@
 
         <div class="row">
             <!-- Card per statistiche portfolio -->
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Videogiochi</h5>
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <!-- Card per statistiche utenti -->
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Consoles</h5>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <!-- Card per altre informazioni -->
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Generi</h5>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">PEGI</h5>
