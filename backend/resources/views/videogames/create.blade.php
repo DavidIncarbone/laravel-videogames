@@ -38,6 +38,8 @@
                             <label for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
                         </div>
                     @endforeach
+                </div>
+                <div>
                     @error('genre_ids')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
@@ -49,12 +51,12 @@
         <x-slot:price>{{ old('price') }}</x-slot:price>
         <x-slot:pegi>
             @foreach ($pegis as $pegi)
-                <option value="{{ $pegi->id }}"{{ old('pegi_id') === $pegi->id ? 'selected' : '' }}>
+                <option value="{{ $pegi->id }}"{{ old('pegi_id') == $pegi->id ? 'selected' : '' }}>
                     {{ $pegi->age }}</option>
             @endforeach
 
         </x-slot>
-        <x-slot:description></x-slot>
+        <x-slot:description>{{ old('description') }}</x-slot>
         <x-slot:cover>
             <div class="form-control mb-3 d-flex flex-column p-3">
                 <label for="cover">Cover</label>

@@ -1,4 +1,4 @@
-<form action="{{ $route }}" method="POST" enctype="multipart/form-data" class="mb-3">
+<form id="videogameForm" action="{{ $route }}" method="POST" enctype="multipart/form-data" class="mb-3">
 
     @csrf
     {{ $method }}
@@ -16,8 +16,10 @@
             <small class="text-danger">{{ $message }}</small>
         @enderror
     </div>
+
     {{ $console }}
     {{ $genres }}
+
     <div class="form-control mb-3 d-flex flex-column p-3">
         <label for="publisher">Casa produttrice*</label>
         <label for="publisher" id="input-info">min. 1 max. 255 caratteri</label>
@@ -32,6 +34,7 @@
             </div>
         </div>
     </div>
+
     <div class="form-control mb-3 d-flex flex-column flex-lg-row gap-5 gap-lg-3 p-3">
         <div class="d-flex justify-content-between me-3 " style="height:40px">
             <div class="d-flex flex-column">
@@ -49,9 +52,9 @@
                         @enderror
                     </div>
                 </div>
-
             </div>
         </div>
+
         <div class="d-flex flex-column flex-lg-row gap-3">
             <div class="d-flex justify-content-between me-3 " style="height:40px">
                 <div class="d-flex flex-column">
@@ -68,7 +71,6 @@
                             @enderror
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -101,30 +103,12 @@
             @enderror
         </div>
     </div>
+
     {{ $cover }}
+
     <div>
         <input type="submit" value="{{ $btnAction }}" class="btn btn-success">
-        <button type="button" onclick="clearForm()" class="btn btn-danger">Svuota tutto</button>
+        <button type="button" onclick="clearVideogameForm()" class="btn btn-danger">Svuota tutto</button>
     </div>
 
 </form>
-
-{{-- SCRIPT --}}
-
-<script>
-    function clearForm() {
-        const form = document.querySelector('form');
-
-        // Svuota tutti i campi input/textarea/select
-        form.querySelectorAll('input, textarea, select').forEach(field => {
-            if (field.name === '_method' || field.name === '_token') return;
-            if (field.type === 'checkbox' || field.type === 'radio') {
-                field.checked = false;
-            } else if (field.tagName.toLowerCase() === 'select') {
-                field.selectedIndex = 0;
-            } else if (field.type !== "submit") {
-                field.value = '';
-            }
-        });
-    }
-</script>

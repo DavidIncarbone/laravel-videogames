@@ -25,7 +25,7 @@
                                 <i id="pencil" class="bi bi-pencil"></i>
                             </a>
                             <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-console-id="{{ $console->id }}">
+                                data-bs-target="#deleteModal" data-console-id="{{ $console->id }}">
                                 <i id="trash" class="bi bi-trash"></i>
                             </button>
                         </td>
@@ -60,7 +60,7 @@
 
     <x-modal>
         <x-slot:deleteBtn>
-            <form id="deleteconsoleForm" action="{{ route('admin.consoles.destroy', $console) }}" method="POST">
+            <form id="deleteConsoleForm" action="{{ route('admin.consoles.destroy', $console) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
@@ -72,15 +72,14 @@
 
     </x-modal>
 
-    @push('scripts')
-        <script>
-            const deleteModal = document.getElementById('exampleModal');
-            deleteModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget;
-                const consoleId = button.getAttribute('data-console-id');
-                const form = document.getElementById('deleteconsoleForm');
-                form.action = `/admin/consoles/${consoleId}`;
-            });
-        </script>
-    @endpush
+
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const consoleId = button.getAttribute('data-console-id');
+            const form = document.getElementById('deleteConsoleForm');
+            form.action = `/admin/consoles/${consoleId}`;
+        });
+    </script>
 @endsection

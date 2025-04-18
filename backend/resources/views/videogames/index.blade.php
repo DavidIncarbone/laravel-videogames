@@ -33,7 +33,7 @@
                                 </a>
 
                                 <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" data-videogame-id="{{ $videogame->id }}">
+                                    data-bs-target="#deleteModal" data-videogame-id="{{ $videogame->id }}">
                                     <i id="trash" class="bi bi-trash"></i>
                                 </button>
                             </div>
@@ -64,7 +64,7 @@
 
     <x-modal>
         <x-slot:deleteBtn>
-            <form id="deletevideogameForm" action="{{ route('admin.videogames.destroy', $videogame) }}" method="POST">
+            <form id="deleteVideogameForm" action="{{ route('admin.videogames.destroy', $videogame) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
@@ -78,11 +78,11 @@
 
 
     <script>
-        const deleteModal = document.getElementById('exampleModal');
+        const deleteModal = document.getElementById('deleteModal');
         deleteModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
             const videogameId = button.getAttribute('data-videogame-id');
-            const form = document.getElementById('deletevideogameForm');
+            const form = document.getElementById('deleteVideogameForm');
             form.action = `/admin/videogames/${videogameId}`;
         });
     </script>

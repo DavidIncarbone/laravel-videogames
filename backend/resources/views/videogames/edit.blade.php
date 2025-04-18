@@ -1,6 +1,7 @@
 @extends('layouts.master');
 
 @section('content')
+    <h1 class="text-center">Modifica Videogioco</h1>
     <x-form>
 
         <x-slot:route>{{ route('admin.videogames.update', $videogame) }}</x-slot>
@@ -10,6 +11,7 @@
             <div class="form-control mb-3">
                 <label for="" class="">Console</label>
                 <div class="d-flex flex-wrap">
+
                     @foreach ($consoles as $console)
                         <div class="tag me-2">
                             <input type="checkbox" name="console_ids[]" value="{{ $console->id }}"
@@ -26,18 +28,34 @@
         </x-slot>
         <x-slot:genres>
 
-            <div class="form-control mb-3 d-flex flex-wrap">
-                @foreach ($genres as $genre)
-                    <div class="tag me-2">
-                        <input type="checkbox" name="genre_ids[]" value="{{ $genre->id }}" id="genre-{{ $genre->id }}"
-                            {{ in_array($genre->id, old('genre_ids', $videogame->genre_ids)) ? 'checked' : '' }}>
-                        <label for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
-                    </div>
-                @endforeach
-                @error('genre_ids')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
+
+            <div class="form-control mb-3 ">
+                {{-- @php
+                    if (!old('genre_ids')) {
+                        $selectedGenres = $videogame->genre_ids;
+                    } elseif (old('genre_ids') == null) {
+                        $selectedGenres = [];
+                    }
+                @endphp --}}
+                <label>Generi</label>
+                <div class="d-flex  flex-wrap">
+                    @foreach ($genres as $genre)
+                        <div class="tag me-2">
+                            <input type="checkbox" name="genre_ids[]" value="{{ $genre->id }}"
+                                id="genre-{{ $genre->id }}"
+                                {{ in_array($genre->id, old('genre_ids', $videogame->genre_ids)) ? 'checked' : '' }}>
+                            <label for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
+                <div>
+                    @error('genre_ids')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
             </div>
+
+
 
         </x-slot>
         <x-slot:publisher>{{ old('publisher', $videogame->publisher) }}</x-slot>

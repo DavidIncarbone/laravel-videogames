@@ -93,19 +93,13 @@ class GenreController extends Controller
 
         // Name
         $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'min:3',
-                'max:50',
-                'alpha',
-            ],
+            'name' => ['required', 'string', 'min:1', 'max:255', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
         ], [
-            'name.required' => 'Il campo nome è obbligatorio.',
-            'name.string' => 'Il campo nome deve essere una stringa.',
-            'name.min' => 'Il campo nome deve contenere almeno :min caratteri.',
-            'name.max' => 'Il campo nome non può superare i :max caratteri.',
-            'name.alpha' => 'Il campo nome può contenere solo lettere e spazi.',
+            'name.required' => 'Il campo nome del videogioco è obbligatorio.',
+            'name.string' => 'Il nome del videogioco deve essere una stringa.',
+            'name.min' => 'Il nome del videogioco deve contenere almeno :min carattere.',
+            'name.max' => 'Il nome del videogioco non può superare i :max caratteri.',
+            'name.regex' => 'Il nome del videogioco contiene caratteri non validi.',
 
         ]);
 

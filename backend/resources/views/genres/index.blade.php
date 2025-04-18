@@ -24,7 +24,7 @@
                                 <i id="pencil" class="bi bi-pencil"></i>
                             </a>
                             <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-genre-id="{{ $genre->id }}">
+                                data-bs-target="#deleteModal" data-genre-id="{{ $genre->id }}">
                                 <i id="trash" class="bi bi-trash"></i>
                             </button>
                         </td>
@@ -42,7 +42,7 @@
 
     <x-modal>
         <x-slot:deleteBtn>
-            <form id="deletegenreForm" action="{{ route('admin.genres.destroy', $genre) }}" method="POST">
+            <form id="deleteGenreForm" action="{{ route('admin.genres.destroy', $genre) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
@@ -54,15 +54,14 @@
 
     </x-modal>
 
-    @push('scripts')
-        <script>
-            const deleteModal = document.getElementById('exampleModal');
-            deleteModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget;
-                const genreId = button.getAttribute('data-genre-id');
-                const form = document.getElementById('deletegenreForm');
-                form.action = `/admin/genres/${genreId}`;
-            });
-        </script>
-    @endpush
+
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const genreId = button.getAttribute('data-genre-id');
+            const form = document.getElementById('deleteGenreForm');
+            form.action = `/admin/genres/${genreId}`;
+        });
+    </script>
 @endsection

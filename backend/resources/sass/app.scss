@@ -12,6 +12,7 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
+
 }
 
 .debug {
@@ -27,13 +28,18 @@ img {
 .wrapper {
     display: flex;
     min-height: 100vh;
+
 }
 
 select {
     border: 1px solid #ccc;
+}
 
 
 
+.form-control:focus {
+    box-shadow: none !important;
+    border-color: #ced4da !important;
 }
 
 #form-info {
@@ -43,7 +49,6 @@ select {
 
 #input-info {
     display: block;
-
     font-size: 0.875rem;
     color: #6c757d;
     font-style: italic;
@@ -56,11 +61,15 @@ select {
 .sidebar {
     width: 250px;
     position: fixed;
-    height: 100%;
+    height: 100vh;
+    padding-bottom: 500px;
     top: 0;
     left: 0;
-    padding-top: 20px;
+    overflow-y: auto;
+    background-color: #212529;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1030;
+
 }
 
 .sidebar h3 {
@@ -86,8 +95,14 @@ select {
 }
 
 
+
+// CONTENT
+
+
 .content {
     margin-left: 250px;
+    flex-grow: 1;
+    padding: 2rem;
 }
 
 .header h1 {
@@ -156,6 +171,10 @@ form textarea {
 #videogame-details-btn {
     height: 35px;
 }
+
+
+
+
 
 // SECONDARY SHOW
 

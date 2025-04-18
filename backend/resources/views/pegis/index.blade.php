@@ -26,7 +26,7 @@
                                 <i id="pencil" class="bi bi-pencil"></i>
                             </a>
                             <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-pegi-id="{{ $pegi->id }}">
+                                data-bs-target="#deleteModal" data-pegi-id="{{ $pegi->id }}">
                                 <i id="trash" class="bi bi-trash"></i>
                             </button>
                         </td>
@@ -74,15 +74,14 @@
 
     </x-modal>
 
-    @push('scripts')
-        <script>
-            const deleteModal = document.getElementById('exampleModal');
-            deleteModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget;
-                const pegiId = button.getAttribute('data-pegi-id');
-                const form = document.getElementById('deletePegiForm');
-                form.action = `/admin/pegis/${pegiId}`;
-            });
-        </script>
-    @endpush
+
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const pegiId = button.getAttribute('data-pegi-id');
+            const form = document.getElementById('deletePegiForm');
+            form.action = `/admin/pegis/${pegiId}`;
+        });
+    </script>
 @endsection

@@ -42,7 +42,7 @@ class VideogameController extends Controller
 
         $request->validate([
 
-            'name' => ['required', 'string', 'min:1', 'max:255', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
+            'name' => ['required', 'string', 'min:1', 'max:255'],
 
             'console_ids' => ['required', 'array', 'exists:consoles,id'],
 
@@ -54,7 +54,7 @@ class VideogameController extends Controller
 
             'price' => ['required', 'numeric', 'min:0.01'],
 
-            'pegi' => ['required', 'exists:pegis,id'],
+            'pegi_id' => ['required', 'exists:pegis,id'],
 
             'description' => ['required', 'string', 'min:10', 'max:500'],
 
@@ -65,7 +65,7 @@ class VideogameController extends Controller
             'name.string' => 'Il nome del videogioco deve essere una stringa.',
             'name.min' => 'Il nome del videogioco deve contenere almeno :min carattere.',
             'name.max' => 'Il nome del videogioco non può superare i :max caratteri.',
-            'name.regex' => 'Il nome del videogioco contiene caratteri non validi.',
+
 
             // Console
             'console_ids.required' => 'Seleziona almeno una console.',
@@ -78,6 +78,7 @@ class VideogameController extends Controller
             'genre_ids.array' => 'Il formato dei generi non è corretto.',
             'genre_ids.min' => 'Seleziona almeno un genere.',
             'genre_ids.*.exists' => 'Uno o più generi selezionati non sono validi.',
+
 
             // Publisher
             'publisher.required' => 'Il campo casa produttrice è obbligatorio.',
@@ -97,8 +98,8 @@ class VideogameController extends Controller
 
 
             // PEGI
-            'pegi.required' => 'Seleziona un\' età minima.',
-            'pegi.exists' => 'L\' età minima selezionata non è vailda.',
+            'pegi_id.required' => 'Seleziona un\' età minima.',
+            'pegi_id.exists' => 'L\' età minima selezionata non è vailda.',
 
             // Descrizione
             'description.required' => 'La descrizione è obbligatoria.',
@@ -119,7 +120,7 @@ class VideogameController extends Controller
 
 
 
-        $newVideogame->pegi_id = $data["pegi"];
+        $newVideogame->pegi_id = $data["pegi_id"];
         $newVideogame->name = $data["name"];
         $newVideogame->price = $data["price"];
         $newVideogame->console_ids = $data["console_ids"];
@@ -168,9 +169,16 @@ class VideogameController extends Controller
     public function update(Request $request, Videogame $videogame)
     {
 
+        // @dd(old("genre_ids"));
+
+        $request->merge([
+            'genre_ids' => $request->input('genre_ids', []),
+            'console_ids' => $request->input('console_ids', [])
+        ]);
+
         $request->validate([
 
-            'name' => ['required', 'string', 'min:1', 'max:255', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
+            'name' => ['required', 'string', 'min:1', 'max:255'],
 
             'console_ids' => ['required', 'array', 'exists:consoles,id'],
 
@@ -193,7 +201,7 @@ class VideogameController extends Controller
             'name.string' => 'Il nome del videogioco deve essere una stringa.',
             'name.min' => 'Il nome del videogioco deve contenere almeno :min carattere.',
             'name.max' => 'Il nome del videogioco non può superare i :max caratteri.',
-            'name.regex' => 'Il nome del videogioco contiene caratteri non validi.',
+
 
             // Console
             'console_ids.required' => 'Seleziona almeno una console.',
