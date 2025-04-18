@@ -1,7 +1,8 @@
 @extends('layouts.master');
 
 @section('content')
-    <h1 class="text-center">Modifica Videogioco</h1>
+    <h1 class="text-center">
+        Modifica Videogioco</h1>
     <x-form>
 
         <x-slot:route>{{ route('admin.videogames.update', $videogame) }}</x-slot>
@@ -11,15 +12,21 @@
             <div class="form-control mb-3">
                 <label for="" class="">Console</label>
                 <div class="d-flex flex-wrap">
+                    <div class="container">
+                        <div class="row">
 
-                    @foreach ($consoles as $console)
-                        <div class="tag me-2">
-                            <input type="checkbox" name="console_ids[]" value="{{ $console->id }}"
-                                id="console-{{ $console->id }}"
-                                {{ in_array($console->id, old('console_ids', $videogame->console_ids)) ? 'checked' : '' }}>
-                            <label for="console-{{ $console->id }}">{{ $console->name }}</label>
+                            @foreach ($consoles as $console)
+                                <div class="form-check d-flex align-items-center gap-3 g-3 g-lg-0 col-6 col-lg-3">
+                                    <input type="checkbox" name="console_ids[]" value="{{ $console->id }}"
+                                        id="console-{{ $console->id }}"
+                                        {{ in_array($console->id, old('console_ids', $videogame->console_ids)) ? 'checked' : '' }}>
+                                    <label for="console-{{ $console->id }}">{{ $console->name }}</label>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+
+
                 </div>
                 @error('console_ids')
                     <small class="text-danger">{{ $message }}</small>
@@ -30,23 +37,22 @@
 
 
             <div class="form-control mb-3 ">
-                {{-- @php
-                    if (!old('genre_ids')) {
-                        $selectedGenres = $videogame->genre_ids;
-                    } elseif (old('genre_ids') == null) {
-                        $selectedGenres = [];
-                    }
-                @endphp --}}
+
                 <label>Generi</label>
-                <div class="d-flex  flex-wrap">
-                    @foreach ($genres as $genre)
-                        <div class="tag me-2">
-                            <input type="checkbox" name="genre_ids[]" value="{{ $genre->id }}"
-                                id="genre-{{ $genre->id }}"
-                                {{ in_array($genre->id, old('genre_ids', $videogame->genre_ids)) ? 'checked' : '' }}>
-                            <label for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
+                <div class="d-flex flex-wrap">
+                    <div class="container">
+                        <div class="row">
+                            @foreach ($genres as $genre)
+                                <div class="form-check d-flex align-items-center gap-3 g-3 g-lg-0 col-6 col-lg-3">
+                                    <input type="checkbox" name="genre_ids[]" value="{{ $genre->id }}"
+                                        id="genre-{{ $genre->id }}"
+                                        {{ in_array($genre->id, old('genre_ids', $videogame->genre_ids)) ? 'checked' : '' }}>
+                                    <label for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+
                 </div>
                 <div>
                     @error('genre_ids')
