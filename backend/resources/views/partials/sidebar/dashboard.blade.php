@@ -9,7 +9,7 @@
      <a href="{{ route('admin.home') }}" class="text-decoration-none text-white w-100">
          <div class="d-flex justify-content-center align-items-center">
              <i class="bi bi-speedometer2 me-2 fs-4"></i>
-             <h3 class="mb-0 w-100">Admin Dashboard</h3>
+             <h4 class="mb-0 w-100">Admin Dashboard</h4>
          </div>
      </a>
  </div>

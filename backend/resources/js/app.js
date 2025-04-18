@@ -99,6 +99,32 @@ window.clearConsoleForm = function () {
     });
 }
 
+// CLEAR INPUT
+
+window.toggleClearButton = function (fieldId) {
+    const input = document.getElementById(fieldId);
+    const clearBtn = document.getElementById('clear-btn-' + fieldId);
+
+    if (input && clearBtn) {
+        if (input.value.length > 0) {
+            clearBtn.style.display = 'block';
+        } else {
+            clearBtn.style.display = 'none';
+        }
+    }
+}
+
+window.clearInput = function (fieldId) {
+    document.getElementById(fieldId).value = '';
+    toggleClearButton(fieldId);
+}
+
+window.onload = function () {
+    const fields = ['name', 'publisher', 'year_of_publication', 'price', 'pegi', 'description'];
+    fields.forEach(field => toggleClearButton(field));
+};
+
+
 
 
 

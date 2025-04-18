@@ -14,7 +14,7 @@
             <label for="name">Inserisci il nome del genere*</label>
             <label for="name" id="input-info">min. 1 max. 255 caratteri</label>
             <input type="text" name="name" id="name" value="{{ old('name') }}"
-                placeholder="Inserisci qui il nome del genere">
+                placeholder="Inserisci qui il nome del genere" class="form-control bg-white">
             @error('name')
                 <small class="text-danger">{{ $message }}</small>
             @enderror

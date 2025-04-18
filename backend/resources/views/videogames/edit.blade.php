@@ -74,7 +74,8 @@
             <div class="form-control mb-3 d-flex flex-column gap-1">
                 <label for="cover">Cover del videogioco</label>
                 <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp</label>
-                <input type="file" id="cover" name="cover" accept=".jpeg, .jpg, .png, .webp">
+                <input type="file" id="cover" name="cover" accept=".jpeg, .jpg, .png, .webp"
+                    class="form-control bg-white">
                 @error('cover')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror

@@ -1,6 +1,8 @@
 ## STEP DI OGGI
 
-
-# Mettere le informazioni sopra ogni campo di input per rendere la UX più accessibile
 # Incrementare il numero di videogames e mostrarli in view con la paginazione
+
+
+# Aggiungere iconcine al form per UX
+# Aggiungere un toast per avvenuta aggiunta, modifica ed eliminazione
 

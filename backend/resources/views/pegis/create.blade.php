@@ -12,8 +12,8 @@
         <div class="form-control d-flex flex-column p-3 mb-3">
             <label for="age">Inserisci l'età minima*</label>
             <label for="name" id="input-info">min. 1 max. 100</label>
-            <input type="number" name="age" id="age" step="1" style="width:190px"
-                value="{{ old('age') }}" placeholder="Inserisci quì l'età minima">
+            <input type="number" name="age" id="age" step="1" style="width:200px"
+                value="{{ old('age') }}" placeholder="Inserisci quì l'età minima" class="form-control bg-white">
             @error('age')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -21,7 +21,8 @@
         <div class="form-control d-flex flex-column  p-3 mb-3">
             <label for="logo">Inserisci il logo</label>
             <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp</label>
-            <input type="file" name="logo" id="logo" accept=".jpeg, .jpg, .png, .webp">
+            <input type="file" name="logo" id="logo" accept=".jpeg, .jpg, .png, .webp"
+                class="form-control bg-white">
             @error('logo')
                 <small class="text-danger">{{ $message }}</small>
             @enderror

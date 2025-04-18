@@ -84,6 +84,8 @@ select {
     font-weight: bold;
 }
 
+
+
 .nav-link:hover {
     background-color: #575757;
     border-radius: 5px;
@@ -172,9 +174,19 @@ form textarea {
     height: 35px;
 }
 
+input[type="checkbox"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+}
 
-
-
+/* Controllo quando la checkbox è selezionata */
+input[type="checkbox"]:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
 
 // SECONDARY SHOW
 
