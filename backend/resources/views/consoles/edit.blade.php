@@ -2,15 +2,18 @@
 
 @section('content')
     <h1 class="text-center py-5">Modifica Console</h1>
-    <x-miniform>
+    <x-console-form>
         <x-slot:method>@method('PUT')</x-slot>
         <x-slot:action>{{ route('admin.consoles.update', $console) }}</x-slot>
+
         <x-slot:subject>la console</x-slot>
         <x-slot:actionTodo>modificare</x-slot>
+
         <x-slot:inputName>name</x-slot>
         <x-slot:name>{{ old('name', $console->name) }}</x-slot>
         <x-slot:actionToDoInput>Modifica</x-slot>
-        <x-slot:oldImage>
+
+        <x-slot:cover>
             @if ($console->logo)
                 <div class="d-flex gap-3 align-items-center">
                     <div>Logo attuale:</div>
@@ -20,6 +23,6 @@
                 </div>
             @endif
         </x-slot>
-        <x-slot:actionToDoInput>Modifica</x-slot>
-    </x-miniform>
+
+    </x-console-form>
 @endsection

@@ -74,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function () {
 window.clearVideogameForm = function () {
     const form = document.getElementById('videogameForm');
 
-    // Svuota tutti i campi input/textarea/select
     form.querySelectorAll('input, textarea, select').forEach(field => {
         if (field.name === '_method' || field.name === '_token') return;
         if (field.type === 'checkbox' || field.type === 'radio') {
@@ -87,10 +86,10 @@ window.clearVideogameForm = function () {
     });
 }
 
-// CLEAR CONSOLE FORM
+// CLEAR OTHER FORMS
 
-window.clearConsoleForm = function () {
-    const form = document.getElementById('consoleForm');
+window.clearForm = function (formId) {
+    const form = document.getElementById(formId);
     form.querySelectorAll('input').forEach(field => {
         if (field.name === '_method' || field.name === '_token') return;
         else if (field.type !== "submit") {
@@ -99,7 +98,7 @@ window.clearConsoleForm = function () {
     });
 }
 
-// CLEAR INPUT
+// CLEAR SINGLE INPUT
 
 window.toggleClearButton = function (fieldId) {
     const input = document.getElementById(fieldId);

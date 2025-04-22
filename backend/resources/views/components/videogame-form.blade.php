@@ -1,3 +1,5 @@
+<h1 class="text-center py-3">{{ $actionToDo }} videogioco</h1>
+
 <form id="videogameForm" action="{{ $route }}" method="POST" enctype="multipart/form-data" class="mb-3">
 
     @csrf
@@ -7,10 +9,11 @@
         <small id="form-info">I campi contrassegnati con * sono obbligatori</small>
     </div>
 
+    {{-- NAME --}}
+
     <div class="form-control mb-3 d-flex flex-column p-3">
         <label for="name">Nome del videogioco*</label>
         <label for="name" id="input-info">min. 1 max. 255 caratteri</label>
-
         <div class="d-flex align-items-center position-relative">
             <span class="position-absolute ps-2"><i class="fa-solid fa-gamepad"></i></span>
             <input type="text" name="name" id="name" value="{{ $name }}"
@@ -19,20 +22,53 @@
             <span id="clear-btn-name" class="position-absolute end-0 pe-3" style="cursor: pointer; display: none;"
                 onclick="clearInput('name')"><i class="fas fa-times"></i></span>
         </div>
-
         @error('name')
             <small class="text-danger">{{ $message }}</small>
         @enderror
     </div>
 
+    {{-- CONSOLES --}}
 
-    {{ $console }}
-    {{ $genres }}
+    <div class="form-control mb-3 p-3">
+        <label class="mb-3">Console*</label>
+        <div class="d-flex flex-wrap">
+            <div class="container">
+                <div class="row">
+                    {{ $consoles }}
+                </div>
+            </div>
+        </div>
+        <div class="ms-4 mt-1">
+            @error('console_ids')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+    </div>
+
+    {{-- GENRES --}}
+
+    <div class="form-control mb-3 p-3">
+        <label class="form-label mb-3">Generi*</label>
+        <div class="d-flex flex-wrap">
+            <div class="container">
+                <div class="row">
+                    {{ $genres }}
+                </div>
+            </div>
+
+        </div>
+        <div class="ms-4 mt-1">
+            @error('genre_ids')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+    </div>
+
+    {{-- PUBLISHER --}}
 
     <div class="form-control mb-3 d-flex flex-column p-3">
         <label for="publisher">Casa produttrice*</label>
         <label for="publisher" id="input-info">min. 1 max. 255 caratteri</label>
-
         <div class="d-flex align-items-center position-relative">
             <span class="position-absolute ps-2"> <i class="fa-solid fa-house-laptop"></i></span>
             <input type="text" name="publisher" id="publisher" value="{{ $publisher }}"
@@ -40,8 +76,6 @@
                 oninput="toggleClearButton('publisher')">
             <span id="clear-btn-publisher" class="position-absolute end-0 pe-3" style="cursor: pointer; display: none;"
                 onclick="clearInput('publisher')"><i class="fas fa-times"></i></span>
-
-
         </div>
         <div>
             @error('publisher')
@@ -51,6 +85,9 @@
     </div>
 
     <div class="form-control mb-3 d-flex flex-column flex-lg-row gap-4 gap-lg-3 p-3 pb-5 pb-lg-3">
+
+        {{-- YEAR OF PUBLICATION --}}
+
         <div class="d-flex justify-content-between me-3">
             <div class="d-flex flex-column w-50">
                 <label for="year_of_publication" class="me-3">Anno di pubblicazione*</label>
@@ -70,6 +107,8 @@
                 </div>
             </div>
         </div>
+
+        {{-- PRICE --}}
 
         <div class="d-flex flex-column flex-lg-row gap-3">
             <div class="d-flex justify-content-between me-3 ">
@@ -93,6 +132,8 @@
                 </div>
             </div>
 
+            {{-- PEGIS --}}
+
             <div class="d-flex gap-0 gap-lg-3">
                 <div>
                     <label for="pegi">Pegi*</label>
@@ -101,7 +142,7 @@
                     <div id="pegi-select">
                         <select name="pegi_id" id="pegi_id" class="form-select bg-white">
                             <option value="" selected disabled>Seleziona PEGI</option>
-                            {!! $pegi !!}
+                            {{ $pegis }}
                         </select>
                         <div class="d-flex justify-content-end ">
                             @error('pegi_id')
@@ -112,7 +153,10 @@
                 </div>
             </div>
         </div>
+
     </div>
+
+    {{-- DESCRIPTION --}}
 
     <div class="form-control mb-3 d-flex flex-column p-3">
         <label for="description">Descrizione*</label>
@@ -132,13 +176,26 @@
         </div>
     </div>
 
-    {{ $cover }}
+    {{-- COVER --}}
+
+    <div class="form-control mb-3 d-flex flex-column p-3">
+        <label for="cover">Cover</label>
+        <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp</label>
+        <input type="file" id="cover" name="cover" accept=".jpeg, .jpg, .png, .webp"
+            class="form-control bg-white">
+        @error('cover')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        @if ($errors->any())
+            <small class="text-warning">Seleziona di nuovo il file prima di inviare il modulo.</small>
+        @endif
+
+        {{ $cover }}
+    </div>
 
     <div>
-        <input type="submit" value="{{ $btnAction }}" class="btn btn-success">
+        <input type="submit" value="{{ $actionToDo }}" class="btn btn-success">
         <button type="button" onclick="clearVideogameForm()" class="btn btn-danger">Svuota tutto</button>
     </div>
 
 </form>
-
-<script></script>

@@ -283,7 +283,7 @@ class VideogameController extends Controller
             $videogame->consoles()->detach();
         }
 
-        toastr()->success('Videogioco modificato con successo');
+        toastr()->success('Videogioco modificato con successo', ['title' => '']);
 
         return redirect()->route("admin.videogames.show", $videogame);
     }
