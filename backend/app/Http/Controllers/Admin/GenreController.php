@@ -63,7 +63,7 @@ class GenreController extends Controller
 
 
         $newGenre->save();
-
+        toastr()->success('Genere aggiunto con successo');
         return redirect()->route("admin.genres.index", $newGenre);
     }
 
@@ -109,7 +109,7 @@ class GenreController extends Controller
         $data = $request->all();
         $genre->name = $data["name"];
         $genre->update();
-
+        toastr()->success('Genere modificato con successo');
         return redirect()->route("admin.genres.index");
     }
 
@@ -119,7 +119,7 @@ class GenreController extends Controller
     public function destroy(genre $genre)
     {
         $genre->delete();
-
+        toastr()->success('Genere eliminato con successo');
         return redirect()->route("admin.genres.index");
     }
 }

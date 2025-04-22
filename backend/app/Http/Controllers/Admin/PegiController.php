@@ -78,7 +78,7 @@ class PegiController extends Controller
         }
 
         $newPegi->save();
-
+        toastr()->success('PEGI aggiunto con successo');
         return redirect()->route("admin.pegis.index");
     }
 
@@ -151,7 +151,7 @@ class PegiController extends Controller
         }
 
         $pegi->update();
-
+        toastr()->success('PEGI modificato con successo');
         return redirect()->route("admin.pegis.index");
     }
 
@@ -161,7 +161,7 @@ class PegiController extends Controller
     public function destroy(Pegi $pegi)
     {
         $pegi->delete();
-
+        toastr()->success('PEGI eliminato con successo');
         return redirect()->route("admin.pegis.index");
     }
 }

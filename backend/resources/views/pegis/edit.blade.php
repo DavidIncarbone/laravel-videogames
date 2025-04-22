@@ -3,8 +3,9 @@
 @section('content')
     <h1 class="text-center py-3">Modifica PEGI</h1>
 
-    <form action="{{ route('admin.pegis.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.pegis.update', $pegi) }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PUT');
         <div>
             <small id="form-info">I campi contrassegnati con * sono obbligatori</small>
         </div>
@@ -39,7 +40,7 @@
             @endif
         </div>
 
-        <input type="submit" value="Aggiungi" class="btn btn-success">
+        <input type="submit" value="Modifica" class="btn btn-success">
         <button type="button" onclick="clearForm()" class="btn btn-danger">Svuota tutto</button>
     </form>
 @endsection

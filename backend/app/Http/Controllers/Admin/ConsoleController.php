@@ -71,6 +71,7 @@ class ConsoleController extends Controller
         }
 
         $newConsole->save();
+        toastr()->success('Console aggiunta con successo');
         return redirect()->route("admin.consoles.index", $newConsole);
     }
 
@@ -138,6 +139,7 @@ class ConsoleController extends Controller
 
         $console->update();
 
+        toastr()->success('Console modificata con successo');
         return redirect()->route("admin.consoles.index");
     }
 
@@ -147,7 +149,7 @@ class ConsoleController extends Controller
     public function destroy(Console $console)
     {
         $console->delete();
-
+        toastr()->success('Console eliminata con successo');
         return redirect()->route("admin.consoles.index");
     }
 }

@@ -142,6 +142,8 @@ class VideogameController extends Controller
         if ($request->has("console_ids")) {
             $newVideogame->consoles()->attach($data["console_ids"]);
         }
+
+        toastr()->success('Videogioco aggiunto con successo');
         return redirect()->route("admin.videogames.show", $newVideogame);
     }
 
@@ -281,6 +283,8 @@ class VideogameController extends Controller
             $videogame->consoles()->detach();
         }
 
+        toastr()->success('Videogioco modificato con successo');
+
         return redirect()->route("admin.videogames.show", $videogame);
     }
 
@@ -290,6 +294,8 @@ class VideogameController extends Controller
     public function destroy(videogame $videogame)
     {
         $videogame->delete();
+
+        toastr()->success('Videogioco eliminato con successo');
 
         return redirect()->route("admin.videogames.index");
     }
