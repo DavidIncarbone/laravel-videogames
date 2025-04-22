@@ -38,6 +38,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="pagination">
+            {{ $genres->links() }}
+        </div>
     </section>
 
     <x-modal>

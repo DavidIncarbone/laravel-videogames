@@ -58,6 +58,10 @@
 
             </tbody>
         </table>
+
+        <div class="pagination">
+            {{ $pegis->links() }}
+        </div>
     </section>
 
     <x-modal>

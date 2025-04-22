@@ -15,7 +15,7 @@ class PegiController extends Controller
      */
     public function index()
     {
-        $pegis = Pegi::all();
+        $pegis = Pegi::paginate(5);
         return view("pegis.index", compact("pegis"));
     }
 

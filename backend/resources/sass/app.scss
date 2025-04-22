@@ -245,6 +245,33 @@ input[type="checkbox"]:checked {
     color: #0dcaf0;
 }
 
+// PAGINATION
+
+.pagination {
+    --bs-pagination-color: black;
+}
+
+.page-link:hover {
+    z-index: 2;
+    color: var(--bs-table-striped-bg);
+    background-color: var(--bs-pagination-hover-bg);
+    border-color: black !important;
+}
+
+.page-link.active,
+.active>.page-link {
+    z-index: 3;
+    color: black;
+    background-color: var(--bs-table-striped-bg);
+    border-color: black;
+
+
+}
+
+.page-link:focus {
+    box-shadow: none;
+}
+
 // RESPONSIVE
 
 

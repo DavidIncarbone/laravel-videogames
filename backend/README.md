@@ -1,7 +1,8 @@
 ## STEP DI OGGI
 
+# Implementare la paginazione
+# Implementare filtri per "Ordina per"
+# Implementare searchbar per ricerca per nome
 
-# Sistemare i componenti e crearli anche per gli altri form
-# Incrementare il numero di videogames e mostrarli in view con la paginazione
 
 

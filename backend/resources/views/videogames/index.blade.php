@@ -60,6 +60,11 @@
 
             </tbody>
         </table>
+
+        <div class="pagination">
+            {{ $videogames->links() }}
+        </div>
+
     </section>
 
     <x-modal>

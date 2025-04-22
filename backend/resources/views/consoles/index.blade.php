@@ -56,6 +56,10 @@
 
             </tbody>
         </table>
+        <div class="pagination">
+            {{ $consoles->links() }}
+        </div>
+
     </section>
 
     <x-modal>

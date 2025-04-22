@@ -14,7 +14,7 @@ class ConsoleController extends Controller
      */
     public function index()
     {
-        $consoles = Console::all();
+        $consoles = Console::paginate(5);
         return view("consoles/index", compact("consoles"));
     }
 
