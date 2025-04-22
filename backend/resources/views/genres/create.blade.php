@@ -2,6 +2,8 @@
 
 @section('content')
     <x-genres-form>
+
+        <x-slot:genreName>Genere</x-slot>
         <x-slot:action>{{ route('admin.genres.store') }}</x-slot>
         <x-slot:method></x-slot>
 

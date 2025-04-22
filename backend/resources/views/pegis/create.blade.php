@@ -2,6 +2,7 @@
 
 @section('content')
     <x-pegi-form>
+        <x-slot:pegiAge>PEGI</x-slot>
         <x-slot:action>{{ route('admin.pegis.store') }}</x-slot>
         <x-slot:method></x-slot>
         <x-slot:age>{{ old('age') }}</x-slot>

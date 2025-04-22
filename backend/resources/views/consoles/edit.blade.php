@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1 class="text-center py-5">Modifica Console</h1>
     <x-console-form>
+        <x-slot:consoleName><span class="text-primary">{{ $console->name }}</span></x-slot>
         <x-slot:method>@method('PUT')</x-slot>
         <x-slot:action>{{ route('admin.consoles.update', $console) }}</x-slot>
 
@@ -11,7 +11,7 @@
 
         <x-slot:inputName>name</x-slot>
         <x-slot:name>{{ old('name', $console->name) }}</x-slot>
-        <x-slot:actionToDoInput>Modifica</x-slot>
+        <x-slot:actionToDo>Modifica</x-slot>
 
         <x-slot:cover>
             @if ($console->logo)

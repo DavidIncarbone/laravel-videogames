@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-    <section id="videogames" class="">
+    <section id="videogames">
 
-        <header class="header my-3">
+        <header class="header mb-3">
 
             <h1 class="">Lista delle consoles</h1>
         </header>
@@ -20,20 +20,24 @@
                 @foreach ($consoles as $console)
                     <tr>
 
+                        {{-- ICONS --}}
+
                         <td class="d-flex align-items-center justify-content-center gap-1 " style="height:66px;">
                             <a class=" text-decoration-none text-dark" href="{{ route('admin.consoles.edit', $console) }}">
                                 <i id="pencil" class="bi bi-pencil"></i>
                             </a>
                             <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal" data-console-id="{{ $console->id }}">
+                                data-bs-target="#deleteModal" data-console-id="{{ $console->id }}"
+                                data-console-name='{{ $console->name }}'>
                                 <i id="trash" class="bi bi-trash"></i>
                             </button>
                         </td>
 
+                        {{-- NAME --}}
+
                         <td>
                             <div class="d-flex justify-content-around gap-3 align-items-center">
                                 <div class="d-flex align-items-center gap-5">
-
                                     <div style="width:150px" class="text-center">
                                         {{ $console->name }}
                                     </div>
@@ -42,6 +46,9 @@
                             </div>
 
                         </td>
+
+                        {{-- LOGO --}}
+
                         <td>
                             <div class="d-flex justify-content-center">
                                 <div id="post-image" style="width: 100px; height:50px">
@@ -56,25 +63,33 @@
 
             </tbody>
         </table>
+
+        {{-- PAGINATION --}}
+
         <div class="pagination">
             {{ $consoles->links() }}
         </div>
 
     </section>
 
-    <x-modal>
-        <x-slot:deleteBtn>
-            <form id="deleteConsoleForm" action="{{ route('admin.consoles.destroy', $console) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
-            </form>
+    {{-- MODAL COMPONENT --}}
 
-        </x-slot>
-        <x-slot:delete>Elimina la console </x-slot>
-        <x-slot:wantDelete>Vuoi eliminare la console?</x-slot>
+    @if (count($consoles) > 0)
+        <x-modal>
+            <x-slot:delete>Elimina <span id="consoleNameToDelete" class="fw-bold text-danger"></span> </x-slot>
+            <x-slot:wantDelete>Vuoi eliminare questa console?</x-slot>
+            <x-slot:deleteBtn>
+                <form id="deleteConsoleForm" action="{{ route('admin.consoles.destroy', $console) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
+                </form>
 
-    </x-modal>
+            </x-slot>
+        </x-modal>
+    @endif
+
+    {{-- MODAL SCRIPT --}}
 
 
     <script>
@@ -82,8 +97,11 @@
         deleteModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
             const consoleId = button.getAttribute('data-console-id');
+            const consoleName = button.getAttribute('data-console-name');
             const form = document.getElementById('deleteConsoleForm');
             form.action = `/admin/consoles/${consoleId}`;
+            const consoleNameToDelete = document.getElementById('consoleNameToDelete');
+            consoleNameToDelete.textContent = consoleName;
         });
     </script>
 @endsection

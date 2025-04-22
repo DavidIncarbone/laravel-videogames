@@ -1,4 +1,4 @@
-<h1 class="text-center py-3">{{ $actionToDo }} videogioco</h1>
+<h1 class="text-center pb-3">{{ $actionToDo }} {{ $videogameName }}</h1>
 
 <form id="videogameForm" action="{{ $route }}" method="POST" enctype="multipart/form-data" class="mb-3">
 

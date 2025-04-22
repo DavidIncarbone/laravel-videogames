@@ -1,3 +1,5 @@
+<h1 class="text-center pb-3">{{ $actionToDo }} {{ $consoleName }}</h1>
+
 <form id="consoleForm" action="{{ $action }}" method="POST" enctype="multipart/form-data">
 
     @csrf
@@ -30,7 +32,7 @@
     {{-- COVER --}}
 
     <div class="form-control d-flex flex-column p-3 mb-3">
-        <label for="logo">{{ $actionToDoInput }} il logo</label>
+        <label for="logo">{{ $actionToDo }} il logo</label>
         <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp</label>
         <input type="file" name="logo" id="logo" accept=".jpeg, .jpg, .png, .webp"
             class="form-control bg-white">
@@ -43,7 +45,7 @@
         {{ $cover }}
     </div>
 
-    <input type="submit" value="{{ $actionToDoInput }}" class="btn btn-success">
+    <input type="submit" value="{{ $actionToDo }}" class="btn btn-success">
     <button type="button" onclick="clearForm('consoleForm')" class="btn btn-danger">Svuota tutto</button>
 
 </form>

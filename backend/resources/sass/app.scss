@@ -59,7 +59,7 @@ select {
 // SIDEBAR
 
 .sidebar {
-    width: 250px;
+    width: 20vw;
     position: fixed;
     height: 100vh;
     padding-bottom: 500px;
@@ -102,7 +102,7 @@ select {
 
 
 .content {
-    margin-left: 250px;
+    margin-left: 20vw;
     flex-grow: 1;
     padding: 2rem;
 }

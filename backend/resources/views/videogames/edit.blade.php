@@ -1,7 +1,9 @@
-@extends('layouts.master');
+@extends('layouts.master')
 
 @section('content')
     <x-videogame-form>
+
+        <x-slot:videogameName><span class="fw-bold text-primary">{{ $videogame->name }}</span></x-slot>
 
         <x-slot:route>{{ route('admin.videogames.update', $videogame) }}</x-slot>
 

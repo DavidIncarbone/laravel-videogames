@@ -2,7 +2,7 @@
 
 @section('content')
     <x-videogame-form>
-
+        <x-slot:videogameName>Videogioco</x-slot>
         <x-slot:route>{{ route('admin.videogames.store') }}</x-slot>
         <x-slot:method></x-slot>
 

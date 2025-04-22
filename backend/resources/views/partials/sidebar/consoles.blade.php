@@ -10,14 +10,14 @@
              <ul class="nav flex-column small">
                  <li>
                      <a href="{{ route('admin.consoles.index') }}"
-                         class="nav-link text-white d-flex mb-2 {{ $routeName === 'admin.consoles.index' ? 'active-navlink' : '' }}">
+                         class="nav-link text-white d-flex align-items-center mb-2 {{ $routeName === 'admin.consoles.index' ? 'active-navlink' : '' }}">
                          <div><i class="bi bi-list-ul me-2 mt-1"></i></div>
                          <div>Tutte le consoles</div>
                      </a>
                  </li>
                  <li>
                      <a href="{{ route('admin.consoles.create') }}"
-                         class="nav-link text-white d-flex {{ $routeName === 'admin.consoles.create' ? 'active-navlink' : '' }}">
+                         class="nav-link text-white d-flex align-items-center {{ $routeName === 'admin.consoles.create' ? 'active-navlink' : '' }}">
                          <div><i class="bi bi-plus-square me-2 mt-1"></i></div>
                          <div>Aggiungi console</div>
 

@@ -1,4 +1,4 @@
-  <h1 class="text-center py-3">{{ $actionToDo }} PEGI</h1>
+  <h1 class="text-center pb-3">{{ $actionToDo }} {{ $pegiAge }}</h1>
 
   <form id="pegiForm" action="{{ $action }}" method="POST" enctype="multipart/form-data">
       @csrf

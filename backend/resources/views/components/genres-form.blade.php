@@ -1,4 +1,4 @@
- <h1 class="text-center py-3">{{ $actionToDo }} genere</h1>
+ <h1 class="text-center pb-3">{{ $actionToDo }} {{ $genreName }}</h1>
 
  <form id="genresForm" action="{{ $action }}" method="POST">
 

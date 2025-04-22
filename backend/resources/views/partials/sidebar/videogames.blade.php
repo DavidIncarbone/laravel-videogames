@@ -11,16 +11,18 @@
               <ul class="nav flex-column small">
                   <li>
                       <a href="{{ route('admin.videogames.index') }}"
-                          class="nav-link text-white d-flex mb-2  {{ $routeName === 'admin.videogames.index' ? 'active-navlink' : '' }}">
+                          class="nav-link text-white d-flex align-items-center mb-2  {{ $routeName === 'admin.videogames.index' ? 'active-navlink' : '' }}">
                           <div>
                               <i class="bi bi-list-ul me-2 mt-1"></i>
                           </div>
-                          Tutti i videogiochi
+                          <div>
+                              Tutti i videogiochi
+                          </div>
                       </a>
                   </li>
                   <li>
                       <a href="{{ route('admin.videogames.create') }}"
-                          class="nav-link text-white d-flex {{ $routeName === 'admin.videogames.create' ? 'active-navlink' : '' }}">
+                          class="nav-link text-white d-flex align-items-center {{ $routeName === 'admin.videogames.create' ? 'active-navlink' : '' }}">
                           <div><i class="bi bi-plus-square me-2 mt-1"></i></div>
                           <div>Aggiungi videogioco</div>
                       </a>

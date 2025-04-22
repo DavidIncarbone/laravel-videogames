@@ -19,7 +19,7 @@
             @include('partials.sidebar.genres')
             <hr>
             @include('partials.sidebar.pegis')
-            <hr class="">
+            <hr>
 
 
             @include('partials.sidebar.logout')

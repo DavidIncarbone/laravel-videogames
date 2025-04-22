@@ -1,14 +1,20 @@
 @extends('layouts.master')
 
 @section('content')
-    <header class="header my-3">
+    <header class="header mb-3">
         <h1>Lista dei videogiochi</h1>
     </header>
 
     <section id="videogames" class="my-3">
+
+        {{-- TABLE --}}
+
         <table class="table table-bordered table-striped">
             <thead class="">
                 <tr class="text-center">
+
+                    {{-- TABLES'S HEADER --}}
+
                     <th></th>
                     <th>Nome videogioco</th>
                     <th>Console</th>
@@ -19,6 +25,8 @@
             <tbody>
 
                 @foreach ($videogames as $videogame)
+                    {{-- ICONS --}}
+
                     <tr>
                         <td>
                             <div id="icons" class="d-flex align-items-center justify-content-around">
@@ -33,26 +41,32 @@
                                 </a>
 
                                 <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal" data-videogame-id="{{ $videogame->id }}">
+                                    data-bs-target="#deleteModal" data-videogame-id="{{ $videogame->id }}"
+                                    data-videogame-name="{{ $videogame->name }}">
                                     <i id="trash" class="bi bi-trash"></i>
                                 </button>
                             </div>
 
 
                         </td>
-                        <td>{{ $videogame->name }}</td>
-                        <td>
 
+                        {{-- NAME --}}
+
+                        <td>{{ $videogame->name }}</td>
+
+                        {{-- CONSOLE --}}
+
+                        <td>
                             @foreach ($videogame->consoles as $console)
                                 {{ $console->name }}
-
-
                                 @if (!$loop->last)
                                     <span id="comma">,</span>
                                 @endif
                             @endforeach
-                        <td class="text-center">
 
+                            {{-- YEAR OF PUBLICATION --}}
+
+                        <td class="text-center">
                             {{ $videogame->year_of_publication }}
                         </td>
                     </tr>
@@ -61,34 +75,45 @@
             </tbody>
         </table>
 
+        {{-- PAGINATION --}}
+
         <div class="pagination">
             {{ $videogames->links() }}
         </div>
 
     </section>
 
-    <x-modal>
-        <x-slot:deleteBtn>
-            <form id="deleteVideogameForm" action="{{ route('admin.videogames.destroy', $videogame) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
-            </form>
+    {{-- MODAL COMPONENT --}}
 
-        </x-slot>
-        <x-slot:delete>Elimina il videogioco </x-slot>
-        <x-slot:wantDelete>Vuoi eliminare il videogioco?</x-slot>
+    @if (count($videogames) > 0)
+        <x-modal>
+            <x-slot:delete>Elimina <span id="videogameNameToDelete" class="fw-bold text-danger"></span> </x-slot>
+            <x-slot:wantDelete>Vuoi eliminare questo videogame?</x-slot>
+            <x-slot:deleteBtn>
+                <form id="deleteVideogameForm" action="{{ route('admin.videogames.destroy', $videogame) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
+                </form>
 
-    </x-modal>
+            </x-slot>
+        </x-modal>
+    @endif
 
+    {{-- MODAL SCRIPT --}}
 
     <script>
         const deleteModal = document.getElementById('deleteModal');
+        // console.log(deleteModal);
         deleteModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
             const videogameId = button.getAttribute('data-videogame-id');
+            const videogameName = button.getAttribute('data-videogame-name');
             const form = document.getElementById('deleteVideogameForm');
             form.action = `/admin/videogames/${videogameId}`;
+            const videogameNameToDelete = document.getElementById('videogameNameToDelete');
+            videogameNameToDelete.textContent = videogameName;
+
         });
     </script>
 @endsection
