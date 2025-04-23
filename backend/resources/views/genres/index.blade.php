@@ -1,11 +1,19 @@
 @extends('layouts.master')
 
 @section('content')
-    <section id="videogames">
+    <section id="genres">
 
         <header class="header mb-3">
             <h1>Lista dei generi</h1>
         </header>
+
+        {{-- SEARCHBAR --}}
+
+        <x-searchbar>
+            <x-slot:route>{{ route('admin.genres.index') }}</x-slot>
+            <x-slot:subject>nome</x-slot>
+            <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
+        </x-searchbar>
 
         {{-- TABLE --}}
 
@@ -36,10 +44,10 @@
 
                         {{-- NAME --}}
 
-                        <td>
-                            <div class="d-flex justify-content-center">
-                                <div style="width:150px;" class="text-center">{{ $genre->name }}</div>
-
+                        <td class="">
+                            <div class="d-flex justify-content-center align-items-center w-100 "
+                                style="width:150px; height:50px;">
+                                <div class="text-center">{{ $genre->name }}</div>
                             </div>
                         </td>
                     </tr>

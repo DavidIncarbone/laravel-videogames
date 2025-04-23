@@ -98,7 +98,7 @@ window.clearForm = function (formId) {
     });
 }
 
-// CLEAR SINGLE INPUT
+// TOGGLE ICON FOR CLEAR
 
 window.toggleClearButton = function (fieldId) {
     const input = document.getElementById(fieldId);
@@ -113,15 +113,31 @@ window.toggleClearButton = function (fieldId) {
     }
 }
 
+// CLEAR SINGLE INPUT
+
+document.getElementById("searchBtn");
 window.clearInput = function (fieldId) {
     document.getElementById(fieldId).value = '';
     toggleClearButton(fieldId);
+    searchBtn.disabled = true;
 }
 
 window.onload = function () {
-    const fields = ['name', 'publisher', 'year_of_publication', 'price', 'pegi', 'description'];
+    const fields = ['name', 'publisher', 'year_of_publication', 'price', 'pegi', 'description', 'searchInput'];
     fields.forEach(field => toggleClearButton(field));
 };
+
+// TOGGLE SEARCHBAR
+
+const searchInput = document.getElementById('searchInput');
+
+function toggleSearch() {
+    searchBtn.disabled = !searchInput.value;
+}
+
+window.addEventListener('load', toggleSearch);
+searchInput.addEventListener('input', toggleSearch);
+
 
 
 

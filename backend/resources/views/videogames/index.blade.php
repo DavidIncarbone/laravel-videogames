@@ -1,9 +1,20 @@
+@php
+    $routeName = Route::currentRouteName();
+@endphp
+
+
+
 @extends('layouts.master')
 
 @section('content')
     <header class="header mb-3">
         <h1>Lista dei videogiochi</h1>
     </header>
+    <x-searchbar>
+        <x-slot:route>{{ route('admin.videogames.index') }}</x-slot>
+        <x-slot:subject>nome</x-slot>
+        <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
+    </x-searchbar>
 
     <section id="videogames" class="my-3">
 

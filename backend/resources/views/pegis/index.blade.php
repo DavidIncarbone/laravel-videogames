@@ -1,11 +1,20 @@
 @extends('layouts.master')
 
+
 @section('content')
     <section id="pegis">
 
         <header class="header mb-3">
             <h1>Lista dei PEGI</h1>
         </header>
+
+        {{-- SEARCHBAR --}}
+
+        <x-searchbar>
+            <x-slot:route>{{ route('admin.pegis.index') }}</x-slot>
+            <x-slot:subject>età minima</x-slot>
+            <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
+        </x-searchbar>
 
         {{-- TABLE --}}
 
@@ -76,39 +85,42 @@
         </div>
     </section>
 
-    {{-- MODAL COMPONENT --}}
-
-    <x-modal>
-
-        <x-slot:delete>Elimina <span id="pegiAgeToDelete" class="fw-bold text-danger"></span></x-slot>
-        <x-slot:wantDelete>Vuoi eliminare questo PEGI?</x-slot>
-        <x-slot:deleteBtn>
-            <form id="deletePegiForm" action="{{ route('admin.pegis.destroy', $pegi) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
-            </form>
-        </x-slot>
 
 
-    </x-modal>
+    @if (count($pegis) > 0)
+        {{-- MODAL COMPONENT --}}
+        <x-modal>
 
-    {{-- MODAL SCRIPT --}}
+            <x-slot:delete>Elimina <span id="pegiAgeToDelete" class="fw-bold text-danger"></span></x-slot>
+            <x-slot:wantDelete>Vuoi eliminare questo PEGI?</x-slot>
+            <x-slot:deleteBtn>
+                <form id="deletePegiForm" action="{{ route('admin.pegis.destroy', $pegi) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
+                </form>
+            </x-slot>
 
 
-    <script>
-        const deleteModal = document.getElementById('deleteModal');
-        // console.log(deleteModal);
-        deleteModal.addEventListener('show.bs.modal', function(event) {
-            const button = event.relatedTarget;
-            const pegiId = button.getAttribute('data-pegi-id');
-            const pegiAge = button.getAttribute('data-pegi-age');
-            const form = document.getElementById('deletePegiForm');
-            form.action = `/admin/pegis/${pegiId}`;
-            const pegiAgeToDelete = document.getElementById('pegiAgeToDelete');
-            // console.log(pegiAgeToDelete);
-            pegiAgeToDelete.textContent = `PEGI ${pegiAge}`;
+        </x-modal>
 
-        });
-    </script>
+        {{-- MODAL SCRIPT --}}
+
+
+        <script>
+            const deleteModal = document.getElementById('deleteModal');
+            // console.log(deleteModal);
+            deleteModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const pegiId = button.getAttribute('data-pegi-id');
+                const pegiAge = button.getAttribute('data-pegi-age');
+                const form = document.getElementById('deletePegiForm');
+                form.action = `/admin/pegis/${pegiId}`;
+                const pegiAgeToDelete = document.getElementById('pegiAgeToDelete');
+                // console.log(pegiAgeToDelete);
+                pegiAgeToDelete.textContent = `PEGI ${pegiAge}`;
+
+            });
+        </script>
+    @endif
 @endsection

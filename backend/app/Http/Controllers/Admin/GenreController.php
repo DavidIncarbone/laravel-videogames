@@ -11,9 +11,16 @@ class GenreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $genres = Genre::paginate(5);
+
+        $query = Genre::query();
+
+        if ($request->filled("search")) {
+            $query->where("name", "like", "%" . $request->search . "%");
+        };
+
+        $genres = $query->paginate(5)->withQueryString();
 
         return view("genres/index", compact("genres"));
     }
@@ -120,6 +127,6 @@ class GenreController extends Controller
     {
         $genre->delete();
         toastr()->success('Genere eliminato con successo');
-        return redirect()->route("admin.genres.index");
+        return back();
     }
 }

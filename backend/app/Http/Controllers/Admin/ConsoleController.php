@@ -12,9 +12,13 @@ class ConsoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $consoles = Console::paginate(5);
+        $query = Console::query();
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        };
+        $consoles = $query->paginate(5)->withQueryString();
         return view("consoles/index", compact("consoles"));
     }
 
@@ -150,6 +154,6 @@ class ConsoleController extends Controller
     {
         $console->delete();
         toastr()->success('Console eliminata con successo');
-        return redirect()->route("admin.consoles.index");
+        return back();
     }
 }

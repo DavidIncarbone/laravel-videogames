@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\videogame;
+use App\Models\Videogame;
 use App\Models\Console;
 use App\Models\Genre;
 use App\Models\Pegi;
@@ -13,10 +13,18 @@ use Illuminate\Support\Facades\Storage;
 class VideogameController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
 
-        $videogames = Videogame::paginate(5);
+        $query = Videogame::query();
+
+        // dd($query);
+
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        };
+
+        $videogames = $query->paginate(5)->withQueryString();
         // dd($videogames);
 
         return view("videogames.index", compact("videogames"));
@@ -297,6 +305,6 @@ class VideogameController extends Controller
 
         toastr()->success('Videogioco eliminato con successo');
 
-        return redirect()->route("admin.videogames.index");
+        return back();
     }
 }

@@ -13,9 +13,15 @@ class PegiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pegis = Pegi::paginate(5);
+        $query = Pegi::query();
+
+        if ($request->filled("search")) {
+            $query->where("age", $request->search);
+        }
+
+        $pegis = $query->paginate(5)->withQueryString();
         return view("pegis.index", compact("pegis"));
     }
 
@@ -162,6 +168,6 @@ class PegiController extends Controller
     {
         $pegi->delete();
         toastr()->success('PEGI eliminato con successo');
-        return redirect()->route("admin.pegis.index");
+        return back();
     }
 }

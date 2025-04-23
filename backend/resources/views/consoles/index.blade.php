@@ -7,6 +7,17 @@
 
             <h1 class="">Lista delle consoles</h1>
         </header>
+
+        {{-- SEARCHBAR --}}
+
+        <x-searchbar>
+            <x-slot:route>{{ route('admin.consoles.index') }}</x-slot>
+            <x-slot:subject>nome</x-slot>
+            <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
+        </x-searchbar>
+
+        {{-- TABLE --}}
+
         <table class="table table-bordered table-striped my-3 m-auto">
             <thead>
                 <tr class="text-center">
@@ -35,9 +46,9 @@
 
                         {{-- NAME --}}
 
-                        <td>
-                            <div class="d-flex justify-content-around gap-3 align-items-center">
-                                <div class="d-flex align-items-center gap-5">
+                        <td class="">
+                            <div class="d-flex justify-content-around align-items-center"style=height:50px>
+                                <div class="d-flex">
                                     <div style="width:150px" class="text-center">
                                         {{ $console->name }}
                                     </div>
