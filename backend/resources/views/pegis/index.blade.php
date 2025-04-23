@@ -16,6 +16,8 @@
             <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
         </x-searchbar>
 
+        <p class="mt-3 fw-bold">Numero di PEGI: <span class="fw-bold text-primary">{{ count($pegis) }}</span></p>
+
         {{-- TABLE --}}
 
         <table class="table table-bordered table-striped my-3">

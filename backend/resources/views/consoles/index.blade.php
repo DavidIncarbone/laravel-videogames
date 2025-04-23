@@ -16,6 +16,8 @@
             <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
         </x-searchbar>
 
+        <p class="mt-3 fw-bold">Numero di consoles: <span class="fw-bold text-primary">{{ count($consoles) }}</span></p>
+
         {{-- TABLE --}}
 
         <table class="table table-bordered table-striped my-3 m-auto">

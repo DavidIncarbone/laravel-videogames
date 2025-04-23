@@ -16,6 +16,8 @@
         <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
     </x-searchbar>
 
+    <p class="mt-3 fw-bold">Numero di videogiochi: <span class="fw-bold text-primary">{{ count($videogames) }}</span></p>
+
     <section id="videogames" class="my-3">
 
         {{-- TABLE --}}

@@ -18,7 +18,8 @@ class PegiController extends Controller
         $query = Pegi::query();
 
         if ($request->filled("search")) {
-            $query->where("age", $request->search);
+            // dd((int)$request->search);
+            $query->where("age", ">=", $request->search);
         }
 
         $pegis = $query->paginate(5)->withQueryString();
