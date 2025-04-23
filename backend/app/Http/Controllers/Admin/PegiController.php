@@ -21,6 +21,13 @@ class PegiController extends Controller
             // dd((int)$request->search);
             $query->where("age", ">=", $request->search);
         }
+        if ($request->orderFor == "create" && $request->orderBy == "desc") {
+            $query->orderBy("created_at", "desc");
+        } else if ($request->orderFor == "edit" && $request->orderBy == "asc") {
+            $query->orderBy("updated_at");
+        } else if ($request->orderFor == "edit" && $request->orderBy == "desc") {
+            $query->orderBy("updated_at", "desc");
+        }
 
         $pegis = $query->paginate(5)->withQueryString();
         return view("pegis.index", compact("pegis"));

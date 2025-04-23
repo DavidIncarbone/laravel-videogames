@@ -100,21 +100,21 @@
 
             </x-slot>
         </x-modal>
+
+        {{-- MODAL SCRIPT --}}
+
+
+        <script>
+            const deleteModal = document.getElementById('deleteModal');
+            deleteModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const consoleId = button.getAttribute('data-console-id');
+                const consoleName = button.getAttribute('data-console-name');
+                const form = document.getElementById('deleteConsoleForm');
+                form.action = `/admin/consoles/${consoleId}`;
+                const consoleNameToDelete = document.getElementById('consoleNameToDelete');
+                consoleNameToDelete.textContent = consoleName;
+            });
+        </script>
     @endif
-
-    {{-- MODAL SCRIPT --}}
-
-
-    <script>
-        const deleteModal = document.getElementById('deleteModal');
-        deleteModal.addEventListener('show.bs.modal', function(event) {
-            const button = event.relatedTarget;
-            const consoleId = button.getAttribute('data-console-id');
-            const consoleName = button.getAttribute('data-console-name');
-            const form = document.getElementById('deleteConsoleForm');
-            form.action = `/admin/consoles/${consoleId}`;
-            const consoleNameToDelete = document.getElementById('consoleNameToDelete');
-            consoleNameToDelete.textContent = consoleName;
-        });
-    </script>
 @endsection

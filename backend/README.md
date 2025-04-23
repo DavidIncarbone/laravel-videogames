@@ -1,7 +1,9 @@
 ## STEP DI OGGI
 
-# Implementare filtri per "Ordina per"
-# Implementare searchbar per ricerca per nome
+
+# aumentare i videogames
+# Sistemare la pagina di dettaglio
+
 
 
 

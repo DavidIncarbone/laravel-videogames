@@ -119,7 +119,7 @@ document.getElementById("searchBtn");
 window.clearInput = function (fieldId) {
     document.getElementById(fieldId).value = '';
     toggleClearButton(fieldId);
-    searchBtn.disabled = true;
+    // searchBtn.disabled = true;
 }
 
 window.onload = function () {
@@ -129,14 +129,14 @@ window.onload = function () {
 
 // TOGGLE SEARCHBAR
 
-const searchInput = document.getElementById('searchInput');
+// const searchInput = document.getElementById('searchInput');
 
-function toggleSearch() {
-    searchBtn.disabled = !searchInput.value;
-}
+// function toggleSearch() {
+//     searchBtn.disabled = !searchInput.value;
+// }
 
-window.addEventListener('load', toggleSearch);
-searchInput.addEventListener('input', toggleSearch);
+// window.addEventListener('load', toggleSearch);
+// searchInput.addEventListener('input', toggleSearch);
 
 
 

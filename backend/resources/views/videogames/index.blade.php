@@ -111,22 +111,22 @@
 
             </x-slot>
         </x-modal>
+
+        {{-- MODAL SCRIPT --}}
+
+        <script>
+            const deleteModal = document.getElementById('deleteModal');
+            // console.log(deleteModal);
+            deleteModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const videogameId = button.getAttribute('data-videogame-id');
+                const videogameName = button.getAttribute('data-videogame-name');
+                const form = document.getElementById('deleteVideogameForm');
+                form.action = `/admin/videogames/${videogameId}`;
+                const videogameNameToDelete = document.getElementById('videogameNameToDelete');
+                videogameNameToDelete.textContent = videogameName;
+
+            });
+        </script>
     @endif
-
-    {{-- MODAL SCRIPT --}}
-
-    <script>
-        const deleteModal = document.getElementById('deleteModal');
-        // console.log(deleteModal);
-        deleteModal.addEventListener('show.bs.modal', function(event) {
-            const button = event.relatedTarget;
-            const videogameId = button.getAttribute('data-videogame-id');
-            const videogameName = button.getAttribute('data-videogame-name');
-            const form = document.getElementById('deleteVideogameForm');
-            form.action = `/admin/videogames/${videogameId}`;
-            const videogameNameToDelete = document.getElementById('videogameNameToDelete');
-            videogameNameToDelete.textContent = videogameName;
-
-        });
-    </script>
 @endsection

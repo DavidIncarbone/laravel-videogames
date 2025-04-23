@@ -19,6 +19,13 @@ class GenreController extends Controller
         if ($request->filled("search")) {
             $query->where("name", "like", "%" . $request->search . "%");
         };
+        if ($request->orderFor == "create" && $request->orderBy == "desc") {
+            $query->orderBy("created_at", "desc");
+        } else if ($request->orderFor == "edit" && $request->orderBy == "asc") {
+            $query->orderBy("updated_at");
+        } else if ($request->orderFor == "edit" && $request->orderBy == "desc") {
+            $query->orderBy("updated_at", "desc");
+        }
 
         $genres = $query->paginate(5)->withQueryString();
 

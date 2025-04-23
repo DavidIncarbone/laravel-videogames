@@ -64,37 +64,39 @@
         </div>
     </section>
 
-    {{-- MODAL COMPONENT --}}
+    @if (count($genres) > 0)
+        {{-- MODAL COMPONENT --}}
 
-    <x-modal>
-        <x-slot:delete>Elimina <span id="genreNameToDelete" class="fw-bold text-danger"></span> </x-slot>
-        <x-slot:wantDelete>Vuoi eliminare questo genere?</x-slot>
-        <x-slot:deleteBtn>
-            <form id="deleteGenreForm" action="{{ route('admin.genres.destroy', $genre) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
-            </form>
+        <x-modal>
+            <x-slot:delete>Elimina <span id="genreNameToDelete" class="fw-bold text-danger"></span> </x-slot>
+            <x-slot:wantDelete>Vuoi eliminare questo genere?</x-slot>
+            <x-slot:deleteBtn>
+                <form id="deleteGenreForm" action="{{ route('admin.genres.destroy', $genre) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
+                </form>
 
-        </x-slot>
+            </x-slot>
 
 
-    </x-modal>
+        </x-modal>
 
-    {{-- MODAL SCRIPT --}}
+        {{-- MODAL SCRIPT --}}
 
-    <script>
-        const deleteModal = document.getElementById('deleteModal');
-        // console.log(deleteModal);
-        deleteModal.addEventListener('show.bs.modal', function(event) {
-            const button = event.relatedTarget;
-            const genreId = button.getAttribute('data-genre-id');
-            const genreName = button.getAttribute('data-genre-name');
-            const form = document.getElementById('deleteGenreForm');
-            form.action = `/admin/genres/${genreId}`;
-            const genreNameToDelete = document.getElementById('genreNameToDelete');
-            genreNameToDelete.textContent = genreName;
+        <script>
+            const deleteModal = document.getElementById('deleteModal');
+            // console.log(deleteModal);
+            deleteModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const genreId = button.getAttribute('data-genre-id');
+                const genreName = button.getAttribute('data-genre-name');
+                const form = document.getElementById('deleteGenreForm');
+                form.action = `/admin/genres/${genreId}`;
+                const genreNameToDelete = document.getElementById('genreNameToDelete');
+                genreNameToDelete.textContent = genreName;
 
-        });
-    </script>
+            });
+        </script>
+    @endif
 @endsection
