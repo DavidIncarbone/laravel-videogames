@@ -8,11 +8,12 @@
             style="cursor: pointer; display:none;" onclick="clearInput('searchInput')"><i
                 class="fas fa-times"></i></span>
     </div>
-    <label for="orderFor" class="d-flex align-items-center">Ordina per:</label>
+    <label for="orderFor" class="d-flex align-self-center d-none d-lg-block">Ordina per:</label>
     <div class="d-flex align-items-start gap-3">
         <select name="orderFor" id="orderFor" class="form-select bg-white">
             <option value="create" {{ request('orderFor') == 'create' ? 'selected' : '' }}>Data creazione
             </option>
+
             <option value="edit" {{ request('orderFor') == 'edit' ? 'selected' : '' }}>Data ultima modifica
             </option>
         </select>
@@ -21,21 +22,8 @@
             <option value="asc" {{ request('orderBy') == 'asc' ? 'selected' : '' }}>Crescente</option>
             <option value="desc" {{ request('orderBy') == 'desc' ? 'selected' : '' }}>Decrescente</option>
         </select>
-
-        <button type="submit" id='searchBtn' class="btn btn-primary">
-            Filtra
-        </button>
-
     </div>
-
-
-
-
-
-
-
-    {{-- <button id="showAll" class="btn btn-primary ms-3"{{ $disabled }}> <a href="{{ $route }}"
-                class="text-decoration-none text-white">
-                Mostra tutti</a>
-        </button> --}}
+    <button type="submit" id='searchBtn' class="btn btn-primary rounded-3">
+        Filtra
+    </button>
 </form>

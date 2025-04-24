@@ -1,10 +1,22 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container-fluid px-3 px-lg-5 py-4">
+    <div class="container-fluid px-3 px-lg-5 py-4" style="background-color:#EBEDEF">
         <!-- Header -->
         <header class="mb-4 text-center text-lg-start">
-            <h1 class="fs-2">{{ $videogame->name }}</h1>
+            <div class="d-flex justify-content-between">
+                <h1 class="fs-2">{{ $videogame->name }}</h1>
+                <div id="icons" class="d-flex align-items-center gap-2">
+                    <a class=" text-decoration-none text-dark" href="{{ route('admin.videogames.edit', $videogame) }}">
+                        <i id="pencil" class="bi bi-pencil"></i>
+                    </a>
+                    <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal" data-videogame-id="{{ $videogame->id }}"
+                        data-videogame-name="{{ $videogame->name }}">
+                        <i id="trash" class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
             <p class="text-muted">Esplora i dettagli completi del mio videogioco.</p>
         </header>
 
@@ -14,7 +26,7 @@
                 <!-- Videogame Image and Description -->
                 <div class="col-12 col-lg-6">
                     <div class="ratio ratio-16x9 mb-3">
-                        <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
+                        <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ Str::limit($videogame->name, 20) }}"
                             class="img-fluid rounded shadow-sm object-fit-cover">
                     </div>
                     <h5><strong>Descrizione:</strong></h5>
@@ -38,7 +50,7 @@
 
                     <div class="mb-3">
                         <p><strong>Disponibile per:</strong></p>
-                        <ul class="list-unstyled d-flex flex-wrap gap-2">
+                        <ul class="list-unstyled d-flex flex-wrap gap-5">
                             @foreach ($videogame->consoles as $console)
                                 <li style="width: 50px; height: 50px;">
                                     <img src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}"
@@ -63,4 +75,38 @@
             </div>
         </section>
     </div>
+    {{-- MODAL COMPONENT --}}
+
+
+    <x-modal>
+        <x-slot:delete>Elimina <span id="videogameNameToDelete" class="fw-bold text-danger"></span> </x-slot>
+        <x-slot:wantDelete>Vuoi eliminare questo videogame?</x-slot>
+        <x-slot:deleteBtn>
+            <form id="deleteVideogameForm" action="{{ route('admin.videogames.show.destroy', $videogame) }}"
+                method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
+            </form>
+
+        </x-slot>
+    </x-modal>
+
+    {{-- MODAL SCRIPT --}}
+
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        // console.log(deleteModal);
+        deleteModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const videogameId = button.getAttribute('data-videogame-id');
+            const videogameName = button.getAttribute('data-videogame-name');
+            const form = document.getElementById('deleteVideogameForm');
+            form.action = `/admin/videogames/show/${videogameId}`;
+            const videogameNameToDelete = document.getElementById('videogameNameToDelete');
+            videogameNameToDelete.textContent = videogameName;
+
+
+        });
+    </script>
 @endsection

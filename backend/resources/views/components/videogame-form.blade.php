@@ -1,4 +1,4 @@
-<h1 class="text-center pb-3">{{ $actionToDo }} {{ $videogameName }}</h1>
+<h2 class="pb-3">{{ $actionToDo }} {{ $videogameName }}</h2>
 
 <form id="videogameForm" action="{{ $route }}" method="POST" enctype="multipart/form-data" class="mb-3">
 
@@ -13,7 +13,7 @@
 
     <div class="form-control mb-3 d-flex flex-column p-3">
         <label for="name">Nome del videogioco*</label>
-        <label for="name" id="input-info">min. 1 max. 255 caratteri</label>
+        <label for="name" id="input-info">min. 2 max. 50 caratteri</label>
         <div class="d-flex align-items-center position-relative">
             <span class="position-absolute ps-2"><i class="fa-solid fa-gamepad"></i></span>
             <input type="text" name="name" id="name" value="{{ $name }}"
@@ -68,7 +68,7 @@
 
     <div class="form-control mb-3 d-flex flex-column p-3">
         <label for="publisher">Casa produttrice*</label>
-        <label for="publisher" id="input-info">min. 1 max. 255 caratteri</label>
+        <label for="publisher" id="input-info">min. 2 max. 50 caratteri</label>
         <div class="d-flex align-items-center position-relative">
             <span class="position-absolute ps-2"> <i class="fa-solid fa-house-laptop"></i></span>
             <input type="text" name="publisher" id="publisher" value="{{ $publisher }}"
@@ -160,7 +160,7 @@
 
     <div class="form-control mb-3 d-flex flex-column p-3">
         <label for="description">Descrizione*</label>
-        <label for="name" id="input-info">min. 10 max. 500 characters</label>
+        <label for="name" id="input-info">min. 10 max. 255 characters</label>
         <div class="d-flex align-items-center position-relative">
             <textarea name="description" id="description" width="100%"
                 placeholder="Inserisci quì la descrizione del videogioco" oninput="toggleClearButton('description')"

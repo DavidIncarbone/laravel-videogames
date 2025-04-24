@@ -14,7 +14,7 @@
 
     <div class="form-control d-flex flex-column p-3 mb-3">
         <label for="{{ $inputName }}">Inserisci {{ $subject }} da {{ $actionTodo }}*</label>
-        <label for="name" id="input-info">min. 1 max. 255 caratteri</label>
+        <label for="name" id="input-info">min. 2 max. 20 caratteri</label>
         <div class="d-flex align-items-center position-relative">
             <input type="text" name="{{ $inputName }}" id="{{ $inputName }}" value="{{ $name }}"
                 placeholder="Inserisci quì il nome della console" class="form-control pr-5 bg-white"

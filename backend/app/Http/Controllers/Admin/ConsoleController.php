@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Console;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 
 class ConsoleController extends Controller
 {
@@ -47,18 +49,18 @@ class ConsoleController extends Controller
 
         $request->validate(
             [
-                'name' => ['required', 'string', 'min:1', 'max:255', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
+                'name' => ['required', 'string', 'min:2', 'max:20', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             ],
 
             // Name
 
             [
-                'name.required' => 'Il campo nome del videogioco è obbligatorio.',
-                'name.string' => 'Il nome del videogioco deve essere una stringa.',
-                'name.min' => 'Il nome del videogioco deve contenere almeno :min carattere.',
-                'name.max' => 'Il nome del videogioco non può superare i :max caratteri.',
-                'name.regex' => 'Il nome del videogioco contiene caratteri non validi.',
+                'name.required' => 'Il campo nome è obbligatorio.',
+                'name.string' => 'Il nome deve essere una stringa.',
+                'name.min' => 'Il nome deve contenere almeno :min caratteri.',
+                'name.max' => 'Il nome non può superare i :max caratteri.',
+                'name.regex' => 'Il nome contiene caratteri non validi.',
             ],
 
             // Logo
@@ -73,7 +75,7 @@ class ConsoleController extends Controller
 
         $data = $request->all();
         $newConsole = new Console;
-        $newConsole->name = $data["name"];
+        $newConsole->name = Str::of($data["name"])->trim();
 
         if (array_key_exists("logo", $data)) {
 
@@ -82,7 +84,7 @@ class ConsoleController extends Controller
         }
 
         $newConsole->save();
-        toastr()->success('Console aggiunta con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($newConsole->name, 20) . '</span> è stata aggiunta con successo');
         return redirect()->route("admin.consoles.index", $newConsole);
     }
 
@@ -113,18 +115,18 @@ class ConsoleController extends Controller
 
         $request->validate(
             [
-                'name' => ['required', 'string', 'min:1', 'max:255', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
+                'name' => ['required', 'string', 'min:2', 'max:20', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             ],
 
             // Name
 
             [
-                'name.required' => 'Il campo nome del videogioco è obbligatorio.',
-                'name.string' => 'Il nome del videogioco deve essere una stringa.',
-                'name.min' => 'Il nome del videogioco deve contenere almeno :min carattere.',
-                'name.max' => 'Il nome del videogioco non può superare i :max caratteri.',
-                'name.regex' => 'Il nome del videogioco contiene caratteri non validi.',
+                'name.required' => 'Il campo nome è obbligatorio.',
+                'name.string' => 'Il nome deve essere una stringa.',
+                'name.min' => 'Il nome deve contenere almeno :min caratteri.',
+                'name.max' => 'Il nome non può superare i :max caratteri.',
+                'name.regex' => 'Il nome contiene caratteri non validi.',
             ],
 
             // Logo
@@ -140,7 +142,8 @@ class ConsoleController extends Controller
         $data = $request->all();
         // dd($data);
 
-        $console->name = $data["name"];
+
+        $console->name = Str::of($data["name"])->trim();
 
         if (array_key_exists("logo", $data)) {
 
@@ -150,7 +153,7 @@ class ConsoleController extends Controller
 
         $console->update();
 
-        toastr()->success('Console modificata con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($console->name, 20) . '</span> è stata modificata con successo');
         return redirect()->route("admin.consoles.index");
     }
 
@@ -159,8 +162,9 @@ class ConsoleController extends Controller
      */
     public function destroy(Console $console)
     {
+        $name = $console->name;
         $console->delete();
-        toastr()->success('Console eliminata con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stata eliminata con successo');
         return back();
     }
 }

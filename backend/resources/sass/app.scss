@@ -182,10 +182,16 @@ input[type="checkbox"] {
     background-color: #fff;
 }
 
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
 /* Controllo quando la checkbox è selezionata */
 input[type="checkbox"]:checked {
     background-color: #007bff;
     border-color: #007bff;
+
 }
 
 // SECONDARY SHOW
@@ -225,11 +231,23 @@ input[type="checkbox"]:checked {
     margin: 0 auto;
 }
 
-// OTHERS
+// TABLE
+
+td:not(.not-break) {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
 
 #logo {
     object-fit: contain;
 }
+
+// #icons {
+
+//     width: 50px;
+
+// }
 
 #pencil:hover {
 
@@ -278,6 +296,7 @@ input[type="checkbox"]:checked {
     width: 100%;
     height: 100%;
 }
+
 
 
 // RESPONSIVE
@@ -332,11 +351,11 @@ input[type="checkbox"]:checked {
         display: none;
     }
 
-    #icons {
-        flex-direction: column;
-        width: 50px;
-        height: 100%
-    }
+    // #icons {
+    //     flex-direction: column;
+    //     width: 50px;
+    //     height: 100%
+    // }
 
     #pegi {
         height: 20px;

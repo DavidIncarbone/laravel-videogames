@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Genre;
+use Illuminate\Support\Str;
 
 class GenreController extends Controller
 {
@@ -54,9 +55,9 @@ class GenreController extends Controller
             'name' => [
                 'required',
                 'string',
-                'min:3',
-                'max:50',
-                'alpha',
+                'min:2',
+                'max:15',
+                'regex:/^[a-zA-Z0-9\s\-\&\']+$/u',
 
             ],
         ], [
@@ -64,20 +65,17 @@ class GenreController extends Controller
             'name.string' => 'Il campo nome deve essere una stringa.',
             'name.min' => 'Il campo nome deve contenere almeno :min caratteri.',
             'name.max' => 'Il campo nome non può superare i :max caratteri.',
-            'name.alpha' => 'Il campo nome può contenere solo lettere e spazi.',
+            'name.regex' => 'Il campo nome contiene caratteri non validi.',
 
         ]);
 
-
-
-
         $data = $request->all();
-        $newGenre = new genre;
-        $newGenre->name = $data["name"];
+        $newGenre = new Genre;
+        $newGenre->name = Str::of($data["name"])->trim();;
 
 
         $newGenre->save();
-        toastr()->success('Genere aggiunto con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($newGenre->name, 20) . '</span> è stato aggiunto con successo');
         return redirect()->route("admin.genres.index", $newGenre);
     }
 
@@ -92,7 +90,7 @@ class GenreController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(genre $genre)
+    public function edit(Genre $genre)
     {
         return view("genres.edit", compact("genre"));
     }
@@ -107,13 +105,13 @@ class GenreController extends Controller
 
         // Name
         $request->validate([
-            'name' => ['required', 'string', 'min:1', 'max:255', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
+            'name' => ['required', 'string', 'min:2', 'max:15', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
         ], [
-            'name.required' => 'Il campo nome del videogioco è obbligatorio.',
-            'name.string' => 'Il nome del videogioco deve essere una stringa.',
-            'name.min' => 'Il nome del videogioco deve contenere almeno :min carattere.',
-            'name.max' => 'Il nome del videogioco non può superare i :max caratteri.',
-            'name.regex' => 'Il nome del videogioco contiene caratteri non validi.',
+            'name.required' => 'Il campo nome è obbligatorio.',
+            'name.string' => 'Il campo nome deve essere una stringa.',
+            'name.min' => 'Il campo nome deve contenere almeno :min caratteri.',
+            'name.max' => 'Il campo nome non può superare i :max caratteri.',
+            'name.regex' => 'Il campo nome contiene caratteri non validi.',
 
         ]);
 
@@ -121,19 +119,21 @@ class GenreController extends Controller
 
 
         $data = $request->all();
-        $genre->name = $data["name"];
+        $genre->name = Str::of($data["name"])->trim();
         $genre->update();
-        toastr()->success('Genere modificato con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($genre->name, 20) . '</span> è stato modificato con successo');
         return redirect()->route("admin.genres.index");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(genre $genre)
+    public function destroy(Genre $genre)
     {
+        $name = $genre->name;
+        // dd($name);
         $genre->delete();
-        toastr()->success('Genere eliminato con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stato eliminato con successo');
         return back();
     }
 }

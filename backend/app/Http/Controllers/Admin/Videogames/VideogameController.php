@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Videogames;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,6 +9,7 @@ use App\Models\Console;
 use App\Models\Genre;
 use App\Models\Pegi;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class VideogameController extends Controller
 {
@@ -31,11 +32,6 @@ class VideogameController extends Controller
         }
 
         $videogames = $query->paginate(5)->withQueryString();
-
-
-
-
-
         return view("videogames.index", compact("videogames"));
     }
 
@@ -53,19 +49,19 @@ class VideogameController extends Controller
     public function store(Request $request)
 
     {
-        // dd($request);
+
 
         // VALIDATION
 
         $request->validate([
 
-            'name' => ['required', 'string', 'min:1', 'max:255'],
+            'name' => ['required', 'string', 'min:2', 'max:50'],
 
             'console_ids' => ['required', 'array', 'exists:consoles,id'],
 
             'genre_ids' => ['required', 'array', 'min:1', 'exists:genres,id'],
 
-            'publisher' => ['required', 'string', 'min:2', 'max:255'],
+            'publisher' => ['required', 'string', 'min:2', 'max:50'],
 
             'year_of_publication' => ['required', 'integer', 'between:1970,' . date('Y')],
 
@@ -73,14 +69,14 @@ class VideogameController extends Controller
 
             'pegi_id' => ['required', 'exists:pegis,id'],
 
-            'description' => ['required', 'string', 'min:10', 'max:500'],
+            'description' => ['required', 'string', 'min:10', 'max:255'],
 
             'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
         ], [
             // Name
             'name.required' => 'Il campo nome del videogioco è obbligatorio.',
             'name.string' => 'Il nome del videogioco deve essere una stringa.',
-            'name.min' => 'Il nome del videogioco deve contenere almeno :min carattere.',
+            'name.min' => 'Il nome del videogioco deve contenere almeno :min caratteri.',
             'name.max' => 'Il nome del videogioco non può superare i :max caratteri.',
 
 
@@ -138,13 +134,13 @@ class VideogameController extends Controller
 
 
         $newVideogame->pegi_id = $data["pegi_id"];
-        $newVideogame->name = $data["name"];
+        $newVideogame->name = Str::of($data["name"])->trim();
         $newVideogame->price = $data["price"];
         $newVideogame->console_ids = $data["console_ids"];
         $newVideogame->genre_ids = $data["genre_ids"];
-        $newVideogame->publisher = $data["publisher"];
+        $newVideogame->publisher = Str::of($data["publisher"])->trim();
         $newVideogame->year_of_publication = $data["year_of_publication"];
-        $newVideogame->description = $data["description"];
+        $newVideogame->description = Str::of($data["description"])->trim();
 
         if (array_key_exists("cover", $data)) {
             $cover_url = Storage::putFile("videogames", $data["cover"]);
@@ -160,7 +156,7 @@ class VideogameController extends Controller
             $newVideogame->consoles()->attach($data["console_ids"]);
         }
 
-        toastr()->success('Videogioco aggiunto con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($newVideogame->name, 20) . '</span> è stato aggiunto con successo');
         return redirect()->route("admin.videogames.show", $newVideogame);
     }
 
@@ -197,13 +193,13 @@ class VideogameController extends Controller
 
         $request->validate([
 
-            'name' => ['required', 'string', 'min:1', 'max:255'],
+            'name' => ['required', 'string', 'min:1', 'max:50'],
 
             'console_ids' => ['required', 'array', 'exists:consoles,id'],
 
             'genre_ids' => ['required', 'array', 'min:1', 'exists:genres,id'],
 
-            'publisher' => ['required', 'string', 'min:2', 'max:255'],
+            'publisher' => ['required', 'string', 'min:2', 'max:50'],
 
             'year_of_publication' => ['required', 'integer', 'between:1970,' . date('Y')],
 
@@ -211,14 +207,14 @@ class VideogameController extends Controller
 
             'pegi_id' => ['required', 'exists:pegis,id'],
 
-            'description' => ['required', 'string', 'min:10', 'max:500'],
+            'description' => ['required', 'string', 'min:10', 'max:255'],
 
             'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
         ], [
             // Name
             'name.required' => 'Il campo nome del videogioco è obbligatorio.',
             'name.string' => 'Il nome del videogioco deve essere una stringa.',
-            'name.min' => 'Il nome del videogioco deve contenere almeno :min carattere.',
+            'name.min' => 'Il nome del videogioco deve contenere almeno :min caratteri.',
             'name.max' => 'Il nome del videogioco non può superare i :max caratteri.',
 
 
@@ -270,12 +266,12 @@ class VideogameController extends Controller
         $data = $request->all();
 
         $videogame->pegi_id = $data["pegi_id"];
-        $videogame->name = $data["name"];
+        $videogame->name = Str::of($data["name"])->trim();
         $videogame->console_ids = $data["console_ids"];
         $videogame->genre_ids = $data["genre_ids"];
-        $videogame->publisher = $data["publisher"];
+        $videogame->publisher = Str::of($data["publisher"])->trim();
         $videogame->year_of_publication = $data["year_of_publication"];
-        $videogame->description = $data["description"];
+        $videogame->description = Str::of($data["description"])->trim();
 
 
         // dd($data);
@@ -300,7 +296,7 @@ class VideogameController extends Controller
             $videogame->consoles()->detach();
         }
 
-        toastr()->success('Videogioco modificato con successo', ['title' => '']);
+        toastr()->success('<span class="fw-bold">' . Str::limit($videogame->name, 20) . '</span> è stato modificato con successo', ['title' => '']);
 
         return redirect()->route("admin.videogames.show", $videogame);
     }
@@ -308,11 +304,12 @@ class VideogameController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(videogame $videogame)
+    public function destroy(Videogame $videogame)
     {
+        $name = $videogame->name;
         $videogame->delete();
 
-        toastr()->success('Videogioco eliminato con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stato eliminato con successo');
 
         return back();
     }

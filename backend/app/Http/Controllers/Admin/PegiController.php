@@ -92,7 +92,7 @@ class PegiController extends Controller
         }
 
         $newPegi->save();
-        toastr()->success('PEGI aggiunto con successo');
+        toastr()->success("<span class='fw-bold'> PEGI " . $newPegi->age . '</span> è stato aggiunto con successo');
         return redirect()->route("admin.pegis.index");
     }
 
@@ -165,7 +165,7 @@ class PegiController extends Controller
         }
 
         $pegi->update();
-        toastr()->success('PEGI modificato con successo');
+        toastr()->success("<span class='fw-bold'> PEGI " . $pegi->age . '</span> è stato modificato con successo');
         return redirect()->route("admin.pegis.index");
     }
 
@@ -174,8 +174,9 @@ class PegiController extends Controller
      */
     public function destroy(Pegi $pegi)
     {
+        $age = $pegi->age;
         $pegi->delete();
-        toastr()->success('PEGI eliminato con successo');
+        toastr()->success("<span class='fw-bold'> PEGI " . $age . '</span> è stato eliminato con successo');
         return back();
     }
 }

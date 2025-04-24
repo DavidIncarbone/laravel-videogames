@@ -25,53 +25,45 @@
                 <tr class="text-center">
                     <th></th>
                     <th>Console</th>
-                    <th>Logo</th>
+                    <th class="d-none d-lg-block">Logo</th>
+                    <th>Data creazione</th>
+                    <th>Data ultima modifica</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($consoles as $console)
-                    <tr>
+                    <x-table>
 
                         {{-- ICONS --}}
-
-                        <td class="d-flex align-items-center justify-content-center gap-1 " style="height:66px;">
-                            <a class=" text-decoration-none text-dark" href="{{ route('admin.consoles.edit', $console) }}">
-                                <i id="pencil" class="bi bi-pencil"></i>
-                            </a>
+                        <x-slot:show> </x-slot>
+                        <x-slot:edit>
+                            href="{{ route('admin.consoles.edit', $console) }}"
+                        </x-slot>
+                        <x-slot:delete>
                             <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal" data-console-id="{{ $console->id }}"
-                                data-console-name='{{ $console->name }}'>
+                                data-console-name="{{ Str::limit($console->name, 30) }}">
                                 <i id="trash" class="bi bi-trash"></i>
                             </button>
-                        </td>
+                        </x-slot>
 
-                        {{-- NAME --}}
+                        {{-- TD --}}
 
-                        <td class="">
-                            <div class="d-flex justify-content-around align-items-center"style=height:50px>
-                                <div class="d-flex">
-                                    <div style="width:150px" class="text-center">
-                                        {{ $console->name }}
+                        <x-slot:firstTd>{{ Str::limit($console->name, 50) }}</x-slot>
+                        <x-slot:secondTd>
+                            <td class="d-none d-lg-block" style="height:82px">
+                                <div class="d-flex w-100 justify-content-center align-items-center">
+                                    <div id="post-image" style="width: 100px; height:50px">
+                                        <img id="logo" class="" src="{{ asset('storage/' . $console->logo) }}"
+                                            alt="{{ $console->name }}">
                                     </div>
                                 </div>
-
-                            </div>
-
-                        </td>
-
-                        {{-- LOGO --}}
-
-                        <td>
-                            <div class="d-flex justify-content-center">
-                                <div id="post-image" style="width: 100px; height:50px">
-                                    <img id="logo" class="" src="{{ asset('storage/' . $console->logo) }}"
-                                        alt="{{ $console->name }}">
-                                </div>
-                            </div>
-                        </td>
-
-                    </tr>
+                            </td>
+                        </x-slot>
+                        <x-slot:created>{{ $console->created_at->format('d/m/Y  H:i') }}</x-slot>
+                        <x-slot:updated>{{ $console->updated_at->format('d/m/Y  H:i') }}</x-slot>
+                    </x-table>
                 @endforeach
 
             </tbody>

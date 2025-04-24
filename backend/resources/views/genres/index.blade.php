@@ -24,35 +24,35 @@
                 <tr class="text-center">
                     <th></th>
                     <th>Genere</th>
+                    <th>Data creazione</th>
+                    <th>Data ultima modifica</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($genres as $genre)
-                    <tr>
+                    <x-table>
 
                         {{-- ICONS --}}
-
-                        <td class="d-flex align-items-center justify-content-center gap-1 " style="height:66px;">
-                            <a class=" text-decoration-none text-dark" href="{{ route('admin.genres.edit', $genre) }}">
-                                <i id="pencil" class="bi bi-pencil"></i>
-                            </a>
+                        <x-slot:show></x-slot>
+                        <x-slot:edit>
+                            href="{{ route('admin.genres.edit', $genre) }}"
+                        </x-slot>
+                        <x-slot:delete>
                             <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal" data-genre-id="{{ $genre->id }}"
-                                data-genre-name='{{ $genre->name }}'>
+                                data-genre-name="{{ Str::limit($genre->name, 30) }}">
                                 <i id="trash" class="bi bi-trash"></i>
                             </button>
-                        </td>
+                        </x-slot>
 
-                        {{-- NAME --}}
+                        {{-- TD --}}
 
-                        <td class="">
-                            <div class="d-flex justify-content-center align-items-center w-100 "
-                                style="width:150px; height:50px;">
-                                <div class="text-center">{{ $genre->name }}</div>
-                            </div>
-                        </td>
-                    </tr>
+                        <x-slot:firstTd>{{ Str::limit($genre->name, 50) }}</x-slot>
+                        <x-slot:secondTd></x-slot>
+                        <x-slot:created>{{ $genre->created_at->format('d/m/Y H:i') }}</x-slot>
+                        <x-slot:updated>{{ $genre->updated_at->format('d/m/Y H:i') }}</x-slot>
+                    </x-table>
                 @endforeach
             </tbody>
         </table>

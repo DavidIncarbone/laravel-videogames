@@ -30,59 +30,46 @@
 
                     <th></th>
                     <th>Nome videogioco</th>
-                    <th>Console</th>
-                    <th>Anno di uscita</th>
+                    <th class="d-none d-lg-block">Casa produttrice</th>
+                    <th>Data creazione</th>
+                    <th>Data ultima modifica</th>
 
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($videogames as $videogame)
-                    {{-- ICONS --}}
+                    <x-table>
 
-                    <tr>
-                        <td>
-                            <div id="icons" class="d-flex align-items-center justify-content-around">
-                                <a href="{{ route('admin.videogames.show', $videogame) }}"
-                                    class="text-decoration-none text-dark d-flex align-items-center">
-                                    <i id="eye" class="bi bi-eye"></i>
-                                </a>
+                        {{-- ICONS --}}
+                        <x-slot:show>
+                            <a href="{{ route('admin.videogames.show', $videogame) }}"
+                                class="text-decoration-none text-dark">
+                                <i id="eye" class="bi bi-eye"></i>
+                            </a>
+                        </x-slot>
+                        <x-slot:edit>
+                            href="{{ route('admin.videogames.edit', $videogame) }}"
+                        </x-slot>
+                        <x-slot:delete>
+                            <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal" data-videogame-id="{{ $videogame->id }}"
+                                data-videogame-name="{{ Str::limit($videogame->name, 30) }}">
+                                <i id="trash" class="bi bi-trash"></i>
+                            </button>
+                        </x-slot>
 
-                                <a class=" text-decoration-none text-dark"
-                                    href="{{ route('admin.videogames.edit', $videogame) }}">
-                                    <i id="pencil" class="bi bi-pencil"></i>
-                                </a>
+                        {{-- TD --}}
 
-                                <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal" data-videogame-id="{{ $videogame->id }}"
-                                    data-videogame-name="{{ $videogame->name }}">
-                                    <i id="trash" class="bi bi-trash"></i>
-                                </button>
-                            </div>
-
-
-                        </td>
-
-                        {{-- NAME --}}
-
-                        <td>{{ $videogame->name }}</td>
-
-                        {{-- CONSOLE --}}
-
-                        <td>
-                            @foreach ($videogame->consoles as $console)
-                                {{ $console->name }}
-                                @if (!$loop->last)
-                                    <span id="comma">,</span>
-                                @endif
-                            @endforeach
-
-                            {{-- YEAR OF PUBLICATION --}}
-
-                        <td class="text-center">
-                            {{ $videogame->year_of_publication }}
-                        </td>
-                    </tr>
+                        <x-slot:firstTd>{{ Str::limit($videogame->name, 50) }}</x-slot>
+                        <x-slot:secondTd>
+                            <td class="d-none d-lg-block" style="height:82px;">
+                                {{ Str::limit($videogame->publisher, 30) }}
+                            </td>
+                        </x-slot>
+                        <x-slot:created>{{ $videogame->created_at->format('d/m/Y  H:i') }}</x-slot>
+                        <x-slot:updated>{{ $videogame->updated_at->format('d/m/Y  H:i') }}</x-slot>
+                    </x-table>
                 @endforeach
 
             </tbody>
