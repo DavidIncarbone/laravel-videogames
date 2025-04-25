@@ -144,6 +144,22 @@ window.resetAll = function (checkboxName) {
     })
 }
 
+// TRIM FORM
+window.onload = function () {
+    const allForms = document.querySelectorAll("form");
+    console.log(allForms);
+    allForms.forEach((form) => {
+        form.addEventListener('submit', function (e) {
+            const formElements = e.target.elements;
+            Array.from(formElements).forEach(function (element) {
+                element.value = element.value.replace(/\s+/g, ' ').trim();
+            });
+        })
+    });
+}
+
+
+
 
 
 

@@ -30,9 +30,6 @@ class VideogamesSeederTable extends Seeder
             $newVideogame->cover = $videogame["cover"];
             $newVideogame->description = $videogame["description"];
             $newVideogame->publisher = $videogame["publisher"];
-            $newVideogame->genre_ids = $videogame["genre_ids"];
-            $newVideogame->console_ids = $videogame["console_ids"];
-
             $newVideogame->save();
         }
     }

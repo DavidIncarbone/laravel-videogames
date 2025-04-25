@@ -14,10 +14,10 @@ class GenresVideogamesSeederTable extends Seeder
      */
     public function run(): void
     {
-        $videogames = Videogame::all();
-
+        $videogames = config("videogames");
         foreach ($videogames as $videogame) {
-            $videogame->genres()->attach($videogame["genre_ids"]);
+            $dbVideogame = Videogame::firstWhere("name", $videogame["name"]);
+            $dbVideogame->genres()->attach($videogame["genre_ids"]);
         }
     }
 }

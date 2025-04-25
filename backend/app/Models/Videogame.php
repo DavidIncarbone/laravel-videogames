@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Videogame extends Model
 {
 
+    protected $fillable = ['pegi_id', 'name', 'publisher', 'year_of_publication', 'description', 'cover', 'console_ids', 'genre_ids'];
+
     protected $casts = [
         'console_ids' => 'array',
         'genre_ids' => 'array'
@@ -15,12 +17,12 @@ class Videogame extends Model
 
     public function consoles()
     {
-        return $this->belongsToMany(Console::class);
+        return $this->belongsToMany(Console::class)->withTimestamps();
     }
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class);
+        return $this->belongsToMany(Genre::class)->withTimestamps();
     }
 
     public function pegi()

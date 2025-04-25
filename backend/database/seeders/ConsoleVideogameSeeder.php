@@ -18,9 +18,10 @@ class ConsoleVideogameSeeder extends Seeder
 
         $videogames = Videogame::all();
 
+        $videogames = config("videogames");
         foreach ($videogames as $videogame) {
-
-            $videogame->consoles()->attach($videogame["console_ids"]);
-        };
+            $dbVideogame = Videogame::firstWhere("name", $videogame["name"]);
+            $dbVideogame->consoles()->attach($videogame["console_ids"]);
+        }
     }
 }

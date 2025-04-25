@@ -184,12 +184,14 @@ class VideogameController extends Controller
     public function update(Request $request, Videogame $videogame)
     {
 
-        // @dd(old("genre_ids"));
+        // ADD THIS ARRAYS ANYWAY
 
         $request->merge([
             'genre_ids' => $request->input('genre_ids', []),
             'console_ids' => $request->input('console_ids', [])
         ]);
+
+        // VALIDATION
 
         $request->validate([
 
@@ -263,26 +265,49 @@ class VideogameController extends Controller
             'cover.max' => 'L\'immagine non può superare i 2MB.',
         ]);
 
+        // SAVE TO DB
+
         $data = $request->all();
 
+
         $videogame->pegi_id = $data["pegi_id"];
-        $videogame->name = Str::of($data["name"])->trim();
-        $videogame->console_ids = $data["console_ids"];
-        $videogame->genre_ids = $data["genre_ids"];
-        $videogame->publisher = Str::of($data["publisher"])->trim();
+        $videogame->name = $data["name"];
+        $videogame->publisher = $data["publisher"];
         $videogame->year_of_publication = $data["year_of_publication"];
-        $videogame->description = Str::of($data["description"])->trim();
+        $videogame->description = $data["description"];
 
-
-        // dd($data);
 
         if (array_key_exists("cover", $data)) {
 
             $cover_url = Storage::putFile("videogames", $data["cover"]);
-            $videogame->cover = $cover_url;
+            $updateData["cover"] = $cover_url;
+        }
+
+
+
+        // NO CHANGE EVENTUALITY
+
+        $originalConsoleIds = $videogame->consoles->pluck("id")->sort()->values()->toArray();
+        $originalGenreIds = $videogame->genres->pluck("id")->sort()->values()->toArray();
+
+        $newConsoleIds = collect($data["console_ids"])->map(fn($id) => (int) $id)->sort()->values()->toArray();
+        $newGenreIds = collect($data["genre_ids"])->map(fn($id) => (int) $id)->sort()->values()->toArray();
+
+        $videogameUnchanged = $videogame->isClean();
+        $consoleUnchanged = $originalConsoleIds === $newConsoleIds;
+        $genreUnchanged = $originalGenreIds === $newGenreIds;
+
+        // TOASTR
+
+        if ($videogameUnchanged && $consoleUnchanged && $genreUnchanged) {
+            toastr()->info("Nessuna modifica effettuata");
+        } else {
+            toastr()->success('<span class="fw-bold">' . Str::limit($videogame->name, 20) . '</span> è stato modificato con successo', ['title' => '']);
         }
 
         $videogame->update();
+
+        // PIVOT
 
         if ($request->has("genre_ids")) {
             $videogame->genres()->sync($data["genre_ids"]);
@@ -296,7 +321,7 @@ class VideogameController extends Controller
             $videogame->consoles()->detach();
         }
 
-        toastr()->success('<span class="fw-bold">' . Str::limit($videogame->name, 20) . '</span> è stato modificato con successo', ['title' => '']);
+
 
         return redirect()->route("admin.videogames.show", $videogame);
     }

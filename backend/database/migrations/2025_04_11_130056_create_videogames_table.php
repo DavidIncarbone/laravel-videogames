@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string("cover")->nullable();
             $table->longtext("description");
             $table->string("publisher");
-            $table->json("genre_ids");
-            $table->json("console_ids");
             $table->timestamps();
         });
     }

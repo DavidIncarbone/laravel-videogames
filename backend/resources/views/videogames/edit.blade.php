@@ -14,7 +14,7 @@
             @foreach ($consoles as $console)
                 <div class="form-check g-3 g-lg-0 gap-3 col-6 col-lg-3 d-flex align-items-center">
                     <input type="checkbox" name="console_ids[]" value="{{ $console->id }}" id="console-{{ $console->id }}"
-                        {{ in_array($console->id, old('console_ids', $videogame->console_ids)) ? 'checked' : '' }}>
+                        {{ in_array($console->id, old('console_ids', $videogame->consoles->pluck('id')->toArray())) ? 'checked' : '' }}>
                     <label for="console-{{ $console->id }}">{{ $console->name }}</label>
                 </div>
             @endforeach
@@ -25,7 +25,7 @@
             @foreach ($genres as $genre)
                 <div class="form-check d-flex align-items-center gap-3 g-3 g-lg-0 col-6 col-lg-3">
                     <input type="checkbox" name="genre_ids[]" value="{{ $genre->id }}" id="genre-{{ $genre->id }}"
-                        {{ in_array($genre->id, old('genre_ids', $videogame->genre_ids)) ? 'checked' : '' }}>
+                        {{ in_array($genre->id, old('genre_ids', $videogame->genres->pluck('id')->toArray())) ? 'checked' : '' }}>
                     <label for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
                 </div>
             @endforeach
@@ -61,4 +61,6 @@
         <x-slot:actionToDo>Modifica</x-slot>
 
     </x-videogame-form>
+
+    <script></script>
 @endsection

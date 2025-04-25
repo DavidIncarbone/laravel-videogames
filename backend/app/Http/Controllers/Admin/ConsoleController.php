@@ -143,7 +143,9 @@ class ConsoleController extends Controller
         // dd($data);
 
 
-        $console->name = Str::of($data["name"])->trim();
+        $console->name = $data["name"];
+
+
 
         if (array_key_exists("logo", $data)) {
 
@@ -151,9 +153,17 @@ class ConsoleController extends Controller
             $console->logo = $logo_url;
         }
 
+        $unchangedConsole = $console->isClean();
+        if ($unchangedConsole) {
+            toastr()->info("Nessuna modifica effettuata");
+        } else {
+            toastr()->success("<span class='fw-bold'>" . Str::limit($console->name, 20) . '</span> è stata modificata con successo');
+        }
+
+
         $console->update();
 
-        toastr()->success("<span class='fw-bold'>" . Str::limit($console->name, 20) . '</span> è stata modificata con successo');
+
         return redirect()->route("admin.consoles.index");
     }
 
