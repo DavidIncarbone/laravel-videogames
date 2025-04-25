@@ -18,6 +18,7 @@
             @endforeach
         </x-slot>
 
+
         <x-slot:genres>
             @foreach ($genres as $genre)
                 <div class="form-check d-flex align-items-center gap-3 g-3 g-lg-0 col-6 col-lg-3">

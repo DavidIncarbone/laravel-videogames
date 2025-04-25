@@ -30,7 +30,16 @@
     {{-- CONSOLES --}}
 
     <div class="form-control mb-3 p-3">
-        <label class="mb-3">Console*</label>
+        <div class="d-flex gap-3 justify-content-between">
+            <label class="mb-3" for="allConsoles">Console*</label>
+            <div class="form-check d-flex align-items-center gap-1 mb-3">
+                <div class="btn btn-secondary" onclick="selectAll('console_ids\\[\\]')">
+                    Seleziona tutti</div>
+                <div class="btn btn-danger" onclick="resetAll('console_ids\\[\\]')">
+                    Reset</div>
+            </div>
+        </div>
+
         <div class="d-flex flex-wrap">
             <div class="container">
                 <div class="row">
@@ -48,7 +57,15 @@
     {{-- GENRES --}}
 
     <div class="form-control mb-3 p-3">
-        <label class="form-label mb-3">Generi*</label>
+        <div class="d-flex gap-3 justify-content-between mb-3">
+            <label class="mb-3" for="allGenres">Generi*</label>
+            <div class="form-check d-flex align-items-center gap-1">
+                <div class="btn btn-secondary" onclick="selectAll('genre_ids\\[\\]')">
+                    Seleziona tutti</div>
+                <div class="btn btn-danger" onclick="resetAll('genre_ids\\[\\]')">
+                    Reset</div>
+            </div>
+        </div>
         <div class="d-flex flex-wrap">
             <div class="container">
                 <div class="row">
@@ -118,7 +135,8 @@
                 </div>
                 <div class="d-flex flex-column">
                     <div>
-                        <span class="position-absolute ps-2 pt-2"><i class="fa-solid fa-money-check-dollar"></i></span>
+                        <span class="position-absolute ps-2 pt-2"><i
+                                class="fa-solid fa-money-check-dollar"></i></span>
                         <input type="number" id="price" name="price" step="0.01"
                             value="{{ old('price', $price) }}" placeholder="Inserisci prezzo"
                             class="form-control bg-white ps-5">

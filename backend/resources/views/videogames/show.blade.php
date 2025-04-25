@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container-fluid px-3 px-lg-5 py-4" style="background-color:#EBEDEF">
+    <div class="container-fluid px-3 px-lg-5 py-4 mb-3" style="background-color:#EBEDEF;">
         <!-- Header -->
         <header class="mb-4 text-center text-lg-start">
             <div class="d-flex justify-content-between">
-                <h1 class="fs-2">{{ $videogame->name }}</h1>
+                <h1 class="fs-2 text-center">{{ $videogame->name }}</h1>
                 <div id="icons" class="d-flex align-items-center gap-2">
                     <a class=" text-decoration-none text-dark" href="{{ route('admin.videogames.edit', $videogame) }}">
                         <i id="pencil" class="bi bi-pencil"></i>
@@ -17,7 +17,7 @@
                     </button>
                 </div>
             </div>
-            <p class="text-muted">Esplora i dettagli completi del mio videogioco.</p>
+            <p class="text-muted">Esplora i dettagli completi videogioco.</p>
         </header>
 
         <!-- Videogame Details -->
@@ -25,9 +25,9 @@
             <div class="row gy-4">
                 <!-- Videogame Image and Description -->
                 <div class="col-12 col-lg-6">
-                    <div class="ratio ratio-16x9 mb-3">
+                    <div id="img-details" class="w-100 mb-3" style="height:50vh;">
                         <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ Str::limit($videogame->name, 20) }}"
-                            class="img-fluid rounded shadow-sm object-fit-cover">
+                            class="rounded shadow-sm">
                     </div>
                     <h5><strong>Descrizione:</strong></h5>
                     <p>{{ $videogame->description }}</p>

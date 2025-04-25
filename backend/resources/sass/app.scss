@@ -126,6 +126,11 @@ select {
 
 }
 
+#img-details>img {
+    object-fit: contain;
+
+}
+
 .card-title {
     font-size: 1.5rem;
 }
@@ -180,14 +185,11 @@ input[type="checkbox"] {
     width: 16px;
     height: 16px;
     background-color: #fff;
-}
-
-input[type="checkbox"] {
     width: 20px;
     height: 20px;
 }
 
-/* Controllo quando la checkbox è selezionata */
+
 input[type="checkbox"]:checked {
     background-color: #007bff;
     border-color: #007bff;
@@ -243,11 +245,7 @@ td:not(.not-break) {
     object-fit: contain;
 }
 
-// #icons {
 
-//     width: 50px;
-
-// }
 
 #pencil:hover {
 
@@ -285,6 +283,7 @@ td:not(.not-break) {
 
 
 }
+
 
 .page-link:focus {
     box-shadow: none;
@@ -380,8 +379,4 @@ td:not(.not-break) {
         font-size: 1.25rem;
     }
 
-    #videogame-details img {
-        width: 100%;
-        height: auto;
-    }
 }

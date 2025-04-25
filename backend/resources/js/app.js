@@ -127,26 +127,22 @@ window.onload = function () {
     fields.forEach(field => toggleClearButton(field));
 };
 
-// TOGGLE SEARCHBAR
 
-// const searchInput = document.getElementById('searchInput');
+// CHECKBOX
 
-// function toggleSearch() {
-//     searchBtn.disabled = !searchInput.value;
-// }
+window.selectAll = function (checkboxName) {
+    const allCheckbox = document.querySelectorAll(`[name=${checkboxName}]`);
+    allCheckbox.forEach((checkbox) => {
+        checkbox.checked = true;
+    })
+}
 
-// window.addEventListener('load', toggleSearch);
-// searchInput.addEventListener('input', toggleSearch);
-
-
-
-
-
-
-
-
-
-
+window.resetAll = function (checkboxName) {
+    const allCheckbox = document.querySelectorAll(`[name=${checkboxName}]`);
+    allCheckbox.forEach((checkbox) => {
+        checkbox.checked = false;
+    })
+}
 
 
 
