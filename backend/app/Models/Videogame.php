@@ -3,17 +3,46 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Videogame extends Model
 {
 
-    protected $fillable = ['pegi_id', 'name', 'publisher', 'year_of_publication', 'description', 'cover', 'console_ids', 'genre_ids'];
+    // SLUG
 
-    protected $casts = [
-        'console_ids' => 'array',
-        'genre_ids' => 'array'
-    ];
+    protected static function booted()
+    {
+        static::creating(function ($videogame) {
+            $videogame->slug = Str::slug($videogame->name);
+        });
 
+        static::updating(function ($videogame) {
+            $videogame->slug = Str::slug($videogame->name);
+        });
+
+        // UNIQUE
+
+        static::creating(function ($videogame) {
+            $baseSlug = Str::slug($videogame->name);
+            $slug = $baseSlug;
+            $i = 2;
+
+            while (Videogame::where('slug', $slug)->exists()) {
+                $slug = $baseSlug . '-' . $i++;
+            }
+
+            $videogame->slug = $slug;
+        });
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+
+
+    // FOREIGN
 
     public function consoles()
     {

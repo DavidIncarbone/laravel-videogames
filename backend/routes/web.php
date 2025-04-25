@@ -22,7 +22,7 @@ Route::/*middleware(["auth", "verified"])
         })->name("home");
         Route::resource("profile", ProfileController::class);
         Route::resource("videogames", VideogameController::class);
-        Route::delete("videogames/show/{videogame}", [VideogameShowController::class, "destroy"])->name("videogames.show.destroy");
+        Route::delete("videogames/show/{videogame:slug}", [VideogameShowController::class, "destroy"])->name("videogames.show.destroy");
         Route::resource("consoles", ConsoleController::class);
         Route::resource("genres", GenreController::class);
         Route::resource("pegis", PegiController::class);
