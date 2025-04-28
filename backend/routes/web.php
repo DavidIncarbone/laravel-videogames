@@ -28,12 +28,17 @@ Route::/*middleware(/["auth", "verified"])
         });
 
         Route::resource("videogames", VideogameController::class);
-        Route::delete("videogames/show/{videogame:slug}", [VideogameShowController::class, "destroy"])->name("videogames.show.destroy");
         Route::delete("videogames/all/destroy", [VideogameController::class, "destroyAll"])->name("videogames.destroyAll");
+        Route::delete("videogames/show/{videogame:slug}", [VideogameShowController::class, "destroy"])->name("videogames.show.destroy");
 
         Route::resource("consoles", ConsoleController::class);
+        Route::delete("consoles/all/destroy", [ConsoleController::class, "destroyAll"])->name("consoles.destroyAll");
+
         Route::resource("genres", GenreController::class);
+        Route::delete("genres/all/destroy", [GenreController::class, "destroyAll"])->name("genres.destroyAll");
+
         Route::resource("pegis", PegiController::class);
+        Route::delete("pegis/all/destroy", [PegiController::class, "destroyAll"])->name("pegis.destroyAll");
     });
 
 

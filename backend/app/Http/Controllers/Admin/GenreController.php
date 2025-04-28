@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Genre;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class GenreController extends Controller
 {
@@ -134,6 +135,17 @@ class GenreController extends Controller
         // dd($name);
         $genre->delete();
         toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stato eliminato con successo');
+        return back();
+    }
+
+    public function destroyAll()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Genre::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        toastr()->success('Tutti i generi sono stati eliminati con successo');
+
         return back();
     }
 }

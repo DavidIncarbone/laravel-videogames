@@ -23,6 +23,9 @@
         @if (count($videogames) < 1)
             <h5>Nessun videogioco presente</h5>
         @else
+            <p class="{{ $videogames->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina {{ $videogames->currentPage() }} di
+                {{ $videogames->lastPage() }}</p>
+
             {{-- TABLE --}}
 
             <table class="table table-bordered table-striped">
@@ -80,8 +83,13 @@
 
             {{-- PAGINATION --}}
 
-            <div class="pagination">
-                {{ $videogames->links() }}
+            <div class="d-flex align-items-start justify-content-between">
+
+                <div class="pagination">
+                    {{ $videogames->links() }}
+                </div>
+                <button id="deleteAll" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
+                        class="bi bi-trash"></i> Elimina tutti </button>
             </div>
 
 
@@ -121,5 +129,16 @@
     </script>
 
     {{-- DELETE ALL MODAL COMPONENT --}}
+    <x-modal-all>
+        <x-slot:delete>Elimina tutti i videogiochi </x-slot>
+        <x-slot:wantDelete>Vuoi davvero eliminare tutti i videogiochi?</x-slot>
+        <x-slot:deleteBtn>
+            <form id="deleteVideogameForm" action="{{ route('admin.videogames.destroyAll') }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
+            </form>
+        </x-slot>
+    </x-modal-all>
     @endif
 @endsection

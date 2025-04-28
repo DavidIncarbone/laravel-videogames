@@ -253,7 +253,7 @@ td:not(.not-break) {
 
 }
 
-#trash:hover {
+#trash:hover:not(.deleteAll) {
     color: red;
 }
 

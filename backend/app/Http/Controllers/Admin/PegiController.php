@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\Pegi;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class PegiController extends Controller
 {
@@ -177,6 +177,17 @@ class PegiController extends Controller
         $age = $pegi->age;
         $pegi->delete();
         toastr()->success("<span class='fw-bold'> PEGI " . $age . '</span> è stato eliminato con successo');
+        return back();
+    }
+
+    public function destroyAll()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Pegi::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        toastr()->success('Tutti i PEGI sono stati eliminati con successo');
+
         return back();
     }
 }

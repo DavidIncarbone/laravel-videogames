@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Console;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 
 class ConsoleController extends Controller
@@ -175,6 +176,17 @@ class ConsoleController extends Controller
         $name = $console->name;
         $console->delete();
         toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stata eliminata con successo');
+        return back();
+    }
+
+    public function destroyAll()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Console::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        toastr()->success('Tutte le consoles sono state eliminate con successo');
+
         return back();
     }
 }
