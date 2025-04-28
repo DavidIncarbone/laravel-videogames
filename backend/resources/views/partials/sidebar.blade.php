@@ -7,7 +7,7 @@
     <div class="d-flex flex-lg-column justify-content-around  ">
 
         @include('partials.sidebar.dashboard')
-        @include('partials.sidebar.user')
+
 
     </div>
 
