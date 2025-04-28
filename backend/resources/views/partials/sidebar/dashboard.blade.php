@@ -7,9 +7,12 @@
      </div>
 
      <a href="{{ route('admin.home') }}" class="text-decoration-none text-white w-100">
-         <div class="d-flex justify-content-center align-items-center">
+         <div class="d-flex  align-items-center">
              <i class="bi bi-speedometer2 me-2 fs-4"></i>
-             <h4 class="mb-0 w-100">Admin Dashboard</h4>
+             <h5 class="mb-0  text-center">Admin Dashboard</h5>
+             @guest
+                 <i class="fa-solid fa-lock ms-3"></i>
+             @endguest
          </div>
      </a>
  </div>

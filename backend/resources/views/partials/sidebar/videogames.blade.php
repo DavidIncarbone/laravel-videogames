@@ -4,30 +4,37 @@
           href="#videogamesSubmenu" role="button"
           aria-expanded="{{ request()->is('admin/videogames*') ? 'true' : 'false' }}">
           <span><i class="bi bi-controller me-2"></i> videogiochi</span>
-          <i class="bi {{ request()->is('admin/videogames*') ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
+          @auth
+              <i class="bi {{ request()->is('admin/videogames*') ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
+          @endauth
+          @guest
+              <i class="fa-solid fa-lock ms-3"></i>
+          @endguest
       </a>
-      <div class="collapse {{ request()->is('admin/videogames*') ? 'show' : '' }}" id="videogamesSubmenu">
-          <div class="ps-3">
-              <ul class="nav flex-column small">
-                  <li>
-                      <a href="{{ route('admin.videogames.index') }}"
-                          class="nav-link text-white d-flex align-items-center mb-2  {{ $routeName === 'admin.videogames.index' ? 'active-navlink' : '' }}">
-                          <div>
-                              <i class="bi bi-list-ul me-2 mt-1"></i>
-                          </div>
-                          <div>
-                              Tutti i videogiochi
-                          </div>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('admin.videogames.create') }}"
-                          class="nav-link text-white d-flex align-items-center {{ $routeName === 'admin.videogames.create' ? 'active-navlink' : '' }}">
-                          <div><i class="bi bi-plus-square me-2 mt-1"></i></div>
-                          <div>Aggiungi videogioco</div>
-                      </a>
-                  </li>
-              </ul>
+      @auth
+          <div class="collapse {{ request()->is('admin/videogames*') ? 'show' : '' }}" id="videogamesSubmenu">
+              <div class="ps-3">
+                  <ul class="nav flex-column small">
+                      <li>
+                          <a href="{{ route('admin.videogames.index') }}"
+                              class="nav-link text-white d-flex align-items-center mb-2  {{ $routeName === 'admin.videogames.index' ? 'active-navlink' : '' }}">
+                              <div>
+                                  <i class="bi bi-list-ul me-2 mt-1"></i>
+                              </div>
+                              <div>
+                                  Tutti i videogiochi
+                              </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('admin.videogames.create') }}"
+                              class="nav-link text-white d-flex align-items-center {{ $routeName === 'admin.videogames.create' ? 'active-navlink' : '' }}">
+                              <div><i class="bi bi-plus-square me-2 mt-1"></i></div>
+                              <div>Aggiungi videogioco</div>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
           </div>
-      </div>
+      @endauth
   </li>

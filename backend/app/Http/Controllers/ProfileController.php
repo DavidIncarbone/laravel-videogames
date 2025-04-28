@@ -11,11 +11,9 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function index()
-    {
-
-        return view("profile");
-    }
+    /**
+     * Display the user's profile form.
+     */
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -36,7 +34,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('admin.profile.edit')->with('status', 'profile-updated');
     }
 
     /**

@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('content')
     <div class="container">
-        <h2 class="fs-4 text-secondary my-4">
-            {{ __('Profile') }}
+        <h2 class="fs-4 text-secondary ">
+            {{ __('Profilo') }}
         </h2>
         <div class="card p-4 mb-4 bg-white shadow rounded-lg">
 

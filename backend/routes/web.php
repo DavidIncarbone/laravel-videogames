@@ -13,20 +13,28 @@ Route::get("/", function () {
     return redirect()->route("admin.home");
 });
 
-Route::/*middleware(["auth", "verified"])
-    ->*/name("admin.")
+Route::middleware(["auth", "verified"])
+    ->name("admin.")
     ->prefix("admin")
     ->group(function () {
         Route::get('/', function () {
             return view('admin');
         })->name("home");
-        Route::resource("profile", ProfileController::class);
+
+        Route::middleware('auth')->group(function () {
+            Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+            Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+            Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        });
+
         Route::resource("videogames", VideogameController::class);
         Route::delete("videogames/show/{videogame:slug}", [VideogameShowController::class, "destroy"])->name("videogames.show.destroy");
         Route::resource("consoles", ConsoleController::class);
         Route::resource("genres", GenreController::class);
         Route::resource("pegis", PegiController::class);
     });
+
+
 
 
 

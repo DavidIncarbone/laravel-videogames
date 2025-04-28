@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -28,6 +29,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+
+        toastr()->success("Login avvenuto con successo");
+
+
         return redirect()->intended(route('admin.home', absolute: false));
     }
 
@@ -41,6 +46,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        toastr()->success("Logout avvenuto con successo");
 
         return redirect('/admin');
     }

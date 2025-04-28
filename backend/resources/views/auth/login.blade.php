@@ -5,7 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+                    <div class="card-header">
+                        {{ __('Per accedere a tutti i contenuti del Back Office devi essere autenticato') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
@@ -60,10 +61,12 @@
 
                             <div class="mb-4 row mb-0">
                                 <div class="col-lg-8 offset-lg-4 d-flex align-items-center gap-1">
-                                    <button type="submit" class="btn btn-dark">
-                                        {{ __('Login') }}
-                                    </button>
-                                    <div class="h-100 d-flex align-items-end">
+                                    <div>
+                                        <button type="submit" class="btn btn-dark">
+                                            {{ __('Login') }}
+                                        </button>
+                                    </div>
+                                    <div class="h-100 d-flex align-items-center">
                                         <a href="{{ route('register') }}"class="btn btn-dark">Registrati</a>
                                     </div>
                                     @if (Route::has('password.request'))
