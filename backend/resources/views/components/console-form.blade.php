@@ -17,7 +17,7 @@
         <label for="name" id="input-info">min. 2 max. 20 caratteri</label>
         <div class="d-flex align-items-center position-relative">
             <input type="text" name="{{ $inputName }}" id="{{ $inputName }}" value="{{ $name }}"
-                placeholder="Inserisci quì il nome della console" class="form-control pr-5 bg-white"
+                placeholder="Inserisci quì il nome della console" class="form-control pr-5 bg-white pe-5"
                 oninput="toggleClearButton('name')">
             <span id="clear-btn-name" class="position-absolute end-0 pe-3" style="cursor: pointer; display: none;"
                 onclick="clearInput('name')"><i class="fas fa-times"></i></span>

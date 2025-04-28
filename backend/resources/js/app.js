@@ -112,6 +112,14 @@ window.toggleClearButton = function (fieldId) {
         }
     }
 }
+window.addEventListener('DOMContentLoaded', function () {
+    const fields = document.querySelectorAll('input');
+    fields.forEach(field => {
+        window.toggleClearButton(field.id);
+    })
+});
+
+
 
 // CLEAR SINGLE INPUT
 

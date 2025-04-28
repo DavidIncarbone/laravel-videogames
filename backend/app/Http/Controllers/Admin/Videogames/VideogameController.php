@@ -10,6 +10,7 @@ use App\Models\Genre;
 use App\Models\Pegi;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class VideogameController extends Controller
 {
@@ -335,6 +336,18 @@ class VideogameController extends Controller
         $videogame->delete();
 
         toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stato eliminato con successo');
+
+        return back();
+    }
+
+    public function destroyAll()
+    {
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Videogame::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        toastr()->success('Tutti i videogiochi sono stati eliminati con successo');
 
         return back();
     }

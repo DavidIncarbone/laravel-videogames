@@ -61,6 +61,4 @@
         <x-slot:actionToDo>Modifica</x-slot>
 
     </x-videogame-form>
-
-    <script></script>
 @endsection

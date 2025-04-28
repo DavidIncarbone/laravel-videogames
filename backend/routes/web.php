@@ -13,8 +13,8 @@ Route::get("/", function () {
     return redirect()->route("admin.home");
 });
 
-Route::middleware(["auth", "verified"])
-    ->name("admin.")
+Route::/*middleware(/["auth", "verified"])
+    ->*/name("admin.")
     ->prefix("admin")
     ->group(function () {
         Route::get('/', function () {
@@ -29,6 +29,8 @@ Route::middleware(["auth", "verified"])
 
         Route::resource("videogames", VideogameController::class);
         Route::delete("videogames/show/{videogame:slug}", [VideogameShowController::class, "destroy"])->name("videogames.show.destroy");
+        Route::delete("videogames/all/destroy", [VideogameController::class, "destroyAll"])->name("videogames.destroyAll");
+
         Route::resource("consoles", ConsoleController::class);
         Route::resource("genres", GenreController::class);
         Route::resource("pegis", PegiController::class);

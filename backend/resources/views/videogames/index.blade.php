@@ -20,100 +20,106 @@
 
     <section id="videogames" class="my-3">
 
-        {{-- TABLE --}}
+        @if (count($videogames) < 1)
+            <h5>Nessun videogioco presente</h5>
+        @else
+            {{-- TABLE --}}
 
-        <table class="table table-bordered table-striped">
-            <thead class="">
-                <tr class="text-center">
+            <table class="table table-bordered table-striped">
+                <thead class="">
+                    <tr class="text-center">
 
-                    {{-- TABLES'S HEADER --}}
+                        {{-- TABLES'S HEADER --}}
 
-                    <th></th>
-                    <th>Nome videogioco</th>
-                    <th class="d-none d-lg-block">Casa produttrice</th>
-                    <th>Data creazione</th>
-                    <th>Data ultima modifica</th>
+                        <th></th>
+                        <th>Nome videogioco</th>
+                        <th class="d-none d-lg-block">Casa produttrice</th>
+                        <th>Data creazione</th>
+                        <th>Data ultima modifica</th>
 
-                </tr>
-            </thead>
-            <tbody>
+                    </tr>
+                </thead>
+                <tbody>
 
-                @foreach ($videogames as $videogame)
-                    <x-table>
+                    @foreach ($videogames as $videogame)
+                        <x-table>
 
-                        {{-- ICONS --}}
-                        <x-slot:show>
-                            <a href="{{ route('admin.videogames.show', $videogame) }}"
-                                class="text-decoration-none text-dark">
-                                <i id="eye" class="bi bi-eye"></i>
-                            </a>
-                        </x-slot>
-                        <x-slot:edit>
-                            href="{{ route('admin.videogames.edit', $videogame) }}"
-                        </x-slot>
-                        <x-slot:delete>
-                            <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal" data-videogame-id="{{ $videogame->id }}"
-                                data-videogame-name="{{ Str::limit($videogame->name, 30) }}">
-                                <i id="trash" class="bi bi-trash"></i>
-                            </button>
-                        </x-slot>
+                            {{-- ICONS --}}
+                            <x-slot:show>
+                                <a href="{{ route('admin.videogames.show', $videogame) }}"
+                                    class="text-decoration-none text-dark">
+                                    <i id="eye" class="bi bi-eye"></i>
+                                </a>
+                            </x-slot>
+                            <x-slot:edit>
+                                href="{{ route('admin.videogames.edit', $videogame) }}"
+                            </x-slot>
+                            <x-slot:delete>
+                                <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal" data-videogame-slug="{{ $videogame->slug }}"
+                                    data-videogame-name="{{ Str::limit($videogame->name, 30) }}">
+                                    <i id="trash" class="bi bi-trash"></i>
+                                </button>
+                            </x-slot>
 
-                        {{-- TD --}}
+                            {{-- TD --}}
 
-                        <x-slot:firstTd>{{ Str::limit($videogame->name, 50) }}</x-slot>
-                        <x-slot:secondTd>
-                            <td class="d-none d-lg-block" style="height:82px;">
-                                {{ Str::limit($videogame->publisher, 30) }}
-                            </td>
-                        </x-slot>
-                        <x-slot:created>{{ $videogame->created_at->format('d/m/Y  H:i') }}</x-slot>
-                        <x-slot:updated>{{ $videogame->updated_at->format('d/m/Y  H:i') }}</x-slot>
-                    </x-table>
-                @endforeach
+                            <x-slot:firstTd>{{ Str::limit($videogame->name, 50) }}</x-slot>
+                            <x-slot:secondTd>
+                                <td class="d-none d-lg-block" style="height:82px;">
+                                    {{ Str::limit($videogame->publisher, 30) }}
+                                </td>
+                            </x-slot>
+                            <x-slot:created>{{ $videogame->created_at->format('d/m/Y  H:i') }}</x-slot>
+                            <x-slot:updated>{{ $videogame->updated_at->format('d/m/Y  H:i') }}</x-slot>
+                        </x-table>
+                    @endforeach
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-        {{-- PAGINATION --}}
+            {{-- PAGINATION --}}
 
-        <div class="pagination">
-            {{ $videogames->links() }}
-        </div>
+            <div class="pagination">
+                {{ $videogames->links() }}
+            </div>
+
 
     </section>
 
-    {{-- MODAL COMPONENT --}}
+    {{-- DELETE ONE MODAL COMPONENT --}}
 
-    @if (count($videogames) > 0)
-        <x-modal>
-            <x-slot:delete>Elimina <span id="videogameNameToDelete" class="fw-bold text-danger"></span> </x-slot>
-            <x-slot:wantDelete>Vuoi eliminare questo videogame?</x-slot>
-            <x-slot:deleteBtn>
-                <form id="deleteVideogameForm" action="{{ route('admin.videogames.destroy', $videogame) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
-                </form>
+    <x-modal>
 
-            </x-slot>
-        </x-modal>
+        <x-slot:delete>Elimina <span id="videogameNameToDelete" class="fw-bold text-danger"></span> </x-slot>
+        <x-slot:wantDelete>Vuoi eliminare questo videogioco?</x-slot>
+        <x-slot:deleteBtn>
+            <form id="deleteVideogameForm" action="{{ route('admin.videogames.destroy', $videogame) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
+            </form>
 
-        {{-- MODAL SCRIPT --}}
+        </x-slot>
+    </x-modal>
 
-        <script>
-            const deleteModal = document.getElementById('deleteModal');
-            // console.log(deleteModal);
-            deleteModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget;
-                const videogameId = button.getAttribute('data-videogame-id');
-                const videogameName = button.getAttribute('data-videogame-name');
-                const form = document.getElementById('deleteVideogameForm');
-                form.action = `/admin/videogames/${videogameId}`;
-                const videogameNameToDelete = document.getElementById('videogameNameToDelete');
-                videogameNameToDelete.textContent = videogameName;
+    {{-- SINGLE MODAL SCRIPT --}}
 
-            });
-        </script>
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        // console.log(deleteModal);
+        deleteModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const videogameSlug = button.getAttribute('data-videogame-slug');
+            const videogameName = button.getAttribute('data-videogame-name');
+            const form = document.getElementById('deleteVideogameForm');
+            form.action = `/admin/videogames/${videogameSlug}`;
+            const videogameNameToDelete = document.getElementById('videogameNameToDelete');
+            videogameNameToDelete.textContent = videogameName;
+
+        });
+    </script>
+
+    {{-- DELETE ALL MODAL COMPONENT --}}
     @endif
 @endsection

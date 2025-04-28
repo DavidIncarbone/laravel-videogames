@@ -11,7 +11,7 @@
                         <i id="pencil" class="bi bi-pencil"></i>
                     </a>
                     <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal" data-videogame-id="{{ $videogame->id }}"
+                        data-bs-target="#deleteModal" data-videogame-slug="{{ $videogame->slug }}"
                         data-videogame-name="{{ $videogame->name }}">
                         <i id="trash" class="bi bi-trash"></i>
                     </button>
@@ -82,7 +82,7 @@
         <x-slot:delete>Elimina <span id="videogameNameToDelete" class="fw-bold text-danger"></span> </x-slot>
         <x-slot:wantDelete>Vuoi eliminare questo videogame?</x-slot>
         <x-slot:deleteBtn>
-            <form id="deleteVideogameForm" action="{{ route('admin.videogames.show.destroy', $videogame) }}"
+            <form id="deleteVideogameForm" action="{{ route('admin.videogames.show.destroy', $videogame->slug) }}"
                 method="POST">
                 @csrf
                 @method('DELETE')
@@ -99,13 +99,12 @@
         // console.log(deleteModal);
         deleteModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
-            const videogameId = button.getAttribute('data-videogame-id');
+            const videogameSlug = button.getAttribute('data-videogame-slug');
             const videogameName = button.getAttribute('data-videogame-name');
             const form = document.getElementById('deleteVideogameForm');
-            form.action = `/admin/videogames/show/${videogameId}`;
+            form.action = `/admin/videogames/show/${videogameSlug}`;
             const videogameNameToDelete = document.getElementById('videogameNameToDelete');
             videogameNameToDelete.textContent = videogameName;
-
 
         });
     </script>
