@@ -328,7 +328,6 @@ td:not(.not-break) {
     .sidebar {
         width: 100%;
         height: auto;
-        // position: static;
         position: fixed;
         margin-bottom: 20px;
         padding: 1rem;
@@ -369,11 +368,7 @@ td:not(.not-break) {
         display: none;
     }
 
-    // #icons {
-    //     flex-direction: column;
-    //     width: 50px;
-    //     height: 100%
-    // }
+
 
     #pegi {
         height: 20px;
@@ -382,6 +377,11 @@ td:not(.not-break) {
 
     #pegi-select {
         margin-left: 85px;
+    }
+
+    .selected-menu {
+        width: 50vw;
+        left: 70%;
     }
 }
 
