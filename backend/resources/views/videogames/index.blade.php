@@ -61,10 +61,12 @@
 
                         @foreach ($videogames as $videogame)
                             <x-table>
+
+                                {{-- CHECKBOX --}}
                                 <x-slot:checkbox>
                                     <input type="checkbox" id="{{ $videogame->slug }}" name="selected_videogames[]"
                                         value="{{ $videogame->slug }}"class="align-self-center"
-                                        data-name="{{ $videogame->name }}">
+                                        data-name="{{ $videogame->name }}" data-id="{{ $videogame->id }}">
                                 </x-slot>
                                 {{-- ICONS --}}
                                 <x-slot:show>
@@ -125,16 +127,7 @@
                 <div class="pagination">
                     {{ $videogames->links() }}
                 </div>
-                <div class="p-3 selected-menu d-flex align-items-center gap-1 gap-lg-3">
-                    <div>
-                        <span id="selected-count" class="fw-bold"></span> elemento/i selezionato/i
-                    </div>
-                    <button id="deleteAll" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#deleteSelectedModal">
-                        <i class="bi bi-trash"></i>
-                        <span class="d-none d-lg-inline">Elimina selezione</span>
-                    </button>
-                </div>
+                <x-selected-menu></x-selected-menu>
 
             </div>
 

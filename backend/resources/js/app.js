@@ -174,7 +174,10 @@ const tableCheckboxes = document.querySelectorAll("input[type=checkbox]:not(.sel
 const selectedMenu = document.querySelector(".selected-menu");
 let selectedItems = [];
 const selectedCount = document.getElementById("selected-count");
-let modalList = document.getElementById("selected-videogames-list");
+let modalList = document.getElementById("selected-items-list");
+const selectedInfo = document.getElementById("selected-info");
+
+
 
 
 // SELECT ALL TABLE CHECKBOX
@@ -185,21 +188,34 @@ selectAll.addEventListener("change", function () {
 
         tableCheckbox.checked = selectAll.checked;
         const name = tableCheckbox.getAttribute('data-name');
+        const id = tableCheckbox.getAttribute('data-id');
 
         if (selectAll.checked) {
-            selectedMenu.classList.add("d-block");
+            selectedMenu.classList.add("d-flex");
             selectedMenu.classList.remove("d-none");
 
-            if (!selectedItems.includes(name)) {
-                selectedItems.push(name);
-                modalList.innerHTML += `<li>${name}</li>`;
-                selectedCount.textContent = `${selectedItems.length}`;
+            const itemExists = selectedItems.some((item) => item.id === id);
+
+            if (!itemExists) {
+                selectedItems.push({ id, name });
             }
+
+            selectedItems.sort((a, b) => a.id - b.id);
+            modalList.innerHTML = ``;
+            selectedItems.forEach((selectedItem) => modalList.innerHTML += `<li>${selectedItem.name}</li>`);
+            selectedCount.textContent = `${selectedItems.length}`;
+
         } else {
             selectedMenu.classList.add("d-none");
-            selectedMenu.classList.remove("d-block");
+            selectedMenu.classList.remove("d-flex");
             selectedItems.splice(0, selectedItems.length);
             modalList.innerHTML = ``;
+        }
+
+        if (selectedItems.length > 1) {
+            selectedInfo.textContent = "elementi selezionati";
+        } else {
+            selectedInfo.textContent = "elemento selezionato";
         }
     })
     console.log(selectedItems);
@@ -210,30 +226,47 @@ selectAll.addEventListener("change", function () {
 tableCheckboxes.forEach((tableCheckbox, index) => {
     tableCheckbox.addEventListener("change", function (e) {
         console.log("change")
+
         const name = tableCheckbox.getAttribute('data-name');
+        const id = tableCheckbox.getAttribute('data-id');
+
         if (tableCheckbox.checked) {
-            selectedItems.push(name);
-            selectedCount.textContent = `${selectedItems.length}`;
+
+            const itemExists = selectedItems.some((item) => item.id === id);
+
+            if (!itemExists) {
+                selectedItems.push({ id, name });
+            }
+
+            selectedItems.sort((a, b) => a.id - b.id);
             modalList.innerHTML = "";
+            selectedCount.textContent = `${selectedItems.length}`;
+
             selectedItems.forEach((item) => {
                 const li = document.createElement("li");
                 modalList.appendChild(li);
-                li.textContent = item;
+                li.textContent = item.name;
             })
 
         } else {
 
-            const index = selectedItems.indexOf(name)
+            const index = selectedItems.findIndex((selectedItem) => selectedItem.id === id);
             selectedItems.splice(index, 1);
             selectedCount.textContent = `${selectedItems.length}`;
             modalList.innerHTML = "";
+            selectedItems.sort((a, b) => a.id - b.id);
             selectedItems.forEach((item) => {
                 const li = document.createElement("li");
                 modalList.appendChild(li);
-                li.textContent = item;
-
+                li.textContent = item.name;
             })
 
+        }
+
+        if (selectedItems.length > 1) {
+            selectedInfo.textContent = "elementi selezionati";
+        } else {
+            selectedInfo.textContent = "elemento selezionato";
         }
 
         if (Array.from(tableCheckboxes).every((checkbox) => checkbox.checked)) {
@@ -243,12 +276,12 @@ tableCheckboxes.forEach((tableCheckbox, index) => {
         }
 
         if (Array.from(tableCheckboxes).some((checkbox) => checkbox.checked)) {
-            selectedMenu.classList.add("d-block");
+            selectedMenu.classList.add("d-flex");
             selectedMenu.classList.remove("d-none");
             // console.log(selectedItems);
         } else {
             selectedMenu.classList.add("d-none");
-            selectedMenu.classList.remove("d-block");
+            selectedMenu.classList.remove("d-flex");
 
         }
     })

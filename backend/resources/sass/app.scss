@@ -296,6 +296,25 @@ td:not(.not-break) {
     height: 100%;
 }
 
+// SELECTED MENU
+
+.selected-menu {
+    position: fixed;
+    width: 24vw;
+    bottom: 1%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid red;
+    border-radius: 8px;
+    font-family: sans-serif;
+
+}
+
+
 
 
 // RESPONSIVE

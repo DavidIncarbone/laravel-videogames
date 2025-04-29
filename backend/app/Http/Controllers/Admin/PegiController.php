@@ -190,4 +190,21 @@ class PegiController extends Controller
 
         return back();
     }
+
+    public function destroySelected(Request $request)
+    {
+
+        $ids = $request->input("selected_pegis", []);
+        // dd($slugs);
+
+        Pegi::whereIn("id", $ids)->delete();
+
+        if (count($ids) > 1) {
+            toastr()->success('I PEGI selezionati sono stati eliminati con successo');
+        } else {
+            toastr()->success('Il PEGI selezionato è stato eliminato con successo');
+        };
+
+        return back();
+    }
 }

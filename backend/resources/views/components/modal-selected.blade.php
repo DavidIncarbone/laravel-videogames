@@ -7,6 +7,9 @@
             </div>
             <div class="modal-body">
                 {{ $wantDelete }}
+                <ul id="selected-items-list">
+
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>

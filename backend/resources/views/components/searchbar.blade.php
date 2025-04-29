@@ -1,4 +1,4 @@
-<form method="GET" action="{{ $route }}" class="input-group d-flex gap-3 ">
+<form method="GET" action="{{ $route }}" class="input-group d-flex gap-3 mb-3">
     <div class="form-outline position-relative">
         <input type="text" id='searchInput' name="search" class="form-control pr-5 bg-white pe-4"
             value='{{ request('search') }}' placeholder='Cerca per {{ $subject }}'

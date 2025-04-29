@@ -137,8 +137,6 @@ class VideogameController extends Controller
         $newVideogame->pegi_id = $data["pegi_id"];
         $newVideogame->name = Str::of($data["name"])->trim();
         $newVideogame->price = $data["price"];
-        $newVideogame->console_ids = $data["console_ids"];
-        $newVideogame->genre_ids = $data["genre_ids"];
         $newVideogame->publisher = Str::of($data["publisher"])->trim();
         $newVideogame->year_of_publication = $data["year_of_publication"];
         $newVideogame->description = Str::of($data["description"])->trim();
@@ -356,11 +354,16 @@ class VideogameController extends Controller
     {
 
         $slugs = $request->input("selected_videogames", []);
+
         // dd($slugs);
 
         Videogame::whereIn("slug", $slugs)->delete();
 
-        toastr()->success('I videogiochi selezionati sono stati eliminati con successo');
+        if (count($slugs) > 1) {
+            toastr()->success('I videogiochi selezionati sono stati eliminati con successo');
+        } else {
+            toastr()->success('Il videogioco selezionato è stato eliminato con successo');
+        };
 
         return back();
     }

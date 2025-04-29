@@ -16,64 +16,106 @@
             <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
         </x-searchbar>
 
-        <p class="mt-3 fw-bold">Numero di consoles: <span class="fw-bold text-primary">{{ count($consoles) }}</span></p>
+
 
         @if (count($consoles) < 1)
             <h5>Nessuna console presente</h5>
         @else
+            {{-- INFO --}}
+
+            <div class="d-flex justify-content-between align-items-center w-100 mt-3">
+                <p class="mt-3 fw-bold">Numero di consoles: <span class="fw-bold text-primary">{{ count($consoles) }}</span>
+                </p>
+                <button id="deleteAll" class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
+                        class="bi bi-trash"></i> Elimina tutti </button>
+            </div>
             <p class="{{ $consoles->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina {{ $consoles->currentPage() }} di
                 {{ $consoles->lastPage() }}</p>
 
-            {{-- TABLE --}}
+            <form action="{{ route('admin.consoles.destroySelected') }}" method="POST">
+                @csrf
+                @method('DELETE')
 
-            <table class="table table-bordered table-striped my-3 m-auto">
-                <thead>
-                    <tr class="text-center">
-                        <th></th>
-                        <th>Console</th>
-                        <th class="d-none d-lg-block">Logo</th>
-                        <th>Data creazione</th>
-                        <th>Data ultima modifica</th>
-                    </tr>
-                </thead>
-                <tbody>
+                {{-- TABLE --}}
 
-                    @foreach ($consoles as $console)
-                        <x-table>
+                <table class="table table-bordered table-striped my-3 m-auto">
+                    <thead>
+                        <tr class="text-center">
+                            <th class="my-auto">
+                                <input type="checkbox" class="select-all mt-1">
+                            </th>
+                            <th></th>
+                            <th>Console</th>
+                            <th class="d-none d-lg-block">Logo</th>
+                            <th>Data creazione</th>
+                            <th>Data ultima modifica</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                            {{-- ICONS --}}
-                            <x-slot:show> </x-slot>
-                            <x-slot:edit>
-                                href="{{ route('admin.consoles.edit', $console) }}"
-                            </x-slot>
-                            <x-slot:delete>
-                                <button type="button" class="text-decoration-none text-dark btn p-0" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal" data-console-id="{{ $console->id }}"
-                                    data-console-name="{{ Str::limit($console->name, 30) }}">
-                                    <i id="trash" class="bi bi-trash"></i>
-                                </button>
-                            </x-slot>
+                        @foreach ($consoles as $console)
+                            <x-table>
 
-                            {{-- TD --}}
+                                {{-- CHECKBOX --}}
 
-                            <x-slot:firstTd>{{ Str::limit($console->name, 50) }}</x-slot>
-                            <x-slot:secondTd>
-                                <td class="d-none d-lg-block" style="height:82px">
-                                    <div class="d-flex w-100 justify-content-center align-items-center">
-                                        <div id="post-image" style="width: 100px; height:50px">
-                                            <img id="logo" class=""
-                                                src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}">
+                                <x-slot:checkbox>
+                                    <input type="checkbox" id="{{ $console->id }}" name="selected_consoles[]"
+                                        value="{{ $console->id }}"class="align-self-center"
+                                        data-name="{{ $console->name }}" data-id="{{ $console->id }}">
+                                </x-slot>
+
+                                {{-- ICONS --}}
+                                <x-slot:show> </x-slot>
+                                <x-slot:edit>
+                                    href="{{ route('admin.consoles.edit', $console) }}"
+                                </x-slot>
+                                <x-slot:delete>
+                                    <button type="button" class="text-decoration-none text-dark btn p-0"
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                        data-console-id="{{ $console->id }}"
+                                        data-console-name="{{ Str::limit($console->name, 30) }}">
+                                        <i id="trash" class="bi bi-trash"></i>
+                                    </button>
+                                </x-slot>
+
+                                {{-- TD --}}
+
+                                <x-slot:firstTd>{{ Str::limit($console->name, 50) }}</x-slot>
+                                <x-slot:secondTd>
+                                    <td class="d-none d-lg-block" style="height:82px">
+                                        <div class="d-flex w-100 justify-content-center align-items-center">
+                                            <div id="post-image" style="width: 100px; height:50px">
+                                                <img id="logo" class=""
+                                                    src="{{ asset('storage/' . $console->logo) }}"
+                                                    alt="{{ $console->name }}">
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </x-slot>
-                            <x-slot:created>{{ $console->created_at->format('d/m/Y  H:i') }}</x-slot>
-                            <x-slot:updated>{{ $console->updated_at->format('d/m/Y  H:i') }}</x-slot>
-                        </x-table>
-                    @endforeach
+                                    </td>
+                                </x-slot>
+                                <x-slot:created>{{ $console->created_at->format('d/m/Y  H:i') }}</x-slot>
+                                <x-slot:updated>{{ $console->updated_at->format('d/m/Y  H:i') }}</x-slot>
+                            </x-table>
+                        @endforeach
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+
+                {{-- DELETE SELECTED MODAL COMPONENT --}}
+
+                <x-modal-selected>
+                    <x-slot:delete>Elimina le consoles selezionate</x-slot>
+                    <x-slot:wantDelete>Le seguenti consoles saranno eliminate:
+                        <ul id="selected-videogames-list">
+
+                        </ul>
+                    </x-slot>
+                    <x-slot:deleteBtn>
+
+                        <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
+
+                    </x-slot>
+                </x-modal-selected>
+            </form>
 
             {{-- PAGINATION --}}
 
@@ -82,14 +124,8 @@
                 <div class="pagination">
                     {{ $consoles->links() }}
                 </div>
-                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
-                        class="bi bi-trash"></i> Elimina tutte </button>
+                <x-selected-menu></x-selected-menu>
             </div>
-
-            {{-- DELETE ALL --}}
-
-
-
     </section>
 
     {{-- MODAL COMPONENT --}}

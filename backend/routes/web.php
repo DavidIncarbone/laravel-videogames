@@ -34,12 +34,16 @@ Route::/*middleware(/["auth", "verified"])
 
         Route::resource("consoles", ConsoleController::class);
         Route::delete("consoles/all/destroy", [ConsoleController::class, "destroyAll"])->name("consoles.destroyAll");
+        Route::delete("consoles/selected/destroy", [ConsoleController::class, "destroySelected"])->name("consoles.destroySelected");
 
         Route::resource("genres", GenreController::class);
         Route::delete("genres/all/destroy", [GenreController::class, "destroyAll"])->name("genres.destroyAll");
+        Route::delete("genres/selected/destroy", [GenreController::class, "destroySelected"])->name("genres.destroySelected");
+
 
         Route::resource("pegis", PegiController::class);
         Route::delete("pegis/all/destroy", [PegiController::class, "destroyAll"])->name("pegis.destroyAll");
+        Route::delete("pegis/selected/destroy", [PegiController::class, "destroySelected"])->name("pegis.destroySelected");
     });
 
 

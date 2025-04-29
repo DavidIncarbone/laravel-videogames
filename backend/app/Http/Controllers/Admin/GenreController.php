@@ -148,4 +148,21 @@ class GenreController extends Controller
 
         return back();
     }
+
+    public function destroySelected(Request $request)
+    {
+
+        $ids = $request->input("selected_genres", []);
+        // dd($slugs);
+
+        Genre::whereIn("id", $ids)->delete();
+
+        if (count($ids) > 1) {
+            toastr()->success('I generi selezionati sono stati eliminati con successo');
+        } else {
+            toastr()->success('Il genere selezionato è stato eliminato con successo');
+        };
+
+        return back();
+    }
 }

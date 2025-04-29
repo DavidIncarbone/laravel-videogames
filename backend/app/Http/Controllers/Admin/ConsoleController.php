@@ -189,4 +189,21 @@ class ConsoleController extends Controller
 
         return back();
     }
+
+    public function destroySelected(Request $request)
+    {
+
+        $ids = $request->input("selected_consoles", []);
+        // dd($slugs);
+
+        Console::whereIn("id", $ids)->delete();
+
+        if (count($ids) > 1) {
+            toastr()->success('Le consoles selezionate sono state eliminate con successo');
+        } else {
+            toastr()->success('La console selezionata è stata eliminata con successo');
+        };
+
+        return back();
+    }
 }
