@@ -13,6 +13,7 @@
         <x-searchbar>
             <x-slot:route>{{ route('admin.pegis.index') }}</x-slot>
             <x-slot:subject>età minima</x-slot>
+            <x-slot:publishers></x-slot>
             <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
         </x-searchbar>
 
@@ -45,7 +46,7 @@
                             </th>
                             <th></th>
                             <th>Logo</th>
-                            <th class="d-none d-lg-block">Età minima (anni)</th>
+                            <th class="d-none d-lg-table-cell">Età minima (anni)</th>
                             <th>Data creazione</th>
                             <th>Data ultima modifica</th>
 
@@ -88,11 +89,8 @@
                                     </div>
                                 </x-slot>
                                 <x-slot:secondTd>
-                                    <td class="d-none d-lg-block" style="height:82px;">
-
-                                        <div class="d-flex justify-content-center align-items-center " style="height:50px">
-                                            <div>{{ $pegi->age }}</div>
-                                        </div>
+                                    <td class="d-none d-lg-table-cell">
+                                        {{ $pegi->age }}
                                     </td>
                                 </x-slot>
                                 <x-slot:created>{{ $pegi->created_at->format('d/m/Y  H:i') }}</x-slot>

@@ -12,6 +12,7 @@
         <x-searchbar>
             <x-slot:route>{{ route('admin.genres.index') }}</x-slot>
             <x-slot:subject>nome</x-slot>
+            <x-slot:publishers></x-slot>
             <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
         </x-searchbar>
 

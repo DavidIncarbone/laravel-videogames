@@ -13,6 +13,7 @@
         <x-searchbar>
             <x-slot:route>{{ route('admin.consoles.index') }}</x-slot>
             <x-slot:subject>nome</x-slot>
+            <x-slot:publishers></x-slot>
             <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
         </x-searchbar>
 
@@ -46,7 +47,7 @@
                             </th>
                             <th></th>
                             <th>Console</th>
-                            <th class="d-none d-lg-block">Logo</th>
+                            <th class="d-none d-lg-table-cell">Logo</th>
                             <th>Data creazione</th>
                             <th>Data ultima modifica</th>
                         </tr>
@@ -82,9 +83,10 @@
 
                                 <x-slot:firstTd>{{ Str::limit($console->name, 50) }}</x-slot>
                                 <x-slot:secondTd>
-                                    <td class="d-none d-lg-block" style="height:82px">
-                                        <div class="d-flex w-100 justify-content-center align-items-center">
-                                            <div id="post-image" style="width: 100px; height:50px">
+                                    <td class="d-none d-lg-table-cell">
+                                        <div class="d-flex w-100 justify-content-center" style="height:66px;">
+                                            <div id="post-image" class="align-self-center"
+                                                style="width: 100px; height:50px">
                                                 <img id="logo" class=""
                                                     src="{{ asset('storage/' . $console->logo) }}"
                                                     alt="{{ $console->name }}">

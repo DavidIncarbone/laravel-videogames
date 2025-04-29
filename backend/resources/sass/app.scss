@@ -35,6 +35,18 @@ select {
     border: 1px solid #ccc;
 }
 
+th {
+    height: 33px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+td {
+    height: 66px;
+    text-align: center;
+    vertical-align: middle;
+}
+
 
 
 .form-control:focus {
@@ -318,6 +330,9 @@ td:not(.not-break) {
     // width: 100px;
 }
 
+#table-videogame-name {
+    height: 66px;
+}
 
 
 
@@ -390,6 +405,10 @@ td:not(.not-break) {
 
     #select-publisher {
         width: 75%;
+    }
+
+    #table-videogame-name {
+        height: auto;
     }
 
 

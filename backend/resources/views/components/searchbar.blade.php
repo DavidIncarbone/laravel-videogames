@@ -9,9 +9,11 @@
             style="cursor: pointer; display:none;" onclick="clearInput('searchInput')"><i
                 class="fas fa-times "></i></span>
     </div>
-    <select name="publisher" id="select-publisher" class="form-select bg-white">
+    <div>
+
         {{ $publishers }}
-    </select>
+
+    </div>
 
     <label for="orderFor" class="d-flex align-self-center d-none d-lg-block">Ordina per:</label>
     <div class="d-flex align-items-start gap-3">

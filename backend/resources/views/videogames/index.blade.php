@@ -14,11 +14,15 @@
         <x-slot:route>{{ route('admin.videogames.index') }}</x-slot>
         <x-slot:subject>nome</x-slot>
         <x-slot:publishers>
-            <option value="">Tutte le case produttrici</option>
-            @foreach ($publishers as $publisher)
-                <option value="{{ $publisher }}">{{ $publisher }}</option>
-            @endforeach
+            <select name="publisher" id="select-publisher" class="form-select bg-white">
+                <option value="">Tutte le case produttrici</option>
+                @foreach ($publishers as $publisher)
+                    <option value="{{ $publisher }}" {{ request('publisher') == $publisher ? 'selected' : '' }}>
+                        {{ $publisher }}</option>
+                @endforeach
+            </select>
         </x-slot>
+
         <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
     </x-searchbar>
 
@@ -33,8 +37,8 @@
             <div class="d-flex justify-content-between align-items-center w-100 mt-3">
                 <p class="mt-3 fw-bold">Numero di videogiochi: <span
                         class="fw-bold text-primary">{{ count($videogames) }}</span></p>
-                <button id="deleteAll" class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
-                        class="bi bi-trash"></i> Elimina tutti </button>
+                <button id="deleteAll" class="btn btn-danger me-3" data-bs-toggle="modal"
+                    data-bs-target="#deleteAllModal"><i class="bi bi-trash"></i> Elimina tutti </button>
             </div>
             <p class="{{ $videogames->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina {{ $videogames->currentPage() }} di
                 {{ $videogames->lastPage() }}</p>
@@ -56,7 +60,7 @@
                             </th>
                             <th></th>
                             <th>Nome videogioco</th>
-                            <th class="d-none d-lg-block">Casa produttrice</th>
+                            <th class="d-none d-lg-table-cell">Casa produttrice</th>
                             <th>Data creazione</th>
                             <th>Data ultima modifica</th>
 
@@ -97,11 +101,13 @@
 
                                 <x-slot:firstTd>{{ Str::limit($videogame->name, 50) }}</x-slot>
                                 <x-slot:secondTd>
-                                    <td class="d-none d-lg-block" style="height:82px;">
+                                    <td class="d-none d-lg-table-cell">
                                         {{ Str::limit($videogame->publisher, 30) }}
                                     </td>
                                 </x-slot>
-                                <x-slot:created>{{ $videogame->created_at->format('d/m/Y  H:i') }}</x-slot>
+                                <x-slot:created>
+                                    {{ $videogame->created_at->format('d/m/Y  H:i') }}
+                                </x-slot>
                                 <x-slot:updated>{{ $videogame->updated_at->format('d/m/Y  H:i') }}</x-slot>
                             </x-table>
                         @endforeach
