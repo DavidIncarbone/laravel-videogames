@@ -351,4 +351,17 @@ class VideogameController extends Controller
 
         return back();
     }
+
+    public function destroySelected(Request $request)
+    {
+
+        $slugs = $request->input("selected_videogames", []);
+        // dd($slugs);
+
+        Videogame::whereIn("slug", $slugs)->delete();
+
+        toastr()->success('I videogiochi selezionati sono stati eliminati con successo');
+
+        return back();
+    }
 }

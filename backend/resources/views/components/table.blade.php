@@ -1,5 +1,10 @@
    <tr>
        <td>
+           <div class="d-flex justify-content-center w-100" style="height:66px">
+               {{ $checkbox }}
+           </div>
+       </td>
+       <td>
            <div class="d-flex justify-content-center align-items-center" style="height:66px">
                <div>
                    {{ $show }}

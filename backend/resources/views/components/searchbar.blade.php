@@ -1,5 +1,4 @@
 <form method="GET" action="{{ $route }}" class="input-group d-flex gap-3 ">
-
     <div class="form-outline position-relative">
         <input type="text" id='searchInput' name="search" class="form-control pr-5 bg-white pe-4"
             value='{{ request('search') }}' placeholder='Cerca per {{ $subject }}'
@@ -24,7 +23,9 @@
             <option value="desc" {{ request('orderBy') == 'desc' ? 'selected' : '' }}>Decrescente</option>
         </select>
     </div>
-    <button type="submit" id='searchBtn' class="btn btn-primary rounded-3">
-        Filtra
-    </button>
+    <div>
+        <button type="submit" id='searchBtn' class="btn btn-primary rounded-3">
+            Filtra
+        </button>
+    </div>
 </form>

@@ -166,6 +166,99 @@ window.onload = function () {
     });
 }
 
+// TABLE CHECKBOXES
+
+
+const selectAll = document.querySelector(".select-all");
+const tableCheckboxes = document.querySelectorAll("input[type=checkbox]:not(.select-all)");
+const selectedMenu = document.querySelector(".selected-menu");
+let selectedItems = [];
+const selectedCount = document.getElementById("selected-count");
+let modalList = document.getElementById("selected-videogames-list");
+
+
+// SELECT ALL TABLE CHECKBOX
+
+selectAll.addEventListener("change", function () {
+
+    tableCheckboxes.forEach((tableCheckbox) => {
+
+        tableCheckbox.checked = selectAll.checked;
+        const name = tableCheckbox.getAttribute('data-name');
+
+        if (selectAll.checked) {
+            selectedMenu.classList.add("d-block");
+            selectedMenu.classList.remove("d-none");
+
+            if (!selectedItems.includes(name)) {
+                selectedItems.push(name);
+                modalList.innerHTML += `<li>${name}</li>`;
+                selectedCount.textContent = `${selectedItems.length}`;
+            }
+        } else {
+            selectedMenu.classList.add("d-none");
+            selectedMenu.classList.remove("d-block");
+            selectedItems.splice(0, selectedItems.length);
+            modalList.innerHTML = ``;
+        }
+    })
+    console.log(selectedItems);
+})
+
+// SINGLE TABLE CHECKBOX
+
+tableCheckboxes.forEach((tableCheckbox, index) => {
+    tableCheckbox.addEventListener("change", function (e) {
+        console.log("change")
+        const name = tableCheckbox.getAttribute('data-name');
+        if (tableCheckbox.checked) {
+            selectedItems.push(name);
+            selectedCount.textContent = `${selectedItems.length}`;
+            modalList.innerHTML = "";
+            selectedItems.forEach((item) => {
+                const li = document.createElement("li");
+                modalList.appendChild(li);
+                li.textContent = item;
+            })
+
+        } else {
+
+            const index = selectedItems.indexOf(name)
+            selectedItems.splice(index, 1);
+            selectedCount.textContent = `${selectedItems.length}`;
+            modalList.innerHTML = "";
+            selectedItems.forEach((item) => {
+                const li = document.createElement("li");
+                modalList.appendChild(li);
+                li.textContent = item;
+
+            })
+
+        }
+
+        if (Array.from(tableCheckboxes).every((checkbox) => checkbox.checked)) {
+            selectAll.checked = true;
+        } else {
+            selectAll.checked = false;
+        }
+
+        if (Array.from(tableCheckboxes).some((checkbox) => checkbox.checked)) {
+            selectedMenu.classList.add("d-block");
+            selectedMenu.classList.remove("d-none");
+            // console.log(selectedItems);
+        } else {
+            selectedMenu.classList.add("d-none");
+            selectedMenu.classList.remove("d-block");
+
+        }
+    })
+})
+
+
+
+
+
+
 
 
 
