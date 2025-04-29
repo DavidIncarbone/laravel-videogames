@@ -17,13 +17,16 @@ class VideogameController extends Controller
 
     public function index(Request $request)
     {
-
+        // dd($request);
         $query = Videogame::query();
 
 
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
         };
+        if ($request->filled('publisher')) {
+            $query->where('publisher', $request->publisher);
+        }
         if ($request->orderFor == "create" && $request->orderBy == "desc") {
             $query->orderBy("created_at", "desc");
         } else if ($request->orderFor == "edit" && $request->orderBy == "asc") {
@@ -33,7 +36,10 @@ class VideogameController extends Controller
         }
 
         $videogames = $query->paginate(5)->withQueryString();
-        return view("videogames.index", compact("videogames"));
+        $publishers = Videogame::all()->pluck("publisher")->toArray();
+
+        $consoles = Console::all();
+        return view("videogames.index", compact("videogames", "publishers"));
     }
 
 

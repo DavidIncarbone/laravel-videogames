@@ -13,6 +13,12 @@
     <x-searchbar>
         <x-slot:route>{{ route('admin.videogames.index') }}</x-slot>
         <x-slot:subject>nome</x-slot>
+        <x-slot:publishers>
+            <option value="">Tutte le case produttrici</option>
+            @foreach ($publishers as $publisher)
+                <option value="{{ $publisher }}">{{ $publisher }}</option>
+            @endforeach
+        </x-slot>
         <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
     </x-searchbar>
 
