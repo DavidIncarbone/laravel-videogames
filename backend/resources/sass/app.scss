@@ -15,6 +15,12 @@ body {
 
 }
 
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+
+}
+
 .debug {
     border: 1px solid red;
 
@@ -25,46 +31,8 @@ img {
     height: 100%;
 }
 
-.wrapper {
-    display: flex;
-    min-height: 100vh;
-
-}
-
 select {
     border: 1px solid #ccc;
-}
-
-th {
-    height: 33px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-td {
-    height: 66px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-
-
-.form-control:focus {
-    box-shadow: none !important;
-    border-color: #ced4da !important;
-}
-
-#form-info {
-    font-style: italic;
-    margin-left: 1em;
-}
-
-#input-info {
-    display: block;
-    font-size: 0.875rem;
-    color: #6c757d;
-    font-style: italic;
-
 }
 
 
@@ -114,9 +82,11 @@ td {
 
 
 .content {
+    position: relative;
     margin-left: 20vw;
     flex-grow: 1;
     padding: 2rem;
+
 }
 
 .header h1 {
@@ -130,13 +100,6 @@ td {
     margin-bottom: 20px;
 }
 
-.show-card-container {
-
-    object-fit: contain;
-    aspect-ratio: 16/9;
-    background-color: #f4f4f4;
-
-}
 
 #img-details>img {
     object-fit: contain;
@@ -160,19 +123,8 @@ td {
     border: 3px solid #ddd;
 }
 
-// PROFILE
 
-
-.profile-card .card-body {
-    padding: 20px;
-    text-align: center;
-}
-
-.profile-card .card-body img {
-    border-radius: 50%;
-}
-
-// FORM
+// FORMS
 
 
 form input,
@@ -181,7 +133,23 @@ form textarea {
     border: 1px solid #ddd;
 }
 
+.form-control:focus {
+    box-shadow: none !important;
+    border-color: #ced4da !important;
+}
 
+#form-info {
+    font-style: italic;
+    margin-left: 1em;
+}
+
+#input-info {
+    display: block;
+    font-size: 0.875rem;
+    color: #6c757d;
+    font-style: italic;
+
+}
 
 form textarea {
     resize: none;
@@ -247,6 +215,18 @@ input[type="checkbox"]:checked {
 
 // TABLE
 
+th {
+    height: 33px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+td {
+    height: 66px;
+    text-align: center;
+    vertical-align: middle;
+}
+
 td:not(.not-break) {
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -257,21 +237,6 @@ td:not(.not-break) {
     object-fit: contain;
 }
 
-
-
-#pencil:hover {
-
-    color: orange;
-
-}
-
-#trash:hover:not(.deleteAll) {
-    color: red;
-}
-
-#eye:hover {
-    color: #0dcaf0;
-}
 
 // PAGINATION
 
@@ -292,10 +257,7 @@ td:not(.not-break) {
     color: black;
     background-color: var(--bs-table-striped-bg);
     border-color: black;
-
-
 }
-
 
 .page-link:focus {
     box-shadow: none;
@@ -312,12 +274,12 @@ td:not(.not-break) {
 
 .selected-menu {
     position: fixed;
-    width: 24vw;
+    width: 34vw;
     bottom: 1%;
-    left: 50%;
+    left: calc(50% + 10vw);
     transform: translateX(-50%);
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.7);
     color: white;
     padding: 10px 20px;
     border: 2px solid red;
@@ -326,23 +288,42 @@ td:not(.not-break) {
 
 }
 
-#select-publisher {
-    // width: 100px;
+// ICONS
+
+
+#pencil:hover {
+
+    color: orange;
+
 }
 
-#table-videogame-name {
-    height: 66px;
+#trash:hover:not(.deleteAll) {
+    color: red;
+}
+
+#eye:hover {
+    color: #0dcaf0;
+}
+
+.fa-sharp,
+.bi-trash {
+    margin-right: 0.21rem;
 }
 
 
 
-// RESPONSIVE
+// ********************* MEDIA QUERY *********************
 
 
 @media (max-width: 769px) {
+
+    // GENERAL
+
     .wrapper {
         flex-direction: column;
     }
+
+    // SIDEBAR
 
     .sidebar {
         width: 100%;
@@ -372,15 +353,20 @@ td:not(.not-break) {
         margin-top: 1rem;
     }
 
+    // CONTENT
+
     .content {
         margin-left: 0;
         margin-top: 5rem;
     }
 
+    // TABLE
+
     th,
     td {
         vertical-align: middle;
         text-align: center;
+        height: auto;
     }
 
     #comma {
@@ -388,6 +374,20 @@ td:not(.not-break) {
     }
 
 
+    .selected-menu {
+        position: fixed;
+        width: 50vw;
+        left: 70%;
+    }
+
+    #cancel-all,
+    #deleteAll {
+        width: 30px;
+        height: 30px;
+
+    }
+
+    // FORMS
 
     #pegi {
         height: 20px;
@@ -398,20 +398,18 @@ td:not(.not-break) {
         margin-left: 85px;
     }
 
-    .selected-menu {
-        width: 50vw;
-        left: 70%;
-    }
+    // SEARCHBAR
 
     #select-publisher {
         width: 75%;
     }
 
-    #table-videogame-name {
-        height: auto;
+    // ICONS
+
+    .fa-sharp,
+    .bi-trash {
+        margin-right: 0;
     }
-
-
 }
 
 

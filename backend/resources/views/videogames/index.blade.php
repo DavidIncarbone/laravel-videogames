@@ -134,7 +134,7 @@
 
             {{-- PAGINATION --}}
 
-            <div class="d-flex align-items-start justify-content-between">
+            <div class="d-flex align-items-start justify-content-between mt-3">
 
                 <div class="pagination">
                     {{ $videogames->links() }}

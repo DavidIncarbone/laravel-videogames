@@ -69,6 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// ****************** FORMS ******************
+
 // CLEAR VIDEOGAME FORM
 
 window.clearVideogameForm = function () {
@@ -112,11 +114,16 @@ window.toggleClearButton = function (fieldId) {
         }
     }
 }
+
+// TOGGLE CLEAR ICON FOR EDIT
+
+
 window.addEventListener('DOMContentLoaded', function () {
-    const fields = document.querySelectorAll('input');
+    const fields = document.querySelectorAll('input, textarea');
     fields.forEach(field => {
         window.toggleClearButton(field.id);
     })
+
 });
 
 
@@ -127,16 +134,13 @@ document.getElementById("searchBtn");
 window.clearInput = function (fieldId) {
     document.getElementById(fieldId).value = '';
     toggleClearButton(fieldId);
-    // searchBtn.disabled = true;
+
 }
 
-window.onload = function () {
-    const fields = ['name', 'publisher', 'year_of_publication', 'price', 'pegi', 'description', 'searchInput'];
-    fields.forEach(field => toggleClearButton(field));
-};
 
 
-// CHECKBOX
+
+// FORM CHECKBOX
 
 window.selectAll = function (checkboxName) {
     const allCheckbox = document.querySelectorAll(`[name=${checkboxName}]`);
@@ -153,6 +157,7 @@ window.resetAll = function (checkboxName) {
 }
 
 // TRIM FORM
+
 window.onload = function () {
     const allForms = document.querySelectorAll("form");
     console.log(allForms);
@@ -166,23 +171,33 @@ window.onload = function () {
     });
 }
 
-// TABLE CHECKBOXES
+// ****************** TABLE CHECKBOXES ******************
+
+// GET ELEMENT
 
 
 const selectAll = document.querySelector(".select-all");
 const tableCheckboxes = document.querySelectorAll("input[type=checkbox]:not(.select-all)");
-const selectedMenu = document.querySelector(".selected-menu");
+
 let selectedItems = [];
-const selectedCount = document.getElementById("selected-count");
 let modalList = document.getElementById("selected-items-list");
+
+const selectedCount = document.getElementById("selected-count");
+const selectedMenu = document.querySelector(".selected-menu");
 const selectedInfo = document.getElementById("selected-info");
+const cancelAll = document.getElementById("cancel-all");
+
+// ADD EVENT LISTENER
+
+selectAll && selectAll.addEventListener("change", selectAllCheckboxes);
+cancelAll && cancelAll.addEventListener("click", cancelCheckboxes);
 
 
-
+// FUNCTIONS
 
 // SELECT ALL TABLE CHECKBOX
 
-selectAll.addEventListener("change", function () {
+function selectAllCheckboxes() {
 
     tableCheckboxes.forEach((tableCheckbox) => {
 
@@ -219,12 +234,12 @@ selectAll.addEventListener("change", function () {
         }
     })
     console.log(selectedItems);
-})
+}
 
 // SINGLE TABLE CHECKBOX
 
-tableCheckboxes.forEach((tableCheckbox, index) => {
-    tableCheckbox.addEventListener("change", function (e) {
+tableCheckboxes.forEach((tableCheckbox) => {
+    tableCheckbox.addEventListener("change", function () {
         console.log("change")
 
         const name = tableCheckbox.getAttribute('data-name');
@@ -286,6 +301,24 @@ tableCheckboxes.forEach((tableCheckbox, index) => {
         }
     })
 })
+
+// CANCEL CHECKBOX
+
+function cancelCheckboxes() {
+    const checkboxes = document.querySelectorAll("input[type=checkbox]");
+    checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+        selectedMenu.classList.remove("d-flex");
+        selectedMenu.classList.add("d-none");
+
+    });
+}
+
+
+
+
+
+
 
 
 
