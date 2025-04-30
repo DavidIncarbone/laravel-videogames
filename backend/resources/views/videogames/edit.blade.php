@@ -57,6 +57,7 @@
                 </div>
             @endif
         </x-slot>
+        <x-slot:screenshots></x-slot>
 
         <x-slot:actionToDo>Modifica</x-slot>
 

@@ -326,6 +326,52 @@ td:not(.not-break) {
     margin-right: 0.21rem;
 }
 
+// DROPZONE.JS
+
+.custom-dropzone {
+    border: 2px dashed #ced4da;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    padding: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #6c757d;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    text-align: center;
+}
+
+.custom-dropzone:hover {
+    background-color: #e9f5ff;
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+
+.custom-dropzone .dz-message::before {
+    content: "\f0ee";
+    /* Font Awesome upload icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+    color: #adb5bd;
+    transition: color 0.3s;
+}
+
+.custom-dropzone:hover .dz-message::before {
+    color: #0d6efd;
+}
+
+.custom-dropzone .dz-message {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+
+
 
 
 // ********************* MEDIA QUERY *********************

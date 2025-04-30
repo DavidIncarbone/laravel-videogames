@@ -54,6 +54,12 @@ class Videogame extends Model
         return $this->belongsToMany(Genre::class)->withTimestamps();
     }
 
+    public function screenshots()
+    {
+
+        return $this->hasMany(Screenshot::class);
+    }
+
     public function pegi()
     {
 

@@ -59,6 +59,7 @@
         <x-slot:description>{{ old('description') }}</x-slot>
 
         <x-slot:cover></x-slot>
+        <x-slot:screenshots></x-slot>
 
         <x-slot:actionToDo>Aggiungi</x-slot>
 

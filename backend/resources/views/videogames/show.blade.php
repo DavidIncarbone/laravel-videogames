@@ -75,6 +75,18 @@
             </div>
         </section>
     </div>
+
+    <h3>Screenshots allegati:</h3>
+
+    <div class="container mt-3">
+        <div class="row">
+            @foreach ($videogame->screenshots as $screenshot)
+                <div class="col-3" style=" height:50vh">
+                    <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}">
+                </div>
+            @endforeach
+        </div>
+    </div>
     {{-- MODAL COMPONENT --}}
 
 

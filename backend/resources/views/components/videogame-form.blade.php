@@ -198,10 +198,29 @@
 
     <div class="form-control mb-3 d-flex flex-column p-3">
         <label for="cover">Cover</label>
-        <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp</label>
+        <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp Max. 2 MB</label>
         <input type="file" id="cover" name="cover" accept=".jpeg, .jpg, .png, .webp"
             class="form-control bg-white">
         @error('cover')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        @if ($errors->any())
+            <small class="text-warning">Seleziona di nuovo il file prima di inviare il modulo.</small>
+        @endif
+
+        {{ $cover }}
+    </div>
+
+    <div class="form-control mb-3 d-flex flex-column p-3">
+        <label for="screenshots">Alle Screenshots</label>
+        <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp | Dimensione Max. per
+            immagine: 2 MB | Max. 5 immagini</label>
+        <input type="file" id="screenshots" name="screenshots[]" accept=".jpeg, .jpg, .png, .webp"
+            class="form-control bg-white" multiple>
+        @error('screenshots')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        @error('screenshots.*')
             <small class="text-danger">{{ $message }}</small>
         @enderror
         @if ($errors->any())

@@ -8,6 +8,7 @@ use App\Models\Videogame;
 use App\Models\Console;
 use App\Models\Genre;
 use App\Models\Pegi;
+use App\Models\Screenshot;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -60,6 +61,8 @@ class VideogameController extends Controller
 
         // VALIDATION
 
+
+
         $request->validate([
 
             'name' => ['required', 'string', 'min:2', 'max:50'],
@@ -79,6 +82,10 @@ class VideogameController extends Controller
             'description' => ['required', 'string', 'min:10', 'max:255'],
 
             'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+
+            'screenshots' => ['nullable', 'array', 'max:4'],
+
+            'screenshots.*' => ['image', 'mimes:jpeg,png,jpg,webp', 'max:2048']
         ], [
             // Name
             'name.required' => 'Il campo nome del videogioco è obbligatorio.',
@@ -131,13 +138,22 @@ class VideogameController extends Controller
             'cover.image' => 'Il file caricato deve essere un\'immagine.',
             'cover.mimes' => 'L\'immagine deve essere nei formati: jpeg, png, jpg o webp.',
             'cover.max' => 'L\'immagine non può superare i 2MB.',
+
+            // Screenshots array
+
+            'screenshots.array' => 'Il formato degli screenshot non è corretto',
+            'screenshots.max' => 'Non puoi caricare più di :max screenshots',
+
+            // Screenshots immagini
+            'screenshots.*.image' => 'Il file caricato deve essere un\'immagine.',
+            'screenshots.*.mimes' => 'L\'immagine deve essere nei formati: jpeg, png, jpg o webp.',
+            'screenshots.*.max' => 'L\'immagine non può superare i 2MB.',
         ]);
 
         // DATABASE
 
         $data = $request->all();
         $newVideogame = new Videogame();
-
 
 
         $newVideogame->pegi_id = $data["pegi_id"];
@@ -147,12 +163,16 @@ class VideogameController extends Controller
         $newVideogame->year_of_publication = $data["year_of_publication"];
         $newVideogame->description = Str::of($data["description"])->trim();
 
+        // COVER
+
         if (array_key_exists("cover", $data)) {
-            $cover_url = Storage::putFile("videogames", $data["cover"]);
+            $cover_url = Storage::putFile("img/videogames/cover", $data["cover"]);
             $newVideogame->cover = $cover_url;
         }
 
         $newVideogame->save();
+
+        // PIVOT
 
         if ($request->has("genre_ids")) {
             $newVideogame->genres()->attach($data["genre_ids"]);
@@ -160,6 +180,23 @@ class VideogameController extends Controller
         if ($request->has("console_ids")) {
             $newVideogame->consoles()->attach($data["console_ids"]);
         }
+
+        // SCREENSHOTS
+
+        $latestVideogame = Videogame::latest()->first();
+
+        if (array_key_exists("screenshots", $data)) {
+
+            $screenshots = $data['screenshots'];
+            foreach ($screenshots as $screenshot) {
+                $newScreenshots = new Screenshot;
+                $newScreenshots->videogame_id = $latestVideogame->id;
+                $screenshots_url = Storage::putFile("img/videogames/screenshots", $screenshot);
+                $newScreenshots->url = $screenshots_url;
+                $newScreenshots->save();
+            }
+        }
+
 
         toastr()->success("<span class='fw-bold'>" . Str::limit($newVideogame->name, 20) . '</span> è stato aggiunto con successo');
         return redirect()->route("admin.videogames.show", $newVideogame);
