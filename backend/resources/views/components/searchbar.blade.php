@@ -4,8 +4,7 @@
         <input type="text" id='searchInput' name="search" class="form-control pr-5 bg-white pe-4"
             value='{{ request('search') }}' placeholder='Cerca per {{ $subject }}'
             oninput="toggleClearButton('searchInput')" />
-        <span id="clear-btn-searchInput"
-            class="position-absolute mt-2 top-0 end-0 pe-2 {{ request('search') ? 'd-block' : '' }}"
+        <span id="clear-btn-searchInput" class="position-absolute mt-2 top-0 end-0 pe-2"
             style="cursor: pointer; display:none;" onclick="clearInput('searchInput')"><i
                 class="fas fa-times "></i></span>
     </div>

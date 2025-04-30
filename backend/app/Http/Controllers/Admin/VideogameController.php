@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Videogames;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -366,11 +366,23 @@ class VideogameController extends Controller
         Videogame::whereIn("slug", $slugs)->delete();
 
         if (count($slugs) > 1) {
-            toastr()->success('I videogiochi selezionati sono stati eliminati con successo');
+            toastr()->success('I <span class="fw-bold">' . count($slugs) . ' Videogiochi</span> selezionati sono stati eliminati con successo');
         } else {
             toastr()->success('Il videogioco selezionato è stato eliminato con successo');
         };
 
         return back();
+    }
+
+    public function destroyShow(Videogame $videogame)
+    {
+
+        $name = $videogame->name;
+
+        $videogame->delete();
+
+        toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . "</span> è stato eliminato con successo");
+
+        return redirect()->route("admin.videogames.index");
     }
 }

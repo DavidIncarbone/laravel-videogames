@@ -5,7 +5,7 @@
 
         <header class="header mb-3">
 
-            <h1 class="">Lista delle consoles</h1>
+            <h1 class="">Lista delle console</h1>
         </header>
 
         {{-- SEARCHBAR --}}
@@ -25,7 +25,7 @@
             {{-- INFO --}}
 
             <div class="d-flex justify-content-between align-items-center w-100 mt-3">
-                <p class="mt-3 fw-bold">Numero di consoles: <span class="fw-bold text-primary">{{ count($consoles) }}</span>
+                <p class="mt-3 fw-bold">Numero di console: <span class="fw-bold text-primary">{{ $consoles->total() }}</span>
                 </p>
                 <button id="deleteAll" class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
                         class="bi bi-trash"></i> Elimina tutti </button>
@@ -105,8 +105,8 @@
                 {{-- DELETE SELECTED MODAL COMPONENT --}}
 
                 <x-modal-selected>
-                    <x-slot:delete>Elimina le consoles selezionate</x-slot>
-                    <x-slot:wantDelete>Le seguenti consoles saranno eliminate:
+                    <x-slot:delete>Elimina le console selezionate</x-slot>
+                    <x-slot:wantDelete>Le seguenti console saranno eliminate:
                         <ul id="selected-videogames-list">
 
                         </ul>
@@ -164,8 +164,8 @@
     {{-- MODAL ALL COMPONENT --}}
 
     <x-modal-all>
-        <x-slot:delete>Elimina tutte le consoles </x-slot>
-        <x-slot:wantDelete>Vuoi davvero eliminare tutte le consoles?</x-slot>
+        <x-slot:delete>Elimina tutte le console </x-slot>
+        <x-slot:wantDelete>Vuoi davvero eliminare tutte le console?</x-slot>
         <x-slot:deleteBtn>
             <form action="{{ route('admin.consoles.destroyAll') }}" method="POST">
                 @csrf

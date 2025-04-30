@@ -158,7 +158,7 @@ class GenreController extends Controller
         Genre::whereIn("id", $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('I generi selezionati sono stati eliminati con successo');
+            toastr()->success('I <span class="fw-bold">' . count($ids) . ' Generi</span> selezionati sono stati eliminati con successo');
         } else {
             toastr()->success('Il genere selezionato è stato eliminato con successo');
         };

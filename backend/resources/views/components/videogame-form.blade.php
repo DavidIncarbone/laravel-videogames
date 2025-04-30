@@ -159,7 +159,7 @@
                 <div id="pegi" class="d-flex flex-column">
                     <div id="pegi-select">
                         <select name="pegi_id" id="pegi_id" class="form-select bg-white">
-                            <option value="" selected disabled>Seleziona PEGI</option>
+
                             {{ $pegis }}
                         </select>
                         <div class="d-flex justify-content-end ">

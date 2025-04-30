@@ -25,7 +25,7 @@
             {{-- INFO --}}
 
             <div class="d-flex justify-content-between align-items-center w-100 mt-3">
-                <p class="mt-3 fw-bold">Numero di PEGI: <span class="fw-bold text-primary">{{ count($pegis) }}</span></p>
+                <p class="mt-3 fw-bold">Numero di PEGI: <span class="fw-bold text-primary">{{ $pegis->total() }}</span></p>
                 <button id="deleteAll" class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
                         class="bi bi-trash"></i> Elimina tutti </button>
             </div>

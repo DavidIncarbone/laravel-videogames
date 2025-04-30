@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
     collapseElements.forEach(collapse => {
         const icons = collapse.previousElementSibling.querySelectorAll('i.bi');
         const toggleIcon = icons[icons.length - 1];
-        // console.log(toggleIcon);
 
         if (!toggleIcon) return;
 
@@ -122,10 +121,11 @@ window.addEventListener('DOMContentLoaded', function () {
     const fields = document.querySelectorAll('input, textarea');
     fields.forEach(field => {
         window.toggleClearButton(field.id);
+        field.addEventListener('input', function () {
+            window.toggleClearButton(field.id);
+        });
     })
-
 });
-
 
 
 // CLEAR SINGLE INPUT
@@ -240,7 +240,7 @@ function selectAllCheckboxes() {
 
 tableCheckboxes.forEach((tableCheckbox) => {
     tableCheckbox.addEventListener("change", function () {
-        console.log("change")
+        console.log(modalList);
 
         const name = tableCheckbox.getAttribute('data-name');
         const id = tableCheckbox.getAttribute('data-id');
@@ -306,8 +306,12 @@ tableCheckboxes.forEach((tableCheckbox) => {
 
 function cancelCheckboxes() {
     const checkboxes = document.querySelectorAll("input[type=checkbox]");
+
+    console.log(modalList);
     checkboxes.forEach((checkbox) => {
         checkbox.checked = false;
+        selectedItems.splice(0, selectedItems.length);
+        modalList.innerHTML = "";
         selectedMenu.classList.remove("d-flex");
         selectedMenu.classList.add("d-none");
 

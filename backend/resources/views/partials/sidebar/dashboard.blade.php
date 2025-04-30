@@ -6,7 +6,7 @@
          </button>
      </div>
 
-     <a href="{{ route('admin.home') }}" class="text-decoration-none text-white w-100 ms-lg-3">
+     <a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-white w-100 ms-lg-3">
          <div class="d-flex align-items-center">
              <i class="bi bi-speedometer2 me-2 fs-4"></i>
              <h5 class="mb-0 text-center">Admin Dashboard</h5>

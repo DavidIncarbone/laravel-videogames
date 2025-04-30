@@ -185,7 +185,7 @@ class ConsoleController extends Controller
         Console::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        toastr()->success('Tutte le consoles sono state eliminate con successo');
+        toastr()->success('Tutte le console sono state eliminate con successo');
 
         return back();
     }
@@ -199,7 +199,7 @@ class ConsoleController extends Controller
         Console::whereIn("id", $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('Le consoles selezionate sono state eliminate con successo');
+            toastr()->success('Le <span class="fw-bold">' . count($ids) . ' Console</span> selezionate sono state eliminate con successo');
         } else {
             toastr()->success('La console selezionata è stata eliminata con successo');
         };

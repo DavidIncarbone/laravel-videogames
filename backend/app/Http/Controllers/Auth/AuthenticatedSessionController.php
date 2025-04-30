@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         toastr()->success("Login avvenuto con successo");
 
 
-        return redirect()->intended(route('admin.home', absolute: false));
+        return redirect()->intended(route('admin.dashboard', absolute: false));
     }
 
     /**

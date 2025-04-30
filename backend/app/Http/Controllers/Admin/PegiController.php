@@ -200,7 +200,7 @@ class PegiController extends Controller
         Pegi::whereIn("id", $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('I PEGI selezionati sono stati eliminati con successo');
+            toastr()->success('I <span class="fw-bold">' . count($ids) . ' PEGI</span> selezionati sono stati eliminati con successo');
         } else {
             toastr()->success('Il PEGI selezionato è stato eliminato con successo');
         };
