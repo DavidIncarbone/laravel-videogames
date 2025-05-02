@@ -84,8 +84,8 @@
                                 <x-slot:firstTd>
                                     <div class="d-flex w-100 justify-content-center align-items-center">
                                         <div id="post-image" style="width: 100px; height:50px">
-                                            <img id="logo" class="" src="{{ asset('storage/' . $pegi->logo) }}"
-                                                alt="{{ $pegi->age }}">
+                                            <img id="logo" class="form-image"
+                                                src="{{ asset('storage/' . $pegi->logo) }}" alt="{{ $pegi->age }}">
                                         </div>
                                     </div>
                                 </x-slot>
@@ -176,5 +176,13 @@
             </form>
         </x-slot>
     </x-modal-all>
+
+    {{-- OVERLAY --}}
+
+    <x-overlay-img>
+        <x-slot:img> <img src="{{ asset('storage/' . $pegi->logo) }}" alt="PEGI {{ $pegi->age }}"
+                id="overlay-img" class="rounded shadow-sm">
+        </x-slot>
+    </x-overlay-img>
     @endif
 @endsection

@@ -204,6 +204,7 @@ function selectAllCheckboxes() {
         tableCheckbox.checked = selectAll.checked;
         const name = tableCheckbox.getAttribute('data-name');
         const id = tableCheckbox.getAttribute('data-id');
+        const url = tableCheckbox.getAttribute('data-screenshot');
 
         if (selectAll.checked) {
             selectedMenu.classList.add("d-flex");
@@ -212,14 +213,30 @@ function selectAllCheckboxes() {
             const itemExists = selectedItems.some((item) => item.id === id);
 
             if (!itemExists) {
-                selectedItems.push({ id, name });
+                selectedItems.push({ id, name, url });
             }
-
             selectedItems.sort((a, b) => a.id - b.id);
             modalList.innerHTML = ``;
-            selectedItems.forEach((selectedItem) => modalList.innerHTML += `<li>${selectedItem.name}</li>`);
             selectedCount.textContent = `${selectedItems.length}`;
 
+            selectedItems.forEach((item) => {
+                const li = document.createElement("li");
+                modalList.appendChild(li);
+                console.log(item.url);
+                if (item.name) {
+                    li.textContent = item.name
+                } else {
+                    modalList.classList.remove("d-block");
+                    modalList.classList.add("d-flex", "list-unstyled", "gap-3", "flex-wrap");
+                    console.log(modalList);
+                    const img = document.createElement("img");
+                    li.appendChild(img);
+                    img.style = "width:100px; height:100px;";
+                    img.classList.add("form-image");
+                    img.src = `/storage/${item.url}`;
+                }
+
+            })
         } else {
             selectedMenu.classList.add("d-none");
             selectedMenu.classList.remove("d-flex");
@@ -244,13 +261,14 @@ tableCheckboxes.forEach((tableCheckbox) => {
 
         const name = tableCheckbox.getAttribute('data-name');
         const id = tableCheckbox.getAttribute('data-id');
+        const url = tableCheckbox.getAttribute('data-screenshot');
 
         if (tableCheckbox.checked) {
 
             const itemExists = selectedItems.some((item) => item.id === id);
 
             if (!itemExists) {
-                selectedItems.push({ id, name });
+                selectedItems.push({ id, name, url });
             }
 
             selectedItems.sort((a, b) => a.id - b.id);
@@ -260,7 +278,20 @@ tableCheckboxes.forEach((tableCheckbox) => {
             selectedItems.forEach((item) => {
                 const li = document.createElement("li");
                 modalList.appendChild(li);
-                li.textContent = item.name;
+                console.log(item.url);
+                if (item.name) {
+                    li.textContent = item.name
+                } else {
+                    modalList.classList.remove("d-block");
+                    modalList.classList.add("d-flex", "list-unstyled", "gap-3", "flex-wrap");
+                    console.log(modalList);
+                    const img = document.createElement("img");
+                    li.appendChild(img);
+
+                    img.style = "width:100px; height:100px;";
+                    img.classList.add("form-image");
+                    img.src = `/storage/${item.url}`;
+                }
             })
 
         } else {
@@ -322,11 +353,8 @@ function cancelCheckboxes() {
 
 
 const images = document.querySelectorAll(".form-image");
-console.log(images);
 const overlay = document.getElementById("overlay");
-// console.log(overlay);
 const overlayImg = document.getElementById("overlay-img");
-console.log(overlayImg);
 images.forEach((image) => {
     image.addEventListener("click", function (e) {
         overlay.classList.toggle("d-none");
@@ -335,9 +363,7 @@ images.forEach((image) => {
         overlayImg.src = imgUrl;
     })
 })
-const overlayBtn = document.getElementById("overlay-btn");
-console.log(overlayBtn);
-overlay.addEventListener("click", () => overlay.classList.toggle("d-none"));
+overlay && overlay.addEventListener("click", () => overlay.classList.toggle("d-none"));
 
 
 

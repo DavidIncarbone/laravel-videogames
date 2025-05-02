@@ -8,6 +8,7 @@ use App\Models\Videogame;
 use App\Models\Console;
 use App\Models\Genre;
 use App\Models\Pegi;
+use App\Models\Screenshot;
 
 class DashboardController extends Controller
 {
@@ -18,6 +19,7 @@ class DashboardController extends Controller
         $consolesCount = Console::all()->count();
         $genresCount = Genre::all()->count();
         $pegisCount = PEGI::all()->count();
+        $screenshotsCount = Screenshot::all()->count();
 
 
         $itemsCount = [
@@ -40,6 +42,11 @@ class DashboardController extends Controller
                 'name' => 'PEGI',
                 'url' => 'admin.pegis.index',
                 'count' => $pegisCount,
+            ],
+            [
+                'name' => 'Screenshots',
+                'url' => 'admin.screenshots.index',
+                'count' => $screenshotsCount,
             ],
         ];
 

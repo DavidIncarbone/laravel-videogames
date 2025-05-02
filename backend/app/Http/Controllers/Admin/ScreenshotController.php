@@ -1,0 +1,152 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Screenshot;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
+class ScreenshotController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        $query = Screenshot::query();
+        if ($request->filled('search')) {
+            $query->whereHas("videogame", function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%');
+            });
+        };
+        if ($request->orderFor == "create" && $request->orderBy == "desc") {
+            $query->orderBy("created_at", "desc");
+        } else if ($request->orderFor == "edit" && $request->orderBy == "asc") {
+            $query->orderBy("updated_at");
+        } else if ($request->orderFor == "edit" && $request->orderBy == "desc") {
+            $query->orderBy("updated_at", "desc");
+        }
+        $screenshots = $query->paginate(5)->withQueryString();
+        return view("screenshots/index", compact("screenshots"));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Screenshot $screenshot)
+    {
+        return view("screenshots.edit", compact("screenshot"));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Screenshot $screenshot)
+    {
+        $request->validate(
+            [
+
+                'screenshot' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            ],
+
+
+            // Screenshot
+
+            [
+
+                'screenshot.image' => 'Il file caricato deve essere un\'immagine.',
+                'screenshot.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
+                'screenshot.max' => 'La dimensione massima dell\'immagine è di 2MB.',
+            ]
+        );
+
+
+        $data = $request->all();
+        // dd($data);
+
+        if (array_key_exists("screenshot", $data)) {
+
+            Storage::delete($screenshot->url);
+
+            $image_url = Storage::putFile("img/screenshots", $data["screenshot"]);
+            $screenshot->url = $image_url;
+        }
+
+        $unchangedScreenshot = $screenshot->isClean();
+        if ($unchangedScreenshot) {
+            toastr()->info("Nessuna modifica effettuata");
+        } else {
+            toastr()->success("Lo screenshot di <span class='fw-bold'>" . Str::limit($screenshot->videogame->name, 20) . '</span> è stato modificato con successo');
+        }
+
+        $screenshot->update();
+
+        return redirect()->route("admin.screenshots.index");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(screenshot $screenshot)
+    {
+        $name = $screenshot->videogame->name;
+        $screenshot->delete();
+        toastr()->success("Lo screenshot di <span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stato eliminato con successo');
+        return back();
+    }
+
+    public function destroyAll()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Screenshot::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        toastr()->success('Tutti gli screenshots sono stati eliminati con successo');
+
+        return back();
+    }
+
+    public function destroySelected(Request $request)
+    {
+
+        $ids = $request->input("selected_screenshots", []);
+        // dd($slugs);
+
+        Screenshot::whereIn("id", $ids)->delete();
+
+        if (count($ids) > 1) {
+            toastr()->success('I <span class="fw-bold">' . count($ids) . ' screenshots</span> selezionati sono stati eliminati con successo');
+        } else {
+            toastr()->success('Lo screenshot selezionato è stata eliminato con successo');
+        };
+
+        return back();
+    }
+}

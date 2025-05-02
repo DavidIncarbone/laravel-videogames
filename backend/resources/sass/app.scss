@@ -495,9 +495,17 @@ td:not(.not-break) {
     .bi-trash {
         margin-right: 0;
     }
+
+    // OVERLAY
+
+    .overlay-img-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
-// OVERLAY
 
 
 

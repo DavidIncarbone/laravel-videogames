@@ -16,6 +16,8 @@
         <div id="dashboard-cards" class="row">
             <!-- Card per statistiche portfolio -->
 
+            <!-- I dati arrivano dal DasboardController -->
+
             @foreach ($itemsCount as $itemCount)
                 <div class="col-lg-4">
                     <div class="card">

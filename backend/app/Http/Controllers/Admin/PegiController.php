@@ -58,7 +58,7 @@ class PegiController extends Controller
                     'max:100',
 
                 ],
-                'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+                'logo' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
             ],
 
             // Age
@@ -68,11 +68,12 @@ class PegiController extends Controller
                 'age.numeric' => 'Il campo età deve essere un numero.',
                 'age.min' => 'L\'età minima non può essere inferiore ad :min anno.',
                 'age.max' => 'L\'età massima non può essere superiore a :max anni.',
-            ],
 
-            // Logo
 
-            [
+                // Logo
+
+
+                'logo.required' => 'Il logo è obbligatorio',
                 'logo.image' => 'Il file caricato deve essere un\'immagine.',
                 'logo.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
                 'logo.max' => 'La dimensione massima dell\'immagine è di 2MB.',

@@ -59,23 +59,22 @@
             @endif
         </x-slot>
         <x-slot:screenshots>
-            <div class="d-flex gap-3 align-items-center mt-3">
-                <div>Screenshots attuali:</div>
-                <div class="container">
-                    <div class="row">
-                        @foreach ($videogame->screenshots as $screenshot)
-                            @if ($screenshot)
+            @if (count($videogame->screenshots) > 0)
+                <div class="d-flex gap-3 align-items-center mt-3">
+                    <div>Screenshots attuali:</div>
+                    <div class="container">
+                        <div class="row">
+                            @foreach ($videogame->screenshots as $screenshot)
                                 <div id="post-image" class="col-6 col-lg-12 g-3"
                                     style="width:100px; height:100px; cursor:zoom-in">
                                     <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
                                         class="form-image">
                                 </div>
-                            @endif
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-
-            </div>
+            @endif
             <x-overlay-img>
                 <x-slot:img> <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
                         id="overlay-img" class="rounded shadow-sm">

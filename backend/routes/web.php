@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ConsoleController;
 use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\PegiController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ScreenshotController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -59,6 +60,12 @@ Route::middleware(["auth", "verified"])
         Route::resource("pegis", PegiController::class);
         Route::delete("pegis/all/destroy", [PegiController::class, "destroyAll"])->name("pegis.destroyAll");
         Route::delete("pegis/selected/destroy", [PegiController::class, "destroySelected"])->name("pegis.destroySelected");
+
+        // SCREENSHOTS
+
+        Route::resource("screenshots", ScreenshotController::class);
+        Route::delete("screenshots/all/destroy", [ScreenshotController::class, "destroyAll"])->name("screenshots.destroyAll");
+        Route::delete("screenshots/selected/destroy", [ScreenshotController::class, "destroySelected"])->name("screenshots.destroySelected");
     });
 
 

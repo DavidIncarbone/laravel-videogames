@@ -88,7 +88,7 @@
                                         <div class="d-flex w-100 justify-content-center" style="height:66px;">
                                             <div id="post-image" class="align-self-center"
                                                 style="width: 100px; height:50px">
-                                                <img id="logo" class=""
+                                                <img id="logo" class="form-image"
                                                     src="{{ asset('storage/' . $console->logo) }}"
                                                     alt="{{ $console->name }}">
                                             </div>
@@ -175,5 +175,13 @@
             </form>
         </x-slot>
     </x-modal-all>
+
+    {{-- OVERLAY --}}
+
+    <x-overlay-img>
+        <x-slot:img> <img src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}"
+                id="overlay-img" class="rounded shadow-sm">
+        </x-slot>
+    </x-overlay-img>
     @endif
 @endsection

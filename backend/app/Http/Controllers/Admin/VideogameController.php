@@ -82,7 +82,7 @@ class VideogameController extends Controller
 
             'description' => ['required', 'string', 'min:10', 'max:255'],
 
-            'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'cover' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
 
             'screenshots' => ['nullable', 'array', 'max:4'],
 
@@ -136,6 +136,7 @@ class VideogameController extends Controller
             'description.max' => 'La descrizione non può superare i :max caratteri.',
 
             // Copertina
+            'cover.required' => 'La cover è obbligatoria',
             'cover.image' => 'Il file caricato deve essere un\'immagine.',
             'cover.mimes' => 'L\'immagine deve essere nei formati: jpeg, png, jpg o webp.',
             'cover.max' => 'L\'immagine non può superare i 2MB.',
@@ -257,6 +258,8 @@ class VideogameController extends Controller
             'description' => ['required', 'string', 'min:10', 'max:255'],
 
             'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+
+
         ], [
             // Name
             'name.required' => 'Il campo nome del videogioco è obbligatorio.',
@@ -305,9 +308,20 @@ class VideogameController extends Controller
             'description.max' => 'La descrizione non può superare i :max caratteri.',
 
             // Copertina
+
             'cover.image' => 'Il file caricato deve essere un\'immagine.',
             'cover.mimes' => 'L\'immagine deve essere nei formati: jpeg, png, jpg o webp.',
             'cover.max' => 'L\'immagine non può superare i 2MB.',
+
+            // Screenshots array
+
+            'screenshots.array' => 'Il formato degli screenshot non è corretto',
+            'screenshots.max' => 'Non puoi caricare più di :max screenshots',
+
+            // Screenshots immagini
+            'screenshots.*.image' => 'Il file caricato deve essere un\'immagine.',
+            'screenshots.*.mimes' => 'L\'immagine deve essere nei formati: jpeg, png, jpg o webp.',
+            'screenshots.*.max' => 'L\'immagine non può superare i 2MB.',
         ]);
 
         // SAVE TO DB
