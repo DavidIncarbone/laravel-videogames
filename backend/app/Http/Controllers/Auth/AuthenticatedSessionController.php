@@ -49,6 +49,6 @@ class AuthenticatedSessionController extends Controller
 
         toastr()->success("Logout avvenuto con successo");
 
-        return redirect('/admin');
+        return redirect()->route("login");
     }
 }

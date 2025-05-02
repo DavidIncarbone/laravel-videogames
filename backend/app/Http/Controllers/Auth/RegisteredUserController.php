@@ -43,7 +43,10 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
+
+        toastr()->success("L'Admin <span class='fw-bold'> $user->name  </span> è stato registrato con successo <br>
+         Effettua il Login");
 
         return redirect(route('admin.dashboard', absolute: false));
     }
