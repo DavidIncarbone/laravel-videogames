@@ -51,13 +51,70 @@
             @if ($videogame->cover)
                 <div class="d-flex gap-3 align-items-center mt-3">
                     <div>Cover attuale:</div>
-                    <div id="post-image" style="width: 100px; height:50px">
-                        <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}">
+                    <div id="post-image" style="width: 100px; height:100px">
+                        <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
+                            class="form-image">
                     </div>
                 </div>
             @endif
         </x-slot>
-        <x-slot:screenshots></x-slot>
+        <x-slot:screenshots>
+            <div class="d-flex gap-3 align-items-center mt-3">
+                <div>Screenshots attuali:</div>
+                @foreach ($videogame->screenshots as $screenshot)
+                    @if ($screenshot)
+                        <div id="post-image" style="width: 100px; height:100px; cursor:zoom-in">
+                            <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
+                                class="form-image">
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+
+            <div id="overlay" class="d-none">
+
+                <div class="overlay-img-container d-flex flex-column">
+                    <button type="button" id="overlay-btn" class="bg-dark text-white align-self-end"><i
+                            class="fa-sharp fa-solid fa-xmark"></i> Chiudi
+                    </button>
+                    <div id="img-details" class="w-100 mb-3" style="height:50vh;">
+                        <img src="{{ asset('storage/' . $videogame->cover) }}"
+                            alt="{{ Str::limit($videogame->name, 20) }}"id="overlay-img" class="rounded shadow-sm">
+                    </div>
+                </div>
+
+            </div>
+
+            <script>
+                function overlayImage() {
+
+
+                    const images = document.querySelectorAll(".form-image");
+                    console.log(images);
+                    const overlay = document.getElementById("overlay");
+                    // console.log(overlay);
+                    const overlayImg = document.getElementById("overlay-img");
+                    console.log(overlayImg);
+
+                    images.forEach((image) => {
+                        image.addEventListener("click", function(e) {
+                            overlay.classList.toggle("d-none");
+                            const imgUrl = e.target.src;
+                            console.log(imgUrl);
+                            overlayImg.src = imgUrl;
+                        })
+                    })
+
+                    const overlayBtn = document.getElementById("overlay-btn");
+                    console.log(overlayBtn);
+                    overlayBtn.addEventListener("click", () => overlay.classList.toggle("d-none"));
+                }
+                overlayImage();
+            </script>
+
+
+
+        </x-slot>
 
         <x-slot:actionToDo>Modifica</x-slot>
 
