@@ -20,7 +20,7 @@ class Videogame extends Model
             $videogame->slug = Str::slug($videogame->name);
         });
 
-        // UNIQUE
+        // UNIQUE SLUG
 
         static::creating(function ($videogame) {
             $baseSlug = Str::slug($videogame->name);

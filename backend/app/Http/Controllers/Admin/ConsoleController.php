@@ -51,7 +51,7 @@ class ConsoleController extends Controller
         $request->validate(
             [
                 'name' => ['required', 'string', 'min:2', 'max:20', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
-                'console_logo' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+                'logo' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             ],
 
             // Name
@@ -67,7 +67,7 @@ class ConsoleController extends Controller
                 // Logo
 
 
-                'console_logo.required' => 'Il logo è obbligatorio',
+                'logo.required' => 'Il logo è obbligatorio',
                 'logo.image' => 'Il file caricato deve essere un\'immagine.',
                 'logo.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
                 'logo.max' => 'La dimensione massima dell\'immagine è di 2MB.',

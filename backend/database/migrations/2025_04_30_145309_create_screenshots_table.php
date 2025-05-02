@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("videogame_id")->constrained()->onUpdate("CASCADE")->onDelete("CASCADE");
             $table->longText("url")->nullable();
+            $table->string("slug")->unique();
             $table->timestamps();
         });
     }
