@@ -32,7 +32,7 @@
           @if ($errors->any())
               <small class="text-warning">Seleziona di nuovo il file prima di inviare il modulo.</small>
           @endif
-          {{ $cover }}
+          {{ $logo }}
       </div>
 
       <input type="submit" value="{{ $actionToDo }}" class="btn btn-success">

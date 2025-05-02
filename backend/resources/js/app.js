@@ -321,6 +321,26 @@ function cancelCheckboxes() {
 // OVERLAY IMAGES
 
 
+const images = document.querySelectorAll(".form-image");
+console.log(images);
+const overlay = document.getElementById("overlay");
+// console.log(overlay);
+const overlayImg = document.getElementById("overlay-img");
+console.log(overlayImg);
+images.forEach((image) => {
+    image.addEventListener("click", function (e) {
+        overlay.classList.toggle("d-none");
+        const imgUrl = e.target.src;
+        console.log(imgUrl);
+        overlayImg.src = imgUrl;
+    })
+})
+const overlayBtn = document.getElementById("overlay-btn");
+console.log(overlayBtn);
+overlayBtn.addEventListener("click", () => overlay.classList.toggle("d-none"));
+
+
+
 
 
 

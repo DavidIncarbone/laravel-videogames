@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string("name");
             $table->decimal("price", 10, 2);
             $table->year("year_of_publication");
-            $table->integer("pegi")->nullable();
-            $table->string("cover")->nullable();
+            $table->integer("pegi");
+            $table->string("cover");
             $table->longtext("description");
             $table->string("publisher");
-            $table->string("slug")->unique()->nullable();
+            $table->string("slug")->unique();
             $table->timestamps();
         });
     }

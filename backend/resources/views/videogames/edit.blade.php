@@ -70,50 +70,11 @@
                     @endif
                 @endforeach
             </div>
-
-            <div id="overlay" class="d-none">
-
-                <div class="overlay-img-container d-flex flex-column">
-                    <button type="button" id="overlay-btn" class="bg-dark text-white align-self-end"><i
-                            class="fa-sharp fa-solid fa-xmark"></i> Chiudi
-                    </button>
-                    <div id="img-details" class="w-100 mb-3" style="height:50vh;">
-                        <img src="{{ asset('storage/' . $videogame->cover) }}"
-                            alt="{{ Str::limit($videogame->name, 20) }}"id="overlay-img" class="rounded shadow-sm">
-                    </div>
-                </div>
-
-            </div>
-
-            <script>
-                function overlayImage() {
-
-
-                    const images = document.querySelectorAll(".form-image");
-                    console.log(images);
-                    const overlay = document.getElementById("overlay");
-                    // console.log(overlay);
-                    const overlayImg = document.getElementById("overlay-img");
-                    console.log(overlayImg);
-
-                    images.forEach((image) => {
-                        image.addEventListener("click", function(e) {
-                            overlay.classList.toggle("d-none");
-                            const imgUrl = e.target.src;
-                            console.log(imgUrl);
-                            overlayImg.src = imgUrl;
-                        })
-                    })
-
-                    const overlayBtn = document.getElementById("overlay-btn");
-                    console.log(overlayBtn);
-                    overlayBtn.addEventListener("click", () => overlay.classList.toggle("d-none"));
-                }
-                overlayImage();
-            </script>
-
-
-
+            <x-overlay-img>
+                <x-slot:img> <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
+                        id="overlay-img" class="rounded shadow-sm">
+                </x-slot>
+            </x-overlay-img>
         </x-slot>
 
         <x-slot:actionToDo>Modifica</x-slot>

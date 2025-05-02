@@ -59,6 +59,7 @@ class VideogameController extends Controller
     {
 
 
+
         // VALIDATION
 
 
@@ -226,6 +227,8 @@ class VideogameController extends Controller
     public function update(Request $request, Videogame $videogame)
     {
 
+        // dd($request);
+
         // ADD THIS ARRAYS ANYWAY
 
         $request->merge([
@@ -325,6 +328,26 @@ class VideogameController extends Controller
             $updateData["cover"] = $cover_url;
         }
 
+        // SCREENSHOTS
+
+        if (array_key_exists("screenshots", $data)) {
+
+            $screenshots = $data['screenshots'];
+            $oldScreenshots = Screenshot::where("videogame_id", $videogame->id)->get();
+            foreach ($oldScreenshots as $oldScreenshot) {
+                Storage::delete($oldScreenshot->url);
+            }
+
+            Screenshot::where("videogame_id", $videogame->id)->delete();
+
+            foreach ($screenshots as $screenshot) {
+                $newScreenshots = new Screenshot;
+                $newScreenshots->videogame_id = $videogame->id;
+                $screenshots_url = Storage::putFile("img/videogames/screenshots", $screenshot);
+                $newScreenshots->url = $screenshots_url;
+                $newScreenshots->save();
+            }
+        }
 
 
         // NO CHANGE EVENTUALITY
@@ -341,7 +364,7 @@ class VideogameController extends Controller
 
         // TOASTR
 
-        if ($videogameUnchanged && $consoleUnchanged && $genreUnchanged) {
+        if ($videogameUnchanged && $consoleUnchanged && $genreUnchanged && !array_key_exists("screenshots", $data)) {
             toastr()->info("Nessuna modifica effettuata");
         } else {
             toastr()->success('<span class="fw-bold">' . Str::limit($videogame->name, 20) . '</span> è stato modificato con successo', ['title' => '']);

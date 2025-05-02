@@ -18,10 +18,16 @@
                 <div class="d-flex gap-3 align-items-center">
                     <div>Logo attuale:</div>
                     <div id="post-image" style="width: 100px; height:50px">
-                        <img id="logo" src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}">
+                        <img id="logo" src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}"
+                            class="form-image">
                     </div>
                 </div>
             @endif
+            <x-overlay-img>
+                <x-slot:img> <img src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}"
+                        id="overlay-img" class="rounded shadow-sm">
+                </x-slot>
+            </x-overlay-img>
         </x-slot>
 
     </x-console-form>
