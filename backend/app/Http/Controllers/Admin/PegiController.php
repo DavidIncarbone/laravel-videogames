@@ -164,8 +164,15 @@ class PegiController extends Controller
             $pegi->logo = $logo_url;
         }
 
+        if ($pegi->isClean()) {
+            toastr()->info("Nessuna modifica effettuata");
+        } else {
+            toastr()->success("<span class='fw-bold'> PEGI " . $pegi->age . '</span> è stato modificato con successo');
+        }
+
         $pegi->update();
-        toastr()->success("<span class='fw-bold'> PEGI " . $pegi->age . '</span> è stato modificato con successo');
+
+
         return redirect()->route("admin.pegis.index");
     }
 

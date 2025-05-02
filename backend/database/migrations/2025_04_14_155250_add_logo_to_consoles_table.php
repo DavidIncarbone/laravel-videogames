@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('consoles', function (Blueprint $table) {
-            $table->longtext("logo")->after("name")->nullable();
+            $table->longtext("logo")->after("name");
         });
     }
 

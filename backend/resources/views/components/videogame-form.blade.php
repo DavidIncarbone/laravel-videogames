@@ -197,7 +197,7 @@
     {{-- COVER --}}
 
     <div class="form-control mb-3 d-flex flex-column p-3">
-        <label for="cover">Cover</label>
+        <label for="cover">Cover*</label>
         <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp | Max. 2 MB</label>
         <input type="file" id="cover" name="cover" accept=".jpeg, .jpg, .png, .webp"
             class="form-control bg-white">
@@ -212,7 +212,7 @@
     </div>
 
     <div class="form-control mb-3 d-flex flex-column p-3">
-        <label for="screenshots">Alle Screenshots</label>
+        <label for="screenshots">Allega Screenshots</label>
         <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp | Dimensione Max. per
             immagine: 2 MB | Max. 4 immagini</label>
         <input type="file" id="screenshots" name="screenshots[]" accept=".jpeg, .jpg, .png, .webp"

@@ -27,8 +27,9 @@
             <div class="d-flex justify-content-between align-items-center w-100 mt-3">
                 <p class="mt-3 fw-bold">Numero di console: <span class="fw-bold text-primary">{{ $consoles->total() }}</span>
                 </p>
-                <button id="deleteAll" class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
-                        class="bi bi-trash"></i> Elimina tutti </button>
+                <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
+                        class="bi bi-trash"></i> <span class="d-none d-lg-inline">Elimina
+                        tutti</span></button>
             </div>
             <p class="{{ $consoles->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina {{ $consoles->currentPage() }} di
                 {{ $consoles->lastPage() }}</p>

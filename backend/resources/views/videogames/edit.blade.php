@@ -51,7 +51,7 @@
             @if ($videogame->cover)
                 <div class="d-flex gap-3 align-items-center mt-3">
                     <div>Cover attuale:</div>
-                    <div id="post-image" style="width: 100px; height:100px">
+                    <div id="post-image" class="col-6 col-lg-12 g-3" style="width: 100px; height:100px">
                         <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
                             class="form-image">
                     </div>
@@ -61,14 +61,20 @@
         <x-slot:screenshots>
             <div class="d-flex gap-3 align-items-center mt-3">
                 <div>Screenshots attuali:</div>
-                @foreach ($videogame->screenshots as $screenshot)
-                    @if ($screenshot)
-                        <div id="post-image" style="width: 100px; height:100px; cursor:zoom-in">
-                            <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
-                                class="form-image">
-                        </div>
-                    @endif
-                @endforeach
+                <div class="container">
+                    <div class="row">
+                        @foreach ($videogame->screenshots as $screenshot)
+                            @if ($screenshot)
+                                <div id="post-image" class="col-6 col-lg-12 g-3"
+                                    style="width:100px; height:100px; cursor:zoom-in">
+                                    <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
+                                        class="form-image">
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+
             </div>
             <x-overlay-img>
                 <x-slot:img> <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"

@@ -120,9 +120,16 @@ class GenreController extends Controller
 
 
         $data = $request->all();
-        $genre->name = Str::of($data["name"])->trim();
+        $genre->name = $data["name"];
+
+        if ($genre->isClean()) {
+            toastr()->info("Nessuna modifica effettuata");
+        } else {
+            toastr()->success("<span class='fw-bold'>" . Str::limit($genre->name, 20) . '</span> è stato modificato con successo');
+        }
+
         $genre->update();
-        toastr()->success("<span class='fw-bold'>" . Str::limit($genre->name, 20) . '</span> è stato modificato con successo');
+
         return redirect()->route("admin.genres.index");
     }
 

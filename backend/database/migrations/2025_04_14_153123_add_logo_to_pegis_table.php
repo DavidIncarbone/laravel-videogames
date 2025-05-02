@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pegis', function (Blueprint $table) {
-            $table->longtext("logo")->nullable()->after("age");
+            $table->longtext("logo")->after("age");
         });
     }
 

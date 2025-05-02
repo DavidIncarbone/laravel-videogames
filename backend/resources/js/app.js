@@ -337,7 +337,7 @@ images.forEach((image) => {
 })
 const overlayBtn = document.getElementById("overlay-btn");
 console.log(overlayBtn);
-overlayBtn.addEventListener("click", () => overlay.classList.toggle("d-none"));
+overlay.addEventListener("click", () => overlay.classList.toggle("d-none"));
 
 
 

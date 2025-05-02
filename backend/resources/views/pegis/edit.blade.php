@@ -10,7 +10,7 @@
             @if ($pegi->logo)
                 <div class="d-flex gap-3 align-items-center mt-3">
                     <div>Logo attuale:</div>
-                    <div id="post-image" style="width: 50px; height:50px">
+                    <div id="post-image" class="col-6 col-lg-12 g-3" style="width: 50px; height:50px">
                         <img src="{{ asset('storage/' . $pegi->logo) }}" alt="PEGI {{ $pegi->age }}" class="form-image">
                     </div>
                 </div>
