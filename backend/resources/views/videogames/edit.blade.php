@@ -67,7 +67,7 @@
                     @foreach ($videogame->screenshots as $screenshot)
                         <div id="post-image" class="col-6 col-lg-12 g-3" style="width:100px; height:100px; cursor:zoom-in">
                             <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
-                                class="form-image">
+                                class="actually-screenshots">
                         </div>
                     @endforeach
                 </div>

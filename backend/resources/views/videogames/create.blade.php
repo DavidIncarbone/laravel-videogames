@@ -61,9 +61,18 @@
         <x-slot:cover></x-slot>
         <x-slot:screenshots></x-slot>
 
+
+
         <x-slot:actionToDo>Aggiungi</x-slot>
 
     </x-videogame-form>
+
+    <x-overlay-dynamic-img>
+        <x-slot:img>CIAO <img src="" alt="" id="dynamic-overlay-img" class="rounded shadow-sm">
+        </x-slot>
+    </x-overlay-dynamic-img>
+
+
 
 
 @endsection

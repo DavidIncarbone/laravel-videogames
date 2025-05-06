@@ -349,27 +349,57 @@ function cancelCheckboxes() {
     });
 }
 
+
+
 // OVERLAY IMAGES
 
 document.addEventListener('DOMContentLoaded', () => {
-    overlayImage(".form-image", "overlay", "overlay-img")
+    overlayImage(".actually-screenshots", "overlay", "overlay-img")
 });
 
 function overlayImage(allImages, myOverlay, myOverlayImg) {
-    const images = document.querySelectorAll(allImages);
+    const images = Array.from(document.querySelectorAll(allImages));
     const overlay = document.getElementById(myOverlay);
     const overlayImg = document.getElementById(myOverlayImg);
+
     images.forEach((image) => {
         image.addEventListener("click", function (e) {
             overlay.classList.toggle("d-none");
-            const imgUrl = e.target.src;
-            overlayImg.src = imgUrl;
+            currentIndex = images.indexOf(image);
+            overlayImg.src = image.src;
         })
     })
     overlay && overlay.addEventListener("click", () => {
         if (!overlay.classList.contains("d-none")) {
             overlay.classList.add("d-none");
         }
+    });
+
+    // SLIDER
+
+    let currentIndex = -1;
+
+    const arrowLeft = document.getElementById('arrow-left');
+    const arrowRight = document.getElementById('arrow-right');
+
+    if (images.length < 2) {
+        arrowLeft.classList.add("arrow-disabled");
+    } else {
+        arrowLeft.classList.remove("disabled");
+    };
+
+
+
+    arrowLeft && arrowLeft.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        overlayImg.src = images[currentIndex].src;
+    });
+
+    arrowRight && arrowRight.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % images.length;
+        overlayImg.src = images[currentIndex].src;
     });
 
 };
@@ -395,8 +425,6 @@ let filesArray = [];
 
 
 coverInput && coverInput.addEventListener('change', function () {
-
-
     const coverFile = coverInput.files[0];
     console.log(coverFile)
     console.log(coverFile instanceof File);
@@ -426,6 +454,8 @@ input && input.addEventListener('change', () => {
 });
 
 //   FUNCTIONS
+
+// COVER
 
 function showCoverPreview(file) {
     const reader = new FileReader();
@@ -463,6 +493,14 @@ function showCoverPreview(file) {
     reader.readAsDataURL(file);
 }
 
+function updateCoverFile(file) {
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    coverInput.files = dataTransfer.files;
+
+}
+
+// SCREENSHOTS
 
 
 function showPreview(file) {
@@ -505,12 +543,7 @@ function updateInputFiles() {
     input.files = dataTransfer.files;
 }
 
-function updateCoverFile(file) {
-    const dataTransfer = new DataTransfer();
-    dataTransfer.items.add(file);
-    coverInput.files = dataTransfer.files;
 
-}
 
 window.clearScreenshots = function () {
 

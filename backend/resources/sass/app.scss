@@ -304,31 +304,7 @@ td:not(.not-break) {
 
 }
 
-// ICONS
 
-
-#pencil:hover {
-
-    color: orange;
-
-}
-
-#trash:hover:not(.deleteAll) {
-    color: red;
-}
-
-#eye:hover {
-    color: #0dcaf0;
-}
-
-#plus:hover {
-    color: blue;
-}
-
-.fa-sharp,
-.bi-trash {
-    margin-right: 0.21rem;
-}
 
 // DROPZONE.JS
 
@@ -392,11 +368,63 @@ td:not(.not-break) {
     top: 50%;
     left: calc(50% + 10vw);
     transform: translate(-50%, -50%);
+    width: 500px;
 }
 
 #post-image,
 #post-dynamic-image {
     cursor: zoom-in;
+}
+
+// ICONS
+
+
+#arrow-left {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: xx-large;
+}
+
+#arrow-right {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: xx-large;
+
+}
+
+.arrow.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
+}
+
+#pencil:hover {
+
+    color: orange;
+
+}
+
+#trash:hover:not(.deleteAll) {
+    color: red;
+}
+
+#eye:hover {
+    color: #0dcaf0;
+}
+
+#plus:hover {
+    color: blue;
+}
+
+.fa-sharp,
+.bi-trash {
+    margin-right: 0.21rem;
 }
 
 // SCREENSHOTS INPUT
