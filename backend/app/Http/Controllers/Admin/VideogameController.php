@@ -343,7 +343,7 @@ class VideogameController extends Controller
         if (array_key_exists("cover", $data)) {
 
             $cover_url = Storage::putFile("videogames", $data["cover"]);
-            $updateData["cover"] = $cover_url;
+            $videogame->cover = $cover_url;
         }
 
         // SCREENSHOTS

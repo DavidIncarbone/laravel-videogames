@@ -40,8 +40,8 @@ class ScreenshotController extends Controller
     public function create(Request $request)
     {
         $videogames = Videogame::all();
-        $videogameId = $request->query('videogame');
-        $videogame = Videogame::find($videogameId);
+        $videogameSlug = $request->query('screenshots');
+        $videogame = Videogame::where('slug', $videogameSlug)->first();
         $screenshots = $videogame->screenshots;
         $screenshotsCount = $videogame->screenshots->count();
         $remainingCount = 4 - $screenshotsCount;

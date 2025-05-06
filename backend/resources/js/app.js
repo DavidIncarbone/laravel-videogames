@@ -163,8 +163,9 @@ window.onload = function () {
     console.log(allForms);
     allForms.forEach((form) => {
         form.addEventListener('submit', function (e) {
-            const formElements = e.target.elements;
-            Array.from(formElements).forEach(function (element) {
+            const formElements = Array.from(e.target.elements);
+            const filteredFormElements = formElements.filter((element) => element.id !== 'cover')
+            filteredFormElements.forEach(function (element) {
                 element.value = element.value.replace(/\s+/g, ' ').trim();
             });
         })
@@ -177,7 +178,7 @@ window.onload = function () {
 
 
 const selectAll = document.querySelector(".select-all");
-const tableCheckboxes = document.querySelectorAll("input[type=checkbox]:not(.select-all)");
+const tableCheckboxes = document.querySelectorAll("table input[type=checkbox]:not(.select-all)");
 
 let selectedItems = [];
 let modalList = document.getElementById("selected-items-list");
@@ -277,7 +278,7 @@ tableCheckboxes && tableCheckboxes.forEach((tableCheckbox) => {
             selectedItems.forEach((item) => {
                 const li = document.createElement("li");
                 modalList.appendChild(li);
-                console.log(item.url);
+
                 if (item.name) {
                     li.textContent = item.name
                 } else {
@@ -350,38 +351,117 @@ function cancelCheckboxes() {
 
 // OVERLAY IMAGES
 
+document.addEventListener('DOMContentLoaded', () => {
+    overlayImage(".form-image", "overlay", "overlay-img")
+});
 
-const images = document.querySelectorAll(".form-image");
-const overlay = document.getElementById("overlay");
-const overlayImg = document.getElementById("overlay-img");
-images.forEach((image) => {
-    image.addEventListener("click", function (e) {
-        overlay.classList.toggle("d-none");
-        const imgUrl = e.target.src;
-        console.log(imgUrl);
-        overlayImg.src = imgUrl;
+function overlayImage(allImages, myOverlay, myOverlayImg) {
+    const images = document.querySelectorAll(allImages);
+    const overlay = document.getElementById(myOverlay);
+    const overlayImg = document.getElementById(myOverlayImg);
+    images.forEach((image) => {
+        image.addEventListener("click", function (e) {
+            overlay.classList.toggle("d-none");
+            const imgUrl = e.target.src;
+            overlayImg.src = imgUrl;
+        })
     })
-})
-overlay && overlay.addEventListener("click", () => overlay.classList.toggle("d-none"));
+    overlay && overlay.addEventListener("click", () => {
+        if (!overlay.classList.contains("d-none")) {
+            overlay.classList.add("d-none");
+        }
+    });
+
+};
 
 
 
-// SCREENSHOTS MULTISELECT
+// ***** COVER AND SCREENSHOTS MULTISELECT *****
+
+// VARIABLES
+
+
+const coverInput = document.getElementById('cover');
+const previewCoverContainer = document.getElementById('preview-cover-container');
+const newCover = document.getElementById('new-cover');
+
 
 const input = document.getElementById('screenshots');
 const previewContainer = document.getElementById('previewContainer');
 const newScreenshots = document.getElementById("new-screenshots");
 let filesArray = [];
-input.addEventListener('change', () => {
+
+//   EVENT LISTENER
+
+
+coverInput && coverInput.addEventListener('change', function () {
+
+
+    const coverFile = coverInput.files[0];
+    console.log(coverFile)
+    console.log(coverFile instanceof File);
+
+    if (coverFile) {
+        showCoverPreview(coverFile);
+        updateCoverFile(coverFile);
+
+    }
+})
+
+
+input && input.addEventListener('change', () => {
     console.log(filesArray);
     const newFiles = Array.from(input.files);
     newFiles.forEach((newFile) => {
         filesArray.push(newFile);
         showPreview(newFile,);
         updateInputFiles();
+
     })
 
+    requestAnimationFrame(() => {
+        overlayImage(".dynamic-image", "dynamic-overlay", "dynamic-overlay-img");
+    });
+
 });
+
+//   FUNCTIONS
+
+function showCoverPreview(file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+
+        file ? newCover.className = 'd-block fw-bold' : newCover.className = 'd-none';
+
+        const preview = document.createElement('div');
+        preview.id = 'post-dynamic-image';
+        preview.classList.add('preview');
+
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.className = 'dynamic-cover-image';
+
+        const btn = document.createElement('button');
+        btn.innerText = "×";
+        btn.classList.add('remove-btn', 'd-flex', 'justify-content-center', 'align-items-center');
+
+        btn.addEventListener('click', function () {
+            preview.remove();
+            coverInput.value = '';
+            newCover.className = 'd-none';
+            updateCoverFile(file);
+        });
+
+        preview.appendChild(img);
+        preview.appendChild(btn);
+        previewCoverContainer.children[0] && previewCoverContainer.children[0].remove();
+        previewCoverContainer.appendChild(preview);
+        overlayImage(".dynamic-cover-image", "dynamic-overlay", "dynamic-overlay-img");
+
+    }
+
+    reader.readAsDataURL(file);
+}
 
 
 
@@ -392,10 +472,12 @@ function showPreview(file) {
         filesArray.length < 1 ? newScreenshots.className = "d-none" : newScreenshots.className = "d-block fw-bold";
 
         const preview = document.createElement('div');
+        preview.id = 'post-image'
         preview.classList.add('preview');
 
         const img = document.createElement('img');
         img.src = e.target.result;
+        img.className = 'dynamic-image';
 
         const btn = document.createElement('button');
         btn.innerText = "×";
@@ -412,6 +494,7 @@ function showPreview(file) {
         previewContainer.appendChild(preview);
 
 
+
     };
     reader.readAsDataURL(file);
 }
@@ -422,8 +505,15 @@ function updateInputFiles() {
     input.files = dataTransfer.files;
 }
 
+function updateCoverFile(file) {
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    coverInput.files = dataTransfer.files;
+
+}
+
 window.clearScreenshots = function () {
-    const clearAll = document.getElementById("clear-all");
+
     console.log(filesArray);
     filesArray.splice(0, filesArray.length);
     const previews = Array.from(previewContainer.children);

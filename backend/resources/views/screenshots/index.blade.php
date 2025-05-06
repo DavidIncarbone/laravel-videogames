@@ -39,7 +39,7 @@
             {{-- INVISIBLE FORM FOR CREATE ROUTE --}}
 
             <form id="createForm" action="{{ route('admin.screenshots.create') }}" method="GET">
-                <input type="hidden" name="videogame" id="videogameInput">
+                <input type="hidden" name="screenshots" id="videogameInput">
             </form>
 
 
@@ -79,7 +79,7 @@
                                 <x-slot:show>
 
                                     <button type="button" class="btn p-0"
-                                        onclick="submitCreate({{ $screenshot->videogame->id }})">
+                                        onclick='submitCreate(@json($screenshot->videogame->slug))'>
                                         <i id="plus" class="fa-solid fa-plus"></i>
                                     </button>
 
@@ -221,8 +221,8 @@
     {{-- SCRIPT FOR CREATE ROUTE --}}
 
     <script>
-        function submitCreate(videogameId) {
-            document.getElementById('videogameInput').value = videogameId;
+        function submitCreate(videogameSlug) {
+            document.getElementById('videogameInput').value = videogameSlug;
             document.getElementById('createForm').submit();
         }
     </script>

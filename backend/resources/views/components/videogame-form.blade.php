@@ -200,7 +200,11 @@
         <label for="cover">Cover*</label>
         <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp | Max. 2 MB</label>
         <input type="file" id="cover" name="cover" accept=".jpeg, .jpg, .png, .webp"
-            class="form-control bg-white">
+            class="form-control bg-white mb-3">
+        <div id="new-cover" class="d-none">Nuova Cover:</div>
+        <div class="preview-container" id="preview-cover-container">
+
+        </div>
         @error('cover')
             <small class="text-danger">{{ $message }}</small>
         @enderror
@@ -243,5 +247,7 @@
         <input type="submit" id="submit-videogame" value="{{ $actionToDo }}" class="btn btn-success">
         <button type="button" onclick="clearVideogameForm()" class="btn btn-danger">Svuota tutto</button>
     </div>
+
+
 
 </form>

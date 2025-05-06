@@ -47,10 +47,12 @@
 
         <x-slot:description>{{ old('description', $videogame->description) }}</x-slot>
 
+
+
         <x-slot:cover>
             @if ($videogame->cover)
+                <div class="mt-3">Cover attuale:</div>
                 <div class="d-flex gap-3 align-items-center mt-3">
-                    <div>Cover attuale:</div>
                     <div id="post-image" style="width: 100px; height:100px">
                         <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
                             class="form-image">
@@ -71,11 +73,16 @@
                 </div>
             @endif
             <x-overlay-img>
-                <x-slot:img> <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
-                        id="overlay-img" class="rounded shadow-sm">
+                <x-slot:img> <img src="" alt="" id="overlay-img" class="rounded shadow-sm">
                 </x-slot>
             </x-overlay-img>
+            <x-overlay-dynamic-img>
+                <x-slot:img> <img src="" alt="" id="dynamic-overlay-img" class="rounded shadow-sm">
+                </x-slot>
+            </x-overlay-dynamic-img>
+
         </x-slot>
+
 
         <x-slot:actionToDo>Modifica</x-slot>
 
