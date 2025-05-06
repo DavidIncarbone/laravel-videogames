@@ -321,6 +321,10 @@ td:not(.not-break) {
     color: #0dcaf0;
 }
 
+#plus:hover {
+    color: blue;
+}
+
 .fa-sharp,
 .bi-trash {
     margin-right: 0.21rem;
@@ -391,6 +395,41 @@ td:not(.not-break) {
 
 #post-image {
     cursor: zoom-in;
+}
+
+// SCREENSHOTS INPUT
+
+.preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.preview {
+    position: relative;
+    margin: 5px;
+}
+
+.preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.remove-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
 }
 
 

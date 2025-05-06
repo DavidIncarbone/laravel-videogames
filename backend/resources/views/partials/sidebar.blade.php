@@ -27,9 +27,6 @@
             <hr>
             @include('partials.sidebar.pegis')
             <hr>
-            @include('partials.sidebar.screenshots')
-            <hr>
-
 
             @include('partials.sidebar.logout')
         </ul>

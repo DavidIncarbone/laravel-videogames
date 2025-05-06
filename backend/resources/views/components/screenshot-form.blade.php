@@ -14,7 +14,8 @@
 
     <div class="form-control d-flex flex-column p-3 mb-3">
         <label for="screenshot">{{ $actionToDo }} lo screenshot*</label>
-        <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp</label>
+        <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp | Dimensione Max. per
+            immagine: 2 MB</label>
         <input type="file" name="screenshot" id="screenshot" accept=".jpeg, .jpg, .png, .webp"
             class="form-control bg-white">
         @error('screenshot')

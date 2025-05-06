@@ -259,6 +259,10 @@ class VideogameController extends Controller
 
             'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
 
+            'screenshots' => ['nullable', 'array', 'max:4'],
+
+            'screenshots.*' => ['image', 'mimes:jpeg,png,jpg,webp', 'max:2048']
+
 
         ], [
             // Name

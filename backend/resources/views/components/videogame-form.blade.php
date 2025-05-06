@@ -211,12 +211,22 @@
         {{ $cover }}
     </div>
 
+
     <div class="form-control mb-3 d-flex flex-column p-3">
-        <label for="screenshots">Allega Screenshots</label>
+        <div class="d-flex justify-content-between">
+            <label for="screenshots">{{ $actionToDo }} Screenshots</label> <button type="button"
+                class="btn btn-danger" id="clear-screenshots" onclick="clearScreenshots()">Reset</button>
+        </div>
+
         <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp | Dimensione Max. per
             immagine: 2 MB | Max. 4 immagini</label>
         <input type="file" id="screenshots" name="screenshots[]" accept=".jpeg, .jpg, .png, .webp"
-            class="form-control bg-white" multiple>
+            class="form-control bg-white mb-3" multiple>
+        <div id="new-screenshots" class="d-none">Nuovi Screenshots:</div>
+        <div class="preview-container" id="previewContainer">
+
+        </div>
+
         @error('screenshots')
             <small class="text-danger">{{ $message }}</small>
         @enderror
@@ -224,14 +234,13 @@
             <small class="text-danger">{{ $message }}</small>
         @enderror
         @if ($errors->any())
-            <small class="text-warning">Seleziona di nuovo il file prima di inviare il modulo.</small>
+            <small class="text-warning">Seleziona di nuovo i files prima di inviare il modulo.</small>
         @endif
-
         {{ $screenshots }}
     </div>
 
     <div>
-        <input type="submit" value="{{ $actionToDo }}" class="btn btn-success">
+        <input type="submit" id="submit-videogame" value="{{ $actionToDo }}" class="btn btn-success">
         <button type="button" onclick="clearVideogameForm()" class="btn btn-danger">Svuota tutto</button>
     </div>
 

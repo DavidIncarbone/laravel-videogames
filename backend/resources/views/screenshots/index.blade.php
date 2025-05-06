@@ -36,6 +36,13 @@
             <p class="{{ $screenshots->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina {{ $screenshots->currentPage() }} di
                 {{ $screenshots->lastPage() }}</p>
 
+            {{-- INVISIBLE FORM FOR CREATE ROUTE --}}
+
+            <form id="createForm" action="{{ route('admin.screenshots.create') }}" method="GET">
+                <input type="hidden" name="videogame" id="videogameInput">
+            </form>
+
+
             <form action="{{ route('admin.screenshots.destroySelected') }}" method="POST">
                 @csrf
                 @method('DELETE')
@@ -69,7 +76,14 @@
                                 </x-slot>
 
                                 {{-- ICONS --}}
-                                <x-slot:show> </x-slot>
+                                <x-slot:show>
+
+                                    <button type="button" class="btn p-0"
+                                        onclick="submitCreate({{ $screenshot->videogame->id }})">
+                                        <i id="plus" class="fa-solid fa-plus"></i>
+                                    </button>
+
+                                </x-slot>
                                 <x-slot:edit>
                                     href="{{ route('admin.screenshots.edit', $screenshot) }}"
                                 </x-slot>
@@ -77,6 +91,7 @@
                                     <button type="button" class="text-decoration-none text-dark btn p-0"
                                         data-bs-toggle="modal" data-bs-target="#deleteModal"
                                         data-screenshot-id="{{ $screenshot->id }}"
+                                        data-screenshot-slug="{{ $screenshot->slug }}"
                                         data-screenshot-name="{{ Str::limit($screenshot->videogame->name, 30) }}"
                                         data-screenshot-url="{{ $screenshot->url }}">
                                         <i id="trash" class="bi bi-trash"></i>
@@ -162,12 +177,12 @@
         const deleteModal = document.getElementById('deleteModal');
         deleteModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
-            const screenshotId = button.getAttribute('data-screenshot-id');
+            const screenshotSlug = button.getAttribute('data-screenshot-slug');
             const screenshotName = button.getAttribute('data-screenshot-name');
             const screenshotUrl = button.getAttribute('data-screenshot-url');
 
             const form = document.getElementById('deletescreenshotForm');
-            form.action = `/admin/screenshots/${screenshotId}`;
+            form.action = `/admin/screenshots/${screenshotSlug}`;
             const screenshotNameToDelete = document.getElementById('screenshotNameToDelete');
             screenshotNameToDelete.textContent = screenshotName;
 
@@ -202,5 +217,16 @@
                 alt="{{ $screenshot->videogame->name }}" id="overlay-img" class="rounded shadow-sm">
         </x-slot>
     </x-overlay-img>
+
+    {{-- SCRIPT FOR CREATE ROUTE --}}
+
+    <script>
+        function submitCreate(videogameId) {
+            document.getElementById('videogameInput').value = videogameId;
+            document.getElementById('createForm').submit();
+        }
+    </script>
     @endif
+
+
 @endsection

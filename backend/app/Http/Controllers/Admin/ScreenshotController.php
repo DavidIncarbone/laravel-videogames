@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Screenshot;
+use App\Models\Videogame;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -36,9 +37,17 @@ class ScreenshotController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $videogames = Videogame::all();
+        $videogameId = $request->query('videogame');
+        $videogame = Videogame::find($videogameId);
+        $screenshots = $videogame->screenshots;
+        $screenshotsCount = $videogame->screenshots->count();
+        $remainingCount = 4 - $screenshotsCount;
+
+
+        return view('screenshots/create', compact('videogames', 'videogame', 'screenshots', 'screenshotsCount', 'remainingCount'));
     }
 
     /**
@@ -46,7 +55,53 @@ class ScreenshotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $remainingCount = $request->query('remainingCount');
+        $isScreenshot = $remainingCount > 1 ? 'screenshots' : 'screenshot';
+
+
+
+        $request->validate(
+            [
+                'screenshots' => ['nullable', 'array', 'max:' . $remainingCount],
+
+                'screenshots.*' => ['image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            ],
+            [
+                // Screenshots array
+
+                'screenshots.array' => 'Il formato degli screenshot non è corretto',
+                'screenshots.max' => 'Non puoi caricare più di :max ' . $isScreenshot,
+
+                // Screenshots immagini
+                'screenshots.*.image' => 'Il file caricato deve essere un\'immagine.',
+                'screenshots.*.mimes' => 'L\'immagine deve essere nei formati: jpeg, png, jpg o webp.',
+                'screenshots.*.max' => 'L\'immagine non può superare i 2MB.',
+            ]
+        );
+
+        $videogameId = $request->query('videogame_id');
+        $data = $request->all();
+
+        if (array_key_exists("screenshots", $data)) {
+
+            $screenshots = $data['screenshots'];
+            foreach ($screenshots as $screenshot) {
+                $newScreenshots = new Screenshot;
+                $newScreenshots->videogame_id = $videogameId;
+                $screenshots_url = Storage::putFile("img/videogames/screenshots", $screenshot);
+                $newScreenshots->url = $screenshots_url;
+                $newScreenshots->save();
+            }
+            if (count($screenshots) > 1) {
+
+                toastr()->success('Screenshots aggiunti con successo!');
+            }
+        } else {
+            toastr()->info('Nessuno screenshot aggiunto');
+        };
+
+        return redirect()->route('admin.screenshots.index');
     }
 
     /**
@@ -114,7 +169,7 @@ class ScreenshotController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(screenshot $screenshot)
+    public function destroy(Screenshot $screenshot)
     {
         $name = $screenshot->videogame->name;
         $screenshot->delete();

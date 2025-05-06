@@ -51,7 +51,7 @@
             @if ($videogame->cover)
                 <div class="d-flex gap-3 align-items-center mt-3">
                     <div>Cover attuale:</div>
-                    <div id="post-image" class="col-6 col-lg-12 g-3" style="width: 100px; height:100px">
+                    <div id="post-image" style="width: 100px; height:100px">
                         <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
                             class="form-image">
                     </div>
@@ -60,19 +60,14 @@
         </x-slot>
         <x-slot:screenshots>
             @if (count($videogame->screenshots) > 0)
-                <div class="d-flex gap-3 align-items-center mt-3">
-                    <div>Screenshots attuali:</div>
-                    <div class="container">
-                        <div class="row">
-                            @foreach ($videogame->screenshots as $screenshot)
-                                <div id="post-image" class="col-6 col-lg-12 g-3"
-                                    style="width:100px; height:100px; cursor:zoom-in">
-                                    <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
-                                        class="form-image">
-                                </div>
-                            @endforeach
+                <div class="mt-3">Screenshots attuali:</div>
+                <div class="d-flex flex-wrap gap-3 align-items-center my-3">
+                    @foreach ($videogame->screenshots as $screenshot)
+                        <div id="post-image" class="col-6 col-lg-12 g-3" style="width:100px; height:100px; cursor:zoom-in">
+                            <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
+                                class="form-image">
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             @endif
             <x-overlay-img>

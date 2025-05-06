@@ -255,10 +255,9 @@ function selectAllCheckboxes() {
 
 // SINGLE TABLE CHECKBOX
 
-tableCheckboxes.forEach((tableCheckbox) => {
+tableCheckboxes && tableCheckboxes.forEach((tableCheckbox) => {
     tableCheckbox.addEventListener("change", function () {
         console.log(modalList);
-
         const name = tableCheckbox.getAttribute('data-name');
         const id = tableCheckbox.getAttribute('data-id');
         const url = tableCheckbox.getAttribute('data-screenshot');
@@ -364,6 +363,80 @@ images.forEach((image) => {
     })
 })
 overlay && overlay.addEventListener("click", () => overlay.classList.toggle("d-none"));
+
+
+
+// SCREENSHOTS MULTISELECT
+
+const input = document.getElementById('screenshots');
+const previewContainer = document.getElementById('previewContainer');
+const newScreenshots = document.getElementById("new-screenshots");
+let filesArray = [];
+input.addEventListener('change', () => {
+    console.log(filesArray);
+    const newFiles = Array.from(input.files);
+    newFiles.forEach((newFile) => {
+        filesArray.push(newFile);
+        showPreview(newFile,);
+        updateInputFiles();
+    })
+
+});
+
+
+
+function showPreview(file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+
+        filesArray.length < 1 ? newScreenshots.className = "d-none" : newScreenshots.className = "d-block fw-bold";
+
+        const preview = document.createElement('div');
+        preview.classList.add('preview');
+
+        const img = document.createElement('img');
+        img.src = e.target.result;
+
+        const btn = document.createElement('button');
+        btn.innerText = "×";
+        btn.classList.add('remove-btn', 'd-flex', 'justify-content-center', 'align-items-center');
+        btn.onclick = () => {
+            const index = Array.from(previewContainer.children).indexOf(preview);
+            filesArray.splice(index, 1);
+            preview.remove();
+            updateInputFiles();
+        };
+
+        preview.appendChild(img);
+        preview.appendChild(btn);
+        previewContainer.appendChild(preview);
+
+
+    };
+    reader.readAsDataURL(file);
+}
+
+function updateInputFiles() {
+    const dataTransfer = new DataTransfer();
+    filesArray.forEach(file => dataTransfer.items.add(file));
+    input.files = dataTransfer.files;
+}
+
+window.clearScreenshots = function () {
+    const clearAll = document.getElementById("clear-all");
+    console.log(filesArray);
+    filesArray.splice(0, filesArray.length);
+    const previews = Array.from(previewContainer.children);
+    previews.forEach((preview) => {
+        preview.remove();
+        newScreenshots.className = 'd-none';
+    })
+    updateInputFiles();
+}
+
+
+
+
 
 
 

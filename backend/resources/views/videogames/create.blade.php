@@ -64,4 +64,6 @@
         <x-slot:actionToDo>Aggiungi</x-slot>
 
     </x-videogame-form>
+
+
 @endsection
