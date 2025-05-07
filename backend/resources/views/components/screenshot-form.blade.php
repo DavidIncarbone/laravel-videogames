@@ -34,4 +34,6 @@
     <input type="submit" value="{{ $actionToDo }}" class="btn btn-success">
     <button type="button" onclick="clearForm('screenshotForm')" class="btn btn-danger">Svuota tutto</button>
 
+
+
 </form>

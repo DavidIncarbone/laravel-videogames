@@ -385,18 +385,24 @@ coverInput && coverInput.addEventListener('change', function () {
 // SCREENSHOTS
 
 
-input && input.addEventListener('change', () => {
-
+input && input.addEventListener('change', async () => {
     const newFiles = Array.from(input.files);
+    const loadPromises = [];
+
     newFiles.forEach((newFile) => {
         previewArray.push(newFile);
-        showScreenshotsPreview(newFile);
-        updateInputFiles();
-    })
-    requestAnimationFrame(() => {
-        overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
+
+        const promise = showScreenshotsPreviewAsync(newFile);
+        loadPromises.push(promise);
     });
+
+    updateInputFiles();
+
+    await Promise.all(loadPromises);
+
+    overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
 });
+
 
 // * FUNCTIONS *
 
@@ -454,42 +460,52 @@ window.clearCover = function () {
 
 // SCREENSHOTS
 
-function showScreenshotsPreview(file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
 
-        previewArray.length < 1 ? newScreenshots.className = "d-none" : newScreenshots.className = "d-block fw-bold";
+function showScreenshotsPreviewAsync(file) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            if (previewArray.length > 0) {
+                newScreenshots.className = "d-block fw-bold";
+            }
 
-        const preview = document.createElement('div');
-        preview.id = 'post-image'
-        preview.classList.add('preview');
+            const preview = document.createElement('div');
+            preview.id = 'post-image';
+            preview.classList.add('preview');
 
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.className = 'new-screenshot';
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'new-screenshot';
 
-        const btn = document.createElement('button');
-        btn.innerText = "×";
-        btn.classList.add('remove-btn', 'd-flex', 'justify-content-center', 'align-items-center');
-        console.log(previewArray)
-        btn.addEventListener("click", function () {
-            const index = Array.from(previewContainer.children).indexOf(preview);
-            previewArray.splice(index, 1);
-            preview.remove();
-            updateInputFiles();
-            previewArray.length < 1 ? newScreenshots.className = 'd-none' : "";
-            requestAnimationFrame(() => {
-                overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
+            const btn = document.createElement('button');
+            btn.innerText = "×";
+            btn.classList.add('remove-btn', 'd-flex', 'justify-content-center', 'align-items-center');
+
+            btn.addEventListener("click", function () {
+                const index = Array.from(previewContainer.children).indexOf(preview);
+                previewArray.splice(index, 1);
+                preview.remove();
+                updateInputFiles();
+
+
+                overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new");
             });
-        });
 
+            preview.appendChild(img);
+            preview.appendChild(btn);
+            previewContainer.appendChild(preview);
 
-        preview.appendChild(img);
-        preview.appendChild(btn);
-        previewContainer.appendChild(preview);
-    };
-    reader.readAsDataURL(file);
+            resolve();
+        };
+        reader.readAsDataURL(file);
+    });
 }
+
+
+
+
+
+
 
 function updateInputFiles() {
     const dataTransfer = new DataTransfer();
@@ -509,8 +525,6 @@ window.clearScreenshots = function () {
     })
     updateInputFiles();
 }
-
-
 
 // ***** OVERLAY IMAGES *****
 
@@ -612,6 +626,19 @@ function overlayScreenshots(allImages, myOverlay, myOverlayImg, arrowL, arrowR, 
             indexScreenshot ? indexScreenshot.textContent = `${currentIndex + 1} di ${images.length}` : "";
         };
     }
+}
+
+// ***** LOADER *****
+
+const loader = document.getElementById('loader-overlay');
+
+function showLoader() {
+    loader.className = 'd-flex';
+}
+
+
+function hideLoader() {
+    loader.className = 'd-none';
 }
 
 

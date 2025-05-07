@@ -67,5 +67,6 @@
             <button type="button" onclick="clearScreenshots()" class="btn btn-danger" id="clear-all">Svuota
                 tutto</button>
         </div>
+        <x-loader></x-loader>
     </form>
 @endsection

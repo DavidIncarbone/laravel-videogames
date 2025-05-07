@@ -250,6 +250,5 @@
         <button type="button" onclick="clearVideogameForm()" class="btn btn-danger">Svuota tutto</button>
     </div>
 
-
-
+    <x-loader></x-loader>
 </form>
