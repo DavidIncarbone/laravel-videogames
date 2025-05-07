@@ -72,9 +72,11 @@
                     @endforeach
                 </div>
             @endif
+        </x-slot>
 
-            {{-- OVERLAYS --}}
+        {{-- OVERLAYS --}}
 
+        <x-slot:overlays>
             <x-current-cover-overlay>
                 <x-slot:img> <img src="" alt="" id="current-cover-overlay-img"
                         class="rounded shadow-sm">
@@ -98,10 +100,7 @@
                         class="rounded shadow-sm">
                 </x-slot>
             </x-new-screenshot-overlay>
-
-
-
-        </x-slot>
+        </x-slot:overlays>
 
         <x-slot:actionToDo>Modifica</x-slot>
 

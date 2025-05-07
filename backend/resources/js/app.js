@@ -30,6 +30,8 @@ flatpickr("#year-picker", {
     altFormat: "Y",
 });
 
+// ***** SIDEBAR *****
+
 // TOGGLE SIDEBAR'S ICONS
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -60,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const toggleBtn = document.getElementById('mobileSidebarToggle');
     const mobileMenu = document.getElementById('mobileSidebarMenu');
-    // console.log(mobileMenu);
+
 
     toggleBtn.addEventListener('click', function () {
         mobileMenu.classList.toggle('d-none');
@@ -160,7 +162,6 @@ window.resetAll = function (checkboxName) {
 
 window.onload = function () {
     const allForms = document.querySelectorAll("form");
-    console.log(allForms);
     allForms.forEach((form) => {
         form.addEventListener('submit', function (e) {
             const formElements = Array.from(e.target.elements);
@@ -223,13 +224,13 @@ function selectAllCheckboxes() {
             selectedItems.forEach((item) => {
                 const li = document.createElement("li");
                 modalList.appendChild(li);
-                console.log(item.url);
+
                 if (item.name) {
                     li.textContent = item.name
                 } else {
                     modalList.classList.remove("d-block");
                     modalList.classList.add("d-flex", "list-unstyled", "gap-3", "flex-wrap");
-                    console.log(modalList);
+
                     const img = document.createElement("img");
                     li.appendChild(img);
                     img.style = "width:100px; height:100px;";
@@ -251,14 +252,14 @@ function selectAllCheckboxes() {
             selectedInfo.textContent = "elemento selezionato";
         }
     })
-    console.log(selectedItems);
+
 }
 
 // SINGLE TABLE CHECKBOX
 
 tableCheckboxes && tableCheckboxes.forEach((tableCheckbox) => {
     tableCheckbox.addEventListener("change", function () {
-        console.log(modalList);
+
         const name = tableCheckbox.getAttribute('data-name');
         const id = tableCheckbox.getAttribute('data-id');
         const url = tableCheckbox.getAttribute('data-screenshot');
@@ -284,7 +285,7 @@ tableCheckboxes && tableCheckboxes.forEach((tableCheckbox) => {
                 } else {
                     modalList.classList.remove("d-block");
                     modalList.classList.add("d-flex", "list-unstyled", "gap-3", "flex-wrap");
-                    console.log(modalList);
+
                     const img = document.createElement("img");
                     li.appendChild(img);
 
@@ -324,7 +325,7 @@ tableCheckboxes && tableCheckboxes.forEach((tableCheckbox) => {
         if (Array.from(tableCheckboxes).some((checkbox) => checkbox.checked)) {
             selectedMenu.classList.add("d-flex");
             selectedMenu.classList.remove("d-none");
-            // console.log(selectedItems);
+
         } else {
             selectedMenu.classList.add("d-none");
             selectedMenu.classList.remove("d-flex");
@@ -338,7 +339,7 @@ tableCheckboxes && tableCheckboxes.forEach((tableCheckbox) => {
 function cancelCheckboxes() {
     const checkboxes = document.querySelectorAll("input[type=checkbox]");
 
-    console.log(modalList);
+
     checkboxes.forEach((checkbox) => {
         checkbox.checked = false;
         selectedItems.splice(0, selectedItems.length);
@@ -349,96 +350,7 @@ function cancelCheckboxes() {
     });
 }
 
-// OVERLAY IMAGES
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    overlayImage(".current-screenshot", "current-screenshot-overlay", "current-screenshot-overlay-img", "arrow-left-current", "arrow-right-current");
-    overlayCover(".current-cover", "current-cover-overlay", "current-cover-overlay-img");
-});
-
-function overlayCover(allImages, myOverlay, myOverlayImg) {
-
-    let images = Array.from(document.querySelectorAll(allImages));
-    console.log(images);
-    const overlay = document.getElementById(myOverlay);
-    console.log(overlay);
-    const overlayImg = document.getElementById(myOverlayImg);
-    console.log(overlayImg);
-    images.forEach((image) => {
-        image.addEventListener("click", function (e) {
-            overlay.classList.toggle("d-none");
-            overlayImg.src = e.target.src;
-        })
-    })
-    overlay && overlay.addEventListener("click", () => {
-        if (!overlay.classList.contains("d-none")) {
-            overlay.classList.add("d-none");
-            images = [];
-            images.push(...document.querySelectorAll(allImages));
-        }
-    })
-};
-
-function overlayImage(allImages, myOverlay, myOverlayImg, arrowL, arrowR) {
-
-    let images = Array.from(document.querySelectorAll(allImages));
-    console.log(images);
-    const overlay = document.getElementById(myOverlay);
-    console.log(overlay);
-    const overlayImg = document.getElementById(myOverlayImg);
-    console.log(overlayImg);
-    images.forEach((image) => {
-        image.addEventListener("click", function (e) {
-            overlay.classList.toggle("d-none");
-            currentIndex = images.indexOf(image);
-            overlayImg.src = image.src;
-        })
-    })
-
-
-    overlay && overlay.addEventListener("click", () => {
-        if (!overlay.classList.contains("d-none")) {
-            overlay.classList.add("d-none");
-            images.length = 0;
-            images = [];
-            images.push(...document.querySelectorAll(allImages));
-
-
-        }
-    });
-    // SLIDER
-
-    let currentIndex = -1;
-
-    const arrowLeft = document.getElementById(arrowL);
-    const arrowRight = document.getElementById(arrowR);
-
-    if (arrowLeft && arrowRight) {
-
-        // if (images.length < 2) {
-        //     arrowLeft.classList.add("d-none");
-        //     arrowRight.classList.add("d-none");
-        // } else {
-        //     arrowLeft.classList.remove("d-none");
-        //     arrowRight.classList.remove("d-none");
-        // };
-
-        arrowLeft.addEventListener("click", (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            overlayImg.src = images[currentIndex].src;
-        });
-
-        arrowRight.addEventListener("click", (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex + 1) % images.length;
-            overlayImg.src = images[currentIndex].src;
-        });
-    }
-
-};
-// ***** COVER AND SCREENSHOTS MULTISELECT *****
+// *****  PREVIEW IMAGES *****
 
 // VARIABLES
 
@@ -449,7 +361,8 @@ const newCover = document.getElementById('new-cover');
 const input = document.getElementById('screenshots');
 const previewContainer = document.getElementById('previewContainer');
 const newScreenshots = document.getElementById("new-screenshots");
-let filesArray = [];
+let previewArray = [];
+let images = [];
 
 // ** EVENT LISTENER **
 
@@ -469,21 +382,19 @@ coverInput && coverInput.addEventListener('change', function () {
 
 
 input && input.addEventListener('change', () => {
-    console.log(filesArray);
+
     const newFiles = Array.from(input.files);
     newFiles.forEach((newFile) => {
-        filesArray.push(newFile);
-        showPreview(newFile,);
+        previewArray.push(newFile);
+        showScreenshotsPreview(newFile);
         updateInputFiles();
     })
-
     requestAnimationFrame(() => {
-        overlayImage(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new");
+        overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new");
     });
-
 });
 
-// ** FUNCTIONS **
+// * FUNCTIONS *
 
 // COVER
 
@@ -516,7 +427,7 @@ function showCoverPreview(file) {
         preview.appendChild(btn);
         previewCoverContainer.children[0] && previewCoverContainer.children[0].remove();
         previewCoverContainer.appendChild(preview);
-        overlayImage(".new-cover-img", "new-cover-overlay", "new-cover-overlay-img");
+        overlayScreenshots(".new-cover-img", "new-cover-overlay", "new-cover-overlay-img");
 
     }
 
@@ -533,11 +444,11 @@ function updateCoverFile(file) {
 // SCREENSHOTS
 
 
-function showPreview(file) {
+function showScreenshotsPreview(file) {
     const reader = new FileReader();
     reader.onload = function (e) {
 
-        filesArray.length < 1 ? newScreenshots.className = "d-none" : newScreenshots.className = "d-block fw-bold";
+        previewArray.length < 1 ? newScreenshots.className = "d-none" : newScreenshots.className = "d-block fw-bold";
 
         const preview = document.createElement('div');
         preview.id = 'post-image'
@@ -550,13 +461,18 @@ function showPreview(file) {
         const btn = document.createElement('button');
         btn.innerText = "×";
         btn.classList.add('remove-btn', 'd-flex', 'justify-content-center', 'align-items-center');
-        btn.onclick = () => {
+        console.log(previewArray)
+        btn.addEventListener("click", function () {
             const index = Array.from(previewContainer.children).indexOf(preview);
-            filesArray.splice(index, 1);
+            previewArray.splice(index, 1);
             preview.remove();
             updateInputFiles();
+            previewArray.length < 1 ? newScreenshots.className = 'd-none' : "";
+            requestAnimationFrame(() => {
+                overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new");
+            });
+        });
 
-        };
 
         preview.appendChild(img);
         preview.appendChild(btn);
@@ -567,18 +483,15 @@ function showPreview(file) {
 
 function updateInputFiles() {
     const dataTransfer = new DataTransfer();
-    filesArray.forEach(file => dataTransfer.items.add(file));
+    previewArray.forEach(file => dataTransfer.items.add(file));
     input.files = dataTransfer.files;
 }
 
 // RESET
 
-
-
 window.clearScreenshots = function () {
 
-    console.log(filesArray);
-    filesArray.splice(0, filesArray.length);
+    previewArray.splice(0, previewArray.length);
     const previews = Array.from(previewContainer.children);
     previews.forEach((preview) => {
         preview.remove();
@@ -586,6 +499,102 @@ window.clearScreenshots = function () {
     })
     updateInputFiles();
 }
+
+// ***** OVERLAY IMAGES *****
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    overlayScreenshots(".current-screenshot", "current-screenshot-overlay", "current-screenshot-overlay-img", "arrow-left-current", "arrow-right-current");
+    overlayCover(".current-cover", "current-cover-overlay", "current-cover-overlay-img");
+});
+
+function overlayCover(allImages, myOverlay, myOverlayImg) {
+
+    images = Array.from(document.querySelectorAll(allImages));
+
+    const overlay = document.getElementById(myOverlay);
+
+    const overlayImg = document.getElementById(myOverlayImg);
+
+    images.forEach((image) => {
+        image.addEventListener("click", function (e) {
+            overlay.classList.toggle("d-none");
+            overlayImg.src = e.target.src;
+        })
+    })
+    overlay && overlay.addEventListener("click", () => {
+        if (!overlay.classList.contains("d-none")) {
+            overlay.classList.add("d-none");
+            images = [];
+            images.push(...document.querySelectorAll(allImages));
+        }
+    })
+};
+
+function overlayScreenshots(allImages, myOverlay, myOverlayImg, arrowL, arrowR) {
+    let images = Array.from(document.querySelectorAll(allImages));
+    const overlay = document.getElementById(myOverlay);
+    const overlayImg = document.getElementById(myOverlayImg);
+    const arrowLeft = document.getElementById(arrowL);
+    const arrowRight = document.getElementById(arrowR);
+
+    let currentIndex = -1;
+
+    function showOverlayAt(index) {
+        if (images.length === 0) return;
+        overlayImg.src = images[index].src;
+        overlay.classList.remove("d-none");
+        currentIndex = index;
+    }
+
+    function closeOverlay() {
+        overlay.classList.add("d-none");
+        currentIndex = -1;
+    }
+
+    // REMOVE PREVIOUSLY LISTENER
+
+
+    images.forEach((image, index) => {
+        const clone = image.cloneNode(true);
+        image.parentNode.replaceChild(clone, image);
+        clone.addEventListener("click", function () {
+            showOverlayAt(index);
+        });
+    });
+
+    if (overlay) {
+        overlay.onclick = closeOverlay;
+    }
+
+    // ARROWS
+
+    if (arrowLeft && arrowRight) {
+
+        if (images.length < 2) {
+            arrowLeft.classList.add("d-none");
+            arrowRight.classList.add("d-none");
+        } else {
+            arrowLeft.classList.remove("d-none");
+            arrowRight.classList.remove("d-none");
+        }
+
+        arrowLeft.onclick = function (e) {
+            e.stopPropagation();
+            if (images.length === 0) return;
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            overlayImg.src = images[currentIndex].src;
+        };
+
+        arrowRight.onclick = function (e) {
+            e.stopPropagation();
+            if (images.length === 0) return;
+            currentIndex = (currentIndex + 1) % images.length;
+            overlayImg.src = images[currentIndex].src;
+        };
+    }
+}
+
 
 
 

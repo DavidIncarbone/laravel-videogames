@@ -243,6 +243,8 @@
         {{ $screenshots }}
     </div>
 
+    {{ $overlays }}
+
     <div>
         <input type="submit" id="submit-videogame" value="{{ $actionToDo }}" class="btn btn-success">
         <button type="button" onclick="clearVideogameForm()" class="btn btn-danger">Svuota tutto</button>

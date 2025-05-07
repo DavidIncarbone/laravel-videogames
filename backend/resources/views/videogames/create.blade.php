@@ -59,20 +59,28 @@
         <x-slot:description>{{ old('description') }}</x-slot>
 
         <x-slot:cover></x-slot>
-        <x-slot:screenshots></x-slot>
+        <x-slot:screenshots>
+        </x-slot>
 
+        {{-- OVERLAYS --}}
 
+        <x-slot:overlays>
+
+            <x-new-cover-overlay>
+                <x-slot:img> <img src="" alt="" id="new-cover-overlay-img"
+                        class="rounded shadow-sm">
+                </x-slot>
+            </x-new-cover-overlay>
+
+            <x-new-screenshot-overlay>
+                <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
+                        class="rounded shadow-sm">
+                </x-slot>
+            </x-new-screenshot-overlay>
+        </x-slot:overlays>
 
         <x-slot:actionToDo>Aggiungi</x-slot>
 
     </x-videogame-form>
-
-    <x-overlay-dynamic-img>
-        <x-slot:img>CIAO <img src="" alt="" id="dynamic-overlay-img" class="rounded shadow-sm">
-        </x-slot>
-    </x-overlay-dynamic-img>
-
-
-
 
 @endsection
