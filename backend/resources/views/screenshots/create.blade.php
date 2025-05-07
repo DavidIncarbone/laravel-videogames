@@ -16,7 +16,7 @@
                 immagine: 2 MB | <span class="fw-bold text-warning">Max. {{ $remainingCount }}
                     {{ $label }}</span></label>
             <input type="file" id="screenshots" name="screenshots[]" accept=".jpeg, .jpg, .png, .webp"
-                class="form-control bg-white mb-3" multiple>
+                class="form-control bg-white mb-3" multiple maxfiles="{{ $remainingCount }}">
             <div id="new-screenshots" class="d-none">Nuovi Screenshots:</div>
             <div class="preview-container" id="previewContainer">
             </div>
@@ -35,16 +35,31 @@
                     @foreach ($videogame->screenshots as $screenshot)
                         <div id="post-image" class="col-6 col-lg-12 g-3" style="width:100px; height:100px; cursor:zoom-in">
                             <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
-                                class="form-image">
+                                class="current-screenshot">
                         </div>
                     @endforeach
                 </div>
             @endif
-            <x-overlay-img>
-                <x-slot:img> <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
-                        id="overlay-img" class="rounded shadow-sm">
+
+
+            {{-- OVERLAYS --}}
+
+            <x-new-screenshot-overlay>
+                <x-slot:overlayTitle>Screenshots da aggiungere</x-slot>
+                <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
+                        class="rounded shadow-sm">
                 </x-slot>
-            </x-overlay-img>
+                <x-slot:index></x-slot>
+            </x-new-screenshot-overlay>
+
+            <x-current-screenshot-overlay>
+                <x-slot:overlayTitle>Screenshots attuali</x-slot>
+                <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
+                        class="rounded shadow-sm">
+                </x-slot>
+                <x-slot:index></x-slot>
+            </x-current-screenshot-overlay>
+
         </div>
 
         <div>

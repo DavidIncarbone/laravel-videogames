@@ -74,7 +74,8 @@
                                 <x-slot:delete>
                                     <button type="button" class="text-decoration-none text-dark btn p-0"
                                         data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                        data-pegi-id="{{ $pegi->id }}" data-pegi-age="{{ $pegi->age }}">
+                                        data-pegi-id="{{ $pegi->id }}" data-pegi-age="{{ $pegi->age }}"
+                                        data-pegi-slug="{{ $pegi->slug }}">
                                         <i id="trash" class="bi bi-trash"></i>
                                     </button>
                                 </x-slot>
@@ -84,7 +85,7 @@
                                 <x-slot:firstTd>
                                     <div class="d-flex w-100 justify-content-center align-items-center">
                                         <div id="post-image" style="width: 100px; height:50px">
-                                            <img id="logo" class="form-image"
+                                            <img id="logo" class="current-screenshot"
                                                 src="{{ asset('storage/' . $pegi->logo) }}" alt="{{ $pegi->age }}">
                                         </div>
                                     </div>
@@ -129,6 +130,7 @@
     </section>
 
     {{-- MODAL COMPONENT --}}
+
     <x-modal>
 
         <x-slot:delete>Elimina <span id="pegiAgeToDelete" class="fw-bold text-danger"></span></x-slot>
@@ -152,10 +154,10 @@
         // console.log(deleteModal);
         deleteModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
-            const pegiId = button.getAttribute('data-pegi-id');
+            const pegiSlug = button.getAttribute('data-pegi-slug');
             const pegiAge = button.getAttribute('data-pegi-age');
             const form = document.getElementById('deletePegiForm');
-            form.action = `/admin/pegis/${pegiId}`;
+            form.action = `/admin/pegis/${pegiSlug}`;
             const pegiAgeToDelete = document.getElementById('pegiAgeToDelete');
             // console.log(pegiAgeToDelete);
             pegiAgeToDelete.textContent = `PEGI ${pegiAge}`;
@@ -179,10 +181,12 @@
 
     {{-- OVERLAY --}}
 
-    <x-overlay-img>
-        <x-slot:img> <img src="{{ asset('storage/' . $pegi->logo) }}" alt="PEGI {{ $pegi->age }}"
-                id="overlay-img" class="rounded shadow-sm">
+    <x-current-screenshot-overlay>
+        <x-slot:overlayTitle>Loghi attuali</x-slot>
+        <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
+                class="rounded shadow-sm">
         </x-slot>
-    </x-overlay-img>
+        <x-slot:index></x-slot>
+    </x-current-screenshot-overlay>
     @endif
 @endsection

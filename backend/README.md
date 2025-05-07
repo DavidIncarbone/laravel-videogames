@@ -1,9 +1,9 @@
 ## STEP DI OGGI
 
 # Aumentare i videogames
+# aggiungere loader al caricamento multiplo degli screenshots
 
-# Aggiungere informazioni all'overlay
-# Mettere gli overlay anche nell'entità screenshots
+
 
 
 

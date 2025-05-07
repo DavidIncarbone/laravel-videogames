@@ -87,6 +87,8 @@ window.clearVideogameForm = function () {
             field.value = '';
         }
     });
+
+    window.clearScreenshots();
 }
 
 // CLEAR OTHER FORMS
@@ -99,6 +101,8 @@ window.clearForm = function (formId) {
             field.value = '';
         }
     });
+    window.clearCover();
+
 }
 
 // TOGGLE ICON FOR CLEAR
@@ -390,7 +394,7 @@ input && input.addEventListener('change', () => {
         updateInputFiles();
     })
     requestAnimationFrame(() => {
-        overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new");
+        overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
     });
 });
 
@@ -405,7 +409,7 @@ function showCoverPreview(file) {
         file ? newCover.className = 'd-block fw-bold' : newCover.className = 'd-none';
 
         const preview = document.createElement('div');
-        preview.id = 'post-dynamic-image';
+        preview.id = 'new-cover-preview';
         preview.classList.add('preview');
 
         const img = document.createElement('img');
@@ -420,7 +424,8 @@ function showCoverPreview(file) {
             preview.remove();
             coverInput.value = '';
             newCover.className = 'd-none';
-            updateCoverFile(file);
+            // updateCoverFile(file);
+
         });
 
         preview.appendChild(img);
@@ -441,8 +446,13 @@ function updateCoverFile(file) {
 
 }
 
-// SCREENSHOTS
+window.clearCover = function () {
+    const preview = document.getElementById('new-cover-preview');
+    preview.remove();
+    newCover.className = 'd-none';
+}
 
+// SCREENSHOTS
 
 function showScreenshotsPreview(file) {
     const reader = new FileReader();
@@ -469,7 +479,7 @@ function showScreenshotsPreview(file) {
             updateInputFiles();
             previewArray.length < 1 ? newScreenshots.className = 'd-none' : "";
             requestAnimationFrame(() => {
-                overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new");
+                overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
             });
         });
 
@@ -500,17 +510,20 @@ window.clearScreenshots = function () {
     updateInputFiles();
 }
 
+
+
 // ***** OVERLAY IMAGES *****
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    overlayScreenshots(".current-screenshot", "current-screenshot-overlay", "current-screenshot-overlay-img", "arrow-left-current", "arrow-right-current");
+    overlayScreenshots(".current-screenshot", "current-screenshot-overlay", "current-screenshot-overlay-img", "arrow-left-current", "arrow-right-current", "index-current-screenshot");
     overlayCover(".current-cover", "current-cover-overlay", "current-cover-overlay-img");
 });
 
 function overlayCover(allImages, myOverlay, myOverlayImg) {
 
     images = Array.from(document.querySelectorAll(allImages));
+    console.log(images)
 
     const overlay = document.getElementById(myOverlay);
 
@@ -531,12 +544,15 @@ function overlayCover(allImages, myOverlay, myOverlayImg) {
     })
 };
 
-function overlayScreenshots(allImages, myOverlay, myOverlayImg, arrowL, arrowR) {
+function overlayScreenshots(allImages, myOverlay, myOverlayImg, arrowL, arrowR, myIndexScreenshot) {
     let images = Array.from(document.querySelectorAll(allImages));
     const overlay = document.getElementById(myOverlay);
     const overlayImg = document.getElementById(myOverlayImg);
     const arrowLeft = document.getElementById(arrowL);
     const arrowRight = document.getElementById(arrowR);
+    const indexScreenshot = document.getElementById(myIndexScreenshot);
+
+
 
     let currentIndex = -1;
 
@@ -545,6 +561,7 @@ function overlayScreenshots(allImages, myOverlay, myOverlayImg, arrowL, arrowR) 
         overlayImg.src = images[index].src;
         overlay.classList.remove("d-none");
         currentIndex = index;
+        indexScreenshot ? indexScreenshot.textContent = `${currentIndex + 1} di ${images.length}` : "";
     }
 
     function closeOverlay() {
@@ -584,6 +601,7 @@ function overlayScreenshots(allImages, myOverlay, myOverlayImg, arrowL, arrowR) 
             if (images.length === 0) return;
             currentIndex = (currentIndex - 1 + images.length) % images.length;
             overlayImg.src = images[currentIndex].src;
+            indexScreenshot ? indexScreenshot.textContent = `${currentIndex + 1} di ${images.length}` : "";
         };
 
         arrowRight.onclick = function (e) {
@@ -591,6 +609,7 @@ function overlayScreenshots(allImages, myOverlay, myOverlayImg, arrowL, arrowR) 
             if (images.length === 0) return;
             currentIndex = (currentIndex + 1) % images.length;
             overlayImg.src = images[currentIndex].src;
+            indexScreenshot ? indexScreenshot.textContent = `${currentIndex + 1} di ${images.length}` : "";
         };
     }
 }

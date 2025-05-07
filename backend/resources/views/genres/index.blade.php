@@ -70,7 +70,8 @@
                                     <button type="button" class="text-decoration-none text-dark btn p-0"
                                         data-bs-toggle="modal" data-bs-target="#deleteModal"
                                         data-genre-id="{{ $genre->id }}"
-                                        data-genre-name="{{ Str::limit($genre->name, 30) }}">
+                                        data-genre-name="{{ Str::limit($genre->name, 30) }}"
+                                        data-genre-slug="{{ $genre->slug }}">
                                         <i id="trash" class="bi bi-trash"></i>
                                     </button>
                                 </x-slot>
@@ -137,10 +138,10 @@
         // console.log(deleteModal);
         deleteModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
-            const genreId = button.getAttribute('data-genre-id');
+            const genreSlug = button.getAttribute('data-genre-slug');
             const genreName = button.getAttribute('data-genre-name');
             const form = document.getElementById('deleteGenreForm');
-            form.action = `/admin/genres/${genreId}`;
+            form.action = `/admin/genres/${genreSlug}`;
             const genreNameToDelete = document.getElementById('genreNameToDelete');
             genreNameToDelete.textContent = genreName;
 

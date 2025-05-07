@@ -220,8 +220,9 @@ class VideogameController extends Controller
         $consoles = Console::all();
         $genres = Genre::all();
         $pegis = Pegi::all();
-        // $videogame->genre_ids = $videogame->genres->pluck('id')->toArray();
-        return view("videogames.edit", compact("videogame", "consoles", "genres", "pegis"));
+        $screenshotsCount = $videogame->screenshots->count();
+
+        return view("videogames.edit", compact("videogame", "consoles", "genres", "pegis", "screenshotsCount"));
     }
 
 

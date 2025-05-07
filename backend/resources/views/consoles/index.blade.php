@@ -75,7 +75,8 @@
                                     <button type="button" class="text-decoration-none text-dark btn p-0"
                                         data-bs-toggle="modal" data-bs-target="#deleteModal"
                                         data-console-id="{{ $console->id }}"
-                                        data-console-name="{{ Str::limit($console->name, 30) }}">
+                                        data-console-name="{{ Str::limit($console->name, 30) }}"
+                                        data-console-slug="{{ $console->slug }}">
                                         <i id="trash" class="bi bi-trash"></i>
                                     </button>
                                 </x-slot>
@@ -88,7 +89,7 @@
                                         <div class="d-flex w-100 justify-content-center" style="height:66px;">
                                             <div id="post-image" class="align-self-center"
                                                 style="width: 100px; height:50px">
-                                                <img id="logo" class="form-image"
+                                                <img id="logo" class="current-screenshot"
                                                     src="{{ asset('storage/' . $console->logo) }}"
                                                     alt="{{ $console->name }}">
                                             </div>
@@ -153,10 +154,10 @@
         const deleteModal = document.getElementById('deleteModal');
         deleteModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
-            const consoleId = button.getAttribute('data-console-id');
+            const consoleSlug = button.getAttribute('data-console-slug');
             const consoleName = button.getAttribute('data-console-name');
             const form = document.getElementById('deleteConsoleForm');
-            form.action = `/admin/consoles/${consoleId}`;
+            form.action = `/admin/consoles/${consoleSlug}`;
             const consoleNameToDelete = document.getElementById('consoleNameToDelete');
             consoleNameToDelete.textContent = consoleName;
         });
@@ -178,10 +179,12 @@
 
     {{-- OVERLAY --}}
 
-    <x-overlay-img>
-        <x-slot:img> <img src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}"
-                id="overlay-img" class="rounded shadow-sm">
+    <x-current-screenshot-overlay>
+        <x-slot:overlayTitle>Loghi attuali</x-slot>
+        <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
+                class="rounded shadow-sm">
         </x-slot>
-    </x-overlay-img>
+        <x-slot:index></x-slot>
+    </x-current-screenshot-overlay>
     @endif
 @endsection

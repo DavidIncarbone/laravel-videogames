@@ -218,7 +218,7 @@
 
     <div class="form-control mb-3 d-flex flex-column p-3">
         <div class="d-flex justify-content-between">
-            <label for="screenshots">{{ $actionToDo }} Screenshots</label> <button type="button"
+            <label for="screenshots">{{ $addEdit }} Screenshots</label> <button type="button"
                 class="btn btn-danger" id="clear-screenshots" onclick="clearScreenshots()">Reset</button>
         </div>
 

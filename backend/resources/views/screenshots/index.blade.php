@@ -103,7 +103,7 @@
                                 <x-slot:firstTd>
                                     <div class="d-flex w-100 justify-content-center" style="height:66px;">
                                         <div id="post-image" class="align-self-center" style="width: 50px; height:50px">
-                                            <img id="logo" class="form-image"
+                                            <img id="logo" class="current-screenshot"
                                                 src="{{ asset('storage/' . $screenshot->url) }}"
                                                 alt="{{ $screenshot->name }}">
                                         </div>
@@ -212,11 +212,13 @@
 
     {{-- OVERLAY --}}
 
-    <x-overlay-img>
-        <x-slot:img> <img src="{{ asset('storage/' . $screenshot->url) }}"
-                alt="{{ $screenshot->videogame->name }}" id="overlay-img" class="rounded shadow-sm">
+    <x-current-screenshot-overlay>
+        <x-slot:overlayTitle>Screenshots attuali </x-slot>
+        <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
+                class="rounded shadow-sm">
         </x-slot>
-    </x-overlay-img>
+        <x-slot:index></x-slot>
+    </x-current-screenshot-overlay>
 
     {{-- SCRIPT FOR CREATE ROUTE --}}
 

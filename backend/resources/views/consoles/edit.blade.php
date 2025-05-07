@@ -15,20 +15,36 @@
 
         <x-slot:cover>
             @if ($console->logo)
-                <div class="d-flex gap-3 align-items-center mt-3">
-                    <div>Logo attuale:</div>
+                <div class="d-flex flex-column gap-3 mt-3">
+                    <div class="fw-bold">Logo attuale:</div>
                     <div id="post-image" class="col-6 col-lg-12 g-3" style="width: 100px; height:50px">
                         <img id="logo" src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}"
-                            class="form-image">
+                            class="current-cover">
                     </div>
                 </div>
             @endif
-            <x-overlay-img>
-                <x-slot:img> <img src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}"
-                        id="overlay-img" class="rounded shadow-sm">
-                </x-slot>
-            </x-overlay-img>
         </x-slot>
+
+        {{-- OVERLAY --}}
+
+        <x-slot:overlays>
+            <x-new-cover-overlay>
+                <x-slot:overlayTitle>Nuovo logo</x-slot>
+                <x-slot:img> <img src="" alt="" id="new-cover-overlay-img"
+                        class="rounded shadow-sm">
+                </x-slot>
+                <x-slot:index></x-slot>
+            </x-new-cover-overlay>
+
+            <x-current-cover-overlay>
+                <x-slot:overlayTitle>Logo attuale </x-slot>
+                <x-slot:img> <img src="" alt="" id="current-cover-overlay-img"
+                        class="rounded shadow-sm">
+                </x-slot>
+                <x-slot:index></x-slot>
+            </x-current-cover-overlay>
+
+        </x-slot:overlays>
 
     </x-console-form>
 @endsection

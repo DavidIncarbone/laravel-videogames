@@ -34,8 +34,11 @@
     <div class="form-control d-flex flex-column p-3 mb-3">
         <label for="logo">{{ $actionToDo }} il logo*</label>
         <label for="name" id="input-info">Tipi di file consentiti: jpeg,png,jpg,webp</label>
-        <input type="file" name="logo" id="logo" accept=".jpeg, .jpg, .png, .webp"
-            class="form-control bg-white">
+        <input type="file" name="logo" id="cover" accept=".jpeg, .jpg, .png, .webp"
+            class="form-control bg-white mb-3">
+        <div id="new-cover" class="d-none">Nuovo logo:</div>
+        <div class="preview-container" id="preview-cover-container">
+        </div>
         @error('logo')
             <small class="text-danger">{{ $message }}</small>
         @enderror
@@ -43,6 +46,7 @@
             <small class="text-warning">Seleziona di nuovo il file prima di inviare il modulo.</small>
         @endif
         {{ $cover }}
+        {{ $overlays }}
     </div>
 
     <input type="submit" value="{{ $actionToDo }}" class="btn btn-success">

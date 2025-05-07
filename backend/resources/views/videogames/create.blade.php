@@ -59,23 +59,27 @@
         <x-slot:description>{{ old('description') }}</x-slot>
 
         <x-slot:cover></x-slot>
-        <x-slot:screenshots>
-        </x-slot>
+        <x-slot:addEdit>Aggiungi</x-slot>
+        <x-slot:screenshots></x-slot>
 
         {{-- OVERLAYS --}}
 
         <x-slot:overlays>
 
             <x-new-cover-overlay>
+                <x-slot:overlayTitle>Cover da aggiungere</x-slot>
                 <x-slot:img> <img src="" alt="" id="new-cover-overlay-img"
                         class="rounded shadow-sm">
                 </x-slot>
+                <x-slot:index></x-slot>
             </x-new-cover-overlay>
 
             <x-new-screenshot-overlay>
+                <x-slot:overlayTitle>Screenshots da aggiungere</x-slot>
                 <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
                         class="rounded shadow-sm">
                 </x-slot>
+                <x-slot:index></x-slot>
             </x-new-screenshot-overlay>
         </x-slot:overlays>
 
