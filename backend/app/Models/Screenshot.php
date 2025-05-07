@@ -16,11 +16,13 @@ class Screenshot extends Model
     // CREATE
     {
         static::creating(function ($screenshot) {
-            $baseSlug = Str::slug($screenshot->videogame->name);
+
+            $videogame = Videogame::find($screenshot->videogame_id);
+            $baseSlug = Str::slug($videogame?->name ?? 'screenshot');
             $slug = $baseSlug;
             $i = 2;
 
-            while (screenshot::where('slug', $slug)->exists()) {
+            while (Screenshot::where('slug', $slug)->exists()) {
                 $slug = $baseSlug . '-' . $i++;
             }
 
@@ -30,7 +32,9 @@ class Screenshot extends Model
         // UPDATE
 
         static::updating(function ($screenshot) {
-            $baseSlug = Str::slug($screenshot->videogame->name . " " . $screenshot->id);
+
+            $videogame = Videogame::find($screenshot->videogame_id);
+            $baseSlug = Str::slug(($videogame?->name ?? 'screenshot') . " " . $screenshot->id);
             $slug = $baseSlug;
             $i = 2;
 

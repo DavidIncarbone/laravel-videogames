@@ -26,8 +26,9 @@
                 <!-- Videogame Image and Description -->
                 <div class="col-12 col-lg-6">
                     <div id="img-details" class="w-100 mb-3" style="height:50vh;">
-                        <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ Str::limit($videogame->name, 20) }}"
-                            class="rounded shadow-sm">
+                        <img src="{{ asset('storage/' . $videogame->cover) }}"
+                            alt="{{ Str::limit($videogame->name, 20) . '-cover' }}" class="rounded shadow-sm current-cover"
+                            style="cursor:zoom-in">
                     </div>
                     <h5><strong>Descrizione:</strong></h5>
                     <p>{{ $videogame->description }}</p>
@@ -81,8 +82,9 @@
     <div class="container mt-3">
         <div class="row">
             @foreach ($videogame->screenshots as $screenshot)
-                <div class="col-3" style=" height:50vh">
-                    <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}">
+                <div class="col-3">
+                    <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
+                        class="current-screenshot" style="cursor:zoom-in">
                 </div>
             @endforeach
         </div>
@@ -120,4 +122,21 @@
 
         });
     </script>
+
+    {{-- OVERLAY --}}
+
+    <x-current-cover-overlay>
+        <x-slot:overlayTitle>Cover attuale</x-slot>
+        <x-slot:img> <img src="" alt="{{ $videogame->name . '-cover' }}" id="current-cover-overlay-img"
+                class="rounded shadow-sm">
+        </x-slot>
+    </x-current-cover-overlay>
+
+    <x-current-screenshot-overlay>
+        <x-slot:overlayTitle>Screenshots attuali</x-slot>
+        <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
+                class="rounded shadow-sm">
+        </x-slot>
+        <x-slot:index></x-slot>
+    </x-current-screenshot-overlay>
 @endsection

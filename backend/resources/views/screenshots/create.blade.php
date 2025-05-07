@@ -4,10 +4,12 @@
 
 @extends('layouts.master')
 
+
+
 @section('content')
     <h1>Aggiungi screenshots a <span class="text-primary">{{ $videogame->name }}</span></h1>
     <form
-        action="{{ route('admin.screenshots.store', 'remainingCount=' . $remainingCount, 'videogame_id=' . $videogame->id) }}"
+        action="{{ route('admin.screenshots.store', 'remainingCount=' . $remainingCount . '&videogame_id=' . $videogame->id) }}"
         method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-control mb-3 d-flex flex-column p-3">

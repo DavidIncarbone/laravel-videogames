@@ -31,6 +31,8 @@ class ScreenshotController extends Controller
             $query->orderBy("updated_at", "desc");
         }
         $screenshots = $query->paginate(5)->withQueryString();
+
+
         return view("screenshots/index", compact("screenshots"));
     }
 
@@ -81,6 +83,7 @@ class ScreenshotController extends Controller
         );
 
         $videogameId = $request->query('videogame_id');
+
         $data = $request->all();
 
         if (array_key_exists("screenshots", $data)) {
@@ -93,10 +96,9 @@ class ScreenshotController extends Controller
                 $newScreenshots->url = $screenshots_url;
                 $newScreenshots->save();
             }
-            if (count($screenshots) > 1) {
 
-                toastr()->success('Screenshots aggiunti con successo!');
-            }
+
+            toastr()->success('Screenshots aggiunti con successo!');
         } else {
             toastr()->info('Nessuno screenshot aggiunto');
         };

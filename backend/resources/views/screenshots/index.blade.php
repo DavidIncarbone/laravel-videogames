@@ -78,10 +78,13 @@
                                 {{-- ICONS --}}
                                 <x-slot:show>
 
-                                    <button type="button" class="btn p-0"
-                                        onclick='submitCreate(@json($screenshot->videogame->slug))'>
-                                        <i id="plus" class="fa-solid fa-plus"></i>
-                                    </button>
+
+                                    @if (count($screenshot->videogame->screenshots) < 4)
+                                        <button type="button" class="btn p-0"
+                                            onclick='submitCreate(@json($screenshot->videogame->slug))'>
+                                            <i id="plus" class="fa-solid fa-plus"></i>
+                                        </button>
+                                    @endif
 
                                 </x-slot>
                                 <x-slot:edit>
@@ -229,6 +232,4 @@
         }
     </script>
     @endif
-
-
 @endsection
