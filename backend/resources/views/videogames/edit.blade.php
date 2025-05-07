@@ -55,7 +55,7 @@
                 <div class="d-flex gap-3 align-items-center mt-3">
                     <div id="post-image" style="width: 100px; height:100px">
                         <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
-                            class="form-image">
+                            class="current-cover">
                     </div>
                 </div>
             @endif
@@ -67,22 +67,41 @@
                     @foreach ($videogame->screenshots as $screenshot)
                         <div id="post-image" class="col-6 col-lg-12 g-3" style="width:100px; height:100px; cursor:zoom-in">
                             <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
-                                class="actually-screenshots">
+                                class="current-screenshot">
                         </div>
                     @endforeach
                 </div>
             @endif
-            <x-overlay-img>
-                <x-slot:img> <img src="" alt="" id="overlay-img" class="rounded shadow-sm">
+
+            {{-- OVERLAYS --}}
+
+            <x-current-cover-overlay>
+                <x-slot:img> <img src="" alt="" id="current-cover-overlay-img"
+                        class="rounded shadow-sm">
                 </x-slot>
-            </x-overlay-img>
-            <x-overlay-dynamic-img>
-                <x-slot:img> <img src="" alt="" id="dynamic-overlay-img" class="rounded shadow-sm">
+            </x-current-cover-overlay>
+
+            <x-new-cover-overlay>
+                <x-slot:img> <img src="" alt="" id="new-cover-overlay-img"
+                        class="rounded shadow-sm">
                 </x-slot>
-            </x-overlay-dynamic-img>
+            </x-new-cover-overlay>
+
+            <x-current-screenshot-overlay>
+                <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
+                        class="rounded shadow-sm">
+                </x-slot>
+            </x-current-screenshot-overlay>
+
+            <x-new-screenshot-overlay>
+                <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
+                        class="rounded shadow-sm">
+                </x-slot>
+            </x-new-screenshot-overlay>
+
+
 
         </x-slot>
-
 
         <x-slot:actionToDo>Modifica</x-slot>
 

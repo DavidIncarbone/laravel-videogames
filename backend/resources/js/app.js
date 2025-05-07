@@ -349,19 +349,45 @@ function cancelCheckboxes() {
     });
 }
 
-
-
 // OVERLAY IMAGES
 
+
 document.addEventListener('DOMContentLoaded', () => {
-    overlayImage(".actually-screenshots", "overlay", "overlay-img")
+    overlayImage(".current-screenshot", "current-screenshot-overlay", "current-screenshot-overlay-img", "arrow-left-current", "arrow-right-current");
+    overlayCover(".current-cover", "current-cover-overlay", "current-cover-overlay-img");
 });
 
-function overlayImage(allImages, myOverlay, myOverlayImg) {
-    const images = Array.from(document.querySelectorAll(allImages));
-    const overlay = document.getElementById(myOverlay);
-    const overlayImg = document.getElementById(myOverlayImg);
+function overlayCover(allImages, myOverlay, myOverlayImg) {
 
+    let images = Array.from(document.querySelectorAll(allImages));
+    console.log(images);
+    const overlay = document.getElementById(myOverlay);
+    console.log(overlay);
+    const overlayImg = document.getElementById(myOverlayImg);
+    console.log(overlayImg);
+    images.forEach((image) => {
+        image.addEventListener("click", function (e) {
+            overlay.classList.toggle("d-none");
+            overlayImg.src = e.target.src;
+        })
+    })
+    overlay && overlay.addEventListener("click", () => {
+        if (!overlay.classList.contains("d-none")) {
+            overlay.classList.add("d-none");
+            images = [];
+            images.push(...document.querySelectorAll(allImages));
+        }
+    })
+};
+
+function overlayImage(allImages, myOverlay, myOverlayImg, arrowL, arrowR) {
+
+    let images = Array.from(document.querySelectorAll(allImages));
+    console.log(images);
+    const overlay = document.getElementById(myOverlay);
+    console.log(overlay);
+    const overlayImg = document.getElementById(myOverlayImg);
+    console.log(overlayImg);
     images.forEach((image) => {
         image.addEventListener("click", function (e) {
             overlay.classList.toggle("d-none");
@@ -369,43 +395,49 @@ function overlayImage(allImages, myOverlay, myOverlayImg) {
             overlayImg.src = image.src;
         })
     })
+
+
     overlay && overlay.addEventListener("click", () => {
         if (!overlay.classList.contains("d-none")) {
             overlay.classList.add("d-none");
+            images.length = 0;
+            images = [];
+            images.push(...document.querySelectorAll(allImages));
+
+
         }
     });
-
     // SLIDER
 
     let currentIndex = -1;
 
-    const arrowLeft = document.getElementById('arrow-left');
-    const arrowRight = document.getElementById('arrow-right');
+    const arrowLeft = document.getElementById(arrowL);
+    const arrowRight = document.getElementById(arrowR);
 
-    if (images.length < 2) {
-        arrowLeft.classList.add("arrow-disabled");
-    } else {
-        arrowLeft.classList.remove("disabled");
-    };
+    if (arrowLeft && arrowRight) {
 
+        // if (images.length < 2) {
+        //     arrowLeft.classList.add("d-none");
+        //     arrowRight.classList.add("d-none");
+        // } else {
+        //     arrowLeft.classList.remove("d-none");
+        //     arrowRight.classList.remove("d-none");
+        // };
 
+        arrowLeft.addEventListener("click", (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            overlayImg.src = images[currentIndex].src;
+        });
 
-    arrowLeft && arrowLeft.addEventListener("click", (e) => {
-        e.stopPropagation();
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        overlayImg.src = images[currentIndex].src;
-    });
-
-    arrowRight && arrowRight.addEventListener("click", (e) => {
-        e.stopPropagation();
-        currentIndex = (currentIndex + 1) % images.length;
-        overlayImg.src = images[currentIndex].src;
-    });
+        arrowRight.addEventListener("click", (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % images.length;
+            overlayImg.src = images[currentIndex].src;
+        });
+    }
 
 };
-
-
-
 // ***** COVER AND SCREENSHOTS MULTISELECT *****
 
 // VARIABLES
@@ -414,27 +446,26 @@ function overlayImage(allImages, myOverlay, myOverlayImg) {
 const coverInput = document.getElementById('cover');
 const previewCoverContainer = document.getElementById('preview-cover-container');
 const newCover = document.getElementById('new-cover');
-
-
 const input = document.getElementById('screenshots');
 const previewContainer = document.getElementById('previewContainer');
 const newScreenshots = document.getElementById("new-screenshots");
 let filesArray = [];
 
-//   EVENT LISTENER
+// ** EVENT LISTENER **
+
+// COVER
 
 
 coverInput && coverInput.addEventListener('change', function () {
     const coverFile = coverInput.files[0];
-    console.log(coverFile)
-    console.log(coverFile instanceof File);
 
     if (coverFile) {
         showCoverPreview(coverFile);
         updateCoverFile(coverFile);
-
     }
 })
+
+// SCREENSHOTS
 
 
 input && input.addEventListener('change', () => {
@@ -444,16 +475,15 @@ input && input.addEventListener('change', () => {
         filesArray.push(newFile);
         showPreview(newFile,);
         updateInputFiles();
-
     })
 
     requestAnimationFrame(() => {
-        overlayImage(".dynamic-image", "dynamic-overlay", "dynamic-overlay-img");
+        overlayImage(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new");
     });
 
 });
 
-//   FUNCTIONS
+// ** FUNCTIONS **
 
 // COVER
 
@@ -469,7 +499,7 @@ function showCoverPreview(file) {
 
         const img = document.createElement('img');
         img.src = e.target.result;
-        img.className = 'dynamic-cover-image';
+        img.className = 'new-cover-img';
 
         const btn = document.createElement('button');
         btn.innerText = "×";
@@ -486,7 +516,7 @@ function showCoverPreview(file) {
         preview.appendChild(btn);
         previewCoverContainer.children[0] && previewCoverContainer.children[0].remove();
         previewCoverContainer.appendChild(preview);
-        overlayImage(".dynamic-cover-image", "dynamic-overlay", "dynamic-overlay-img");
+        overlayImage(".new-cover-img", "new-cover-overlay", "new-cover-overlay-img");
 
     }
 
@@ -515,7 +545,7 @@ function showPreview(file) {
 
         const img = document.createElement('img');
         img.src = e.target.result;
-        img.className = 'dynamic-image';
+        img.className = 'new-screenshot';
 
         const btn = document.createElement('button');
         btn.innerText = "×";
@@ -525,14 +555,12 @@ function showPreview(file) {
             filesArray.splice(index, 1);
             preview.remove();
             updateInputFiles();
+
         };
 
         preview.appendChild(img);
         preview.appendChild(btn);
         previewContainer.appendChild(preview);
-
-
-
     };
     reader.readAsDataURL(file);
 }
@@ -542,6 +570,8 @@ function updateInputFiles() {
     filesArray.forEach(file => dataTransfer.items.add(file));
     input.files = dataTransfer.files;
 }
+
+// RESET
 
 
 
