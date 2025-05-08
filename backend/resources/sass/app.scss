@@ -117,8 +117,10 @@ select {
 }
 
 #img-details {
-    height: 35vh;
+    height: 70vh;
 }
+
+
 
 
 #img-details>img {
@@ -571,7 +573,13 @@ td:not(.not-break) {
     }
 
     #img-details {
-        height: 20vh;
+        height: 50vh;
+    }
+
+    #screenshot-details {
+
+        height: 25vh;
+
     }
 
 

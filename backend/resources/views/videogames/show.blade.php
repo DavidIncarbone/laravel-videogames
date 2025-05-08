@@ -25,7 +25,7 @@
             <div class="row gy-4">
                 <!-- Videogame Image and Description -->
                 <div class="col-12 col-lg-6">
-                    <div id="img-details" class="w-100 mb-3">
+                    <div class="w-100 mb-3" style="height:50vh;">
                         <img src="{{ asset('storage/' . $videogame->cover) }}"
                             alt="{{ Str::limit($videogame->name, 20) . '-cover' }}" class="rounded shadow-sm current-cover"
                             style="cursor:zoom-in">
@@ -53,7 +53,7 @@
                         <p><strong>Disponibile per:</strong></p>
                         <ul class="list-unstyled d-flex flex-wrap gap-5">
                             @foreach ($videogame->consoles as $console)
-                                <li style="width: 50px; height: 50px;">
+                                <li style="width: 75px; height: 75px;">
                                     <img src="{{ asset('storage/' . $console->logo) }}" alt="{{ $console->name }}"
                                         class="img-fluid">
                                 </li>
