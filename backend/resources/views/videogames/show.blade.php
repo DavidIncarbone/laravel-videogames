@@ -128,12 +128,28 @@
 
     {{-- OVERLAY --}}
 
+    <x-new-cover-overlay>
+        <x-slot:overlayTitle>Logo del PEGI</x-slot>
+        <x-slot:img> <img src="" alt="" id="new-cover-overlay-img"
+                class="rounded shadow-sm w-75 w-75">
+        </x-slot>
+        <x-slot:index></x-slot>
+    </x-new-cover-overlay>
+
     <x-current-cover-overlay>
         <x-slot:overlayTitle>Cover attuale</x-slot>
         <x-slot:img> <img src="" alt="{{ $videogame->name . '-cover' }}" id="current-cover-overlay-img"
                 class="rounded shadow-sm w-75 w-75">
         </x-slot>
     </x-current-cover-overlay>
+
+    <x-new-screenshot-overlay>
+        <x-slot:overlayTitle>Loghi delle console</x-slot>
+        <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
+                class="rounded shadow-sm w-75 w-75">
+        </x-slot>
+        <x-slot:index></x-slot>
+    </x-new-screenshot-overlay>
 
     <x-current-screenshot-overlay>
         <x-slot:overlayTitle>Screenshot attuali</x-slot>

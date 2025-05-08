@@ -168,7 +168,7 @@ class VideogameController extends Controller
         // COVER
 
         if (array_key_exists("cover", $data)) {
-            $cover_url = Storage::putFile("img/videogames/cover", $data["cover"]);
+            $cover_url = Storage::putFile("img/videogames/covers", $data["cover"]);
             $newVideogame->cover = $cover_url;
         }
 
@@ -343,7 +343,11 @@ class VideogameController extends Controller
 
         if (array_key_exists("cover", $data)) {
 
-            $cover_url = Storage::putFile("videogames", $data["cover"]);
+            $cover = $data['cover'];
+            $oldCover = $videogame->cover;
+            Storage::delete($oldCover);
+
+            $cover_url = Storage::putFile("img/videogames/covers", $cover);
             $videogame->cover = $cover_url;
         }
 

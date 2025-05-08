@@ -39,9 +39,6 @@ Route::middleware(["auth", "verified"])
         Route::delete("videogames/selected/destroy", [VideogameController::class, "destroySelected"])->name("videogames.destroySelected");
         Route::delete("videogames/show/{videogame:slug}", [VideogameController::class, "destroyShow"])->name("videogames.show.destroy");
 
-        // DROPZONE.JS SCREENSHOTS
-
-
 
         // CONSOLES
 

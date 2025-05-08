@@ -88,7 +88,7 @@ class PegiController extends Controller
         $newPegi->age = $data["age"];
 
         if (array_key_exists("logo", $data)) {
-            $logo_url = Storage::putFile("img/pegis", $data["logo"]);
+            $logo_url = Storage::putFile("img/pegis/logos", $data["logo"]);
             $newPegi->logo = $logo_url;
         }
 
@@ -161,7 +161,7 @@ class PegiController extends Controller
         $pegi->age = $data["age"];
 
         if (array_key_exists("logo", $data)) {
-            $logo_url = Storage::putFile("img/pegis", $data["logo"]);
+            $logo_url = Storage::putFile("img/pegis/logos", $data["logo"]);
             $pegi->logo = $logo_url;
         }
 

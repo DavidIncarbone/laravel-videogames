@@ -81,7 +81,7 @@ class ConsoleController extends Controller
 
         if (array_key_exists("logo", $data)) {
 
-            $logo_url = Storage::putFile("img/consoles", $data["logo"]);
+            $logo_url = Storage::putFile("img/consoles/logos", $data["logo"]);
             $newConsole->logo = $logo_url;
         }
 
@@ -152,7 +152,7 @@ class ConsoleController extends Controller
 
         if (array_key_exists("logo", $data)) {
 
-            $logo_url = Storage::putFile("img/consoles", $data["logo"]);
+            $logo_url = Storage::putFile("img/consoles/logos", $data["logo"]);
             $console->logo = $logo_url;
         }
 

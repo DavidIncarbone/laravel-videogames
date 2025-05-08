@@ -21,7 +21,7 @@ class PegisSeederTable extends Seeder
 
             $newPegi = new Pegi;
             $newPegi->age = $pegi;
-            $newPegi->logo = "img/pegis/pegi" . $pegi . ".png";
+            $newPegi->logo = "img/pegis/logos/pegi" . $pegi . ".png";
 
             $newPegi->save();
         }

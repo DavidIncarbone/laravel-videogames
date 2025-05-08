@@ -154,8 +154,7 @@ class ScreenshotController extends Controller
         if (array_key_exists("screenshot", $data)) {
 
             Storage::delete($screenshot->url);
-
-            $image_url = Storage::putFile("img/screenshots", $data["screenshot"]);
+            $image_url = Storage::putFile("img/videogames/screenshots", $data["screenshot"]);
             $screenshot->url = $image_url;
         }
 
