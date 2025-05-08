@@ -18,7 +18,7 @@
 
             {{-- @include('partials.sidebar.webApp')
             <hr> --}}
-
+            <hr>
             @include('partials.sidebar.videogames')
             <hr>
             @include('partials.sidebar.consoles')
@@ -29,6 +29,7 @@
             <hr>
 
             @include('partials.sidebar.logout')
+            <hr>
         </ul>
     </div>
 </nav>

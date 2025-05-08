@@ -237,7 +237,7 @@ function selectAllCheckboxes() {
 
                     const img = document.createElement("img");
                     li.appendChild(img);
-                    img.style = "width:100px; height:100px;";
+                    img.style = "width:124px; height:100px;";
                     img.classList.add("form-image");
                     img.src = `/storage/${item.url}`;
                 }
@@ -293,8 +293,8 @@ tableCheckboxes && tableCheckboxes.forEach((tableCheckbox) => {
                     const img = document.createElement("img");
                     li.appendChild(img);
 
-                    img.style = "width:100px; height:100px;";
-                    img.classList.add("form-image");
+                    img.style = "width:124px; height:100px;";
+                    img.classList.add("new-screenshot");
                     img.src = `/storage/${item.url}`;
                 }
             })
@@ -420,7 +420,8 @@ function showCoverPreview(file) {
 
         const img = document.createElement('img');
         img.src = e.target.result;
-        img.className = 'new-cover-img';
+        img.className = 'new-cover-img object-fit-contain';
+        img.style = 'cursor:zoom-in;'
 
         const btn = document.createElement('button');
         btn.innerText = "×";
@@ -475,7 +476,7 @@ function showScreenshotsPreviewAsync(file) {
 
             const img = document.createElement('img');
             img.src = e.target.result;
-            img.className = 'new-screenshot';
+            img.className = 'new-screenshot object-fit-contain';
 
             const btn = document.createElement('button');
             btn.innerText = "×";
@@ -500,12 +501,6 @@ function showScreenshotsPreviewAsync(file) {
         reader.readAsDataURL(file);
     });
 }
-
-
-
-
-
-
 
 function updateInputFiles() {
     const dataTransfer = new DataTransfer();

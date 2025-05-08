@@ -1,6 +1,6 @@
  {{-- Console --}}
  <li>
-     <a class="nav-link text-white d-flex justify-content-between align-items-center mb-2" data-bs-toggle="collapse"
+     <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
          href="#consolesSubmenu" role="button" aria-expanded="{{ request()->is('admin/consoles*') ? 'true' : 'false' }}">
          <span><i class="bi bi-device-hdd me-2"></i> console</span>
          @auth

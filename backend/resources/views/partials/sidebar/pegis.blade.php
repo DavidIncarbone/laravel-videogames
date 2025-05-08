@@ -1,6 +1,6 @@
 {{-- PEGI --}}
 <li>
-    <a class="nav-link text-white d-flex justify-content-between align-items-center mb-2" data-bs-toggle="collapse"
+    <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
         href="#pegisSubmenu" role="button" aria-expanded="{{ request()->is('admin/pegis*') ? 'true' : 'false' }}">
         <span><i class="bi bi-shield-lock me-2"></i> PEGI</span>
         @auth

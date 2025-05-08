@@ -116,6 +116,10 @@ select {
     margin-bottom: 20px;
 }
 
+#img-details {
+    height: 50vh;
+}
+
 
 #img-details>img {
     object-fit: contain;
@@ -359,12 +363,6 @@ td:not(.not-break) {
 
 }
 
-.arrow.disabled {
-    opacity: 0.1;
-    pointer-events: none;
-    cursor: default;
-}
-
 #pencil:hover {
 
     color: orange;
@@ -407,6 +405,11 @@ td:not(.not-break) {
     object-fit: cover;
     border-radius: 4px;
     border: 1px solid #ccc;
+}
+
+.current-screenshot,
+.current-cover {
+    object-fit: contain;
 }
 
 .remove-btn {
@@ -558,11 +561,15 @@ td:not(.not-break) {
     // OVERLAY
 
     .overlay-img-container {
-        position: fixed;
-        top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        width: 350px;
     }
+
+    #img-details {
+        height: 40vh;
+    }
+
+
 }
 
 

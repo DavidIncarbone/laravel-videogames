@@ -35,7 +35,7 @@
                 <div class="mt-3 fw-bold">Screenshots attuali <span class="fw-bold">{{ $screenshotsCount }}</span>:</div>
                 <div class="d-flex flex-wrap gap-3 align-items-center my-3">
                     @foreach ($videogame->screenshots as $screenshot)
-                        <div id="post-image" class="col-6 col-lg-12 g-3" style="width:100px; height:100px; cursor:zoom-in">
+                        <div id="post-image" class="col-6 col-lg-12 g-3" style="width:124px; height:100px; cursor:zoom-in">
                             <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
                                 class="current-screenshot">
                         </div>
@@ -57,7 +57,7 @@
             <x-current-screenshot-overlay>
                 <x-slot:overlayTitle>Screenshots attuali</x-slot>
                 <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
-                        class="rounded shadow-sm">
+                        class="rounded shadow-sm w-75 w-75">
                 </x-slot>
                 <x-slot:index></x-slot>
             </x-current-screenshot-overlay>

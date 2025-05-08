@@ -8,10 +8,11 @@
         <x-slot:age>{{ old('age', $pegi) }}</x-slot>
         <x-slot:logo>
             @if ($pegi->logo)
-                <div class="d-flex gap-3 align-items-center mt-3">
-                    <div>Logo attuale:</div>
-                    <div id="post-image" class="col-6 col-lg-12 g-3" style="width: 50px; height:50px">
-                        <img src="{{ asset('storage/' . $pegi->logo) }}" alt="PEGI {{ $pegi->age }}" class="current-cover">
+                <div class="d-flex flex-column gap-3 mt-3">
+                    <div class="fw-bold">Logo attuale:</div>
+                    <div id="post-image" class="col-6 col-lg-12 g-3" style="width:124px; height:100px">
+                        <img id="logo" src="{{ asset('storage/' . $pegi->logo) }}" alt="{{ $pegi->age }}"
+                            class="current-cover">
                     </div>
                 </div>
             @endif
@@ -23,7 +24,8 @@
         <x-slot:overlays>
             <x-new-cover-overlay>
                 <x-slot:overlayTitle>Nuovo logo</x-slot>
-                <x-slot:img> <img src="" alt="" id="new-cover-overlay-img" class="rounded shadow-sm">
+                <x-slot:img> <img src="" alt="" id="new-cover-overlay-img"
+                        class="rounded shadow-sm w-75 w-75">
                 </x-slot>
                 <x-slot:index></x-slot>
             </x-new-cover-overlay>
@@ -31,7 +33,7 @@
             <x-current-cover-overlay>
                 <x-slot:overlayTitle>Logo attuale </x-slot>
                 <x-slot:img> <img src="" alt="" id="current-cover-overlay-img"
-                        class="rounded shadow-sm">
+                        class="rounded shadow-sm w-75 w-75">
                 </x-slot>
                 <x-slot:index></x-slot>
             </x-current-cover-overlay>

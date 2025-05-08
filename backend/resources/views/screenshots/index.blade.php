@@ -160,7 +160,7 @@
         <x-slot:delete>Elimina lo screenshot di <span id="screenshotNameToDelete" class="fw-bold text-danger"></span>
         </x-slot>
         <x-slot:wantDelete>Vuoi eliminare questo screenshot?
-            <div id="screenshot-container" class="mt-3" style="width:100px; height:100px;">
+            <div id="screenshot-container" class="mt-3" style="width:124px; height:100px;">
 
             </div>
         </x-slot>
@@ -218,7 +218,7 @@
     <x-current-screenshot-overlay>
         <x-slot:overlayTitle>Screenshots attuali </x-slot>
         <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
-                class="rounded shadow-sm">
+                class="rounded shadow-sm w-75 w-75">
         </x-slot>
         <x-slot:index></x-slot>
     </x-current-screenshot-overlay>

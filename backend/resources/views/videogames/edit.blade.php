@@ -66,7 +66,7 @@
                 <div class="mt-3 fw-bold">Screenshots attuali {{ $screenshotsCount }}:</div>
                 <div class="d-flex flex-wrap gap-3 align-items-center my-3">
                     @foreach ($videogame->screenshots as $screenshot)
-                        <div id="post-image" class="col-6 col-lg-12 g-3" style="width:100px; height:100px; cursor:zoom-in">
+                        <div id="post-image" class="col-6 col-lg-12 g-3" style="width:124px; height:100px; cursor:zoom-in">
                             <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
                                 class="current-screenshot">
                         </div>
@@ -81,7 +81,7 @@
             <x-new-cover-overlay>
                 <x-slot:overlayTitle>Cover da aggiungere</x-slot>
                 <x-slot:img> <img src="" alt="" id="new-cover-overlay-img"
-                        class="rounded shadow-sm">
+                        class="rounded shadow-sm w-75 w-75">
                 </x-slot>
                 <x-slot:index></x-slot>
             </x-new-cover-overlay>
@@ -90,14 +90,14 @@
             <x-current-cover-overlay>
                 <x-slot:overlayTitle>Cover attuale</x-slot>
                 <x-slot:img> <img src="" alt="" id="current-cover-overlay-img"
-                        class="rounded shadow-sm">
+                        class="rounded shadow-sm w-75 w-75">
                 </x-slot>
             </x-current-cover-overlay>
 
             <x-new-screenshot-overlay>
                 <x-slot:overlayTitle>Nuovi screenshots</x-slot>
                 <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
-                        class="rounded shadow-sm">
+                        class="rounded shadow-sm w-75 w-75">
                 </x-slot>
                 <x-slot:index></x-slot>
             </x-new-screenshot-overlay>
@@ -105,7 +105,7 @@
             <x-current-screenshot-overlay>
                 <x-slot:overlayTitle>Screenshots attuali </x-slot>
                 <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
-                        class="rounded shadow-sm">
+                        class="rounded shadow-sm w-75 w-75">
                 </x-slot>
                 <x-slot:index></x-slot>
             </x-current-screenshot-overlay>

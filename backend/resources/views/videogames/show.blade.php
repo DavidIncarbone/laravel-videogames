@@ -25,7 +25,7 @@
             <div class="row gy-4">
                 <!-- Videogame Image and Description -->
                 <div class="col-12 col-lg-6">
-                    <div id="img-details" class="w-100 mb-3" style="height:50vh;">
+                    <div id="img-details" class="w-100 mb-3">
                         <img src="{{ asset('storage/' . $videogame->cover) }}"
                             alt="{{ Str::limit($videogame->name, 20) . '-cover' }}" class="rounded shadow-sm current-cover"
                             style="cursor:zoom-in">
@@ -82,9 +82,9 @@
     <div class="container mt-3">
         <div class="row">
             @foreach ($videogame->screenshots as $screenshot)
-                <div class="col-3">
+                <div class="" style="height:100px; width:124px;">
                     <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
-                        class="current-screenshot" style="cursor:zoom-in">
+                        class="current-screenshot" style=" cursor:zoom-in;">
                 </div>
             @endforeach
         </div>
@@ -128,14 +128,14 @@
     <x-current-cover-overlay>
         <x-slot:overlayTitle>Cover attuale</x-slot>
         <x-slot:img> <img src="" alt="{{ $videogame->name . '-cover' }}" id="current-cover-overlay-img"
-                class="rounded shadow-sm">
+                class="rounded shadow-sm w-75 w-75">
         </x-slot>
     </x-current-cover-overlay>
 
     <x-current-screenshot-overlay>
         <x-slot:overlayTitle>Screenshots attuali</x-slot>
         <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
-                class="rounded shadow-sm">
+                class="rounded shadow-sm w-75 w-75">
         </x-slot>
         <x-slot:index></x-slot>
     </x-current-screenshot-overlay>

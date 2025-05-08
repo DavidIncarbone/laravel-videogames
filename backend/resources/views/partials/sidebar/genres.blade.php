@@ -1,6 +1,6 @@
  {{-- Generi --}}
  <li>
-     <a class="nav-link text-white d-flex justify-content-between align-items-center mb-2" data-bs-toggle="collapse"
+     <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
          href="#genresSubmenu" role="button" aria-expanded="{{ request()->is('admin/genres*') ? 'true' : 'false' }}">
          <span><i class="bi bi-tags me-2"></i> generi</span>
          @auth <i class="bi {{ request()->is('admin/genres*') ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>

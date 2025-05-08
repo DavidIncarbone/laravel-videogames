@@ -184,7 +184,7 @@
     <x-current-screenshot-overlay>
         <x-slot:overlayTitle>Loghi attuali</x-slot>
         <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
-                class="rounded shadow-sm">
+                class="rounded shadow-sm w-75 w-75">
         </x-slot>
         <x-slot:index></x-slot>
     </x-current-screenshot-overlay>

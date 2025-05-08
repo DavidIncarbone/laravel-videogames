@@ -1,6 +1,6 @@
   {{-- Videogiochi --}}
-  <li>
-      <a class="nav-link text-white d-flex justify-content-between align-items-center mb-2" data-bs-toggle="collapse"
+  <li class="d-flex flex-column">
+      <a class="nav-link text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
           href="#videogamesSubmenu" role="button"
           aria-expanded="{{ request()->is('admin/videogames*') ? 'true' : 'false' }}">
           <span><i class="bi bi-controller me-2"></i> videogiochi</span>
