@@ -237,9 +237,11 @@ function selectAllCheckboxes() {
 
                     const img = document.createElement("img");
                     li.appendChild(img);
-                    img.style = "width:124px; height:100px;";
-                    img.classList.add("form-image");
+                    img.style = "width:124px; height:100px; object-fit:contain; cursor:zoom-in;";
+                    img.classList.add("new-screenshot");
                     img.src = `/storage/${item.url}`;
+
+                    overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
                 }
 
             })
@@ -293,9 +295,10 @@ tableCheckboxes && tableCheckboxes.forEach((tableCheckbox) => {
                     const img = document.createElement("img");
                     li.appendChild(img);
 
-                    img.style = "width:124px; height:100px;";
+                    img.style = "width:124px; height:100px; object-fit:contain; cursor:zoom-in;";
                     img.classList.add("new-screenshot");
                     img.src = `/storage/${item.url}`;
+                    overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
                 }
             })
 
@@ -464,6 +467,7 @@ window.clearCover = function () {
 
 function showScreenshotsPreviewAsync(file) {
     return new Promise((resolve) => {
+        showLoader();
         const reader = new FileReader();
         reader.onload = function (e) {
             if (previewArray.length > 0) {
@@ -487,9 +491,7 @@ function showScreenshotsPreviewAsync(file) {
                 previewArray.splice(index, 1);
                 preview.remove();
                 updateInputFiles();
-
-
-                overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new");
+                overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
             });
 
             preview.appendChild(img);
@@ -497,6 +499,7 @@ function showScreenshotsPreviewAsync(file) {
             previewContainer.appendChild(preview);
 
             resolve();
+            hideLoader();
         };
         reader.readAsDataURL(file);
     });
@@ -571,6 +574,7 @@ function overlayScreenshots(allImages, myOverlay, myOverlayImg, arrowL, arrowR, 
         overlay.classList.remove("d-none");
         currentIndex = index;
         indexScreenshot ? indexScreenshot.textContent = `${currentIndex + 1} di ${images.length}` : "";
+        images.length < 2 ? indexScreenshot.classList.add('d-none') : '';
     }
 
     function closeOverlay() {

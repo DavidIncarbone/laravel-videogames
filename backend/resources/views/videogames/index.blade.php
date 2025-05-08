@@ -110,10 +110,14 @@
                                     {{ $videogame->created_at->format('d/m/Y  H:i') }}
                                 </x-slot>
                                 <x-slot:updated>{{ $videogame->updated_at->format('d/m/Y  H:i') }}</x-slot>
+
+
                             </x-table>
                         @endforeach
 
                     </tbody>
+
+
                 </table>
 
                 {{-- DELETE SELECTED MODAL COMPONENT --}}

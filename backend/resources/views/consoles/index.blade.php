@@ -98,6 +98,7 @@
                                 </x-slot>
                                 <x-slot:created>{{ $console->created_at->format('d/m/Y  H:i') }}</x-slot>
                                 <x-slot:updated>{{ $console->updated_at->format('d/m/Y  H:i') }}</x-slot>
+
                             </x-table>
                         @endforeach
 
@@ -176,15 +177,5 @@
             </form>
         </x-slot>
     </x-modal-all>
-
-    {{-- OVERLAY --}}
-
-    <x-current-screenshot-overlay>
-        <x-slot:overlayTitle>Loghi attuali</x-slot>
-        <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
-                class="rounded shadow-sm w-75 w-75">
-        </x-slot>
-        <x-slot:index></x-slot>
-    </x-current-screenshot-overlay>
     @endif
 @endsection
