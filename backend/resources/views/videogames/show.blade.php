@@ -17,7 +17,7 @@
                     </button>
                 </div>
             </div>
-            <p class="text-muted">Esplora i dettagli completi videogioco.</p>
+            <p class="text-muted">Esplora i dettagli completi del videogioco.</p>
         </header>
 
         <!-- Videogame Details -->
@@ -73,23 +73,24 @@
                         </ul>
                     </div>
                 </div>
+                @if ($videogame->screenshots->isNotEmpty())
+                    <h3>Screenshot allegati:</h3>
+
+
+                    <div class="d-flex flex-wrap gap-3">
+                        @foreach ($videogame->screenshots as $screenshot)
+                            <div>
+                                <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
+                                    class="current-screenshot" style="cursor:zoom-in;">
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </section>
     </div>
 
-    @if ($videogame->screenshots->isNotEmpty())
-        <h3>Screenshot allegati:</h3>
 
-
-        <div class="d-flex flex-wrap gap-3">
-            @foreach ($videogame->screenshots as $screenshot)
-                <div>
-                    <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
-                        class="current-screenshot" style="cursor:zoom-in;">
-                </div>
-            @endforeach
-        </div>
-    @endif
 
     {{-- MODAL COMPONENT --}}
 
