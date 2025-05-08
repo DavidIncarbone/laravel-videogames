@@ -63,7 +63,7 @@
         <x-slot:addEdit>Sostituisci</x-slot>
         <x-slot:screenshots>
             @if (count($videogame->screenshots) > 0)
-                <div class="mt-3 fw-bold">Screenshots attuali {{ $screenshotsCount }}:</div>
+                <div class="mt-3 fw-bold">Screenshot attuali {{ $screenshotsCount }}:</div>
                 <div class="d-flex flex-wrap gap-3 align-items-center my-3">
                     @foreach ($videogame->screenshots as $screenshot)
                         <div id="post-image" class="col-6 col-lg-12 g-3" style="width:124px; height:100px; cursor:zoom-in">
@@ -103,7 +103,7 @@
             </x-new-screenshot-overlay>
 
             <x-current-screenshot-overlay>
-                <x-slot:overlayTitle>Screenshots attuali </x-slot>
+                <x-slot:overlayTitle>Screenshot attuali </x-slot>
                 <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
                         class="rounded shadow-sm w-75 w-75">
                 </x-slot>

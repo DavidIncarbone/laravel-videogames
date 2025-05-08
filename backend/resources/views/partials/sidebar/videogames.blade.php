@@ -38,7 +38,7 @@
                           <a href="{{ route('admin.screenshots.index') }}"
                               class="nav-link text-white d-flex align-items-center {{ $routeName === 'admin.screenshots.index' ? 'active-navlink' : '' }}">
                               <div><i class="fa-solid fa-images me-2"></i></div>
-                              <div>Screenshots</div>
+                              <div>Screenshot</div>
                           </a>
 
                       </li>

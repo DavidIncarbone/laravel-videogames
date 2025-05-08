@@ -77,7 +77,7 @@
         </section>
     </div>
 
-    <h3>Screenshots allegati:</h3>
+    <h3>Screenshot allegati:</h3>
 
     <div class="container mt-3">
         <div class="row">
@@ -133,7 +133,7 @@
     </x-current-cover-overlay>
 
     <x-current-screenshot-overlay>
-        <x-slot:overlayTitle>Screenshots attuali</x-slot>
+        <x-slot:overlayTitle>Screenshot attuali</x-slot>
         <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
                 class="rounded shadow-sm w-75 w-75">
         </x-slot>

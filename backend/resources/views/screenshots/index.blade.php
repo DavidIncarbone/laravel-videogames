@@ -216,7 +216,7 @@
     {{-- OVERLAY --}}
 
     <x-current-screenshot-overlay>
-        <x-slot:overlayTitle>Screenshots attuali </x-slot>
+        <x-slot:overlayTitle>Screenshot attuali </x-slot>
         <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
                 class="rounded shadow-sm w-75 w-75">
         </x-slot>
@@ -236,7 +236,7 @@
 
 
     <x-new-screenshot-overlay>
-        <x-slot:overlayTitle>Screenshots da aggiungere</x-slot>
+        <x-slot:overlayTitle>Screenshot da aggiungere</x-slot>
         <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
                 class="rounded shadow-sm w-75 w-75">
         </x-slot>

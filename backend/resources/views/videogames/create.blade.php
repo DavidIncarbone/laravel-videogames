@@ -75,7 +75,7 @@
             </x-new-cover-overlay>
 
             <x-new-screenshot-overlay>
-                <x-slot:overlayTitle>Screenshots da aggiungere</x-slot>
+                <x-slot:overlayTitle>Screenshot da aggiungere</x-slot>
                 <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
                         class="rounded shadow-sm w-75 w-75">
                 </x-slot>

@@ -98,7 +98,7 @@ class ScreenshotController extends Controller
             }
 
 
-            toastr()->success('Screenshots aggiunti con successo!');
+            toastr()->success('Screenshot aggiunti con successo!');
         } else {
             toastr()->info('Nessuno screenshot aggiunto');
         };
@@ -185,7 +185,7 @@ class ScreenshotController extends Controller
         Screenshot::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        toastr()->success('Tutti gli screenshots sono stati eliminati con successo');
+        toastr()->success('Tutti gli screenshot sono stati eliminati con successo');
 
         return back();
     }
@@ -199,7 +199,7 @@ class ScreenshotController extends Controller
         Screenshot::whereIn("id", $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('I <span class="fw-bold">' . count($ids) . ' screenshots</span> selezionati sono stati eliminati con successo');
+            toastr()->success('I <span class="fw-bold">' . count($ids) . ' screenshot</span> selezionati sono stati eliminati con successo');
         } else {
             toastr()->success('Lo screenshot selezionato è stata eliminato con successo');
         };
