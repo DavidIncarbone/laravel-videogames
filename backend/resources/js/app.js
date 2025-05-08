@@ -237,7 +237,7 @@ function selectAllCheckboxes() {
 
                     const img = document.createElement("img");
                     li.appendChild(img);
-                    img.style = "width:124px; height:100px; object-fit:contain; cursor:zoom-in;";
+                    img.style = "width:124px; height:62px; object-fit:contain; cursor:zoom-in;";
                     img.classList.add("new-screenshot");
                     img.src = `/storage/${item.url}`;
 
@@ -295,7 +295,7 @@ tableCheckboxes && tableCheckboxes.forEach((tableCheckbox) => {
                     const img = document.createElement("img");
                     li.appendChild(img);
 
-                    img.style = "width:124px; height:100px; object-fit:contain; cursor:zoom-in;";
+                    img.style = "width:124px; height:62px; object-fit:contain; cursor:zoom-in;";
                     img.classList.add("new-screenshot");
                     img.src = `/storage/${item.url}`;
                     overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
@@ -482,7 +482,8 @@ function showScreenshotsPreviewAsync(file) {
 
             const img = document.createElement('img');
             img.src = e.target.result;
-            img.className = 'new-screenshot object-fit-contain';
+            img.className = 'new-screenshot object-fit-cover';
+            img.style = 'width:124px; height:62px;'
 
             const btn = document.createElement('button');
             btn.innerText = "×";

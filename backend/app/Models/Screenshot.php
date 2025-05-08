@@ -18,7 +18,7 @@ class Screenshot extends Model
         static::creating(function ($screenshot) {
 
             $videogame = Videogame::find($screenshot->videogame_id);
-            $baseSlug = Str::slug($videogame?->name ?? 'screenshot');
+            $baseSlug = Str::slug($videogame?->name . 'screenshot' ?? 'screenshot');
             $slug = $baseSlug;
             $i = 2;
 
@@ -34,7 +34,7 @@ class Screenshot extends Model
         static::updating(function ($screenshot) {
 
             $videogame = Videogame::find($screenshot->videogame_id);
-            $baseSlug = Str::slug(($videogame?->name ?? 'screenshot') . " " . $screenshot->id);
+            $baseSlug = Str::slug(($videogame?->name . 'screenshot' ?? 'screenshot') . " " . $screenshot->id);
             $slug = $baseSlug;
             $i = 2;
 

@@ -117,7 +117,7 @@ select {
 }
 
 #img-details {
-    height: 50vh;
+    height: 35vh;
 }
 
 
@@ -329,7 +329,7 @@ td:not(.not-break) {
     top: 50%;
     left: calc(50% + 10vw);
     transform: translate(-50%, -50%);
-    width: 500px;
+    width: 50vw;
 }
 
 #post-image,
@@ -407,7 +407,12 @@ td:not(.not-break) {
     border: 1px solid #ccc;
 }
 
-.current-screenshot,
+.current-screenshot {
+    object-fit: cover;
+    width: 124px;
+    height: 62px;
+}
+
 .current-cover {
     object-fit: contain;
 }
@@ -566,7 +571,7 @@ td:not(.not-break) {
     }
 
     #img-details {
-        height: 40vh;
+        height: 20vh;
     }
 
 

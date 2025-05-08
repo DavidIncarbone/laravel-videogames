@@ -105,7 +105,7 @@
 
                                 <x-slot:firstTd>
                                     <div class="d-flex w-100 justify-content-center" style="height:66px;">
-                                        <div id="post-image" class="align-self-center" style="width: 50px; height:50px">
+                                        <div id="post-image" class="align-self-center">
                                             <img id="logo" class="current-screenshot"
                                                 src="{{ asset('storage/' . $screenshot->url) }}"
                                                 alt="{{ $screenshot->name }}">
@@ -160,7 +160,7 @@
         <x-slot:delete>Elimina lo screenshot di <span id="screenshotNameToDelete" class="fw-bold text-danger"></span>
         </x-slot>
         <x-slot:wantDelete>Vuoi eliminare questo screenshot?
-            <div id="screenshot-container" class="mt-3" style="width:124px; height:100px;">
+            <div id="screenshot-container" class="mt-3" style="">
 
             </div>
         </x-slot>
@@ -223,20 +223,9 @@
         <x-slot:index></x-slot>
     </x-current-screenshot-overlay>
 
-    {{-- OVERLAY --}}
-
-
-    <x-current-screenshot-overlay>
-        <x-slot:overlayTitle>Loghi attuali</x-slot>
-        <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
-                class="rounded shadow-sm w-75 w-75">
-        </x-slot>
-        <x-slot:index></x-slot>
-    </x-current-screenshot-overlay>
-
 
     <x-new-screenshot-overlay>
-        <x-slot:overlayTitle>Screenshot da aggiungere</x-slot>
+        <x-slot:overlayTitle>Screenshot da eliminare</x-slot>
         <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
                 class="rounded shadow-sm w-75 w-75">
         </x-slot>
