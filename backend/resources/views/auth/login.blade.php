@@ -48,9 +48,9 @@
 
                             <div class="mb-4 row">
                                 <div class="col-lg-6 offset-lg-4">
-                                    <div class="form-check">
+                                    <div class="form-check d-flex gap-2">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                            {{ old('remember') ? 'checked' : '' }}>
+                                            {{ old('remember') ? 'checked' : '' }} style="width:15px; height:15px;">
 
                                         <label class="form-check-label" for="remember">
                                             {{ __('Remember Me') }}

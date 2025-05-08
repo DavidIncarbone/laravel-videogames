@@ -97,8 +97,11 @@ class ScreenshotController extends Controller
                 $newScreenshots->save();
             }
 
-
-            toastr()->success('Screenshot aggiunti con successo!');
+            if (count($screenshots) > 1)
+                toastr()->success('Screenshot aggiunti con successo!');
+            else {
+                toastr()->success('Screenshot aggiunto con successo!');
+            }
         } else {
             toastr()->info('Nessuno screenshot aggiunto');
         };

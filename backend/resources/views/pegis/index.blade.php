@@ -97,6 +97,8 @@
                                 </x-slot>
                                 <x-slot:created>{{ $pegi->created_at->format('d/m/Y  H:i') }}</x-slot>
                                 <x-slot:updated>{{ $pegi->updated_at->format('d/m/Y  H:i') }}</x-slot>
+
+
                             </x-table>
                         @endforeach
 

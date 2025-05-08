@@ -403,6 +403,8 @@ input && input.addEventListener('change', async () => {
 
     await Promise.all(loadPromises);
 
+
+
     overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
 });
 
@@ -492,6 +494,7 @@ function showScreenshotsPreviewAsync(file) {
                 preview.remove();
                 updateInputFiles();
                 overlayScreenshots(".new-screenshot", "new-screenshot-overlay", "new-screenshot-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-screenshot");
+                previewArray.length < 1 ? newScreenshots.className = 'd-none' : '';
             });
 
             preview.appendChild(img);
@@ -563,18 +566,20 @@ function overlayScreenshots(allImages, myOverlay, myOverlayImg, arrowL, arrowR, 
     const arrowLeft = document.getElementById(arrowL);
     const arrowRight = document.getElementById(arrowR);
     const indexScreenshot = document.getElementById(myIndexScreenshot);
-
-
-
     let currentIndex = -1;
 
     function showOverlayAt(index) {
         if (images.length === 0) return;
-        overlayImg.src = images[index].src;
         overlay.classList.remove("d-none");
+        overlayImg.src = images[index].src;
         currentIndex = index;
-        indexScreenshot ? indexScreenshot.textContent = `${currentIndex + 1} di ${images.length}` : "";
-        images.length < 2 ? indexScreenshot.classList.add('d-none') : '';
+
+        if (indexScreenshot) {
+
+            indexScreenshot.textContent = `${currentIndex + 1} di ${images.length}`
+
+            images.length < 2 ? indexScreenshot.classList.add('d-none') : indexScreenshot.classList.remove('d-none');
+        }
     }
 
     function closeOverlay() {

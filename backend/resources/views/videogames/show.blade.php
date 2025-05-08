@@ -77,18 +77,21 @@
         </section>
     </div>
 
-    <h3>Screenshot allegati:</h3>
+    @if ($videogame->screenshots->isNotEmpty())
+        <h3>Screenshot allegati:</h3>
 
-    <div class="container mt-3">
-        <div class="row">
-            @foreach ($videogame->screenshots as $screenshot)
-                <div class="" style="height:100px; width:124px;">
-                    <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
-                        class="current-screenshot" style=" cursor:zoom-in;">
-                </div>
-            @endforeach
+        <div class="container mt-3">
+            <div class="row">
+                @foreach ($videogame->screenshots as $screenshot)
+                    <div class="" style="height:100px; width:124px;">
+                        <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
+                            class="current-screenshot" style=" cursor:zoom-in;">
+                    </div>
+                @endforeach
+            </div>
         </div>
-    </div>
+    @endif
+
     {{-- MODAL COMPONENT --}}
 
 
