@@ -1,5 +1,5 @@
 // Creazione della GlobalContext che conterrà tutte le chiamate API al server
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useRef } from "react";
 import axios from "axios";
 
 //creo il Context e gli do il nome GlobalContext
@@ -129,7 +129,37 @@ const GlobalProvider = ({ children }) => {
         });
     }
 
+    // CAROUSEL
 
+    const [activeIndex, setActiveIndex] = useState(0);
+    const intervalRef = useRef(null);
+
+    const startAutoSlide = () => {
+        if (!intervalRef.current) {
+            intervalRef.current = setInterval(() => {
+                setActiveIndex((prev) => (prev + 1) % homepageVideogames.length);
+            }, 3000);
+        }
+    };
+
+    const stopAutoSlide = () => {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        }
+    };
+
+    const goToPrev = () => {
+        setActiveIndex((prev) => (prev - 1 + homepageVideogames.length) % homepageVideogames.length);
+    };
+
+    const goToNext = () => {
+        setActiveIndex((prev) => (prev + 1) % homepageVideogames.length);
+    };
+
+    const handleDotClick = (index) => {
+        setActiveIndex(index);
+    };
 
     const data = {
         homepageVideogames,
@@ -145,7 +175,14 @@ const GlobalProvider = ({ children }) => {
         pegis,
         fetchPegis,
         isLoading,
-        fileUrl
+        fileUrl,
+        activeIndex,
+        setActiveIndex,
+        startAutoSlide,
+        stopAutoSlide,
+        goToPrev,
+        goToNext,
+        handleDotClick
     }
 
     return (

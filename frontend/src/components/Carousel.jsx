@@ -1,43 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from '../style/Carousel.module.css';
 import { Container } from 'react-bootstrap';
+import { useGlobalContext } from '../contexts/GlobalContext';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Carousel = ({ data, fileUrl }) => {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const intervalRef = useRef(null);
 
-    const startAutoSlide = () => {
-        if (!intervalRef.current) {
-            intervalRef.current = setInterval(() => {
-                setActiveIndex((prev) => (prev + 1) % data.length);
-            }, 3000);
-        }
-    };
-
-    const stopAutoSlide = () => {
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-        }
-    };
+    const { activeIndex,
+        startAutoSlide,
+        stopAutoSlide,
+        goToPrev,
+        goToNext,
+        handleDotClick } = useGlobalContext();
 
     useEffect(() => {
         startAutoSlide();
         return () => stopAutoSlide();
     }, [data.length]);
-
-    const goToPrev = () => {
-        setActiveIndex((prev) => (prev - 1 + data.length) % data.length);
-    };
-
-    const goToNext = () => {
-        setActiveIndex((prev) => (prev + 1) % data.length);
-    };
-
-    const handleDotClick = (index) => {
-        setActiveIndex(index);
-    };
 
     return (
         <Container>

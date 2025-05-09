@@ -1,6 +1,7 @@
 /* Aggiungi stili personalizzati */
 body {
     font-family: 'Arial', sans-serif;
+    background-color: grey;
 }
 
 .debug {
@@ -15,24 +16,13 @@ img {
 /* Navbar */
 
 
+
+
 .navbar-brand {
     font-weight: bold;
 }
 
-/* Header */
-header {
-    background: #007bff;
-    color: white;
-
-}
-
-header h1 {
-    font-size: 3rem;
-}
-
-
-
-/* Progetti */
+/* VIDEOGAMES */
 #videogames .card {
     border-radius: 10px;
     overflow: hidden;
@@ -61,4 +51,12 @@ header h1 {
 footer {
     background: #222;
     color: white;
+}
+
+/* ***** MEDIA QUERY ***** */
+
+@media screen and (max-width:480px) {
+    /* h1 {
+        display: none;
+    } */
 }
