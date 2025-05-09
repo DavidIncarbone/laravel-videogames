@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import styles from '../style/Carousel.module.css';
 import { Container } from 'react-bootstrap';
 import { useGlobalContext } from '../contexts/GlobalContext';
@@ -31,7 +32,9 @@ const Carousel = ({ data, fileUrl }) => {
                 >
                     {data.map((item) => (
                         <div key={item.id} className={styles.slide}>
-                            <img src={`${fileUrl}${item.screenshots[0].url}`} alt={item.name} />
+                            <NavLink to={`/videogame/${item.slug}`}>
+                                <img src={`${fileUrl}${item.screenshots[0].url}`} alt={item.name} />
+                            </NavLink>
                             <div className={styles.overlay}>
                                 <h2>{item.name}</h2>
                                 <p>{item.description}</p>

@@ -104,7 +104,7 @@ class VideogameController extends Controller
     public function show(Videogame $videogame)
     {
 
-        $new = $videogame->load("consoles");
+        $new = $videogame->load("consoles", "genres", "pegi", "screenshots");
 
         try {
 

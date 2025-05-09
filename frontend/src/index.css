@@ -1,7 +1,7 @@
 /* Aggiungi stili personalizzati */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: grey;
+    background-color: #EBEDEF;
 }
 
 .debug {
@@ -14,8 +14,6 @@ img {
 }
 
 /* Navbar */
-
-
 
 
 .navbar-brand {
@@ -41,10 +39,10 @@ img {
     font-size: 1rem;
 }
 
-/* Contatti */
-#contact {
-    background: #333;
-    color: white;
+/* VIDEOGAME DETAILS */
+
+#screenshot-details{
+    height:calc(50vh / 4);
 }
 
 /* Footer */

@@ -8,10 +8,12 @@ export default function DefaultLayout() {
         <>
             <Header />
             <Navbar />
-            <main>
+            
+            <main className="container">
                 <Outlet />
             </main>
             <Footer />
+            
         </>
     )
 }

@@ -75,7 +75,9 @@ const GlobalProvider = ({ children }) => {
         axios.get(apiUrl + videogameEndpoint + slug).then((res) => {
             setIsLoading(false);
             console.log("Videogioco attuale", res.data);
+            
             const videogame = res.data.item;
+            console.log("pegi del videogioco", videogame.pegi.age)
             setVideogame(videogame)
         }).catch((err) => {
             console.log(err);
