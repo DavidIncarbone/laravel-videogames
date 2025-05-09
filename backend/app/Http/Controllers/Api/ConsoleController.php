@@ -5,19 +5,39 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Console;
+use Illuminate\Http\JsonResponse;
 
 class ConsoleController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
 
-        $consoles = Console::all();
-        $consolesCount = Console::count();
+        try {
 
-        return response()->json([
-            "success" => true,
-            "count" => $consolesCount,
-            "data" => $consoles
-        ]);
+            $consoles = Console::all();
+            $consolesCount = Console::count();
+
+            if ($consoles->isEmpty()) {
+
+                return response()->json([
+                    "success" => true,
+                    "message" => "Richiesta effettuata con successo",
+                    "details" => "Non ci sono Console nel database"
+                ], 200);
+            }
+
+            return response()->json([
+                "success" => true,
+                "message" => "Richiesta effettuata con successo",
+                "count" => $consolesCount,
+                "data" => $consoles
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Errore interno del server.',
+                'details' => $e->getMessage(),
+            ], 500);
+        };
     }
 }

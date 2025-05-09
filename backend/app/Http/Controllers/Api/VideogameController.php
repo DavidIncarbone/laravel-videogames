@@ -5,69 +5,128 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Videogame;
+use Illuminate\Http\JsonResponse;
 
 class VideogameController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function homePage(): JsonResponse
     {
-        $videogames = Videogame::with('pegi', 'genres', 'consoles', 'screenshots')->get();
-        $videogamesCount = Videogame::count();
+        try {
 
-        return response()->json([
-            "success" => true,
-            "items" => $videogamesCount,
-            "data" => $videogames
-        ]);
+            $latestFour = Videogame::orderBy('year_of_publication', 'desc')->take(4)->get();
+            $latestFourCount = $latestFour->count();
+
+            if ($latestFour->isEmpty()) {
+
+                return response()->json([
+                    "success" => true,
+                    "message" => "Non ci sono Videogiochi nel database",
+                ], 200);
+            }
+
+            return response()->json([
+                "success" => true,
+                "message" => "Richiesta effettuata con successo",
+                "count" => $latestFourCount,
+                "data" => $latestFour
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Errore interno del server.',
+                'details' => $e->getMessage(),
+            ], 500);
+        };
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(Request $request): JsonResponse
     {
-        //
+        try {
+
+            // dd($request);
+
+            $query = Videogame::with('consoles', 'genres', 'pegi');
+
+            if ($request->filled('search')) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            }
+
+            // CONSOLE FILTER
+
+            if ($request->filled('consoles')) {
+                $query->whereHas('consoles', function ($relQuery) use ($request) {
+                    $relQuery->whereIn('name', $request->consoles);
+                });
+            }
+
+            // GENRE FILTER
+
+            if ($request->filled('genres')) {
+                $query->whereHas('genres', function ($relQuery) use ($request) {
+                    $relQuery->whereIn('name', $request->genres);
+                });
+            }
+
+            // PEGI FILTER
+            if ($request->filled('pegi')) {
+                $query->whereHas('pegi', function ($q) use ($request) {
+                    $q->whereIn('age', $request->pegi);
+                });
+            }
+            $videogames = $query->paginate(6);
+            $videogamesCount = $videogames->count();
+
+            if ($videogames->isEmpty()) {
+
+                return response()->json([
+                    "success" => true,
+                    "message" => "Richiesta effettuata con successo",
+                    "details" => "Nessun videogioco soddisfa i criteri di ricerca"
+                ], 200);
+            }
+
+            return response()->json([
+                "success" => true,
+                "message" => "Richiesta effettuata con successo",
+                "count" => $videogamesCount,
+                "data" => $videogames
+            ], 200);
+        } catch (\Exception $error) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Errore interno del server.',
+                'details' => $error->getMessage(),
+            ], 500);
+        };
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Videogame $videogame)
     {
-        return $videogame;
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        try {
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+            if (!$videogame) {
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+                return response()->json([
+                    "success" => true,
+                    "message" => "Richiesta effettuata con successo",
+                    "details" => "Nessun videogioco soddisfa i criteri di ricerca"
+                ], 200);
+            }
+
+            return response()->json([
+                "success" => true,
+                "message" => "Richiesta effettuata con successo",
+                "data" => $videogame
+            ], 200);
+        } catch (\Exception $error) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Errore interno del server.',
+                'details' => $error->getMessage(),
+            ], 500);
+        };
     }
 }
