@@ -1,10 +1,14 @@
+import Searchbar from './Searchbar';
+
 function Header() {
     return (
-        <header className="text-center text-white py-5 bg-primary">
-            <div className="container">
-                <h1>Videogames</h1>
-                <p className="lead">Esplora i videogiochi presenti</p>
+        <header className="p-3 text-white bg-warning d-flex align-items-center justify-content-between">
+
+            <h1>Videogames</h1>
+            <div>
+                <Searchbar />
             </div>
+
         </header>
     )
 }
