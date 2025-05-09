@@ -28,7 +28,7 @@ class VideogameController extends Controller
                 "success" => true,
                 "message" => "Richiesta effettuata con successo",
                 "count" => $latestFourCount,
-                "data" => $latestFour
+                "items" => $latestFour
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -89,7 +89,7 @@ class VideogameController extends Controller
                 "success" => true,
                 "message" => "Richiesta effettuata con successo",
                 "count" => $videogamesCount,
-                "data" => $videogames
+                "items" => $videogames
             ], 200);
         } catch (\Exception $error) {
 
@@ -103,6 +103,8 @@ class VideogameController extends Controller
 
     public function show(Videogame $videogame)
     {
+
+        $new = $videogame->load("consoles");
 
         try {
 
@@ -118,7 +120,7 @@ class VideogameController extends Controller
             return response()->json([
                 "success" => true,
                 "message" => "Richiesta effettuata con successo",
-                "data" => $videogame
+                "data" => $new
             ], 200);
         } catch (\Exception $error) {
 

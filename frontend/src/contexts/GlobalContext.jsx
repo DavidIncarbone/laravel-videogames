@@ -17,47 +17,61 @@ const GlobalProvider = ({ children }) => {
 
     // videogame
 
-    const endpoint = "videogames";
-    const [videogames, setvideogames] = useState([]);
+    const homepageEndpoint = "homepage";
+    const [homepageVideogames, setHomeVideogames] = useState([]);
+
+    const endpoint = "videogames/";
+    const [videogames, setVideogames] = useState([]);
 
     const videogameEndpoint = `videogame/`;
-    const [videogame, setvideogame] = useState({});
+    const [videogame, setVideogame] = useState({});
 
     const [isLoading, setIsLoading] = useState(true);
 
     // Functions
 
-    const fetchvideogames = () => {
+    const fetchHomepageVideogames = () => {
+        axios.get(apiUrl + endpoint + homepageEndpoint).then((res) => {
+            setIsLoading(false);
+            console.log(res.data);
+            const latestFour = res.data.items;
+            setHomeVideogames(latestFour);
+        })
+    }
+
+    const fetchVideogames = () => {
         axios.get(apiUrl + endpoint).then((res) => {
             setIsLoading(false);
-            type.log(res.data.data);
-            setvideogames(res.data.data);
+            console.log(res.data.items.data);
+            const videogames = res.data.items.data;
+            setVideogames(videogames);
 
         }).catch((err) => {
-            type.log(err);
+            console.log(err);
         }).finally(() => {
-            type.log("Chiamata effettuata", videogames);
+            console.log("Chiamata effettuata", videogames);
         });
     };
 
-    const fetchvideogame = (id) => {
-        axios.get(apiUrl + videogameEndpoint + id).then((res) => {
+    const fetchVideogame = (slug) => {
+        axios.get(apiUrl + videogameEndpoint + slug).then((res) => {
             setIsLoading(false);
-            type.log(res.data);
-            setvideogame(res.data.data)
+            console.log(res.data.data.consoles);
+            setVideogame(res.data.data)
         }).catch((err) => {
-            type.log(err);
+            console.log(err);
         })
     }
 
     const data = {
+        homepageVideogames,
+        fetchHomepageVideogames,
         videogames,
+        fetchVideogames,
         videogame,
-        fetchvideogames,
-        fetchvideogame,
+        fetchVideogame,
         isLoading,
         fileUrl
-
     }
 
     return (

@@ -1,33 +1,32 @@
 
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { useGlobalContext } from "./contexts/GlobalContext"
-import DefaultLayout from "./layouts/DefaultLayout"
-import HomePage from "./pages/HomePage"
-import videogamePage from "./pages/videogamePage"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useGlobalContext } from "./contexts/GlobalContext";
+import DefaultLayout from "./layouts/DefaultLayout";
+import HomePage from "./pages/HomePage";
+import VideogamePage from "./pages/VideogamePage";
+import Videogames from "./pages/Videogames";
 import Loader from "./components/Loader";
-import NotFound from "./pages/NotFound"
-import { GlobalProvider } from "./contexts/GlobalContext"
+import NotFound from "./pages/NotFound";
+import { GlobalProvider } from "./contexts/GlobalContext";
 
 function App() {
 
 
 
   return (
-
-
-
     <BrowserRouter>
-
       <GlobalProvider>
         <Routes>
-          <Route Component={DefaultLayout} >
-            <Route index Component={HomePage} />
-            <Route path="/videogame/:id" Component={videogamePage} />
-            <Route path="*" Component={NotFound} />
+          <Route element={<DefaultLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/videogame/:slug" element={<VideogamePage />} />
+            <Route path="/videogames" element={<Videogames />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </GlobalProvider>
     </BrowserRouter>
+
 
   )
 }

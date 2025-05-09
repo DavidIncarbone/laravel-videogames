@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 // VIDEOGAMES
 
 Route::get("videogames", [VideogameController::class, "index"]);
-Route::get("videogames/{videogame}", [VideogameController::class, "show"]);
+Route::get("videogame/{videogame}", [VideogameController::class, "show"]);
 Route::get("videogames/homepage", [VideogameController::class, "homePage"]);
 
 // CONSOLES

@@ -1,10 +1,10 @@
-/* Dettaglio videogioco */
+/* Dettaglio progetto */
 #videogameImages .carousel-inner img {
     height: 400px;
     object-fit: cover;
 }
 
-/* Sezione descrizione del videogioco */
+/* Sezione descrizione del progetto */
 h1 {
     font-size: 2.5rem;
     font-weight: bold;
