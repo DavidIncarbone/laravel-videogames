@@ -120,7 +120,7 @@ class VideogameController extends Controller
             return response()->json([
                 "success" => true,
                 "message" => "Richiesta effettuata con successo",
-                "data" => $new
+                "item" => $new
             ], 200);
         } catch (\Exception $error) {
 

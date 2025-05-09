@@ -30,7 +30,7 @@ class PegiController extends Controller
                 "success" => true,
                 "message" => "Richiesta effettuata con successo",
                 "count" => $pegisCount,
-                "data" => $pegis
+                "items" => $pegis
             ], 200);
         } catch (\Exception $e) {
             return response()->json([

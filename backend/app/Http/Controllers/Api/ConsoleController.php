@@ -30,7 +30,7 @@ class ConsoleController extends Controller
                 "success" => true,
                 "message" => "Richiesta effettuata con successo",
                 "count" => $consolesCount,
-                "data" => $consoles
+                "items" => $consoles
             ], 200);
         } catch (\Exception $e) {
             return response()->json([

@@ -30,7 +30,7 @@ class GenreController extends Controller
                 "success" => true,
                 "message" => "Richiesta effettuata con successo",
                 "count" => $genresCount,
-                "data" => $genres
+                "items" => $genres
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
