@@ -26,7 +26,7 @@ const GlobalProvider = ({ children }) => {
     const videogameEndpoint = `videogame/`;
     const [videogame, setVideogame] = useState({});
 
-    const [isLoading, setIsLoading] = useState(true);
+    const [loadingCount, setLoadingCount] = useState(0);
 
     // CONSOLE
 
@@ -46,36 +46,47 @@ const GlobalProvider = ({ children }) => {
 
     //   ***** FUNCTIONS *****
 
+    // LOADER
+
+    const startLoading = () => setLoadingCount((count) => count + 1);
+    const stopLoading = () => setLoadingCount((count) => count - 1);
+    const isLoading = loadingCount > 0;
+
     // VIDEOGAMES
 
     const fetchHomepageVideogames = () => {
+        startLoading();
         axios.get(apiUrl + endpoint + homepageEndpoint).then((res) => {
-            setIsLoading(false);
             console.log("ultimi 4 videogiochi", res.data);
             const latestFour = res.data.items;
             setHomeVideogames(latestFour);
-        })
+        }).catch((err) => {
+            console.log(err);
+        }).finally(() => {
+            console.log("Chiamata agli ultimi videogiochi effettuata");
+            stopLoading();
+        });
     }
 
     const fetchVideogames = () => {
+        startLoading();
         axios.get(apiUrl + endpoint).then((res) => {
-            setIsLoading(false);
             console.log("videogiochi", res.data.items.data);
             const videogames = res.data.items.data;
             setVideogames(videogames);
-
         }).catch((err) => {
             console.log(err);
         }).finally(() => {
             console.log("Chiamata ai videogiochi effettuata");
+            stopLoading();
         });
     };
 
     const fetchVideogame = (slug) => {
+        startLoading();
+        setVideogame({});
         axios.get(apiUrl + videogameEndpoint + slug).then((res) => {
-            setIsLoading(false);
             console.log("Videogioco attuale", res.data);
-            
             const videogame = res.data.item;
             console.log("pegi del videogioco", videogame.pegi.age)
             setVideogame(videogame)
@@ -83,14 +94,15 @@ const GlobalProvider = ({ children }) => {
             console.log(err);
         }).finally(() => {
             console.log(`Chiamata al videogioco effettuata`);
+            stopLoading();
         });
     }
 
     // CONSOLE
 
     const fetchConsoles = () => {
+        startLoading();
         axios.get(apiUrl + consolesEndpoint).then((res) => {
-            setIsLoading(false);
             console.log("console", res.data);
             const consoles = res.data.items;
             setConsoles(consoles);
@@ -98,14 +110,16 @@ const GlobalProvider = ({ children }) => {
             console.log(err);
         }).finally(() => {
             console.log("Chiamata alle Console effettuata");
+            stopLoading();
         });
     }
 
     // GENRES
 
     const fetchGenres = () => {
+        startLoading();
         axios.get(apiUrl + genresEndpoint).then((res) => {
-            setIsLoading(false);
+            
             console.log("generi", res.data);
             const genres = res.data.items;
             setGenres(genres);
@@ -113,14 +127,15 @@ const GlobalProvider = ({ children }) => {
             console.log(err);
         }).finally(() => {
             console.log("Chiamata ai Generi effettuata");
+            stopLoading();
         });
     }
 
     // PEGI
 
     const fetchPegis = () => {
+        startLoading();
         axios.get(apiUrl + pegisEndpoint).then((res) => {
-            setIsLoading(false);
             console.log("PEGI", res.data);
             const pegis = res.data.items;
             setPegis(pegis);
@@ -128,6 +143,7 @@ const GlobalProvider = ({ children }) => {
             console.log(err);
         }).finally(() => {
             console.log("Chiamata ai PEGI effettuata");
+            stopLoading();
         });
     }
 

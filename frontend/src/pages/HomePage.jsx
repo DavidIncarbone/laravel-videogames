@@ -15,13 +15,15 @@ export default function HomePage() {
 
     useEffect(() => { fetchHomepageVideogames() }, []);
 
+    // if (isLoading){
+    //     return <Loader/>;
+    // }
+
     return (
-        <section id="videogames" className="py-5 bg-light">
+        <section id="videogames" className="py-5">
             <div className="container">
                 <h2 className="text-center mb-4">Nuove uscite</h2>
-                {isLoading ? <Loader /> :
                     <Carousel data={homepageVideogames} fileUrl={fileUrl} />
-                }
             </div>
         </section>
 

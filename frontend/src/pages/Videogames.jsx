@@ -14,13 +14,15 @@ export default function Videogames() {
 
     useEffect(() => { fetchVideogames(), fetchConsoles(), fetchGenres(), fetchPegis() }, []);
 
-
+    // {if (isLoading){
+    //     return <Loader/>}
+    // }  
     return (
 
-        <section id="videogames" className="py-5 bg-light">
+        <section id="videogames" className="py-5 ">
             <div className="container">
                 <h2 className="text-center mb-4">Lista videogiochi</h2>
-                {isLoading ? <Loader /> :
+                
                     <div className="row">
                         {videogames?.map((videogame) => {
                             return (
@@ -28,7 +30,7 @@ export default function Videogames() {
                             )
                         })}
                     </div>
-                }
+                
             </div>
         </section>
 

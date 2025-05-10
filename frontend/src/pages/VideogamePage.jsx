@@ -17,6 +17,9 @@ export default function VideogamePage() {
 
     useEffect(() => { fetchVideogame(slug) }, [slug]);
 
+//    {if (isLoading){
+//         return <Loader/>}
+//     }  
 
     return (
        
@@ -29,12 +32,9 @@ export default function VideogamePage() {
             <p className="text-muted">Esplora i dettagli completi del videogioco.</p>
         </header>
 
-        
-
         {/*  Videogame Details  */}
         <section id="videogame-details">
 
-        
             <div className="row gy-4">
                  {/* Videogame Image and Description  */}
                 <div className="col-12 col-lg-6">
@@ -51,7 +51,7 @@ export default function VideogamePage() {
                     {videogame.screenshots?.map((screenshot) => {
                         
                         return(
-                        <div style={{width:"144px", height:"62px"}}>
+                        <div key={screenshot.id} style={{width:"144px", height:"62px"}}>
                         <img src={fileUrl + screenshot.url} alt={ videogame.name }
                             className="current-screenshot" style={{cursor:"zoom-in"}}/>
                     </div>
