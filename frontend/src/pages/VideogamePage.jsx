@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import styles from '../style/videogameDetails.module.css';
 import { useGlobalContext } from "../contexts/GlobalContext";
 import Loader from "../components/Loader";
+import CoverOverlay from '../components/Overlay';
 
 export default function VideogamePage() {
 
@@ -13,17 +14,27 @@ export default function VideogamePage() {
     const { slug } = useParams();
     console.log(slug);
 
+        const [isOverlayOpen, setOverlayOpen] = useState(false);
+    
+    const handleImageClick = () => {
+        setOverlayOpen(true);
+    };
+    
+    const handleOverlayClick = () => {
+        setOverlayOpen(false);
+    }
+
     // Dichiaro le funzioni
 
     useEffect(() => { fetchVideogame(slug) }, [slug]);
 
-//    {if (isLoading){
-//         return <Loader/>}
-//     }  
-
+ 
     return (
-       
-    <div className="container px-3 px-lg-5 py-4 mb-3" style={{backgroundColor:"#EBEDEF"}}>
+        
+       <>
+       {isOverlayOpen && <CoverOverlay title={videogame.name} src={fileUrl + videogame.cover} alt={videogame.name} handleOverlayClick={handleOverlayClick}/>}
+    <div className="container px-3 px-lg-5 py-4 mb-3 position-relative" style={{backgroundColor:"#EBEDEF"}}>
+        
        {/* Header */}
         <header className="mb-4 text-center text-lg-start">
             <div className="d-flex justify-content-between">
@@ -31,7 +42,6 @@ export default function VideogamePage() {
             </div>
             <p className="text-muted">Esplora i dettagli completi del videogioco.</p>
         </header>
-
         {/*  Videogame Details  */}
         <section id="videogame-details">
 
@@ -39,11 +49,9 @@ export default function VideogamePage() {
                  {/* Videogame Image and Description  */}
                 <div className="col-12 col-lg-6">
                     <div className=" mb-3" style={{height:"50vh"}}>
-                        <img src={fileUrl + videogame.cover}
+                    <img src={fileUrl + videogame.cover}
                             alt={videogame.name} className="rounded shadow-sm current-cover"
-                            style={{cursor:"zoom-in", objectFit:"contain"}}/>
-                            <div className="d-flex">
-                            </div>
+                            style={{cursor:"zoom-in", objectFit:"contain"}} onClick={handleImageClick}/>
                     </div>
                     <h5 className="text-center mb-3">Screenshot allegati:</h5>
                     <div className="d-flex gap-3 mb-3">
@@ -110,4 +118,5 @@ export default function VideogamePage() {
             </div>
         </section>
     </div>
+    </>
     )}
