@@ -43,6 +43,12 @@ const GlobalProvider = ({ children }) => {
     const pegisEndpoint = "pegis";
     const [pegis, setPegis] = useState([]);
 
+    // OVERLAYS
+
+    const [isCoverOverlayOpen, setCoverOverlayOpen] = useState(false);
+    const [isScreenshotOverlayOpen, setScreenshotOverlayOpen] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
 
     //   ***** FUNCTIONS *****
 
@@ -179,6 +185,42 @@ const GlobalProvider = ({ children }) => {
         setActiveIndex(index);
     };
 
+    // ** OVERLAYS SLIDER **
+
+      //COVER
+    
+      const handleCoverClick = () => {
+        setCoverOverlayOpen(true);
+    };
+    
+    const handleCoverOverlayClick = () => {
+        setCoverOverlayOpen(false);
+    }
+
+    // SCREENSHOT
+
+    const handleScreenshotClick = (index) => {
+        setCurrentIndex(index);
+        setScreenshotOverlayOpen(true);
+
+    };
+
+    const handleScreenshotOverlayClick = () => {
+        setScreenshotOverlayOpen(false);
+    }
+
+    const goToPrevSlide = (e) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev - 1 + videogame.screenshots.length) % videogame.screenshots.length);
+      };
+    
+      const goToNextSlide = (e) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev + 1) % videogame.screenshots.length);
+      };
+
+      // DATA
+
     const data = {
         homepageVideogames,
         fetchHomepageVideogames,
@@ -200,7 +242,8 @@ const GlobalProvider = ({ children }) => {
         stopAutoSlide,
         goToPrev,
         goToNext,
-        handleDotClick
+        handleDotClick,
+        isCoverOverlayOpen, isScreenshotOverlayOpen, currentIndex, handleCoverClick, handleCoverOverlayClick, handleScreenshotClick, handleScreenshotOverlayClick, goToPrevSlide, goToNextSlide
     }
 
     return (

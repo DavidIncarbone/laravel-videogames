@@ -16,5 +16,21 @@
     height:75vh;
     width:30vw;
     
+}
+
+.overlayScreenshotContainer {
+    height: 50vh;
+    width: 60vw;
+
+}
+
+.arrowLeftCurrent
+ {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: xx-large;
 
 }
