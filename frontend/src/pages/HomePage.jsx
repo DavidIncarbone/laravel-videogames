@@ -9,15 +9,11 @@ export default function HomePage() {
 
     // Dichiarazione variabili
 
-    const { homepageVideogames, fetchHomepageVideogames, isLoading, fileUrl } = useGlobalContext();
+    const { homepageVideogames, fetchHomepageVideogames, fileUrl } = useGlobalContext();
 
     // Dichiarazione funzioni
 
     useEffect(() => { fetchHomepageVideogames() }, []);
-
-    // if (isLoading){
-    //     return <Loader/>;
-    // }
 
     return (
         <section id="videogames" className="py-5">

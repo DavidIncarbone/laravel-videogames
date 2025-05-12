@@ -34,3 +34,18 @@
     font-size: xx-large;
 
 }
+
+@media screen and (max-width:480px){
+
+    .overlayImgContainer {
+            height: 40vh;
+            width: 60vw;
+    
+        }
+    
+    .overlayScreenshotContainer {
+            height: 25vh;
+            width: 70vw;
+          }
+
+}

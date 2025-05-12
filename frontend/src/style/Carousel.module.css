@@ -76,3 +76,16 @@
 .activeDot {
     background-color: #007bff;
 }
+
+/* ***** MEDIA QUERY ***** */
+
+@media screen and (max-width:480px) {
+
+    .arrowLeft,
+        .arrowRight {
+           
+            font-size: 1rem;
+             
+        }
+
+}

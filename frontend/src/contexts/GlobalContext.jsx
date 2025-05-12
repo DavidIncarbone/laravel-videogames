@@ -1,5 +1,6 @@
 // Creazione della GlobalContext che conterrà tutte le chiamate API al server
 import { createContext, useContext, useState, useRef } from "react";
+
 import axios from "axios";
 
 //creo il Context e gli do il nome GlobalContext
@@ -18,7 +19,7 @@ const GlobalProvider = ({ children }) => {
     // VIDEOGAMES
 
     const homepageEndpoint = "homepage";
-    const [homepageVideogames, setHomeVideogames] = useState([]);
+    const [homepageVideogames, setHomepageVideogames] = useState([]);
 
     const endpoint = "videogames/";
     const [videogames, setVideogames] = useState([]);
@@ -65,7 +66,7 @@ const GlobalProvider = ({ children }) => {
         axios.get(apiUrl + endpoint + homepageEndpoint).then((res) => {
             console.log("ultimi 4 videogiochi", res.data);
             const latestFour = res.data.items;
-            setHomeVideogames(latestFour);
+            setHomepageVideogames(latestFour);
         }).catch((err) => {
             console.log(err);
         }).finally(() => {
@@ -159,7 +160,7 @@ const GlobalProvider = ({ children }) => {
     const intervalRef = useRef(null);
 
     const startAutoSlide = () => {
-        if (!intervalRef.current) {
+        if (!intervalRef.current && homepageVideogames.length > 0) {
             intervalRef.current = setInterval(() => {
                 setActiveIndex((prev) => (prev + 1) % homepageVideogames.length);
             }, 3000);
@@ -218,6 +219,9 @@ const GlobalProvider = ({ children }) => {
         e.stopPropagation();
         setCurrentIndex((prev) => (prev + 1) % videogame.screenshots.length);
       };
+
+   
+      
 
       // DATA
 
