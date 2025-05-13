@@ -1,18 +1,14 @@
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useGlobalContext } from "./contexts/GlobalContext";
-import DefaultLayout from "./layouts/DefaultLayout";
-import HomePage from "./pages/HomePage";
-import VideogamePage from "./pages/VideogamePage";
-import Videogames from "./pages/Videogames";
-import Loader from "./components/Loader";
-import NotFound from "./pages/NotFound";
-import { GlobalProvider } from "./contexts/GlobalContext";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useGlobalContext } from './contexts/GlobalContext';
+import DefaultLayout from './layouts/DefaultLayout';
+import HomePage from './pages/HomePage';
+import VideogamePage from './pages/VideogamePage';
+import Videogames from './pages/Videogames';
+import Loader from './components/Loader';
+import NotFound from './pages/NotFound';
+import { GlobalProvider } from './contexts/GlobalContext';
 
 function App() {
-
-
-
   return (
     <BrowserRouter>
       <GlobalProvider>
@@ -26,9 +22,7 @@ function App() {
         </Routes>
       </GlobalProvider>
     </BrowserRouter>
-
-
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,14 +1,47 @@
+import { useGlobalContext } from '../contexts/GlobalContext';
+import { useNavigate } from 'react-router-dom';
+
 const Searchbar = () => {
-    return (
-        <div className="input-group align-items-start">
-            <div className="form-outline" data-mdb-input-init>
-                <input type="search" id="form1" className="form-control" placeholder="Cerca per nome" />
-            </div>
-            <button type="button" className="btn btn-dark" data-mdb-ripple-init>
-                <i className="fas fa-search"></i>
-            </button>
-        </div>
-    )
-}
+  const { search, setSearch, fetchVideogames, currentPage, setCurrentPage } =
+    useGlobalContext();
+
+  const navigate = useNavigate();
+  const filteredVideogames = () => {
+    if (search) {
+      setCurrentPage(1);
+      navigate(`/videogames?page=${currentPage}&search=${search}`);
+      fetchVideogames(search);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      filteredVideogames();
+    }
+  };
+
+  return (
+    <div className="input-group align-items-start">
+      <div className="form-outline" data-mdb-input-init>
+        <input
+          type="search"
+          id="form1"
+          className="form-control"
+          placeholder="Cerca per nome"
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
+      <button
+        type="submit"
+        className="btn btn-dark"
+        data-mdb-ripple-init
+        onClick={filteredVideogames}
+      >
+        <i className="fas fa-search"></i>
+      </button>
+    </div>
+  );
+};
 
 export default Searchbar;

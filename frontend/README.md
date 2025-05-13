@@ -19,7 +19,7 @@ npm run dev
  # cancello il contenuto di App.jsx e rimuovo gli import che non mi servono
  # cancello i file che non mi servono
 
- #se voglio importo bootstrap in main.jsx prima del mio css custom 
+ #se voglio importo bootstrap in main.jsx prima del mio css custom
  import "bootstrap/dist/css/bootstrap.min.css";
 
  # comincio ad editare App.jsx

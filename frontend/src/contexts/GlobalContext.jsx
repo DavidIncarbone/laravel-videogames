@@ -1,270 +1,285 @@
 // Creazione della GlobalContext che conterrà tutte le chiamate API al server
-import { createContext, useContext, useState, useRef } from "react";
+import { createContext, useContext, useState, useRef } from 'react';
 
-import axios from "axios";
+import axios from 'axios';
 
 //creo il Context e gli do il nome GlobalContext
 
 const GlobalContext = createContext();
 
-
 // Creo il provider customizzato:
 const GlobalProvider = ({ children }) => {
+  // ***** VARIABLES *****
 
-    // ***** VARIABLES *****
+  // ENV
 
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const fileUrl = import.meta.env.VITE_BACKEND_FILE_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const fileUrl = import.meta.env.VITE_BACKEND_FILE_URL;
 
-    // VIDEOGAMES
+  // *** VIDEOGAMES ***
 
-    const homepageEndpoint = "homepage";
-    const [homepageVideogames, setHomepageVideogames] = useState([]);
+  // HOMEPAGE
 
-    const endpoint = "videogames/";
-    const [videogames, setVideogames] = useState([]);
+  const homepageEndpoint = 'videogames/homepage';
+  const [homepageVideogames, setHomepageVideogames] = useState([]);
 
-    const videogameEndpoint = `videogame/`;
-    const [videogame, setVideogame] = useState({});
+  // VIDEOGAMES LIST
 
-    const [loadingCount, setLoadingCount] = useState(0);
+  const endpoint = 'videogames';
+  const [videogames, setVideogames] = useState([]);
+  const [totalVideogames, setTotalVideogames] = useState(0);
 
-    // CONSOLE
+  // SHOW
 
-    const consolesEndpoint = "consoles";
-    const [consoles, setConsoles] = useState([]);
+  const videogameEndpoint = `videogame/`;
+  const [videogame, setVideogame] = useState({});
 
-    // GENRES
+  // LOADER
 
-    const genresEndpoint = "genres";
-    const [genres, setGenres] = useState([]);
+  const [loadingCount, setLoadingCount] = useState(0);
 
-    // PEGI
+  // CONSOLE
 
-    const pegisEndpoint = "pegis";
-    const [pegis, setPegis] = useState([]);
+  const [consoles, setConsoles] = useState([]);
 
-    // OVERLAYS
+  // GENRES
 
-    const [isCoverOverlayOpen, setCoverOverlayOpen] = useState(false);
-    const [isScreenshotOverlayOpen, setScreenshotOverlayOpen] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0);
+  const [genres, setGenres] = useState([]);
 
+  // PEGI
 
-    //   ***** FUNCTIONS *****
+  const [pegis, setPegis] = useState([]);
 
-    // LOADER
+  // OVERLAYS
 
-    const startLoading = () => setLoadingCount((count) => count + 1);
-    const stopLoading = () => setLoadingCount((count) => count - 1);
-    const isLoading = loadingCount > 0;
+  const [isCoverOverlayOpen, setCoverOverlayOpen] = useState(false);
+  const [isScreenshotOverlayOpen, setScreenshotOverlayOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-    // VIDEOGAMES
+  //   ***** FUNCTIONS *****
 
-    const fetchHomepageVideogames = () => {
-        startLoading();
-        axios.get(apiUrl + endpoint + homepageEndpoint).then((res) => {
-            console.log("ultimi 4 videogiochi", res.data);
-            const latestFour = res.data.items;
-            setHomepageVideogames(latestFour);
-        }).catch((err) => {
-            console.log(err);
-        }).finally(() => {
-            console.log("Chiamata agli ultimi videogiochi effettuata");
-            stopLoading();
-        });
-    }
+  // LOADER
 
-    const fetchVideogames = () => {
-        startLoading();
-        axios.get(apiUrl + endpoint).then((res) => {
-            console.log("videogiochi", res.data.items.data);
-            const videogames = res.data.items.data;
-            setVideogames(videogames);
-        }).catch((err) => {
-            console.log(err);
-        }).finally(() => {
-            console.log("Chiamata ai videogiochi effettuata");
-            stopLoading();
-        });
+  const startLoading = () => setLoadingCount((count) => count + 1);
+  const stopLoading = () => setLoadingCount((count) => count - 1);
+  const isLoading = loadingCount > 0;
+
+  // GLOBAL SEARCH
+
+  const [search, setSearch] = useState('');
+
+  // *** VIDEOGAMES ***
+
+  // HOMEPAGE
+
+  const fetchHomepageVideogames = () => {
+    startLoading();
+    axios
+      .get(apiUrl + homepageEndpoint)
+      .then((res) => {
+        console.log('ultimi 4 videogiochi', res.data);
+        const latestFour = res.data.items;
+        setHomepageVideogames(latestFour);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        console.log('Chiamata agli ultimi videogiochi effettuata');
+        stopLoading();
+      });
+  };
+
+  // VIDEOGAMES LIST
+
+  const fetchVideogames = (query, page) => {
+    startLoading();
+    const params = {
+      page: page,
+      search: query,
     };
+    axios
+      .get(`${apiUrl}${endpoint}`, { params })
+      .then((res) => {
+        const items = res.data.items || {};
+        const videogamesPagination = items.videogames || {};
+        const videogamesData = items.videogames?.data || [];
 
-    const fetchVideogame = (slug) => {
-        startLoading();
-        setVideogame({});
-        axios.get(apiUrl + videogameEndpoint + slug).then((res) => {
-            console.log("Videogioco attuale", res.data);
-            const videogame = res.data.item;
-            console.log("pegi del videogioco", videogame.pegi.age)
-            setVideogame(videogame)
-        }).catch((err) => {
-            console.log(err);
-        }).finally(() => {
-            console.log(`Chiamata al videogioco effettuata`);
-            stopLoading();
-        });
-    }
+        console.log('Risposta videogiochi:', videogamesData);
 
-    // CONSOLE
+        // Imposta comunque lo stato, anche se vuoto
 
-    const fetchConsoles = () => {
-        startLoading();
-        axios.get(apiUrl + consolesEndpoint).then((res) => {
-            console.log("console", res.data);
-            const consoles = res.data.items;
-            setConsoles(consoles);
-        }).catch((err) => {
-            console.log(err);
-        }).finally(() => {
-            console.log("Chiamata alle Console effettuata");
-            stopLoading();
-        });
-    }
-
-    // GENRES
-
-    const fetchGenres = () => {
-        startLoading();
-        axios.get(apiUrl + genresEndpoint).then((res) => {
-            
-            console.log("generi", res.data);
-            const genres = res.data.items;
-            setGenres(genres);
-        }).catch((err) => {
-            console.log(err);
-        }).finally(() => {
-            console.log("Chiamata ai Generi effettuata");
-            stopLoading();
-        });
-    }
-
-    // PEGI
-
-    const fetchPegis = () => {
-        startLoading();
-        axios.get(apiUrl + pegisEndpoint).then((res) => {
-            console.log("PEGI", res.data);
-            const pegis = res.data.items;
-            setPegis(pegis);
-        }).catch((err) => {
-            console.log(err);
-        }).finally(() => {
-            console.log("Chiamata ai PEGI effettuata");
-            stopLoading();
-        });
-    }
-
-    // CAROUSEL
-
-    const [activeIndex, setActiveIndex] = useState(0);
-    const intervalRef = useRef(null);
-
-    const startAutoSlide = () => {
-        if (!intervalRef.current && homepageVideogames.length > 0) {
-            intervalRef.current = setInterval(() => {
-                setActiveIndex((prev) => (prev + 1) % homepageVideogames.length);
-            }, 3000);
+        if (items) {
+          setVideogames(videogamesPagination.data || []);
+          setTotalVideogames(videogamesPagination.total || 0);
+          setPagination(
+            {
+              current_page: videogamesPagination.current_page,
+              last_page: videogamesPagination.last_page,
+              next_page_url: videogamesPagination.next_page_url,
+              prev_page_url: videogamesPagination.prev_page_url,
+            } || {},
+          );
+          setConsoles(items.consoles || []);
+          setGenres(items.genres || []);
+          setPegis(items.pegis || []);
         }
-    };
+      })
+      .catch((err) => {
+        console.error('Errore nella fetch:', err);
+        setVideogames([]);
+        setPagination({});
+        setConsoles([]);
+        setGenres([]);
+        setPegis([]);
+      })
+      .finally(() => {
+        console.log('Chiamata ai videogiochi effettuata');
+        stopLoading();
+      });
+  };
 
-    const stopAutoSlide = () => {
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-        }
-    };
+  // SHOW
 
-    const goToPrev = () => {
-        setActiveIndex((prev) => (prev - 1 + homepageVideogames.length) % homepageVideogames.length);
-    };
+  const fetchVideogame = (slug) => {
+    startLoading();
+    setVideogame({});
+    axios
+      .get(apiUrl + videogameEndpoint + slug)
+      .then((res) => {
+        console.log('Videogioco attuale', res.data);
+        const videogame = res.data.item;
+        console.log('pegi del videogioco', videogame.pegi.age);
+        setVideogame(videogame);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        console.log(`Chiamata al videogioco effettuata`);
+        stopLoading();
+      });
+  };
 
-    const goToNext = () => {
+  // CAROUSEL
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const intervalRef = useRef(null);
+
+  const startAutoSlide = () => {
+    if (!intervalRef.current && homepageVideogames.length > 0) {
+      intervalRef.current = setInterval(() => {
         setActiveIndex((prev) => (prev + 1) % homepageVideogames.length);
-    };
-
-    const handleDotClick = (index) => {
-        setActiveIndex(index);
-    };
-
-    // ** OVERLAYS SLIDER **
-
-      //COVER
-    
-      const handleCoverClick = () => {
-        setCoverOverlayOpen(true);
-    };
-    
-    const handleCoverOverlayClick = () => {
-        setCoverOverlayOpen(false);
+      }, 3000);
     }
+  };
 
-    // SCREENSHOT
-
-    const handleScreenshotClick = (index) => {
-        setCurrentIndex(index);
-        setScreenshotOverlayOpen(true);
-
-    };
-
-    const handleScreenshotOverlayClick = () => {
-        setScreenshotOverlayOpen(false);
+  const stopAutoSlide = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
+  };
 
-    const goToPrevSlide = (e) => {
-        e.stopPropagation();
-        setCurrentIndex((prev) => (prev - 1 + videogame.screenshots.length) % videogame.screenshots.length);
-      };
-    
-      const goToNextSlide = (e) => {
-        e.stopPropagation();
-        setCurrentIndex((prev) => (prev + 1) % videogame.screenshots.length);
-      };
+  const goToPrev = () => {
+    setActiveIndex(
+      (prev) =>
+        (prev - 1 + homepageVideogames.length) % homepageVideogames.length,
+    );
+  };
 
-   
-      
+  const goToNext = () => {
+    setActiveIndex((prev) => (prev + 1) % homepageVideogames.length);
+  };
 
-      // DATA
+  const handleDotClick = (index) => {
+    setActiveIndex(index);
+  };
 
-    const data = {
-        homepageVideogames,
-        fetchHomepageVideogames,
-        videogames,
-        fetchVideogames,
-        videogame,
-        fetchVideogame,
-        consoles,
-        fetchConsoles,
-        genres,
-        fetchGenres,
-        pegis,
-        fetchPegis,
-        isLoading,
-        fileUrl,
-        activeIndex,
-        setActiveIndex,
-        startAutoSlide,
-        stopAutoSlide,
-        goToPrev,
-        goToNext,
-        handleDotClick,
-        isCoverOverlayOpen, isScreenshotOverlayOpen, currentIndex, handleCoverClick, handleCoverOverlayClick, handleScreenshotClick, handleScreenshotOverlayClick, goToPrevSlide, goToNextSlide
-    }
+  // ** OVERLAYS SLIDER **
 
-    return (
+  //COVER
 
-        <GlobalContext.Provider value={data}>
-            {children}
-        </GlobalContext.Provider>
-    )
-}
+  const handleCoverClick = () => {
+    setCoverOverlayOpen(true);
+  };
 
+  const handleCoverOverlayClick = () => {
+    setCoverOverlayOpen(false);
+  };
+
+  // SCREENSHOT
+
+  const handleScreenshotClick = (index) => {
+    setCurrentIndex(index);
+    setScreenshotOverlayOpen(true);
+  };
+
+  const handleScreenshotOverlayClick = () => {
+    setScreenshotOverlayOpen(false);
+  };
+
+  const goToPrevSlide = (e) => {
+    e.stopPropagation();
+    setCurrentIndex(
+      (prev) =>
+        (prev - 1 + videogame.screenshots.length) %
+        videogame.screenshots.length,
+    );
+  };
+
+  const goToNextSlide = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % videogame.screenshots.length);
+  };
+
+  // DATA
+
+  const data = {
+    apiUrl,
+    endpoint,
+    homepageVideogames,
+    fetchHomepageVideogames,
+    videogames,
+    fetchVideogames,
+    totalVideogames,
+    videogame,
+    fetchVideogame,
+    isLoading,
+    fileUrl,
+    activeIndex,
+    setActiveIndex,
+    startAutoSlide,
+    stopAutoSlide,
+    goToPrev,
+    goToNext,
+    handleDotClick,
+    isCoverOverlayOpen,
+    isScreenshotOverlayOpen,
+    currentIndex,
+    handleCoverClick,
+    handleCoverOverlayClick,
+    handleScreenshotClick,
+    handleScreenshotOverlayClick,
+    goToPrevSlide,
+    goToNextSlide,
+    search,
+    setSearch,
+  };
+
+  return (
+    <GlobalContext.Provider value={data}>{children}</GlobalContext.Provider>
+  );
+};
 
 function useGlobalContext() {
-    const context = useContext(GlobalContext);
-    if (!context) {
-        throw new Error("useGlobalContext is not inside the context provider GlobalProvider");
-    }
-    return context;
+  const context = useContext(GlobalContext);
+  if (!context) {
+    throw new Error(
+      'useGlobalContext is not inside the context provider GlobalProvider',
+    );
+  }
+  return context;
 }
 
 export { GlobalProvider, useGlobalContext };

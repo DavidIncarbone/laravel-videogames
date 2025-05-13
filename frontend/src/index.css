@@ -1,62 +1,68 @@
-/* Aggiungi stili personalizzati */
+/* GENERAL  */
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #EBEDEF;
+  font-family: 'Arial', sans-serif;
+  background-color: #ebedef;
 }
 
 .debug {
-    border: 1px solid red;
+  border: 1px solid red;
 }
 
-
-
 img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* HEADER */
+
+header {
+  height: 10vh;
 }
 
 /* Navbar */
 
-
 .navbar-brand {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-/* VIDEOGAMES */
-#videogames .card {
-    border-radius: 10px;
-    overflow: hidden;
+nav {
+  height: 5vh;
 }
 
-#videogames .card img {
-    height: 200px;
-    object-fit: cover;
-}
+/* MAIN */
 
-.card-title {
-    font-size: 1.5rem;
-}
-
-.card-text {
-    font-size: 1rem;
+main {
+  height: auto;
+  margin-top: 15vh;
 }
 
 /* VIDEOGAME DETAILS */
 
-#screenshot-details{
-    height:calc(50vh / 4);
+#screenshot-details {
+  height: calc(50vh / 4);
 }
 
 /* Footer */
+
 footer {
-    background: #222;
-    color: white;
+  height: 10vh;
+  background: #222;
+  color: white;
 }
 
 /* ***** MEDIA QUERY ***** */
 
-@media screen and (max-width:480px) {
-    /* h1 {
+@media screen and (max-width: 480px) {
+  /* h1 {
         display: none;
     } */
 }

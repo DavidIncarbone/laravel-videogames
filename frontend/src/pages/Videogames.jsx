@@ -1,40 +1,68 @@
-import axios from 'axios';
-import { useEffect } from 'react';
-import { useGlobalContext } from "../contexts/GlobalContext";
-import Loader from "../components/Loader";
-import Card from "../components/Card";
-
+import { useEffect, useState } from 'react';
+import { useGlobalContext } from '../contexts/GlobalContext';
+import Card from '../components/Card';
+import Paginator from '../components/Paginator';
+import { useLocation, useNavigate } from 'react-router-dom';
 export default function Videogames() {
+  // VARIABLES
 
-    // Dichiarazione variabili
+  const { fileUrl, fetchVideogames, videogames, pagination, totalVideogames } =
+    useGlobalContext();
 
-    const { videogames, fetchVideogames, consoles, fetchConsoles, genres, fetchGenres, pegis, fetchPegis, isLoading, fileUrl } = useGlobalContext();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    // Dichiarazione funzioni
+  const queryParams = new URLSearchParams();
 
-    useEffect(() => { fetchVideogames(), fetchConsoles(), fetchGenres(), fetchPegis() }, []);
+  const querySearch = new URLSearchParams(location.search);
+  const search = querySearch.get('search') || '';
+  const [page, setPage] = useState(+querySearch.get('page') || '');
 
-    // {if (isLoading){
-    //     return <Loader/>}
-    // }  
-    return (
+  // FUNCTIONS
 
-        <section id="videogames" className="py-5 ">
-            <div className="container">
-                <h2 className="text-center mb-4">Lista videogiochi</h2>
-                
-                    <div className="row">
-                        {videogames?.map((videogame) => {
-                            return (
-                                <Card data={videogame} fileUrl={fileUrl} key={videogame.id} />
-                            )
-                        })}
-                    </div>
-                
-            </div>
-        </section>
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= pagination.last_page) {
+      setPage(newPage);
+    }
+  };
 
+  useEffect(() => {
+    if (page) {
+      queryParams.set('page', page);
+    }
 
+    if (search) {
+      queryParams.set('search', search);
+    }
 
-    );
+    navigate(`?${queryParams.toString()}`, { replace: true });
+    fetchVideogames(search, page);
+  }, [search, page]);
+
+  return videogames.length > 0 ? (
+    <section id="videogames">
+      <div className="container">
+        <h2 className="text-center mb-4">
+          Lista videogiochi:
+          <span className="fw-bold text-primary ms-2">{totalVideogames}</span>
+        </h2>
+        <div className="row">
+          {videogames?.map((videogame) => (
+            <Card data={videogame} fileUrl={fileUrl} key={videogame.id} />
+          ))}
+        </div>
+      </div>
+      {pagination.last_page > 1 && (
+        <Paginator
+          pageChange={handlePageChange}
+          currentPage={page}
+          pagination={pagination}
+        />
+      )}
+    </section>
+  ) : (
+    <p className="fw-bold text-center">
+      Nessun videogioco soddisfa i requisiti di ricerca
+    </p>
+  );
 }
