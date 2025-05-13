@@ -8,8 +8,7 @@ const Searchbar = () => {
   const navigate = useNavigate();
   const filteredVideogames = () => {
     if (search) {
-      setCurrentPage(1);
-      navigate(`/videogames?page=${currentPage}&search=${search}`);
+      navigate(`/videogames?page=1&search=${search}`);
       fetchVideogames(search);
     }
   };

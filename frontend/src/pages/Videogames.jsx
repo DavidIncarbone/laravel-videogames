@@ -27,6 +27,10 @@ export default function Videogames() {
   };
 
   useEffect(() => {
+    if (!page || page < 1) {
+      setPage(1);
+      return;
+    }
     if (page) {
       queryParams.set('page', page);
     }
@@ -37,7 +41,11 @@ export default function Videogames() {
 
     navigate(`?${queryParams.toString()}`, { replace: true });
     fetchVideogames(search, page);
-  }, [search, page]);
+  }, [page]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [search]);
 
   return videogames.length > 0 ? (
     <section id="videogames">

@@ -29,6 +29,11 @@ const GlobalProvider = ({ children }) => {
   const [videogames, setVideogames] = useState([]);
   const [totalVideogames, setTotalVideogames] = useState(0);
 
+  // PAGINATION
+
+  const [pagination, setPagination] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+
   // SHOW
 
   const videogameEndpoint = `videogame/`;
@@ -242,6 +247,9 @@ const GlobalProvider = ({ children }) => {
     fetchHomepageVideogames,
     videogames,
     fetchVideogames,
+    pagination,
+    currentPage,
+    setCurrentPage,
     totalVideogames,
     videogame,
     fetchVideogame,
