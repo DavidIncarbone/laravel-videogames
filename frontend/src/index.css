@@ -22,6 +22,21 @@ a {
   text-decoration: none;
 }
 
+input[type='checkbox'] {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  width: 20px;
+  height: 20px;
+}
+
+input[type='checkbox']:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
 /* HEADER */
 
 header {

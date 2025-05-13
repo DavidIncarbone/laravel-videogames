@@ -74,9 +74,9 @@ class VideogameController extends Controller
             }
 
             // PEGI FILTER
-            if ($request->filled('pegi')) {
-                $query->whereHas('pegi', function ($q) use ($request) {
-                    $q->whereIn('age', $request->pegi);
+            if ($request->filled('pegis')) {
+                $query->whereHas('pegi', function ($relQuery) use ($request) {
+                    $relQuery->whereIn('age', $request->pegis);
                 });
             }
             $videogames = $query->paginate(6);
@@ -85,15 +85,6 @@ class VideogameController extends Controller
             $consoles = Console::all();
             $genres = Genre::all();
             $pegis = Pegi::all();
-
-            if ($videogames->isEmpty()) {
-
-                return response()->json([
-                    "success" => true,
-                    "message" => "Richiesta effettuata con successo",
-                    "details" => "Nessun videogioco soddisfa i criteri di ricerca"
-                ], 200);
-            }
 
             return response()->json([
                 "success" => true,

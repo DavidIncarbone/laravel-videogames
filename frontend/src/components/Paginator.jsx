@@ -19,7 +19,7 @@ const Paginator = ({ pageChange, currentPage, pagination }) => {
         {Array.from({ length: pagination.last_page }, (_, i) => i + 1).map(
           (page) => {
             return (
-              <li key={page} className="page-item">
+              <li key={crypto.randomUUID()} className="page-item">
                 <button className="page-link" onClick={() => pageChange(page)}>
                   {page}
                 </button>

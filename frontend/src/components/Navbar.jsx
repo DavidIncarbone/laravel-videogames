@@ -1,7 +1,10 @@
 import styles from '../style/videogameDetails.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import { useGlobalContext } from '../contexts/GlobalContext';
 
 export default function Navbar() {
+  const { resetFilters, fetchVideogames, search } = useGlobalContext();
+
   return (
     <nav
       className={`navbar navbar-expand-lg navbar-dark bg-dark ${styles.navbar}`}

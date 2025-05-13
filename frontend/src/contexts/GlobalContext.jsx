@@ -34,6 +34,12 @@ const GlobalProvider = ({ children }) => {
   const [pagination, setPagination] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
 
+  // FILTER
+
+  const [selectedConsoles, setSelectedConsoles] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedPegis, setSelectedPegis] = useState([]);
+
   // SHOW
 
   const videogameEndpoint = `videogame/`;
@@ -99,8 +105,90 @@ const GlobalProvider = ({ children }) => {
 
   const fetchVideogames = (query, page) => {
     startLoading();
+
     const params = {
-      page: page,
+      page,
+      search: query,
+      consoles: selectedConsoles,
+      genres: selectedGenres,
+      pegis: selectedPegis,
+    };
+    axios
+      .get(`${apiUrl}${endpoint}`, { params })
+      .then((res) => {
+        const items = res.data.items || {};
+        const videogamesPagination = items.videogames || {};
+        const videogamesData = items.videogames?.data || [];
+
+        console.log('Risposta videogiochi:', videogamesData);
+
+        // Imposta comunque lo stato, anche se vuoto
+
+        if (items) {
+          setVideogames(videogamesPagination.data || []);
+          setTotalVideogames(videogamesPagination.total || 0);
+          setPagination(
+            {
+              current_page: videogamesPagination.current_page,
+              last_page: videogamesPagination.last_page,
+              next_page_url: videogamesPagination.next_page_url,
+              prev_page_url: videogamesPagination.prev_page_url,
+            } || {},
+          );
+          setConsoles(items.consoles || []);
+          setGenres(items.genres || []);
+          setPegis(items.pegis || []);
+        }
+      })
+      .catch((err) => {
+        console.error('Errore nella fetch:', err);
+        resetFilters();
+      })
+      .finally(() => {
+        console.log('Chiamata ai videogiochi effettuata');
+        stopLoading();
+      });
+  };
+
+  // FILTER
+
+  const handleCheckboxChange = (value, selectedList, setSelectedList) => {
+    if (selectedList.includes(value)) {
+      setSelectedList(selectedList.filter((item) => item !== value));
+    } else {
+      setSelectedList([...selectedList, value]);
+    }
+  };
+
+  const handleConsolesChange = (e) => {
+    handleCheckboxChange(e.target.value, selectedConsoles, setSelectedConsoles);
+  };
+
+  const handleGenresChange = (e) => {
+    handleCheckboxChange(e.target.value, selectedGenres, setSelectedGenres);
+  };
+
+  const handlePegisChange = (e) => {
+    console.log(typeof e.target.value);
+    handleCheckboxChange(e.target.value, selectedPegis, setSelectedPegis);
+  };
+
+  const resetFilters = () => {
+    setVideogames([]);
+    setPagination({});
+    setSelectedConsoles([]);
+    setSelectedGenres([]);
+    setSelectedPegis([]);
+  };
+
+  // ALL
+
+  const fetchAllVideogames = (query, page) => {
+    startLoading();
+    resetFilters();
+
+    const params = {
+      page,
       search: query,
     };
     axios
@@ -132,11 +220,7 @@ const GlobalProvider = ({ children }) => {
       })
       .catch((err) => {
         console.error('Errore nella fetch:', err);
-        setVideogames([]);
-        setPagination({});
-        setConsoles([]);
-        setGenres([]);
-        setPegis([]);
+        resetFilters();
       })
       .finally(() => {
         console.log('Chiamata ai videogiochi effettuata');
@@ -253,6 +337,15 @@ const GlobalProvider = ({ children }) => {
     totalVideogames,
     videogame,
     fetchVideogame,
+    consoles,
+    genres,
+    pegis,
+    selectedConsoles,
+    selectedGenres,
+    selectedPegis,
+    handleConsolesChange,
+    handleGenresChange,
+    handlePegisChange,
     isLoading,
     fileUrl,
     activeIndex,
@@ -273,6 +366,8 @@ const GlobalProvider = ({ children }) => {
     goToNextSlide,
     search,
     setSearch,
+    resetFilters,
+    fetchAllVideogames,
   };
 
   return (
