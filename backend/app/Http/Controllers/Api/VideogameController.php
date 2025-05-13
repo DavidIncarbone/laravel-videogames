@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Videogame;
+use App\Models\Console;
+use App\Models\Genre;
+use App\Models\Pegi;
 use Illuminate\Http\JsonResponse;
 
 class VideogameController extends Controller
@@ -43,7 +46,9 @@ class VideogameController extends Controller
     {
         try {
 
-            // dd($request);
+            //  dd($request);
+
+            // dd($request->search);
 
             $query = Videogame::with('consoles', 'genres', 'pegi');
 
@@ -56,6 +61,7 @@ class VideogameController extends Controller
             if ($request->filled('consoles')) {
                 $query->whereHas('consoles', function ($relQuery) use ($request) {
                     $relQuery->whereIn('name', $request->consoles);
+                    
                 });
             }
 
@@ -76,6 +82,10 @@ class VideogameController extends Controller
             $videogames = $query->paginate(6);
             $videogamesCount = $videogames->count();
 
+            $consoles = Console::all();
+            $genres = Genre::all();
+            $pegis = Pegi::all();
+
             if ($videogames->isEmpty()) {
 
                 return response()->json([
@@ -89,7 +99,12 @@ class VideogameController extends Controller
                 "success" => true,
                 "message" => "Richiesta effettuata con successo",
                 "count" => $videogamesCount,
-                "items" => $videogames
+                "items" => [
+                    "videogames" => $videogames,
+                    "consoles" => $consoles,
+                    "genres" => $genres,
+                    "pegis" => $pegis
+                            ]
             ], 200);
         } catch (\Exception $error) {
 
@@ -99,6 +114,8 @@ class VideogameController extends Controller
                 'details' => $error->getMessage(),
             ], 500);
         };
+
+
     }
 
     public function show(Videogame $videogame)
