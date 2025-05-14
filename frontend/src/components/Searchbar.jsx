@@ -11,10 +11,10 @@ const Searchbar = () => {
     selectedConsoles,
     selectedGenres,
     selectedPegis,
+    toggleFilters,
   } = useGlobalContext();
 
   const navigate = useNavigate();
-  console.log(newParams.get('search'));
 
   const filteredVideogames = () => {
     newParams.set('search', search.trim().replace(/\s{2,}/g, ' '));
@@ -31,27 +31,29 @@ const Searchbar = () => {
   };
 
   return (
-    <div className="input-group align-items-start">
-      <div className="form-outline" data-mdb-input-init>
-        <input
-          type="search"
-          id="form1"
-          value={search}
-          className="form-control"
-          placeholder="Cerca per nome"
-          onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
+    <>
+      <div className="input-group align-items-start">
+        <div className="form-outline" data-mdb-input-init>
+          <input
+            type="search"
+            id="form1"
+            value={search || ''}
+            className="form-control"
+            placeholder="Cerca per nome"
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
+        <button
+          type="submit"
+          className="btn btn-dark"
+          data-mdb-ripple-init
+          onClick={filteredVideogames}
+        >
+          <i className="fas fa-search"></i>
+        </button>
       </div>
-      <button
-        type="submit"
-        className="btn btn-dark"
-        data-mdb-ripple-init
-        onClick={filteredVideogames}
-      >
-        <i className="fas fa-search"></i>
-      </button>
-    </div>
+    </>
   );
 };
 

@@ -38,6 +38,10 @@ const GlobalProvider = ({ children }) => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedPegis, setSelectedPegis] = useState([]);
 
+  // MOBILE
+
+  const [isFilterOpen, setFilterOpen] = useState(false);
+
   // PAGINATION
 
   const [page, setPage] = useState(+searchParams.get('page') || '');
@@ -219,6 +223,11 @@ const GlobalProvider = ({ children }) => {
       setSelectedPegis,
     );
   };
+
+  // MOBILE
+
+  const toggleFilters = () => setFilterOpen((prev) => !prev);
+  const closeFilters = () => setFilterOpen(false);
 
   // ALL
 
@@ -450,6 +459,10 @@ const GlobalProvider = ({ children }) => {
     stopLoading,
     initialLoader,
     setInitialLoader,
+    isFilterOpen,
+    setFilterOpen,
+    toggleFilters,
+    closeFilters,
   };
 
   return (

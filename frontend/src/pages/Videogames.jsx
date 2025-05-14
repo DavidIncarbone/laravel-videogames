@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import Paginator from '../components/Paginator';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../components/Loader';
+import mobileStyles from '../style/FilterMobile.module.css';
 
 export default function Videogames() {
   // VARIABLES
@@ -36,6 +37,10 @@ export default function Videogames() {
     resetSelectedFilters,
     initialLoader,
     setInitialLoader,
+    isFilterOpen,
+    setFilterOpen,
+    toggleFilters,
+    closeFilters,
   } = useGlobalContext();
 
   // FUNCTIONS
@@ -62,18 +67,16 @@ export default function Videogames() {
       ) : (
         <div id="filters" className="container">
           <div className="row">
-            <div className="col-4 gap-3 form-check">
+            {/* // FILTER MENU */}
+
+            <div className="col-4 d-none d-md-block gap-3 form-check">
               <div className="container p-3">
                 <div className="row items-filters">
                   <h5 className="fw-bold">Filtra per console</h5>
                   {consoles.map((console) => {
                     return (
-                      <div
-                        key={self.crypto.randomUUID()}
-                        className="col-6 g-3 d-flex align-items-center gap-2"
-                      >
+                      <div className="col-6 g-3 d-flex align-items-center gap-2">
                         <input
-                          key={self.crypto.randomUUID()}
                           type="checkbox"
                           name="consoles[]"
                           id={`console-${console.id}`}
@@ -81,10 +84,7 @@ export default function Videogames() {
                           checked={selectedConsoles.includes(console.name)}
                           onChange={handleConsolesChange}
                         />
-                        <label
-                          key={self.crypto.randomUUID()}
-                          htmlFor={`console-${console.id}`}
-                        >
+                        <label htmlFor={`console-${console.id}`}>
                           {console.name}
                         </label>
                       </div>
@@ -97,12 +97,8 @@ export default function Videogames() {
                   <h5 className="fw-bold">Filtra per genere</h5>
                   {genres.map((genre) => {
                     return (
-                      <div
-                        key={self.crypto.randomUUID()}
-                        className="col-6 g-3 d-flex align-items-center gap-2"
-                      >
+                      <div className="col-6 g-3 d-flex align-items-center gap-2">
                         <input
-                          key={self.crypto.randomUUID()}
                           type="checkbox"
                           name="genres[]"
                           id={`genre-${genre.id}`}
@@ -110,10 +106,7 @@ export default function Videogames() {
                           checked={selectedGenres.includes(genre.name)}
                           onChange={handleGenresChange}
                         />
-                        <label
-                          key={self.crypto.randomUUID()}
-                          htmlFor={`genre-${genre.id}`}
-                        >
+                        <label htmlFor={`genre-${genre.id}`}>
                           {genre.name}
                         </label>
                       </div>
@@ -126,12 +119,8 @@ export default function Videogames() {
                   <h5 className="fw-bold">Filtra per PEGI</h5>
                   {pegis.map((pegi) => {
                     return (
-                      <div
-                        key={self.crypto.randomUUID()}
-                        className="col-6 g-3 d-flex align-items-center gap-2"
-                      >
+                      <div className="col-6 g-3 d-flex align-items-center gap-2">
                         <input
-                          key={self.crypto.randomUUID()}
                           type="checkbox"
                           name="pegis[]"
                           id={`pegi-${pegi.id}`}
@@ -139,12 +128,7 @@ export default function Videogames() {
                           checked={selectedPegis.includes(pegi.age.toString())}
                           onChange={handlePegisChange}
                         />
-                        <label
-                          key={self.crypto.randomUUID()}
-                          htmlFor={`pegi-${pegi.id}`}
-                        >
-                          {pegi.age}
-                        </label>
+                        <label htmlFor={`pegi-${pegi.id}`}>{pegi.age}</label>
                       </div>
                     );
                   })}
@@ -160,25 +144,74 @@ export default function Videogames() {
               </div>
             </div>
 
+            {/* FILTER MENU MOBILE */}
+
+            <div
+              className={`${mobileStyles.mobileFilter} d-md-none ${isFilterOpen ? mobileStyles.open : ''}`}
+            >
+              <button className={mobileStyles.closeBtn} onClick={closeFilters}>
+                ✖
+              </button>
+
+              <div className="container p-3">
+                <div className={`row`}>
+                  <h5 className="fw-bold">Filtra per console</h5>
+                  {consoles.map((console) => (
+                    <div
+                      key={console.id}
+                      className="col-12 g-3 d-flex align-items-center gap-2"
+                    >
+                      <input
+                        type="checkbox"
+                        name="consoles[]"
+                        id={`console-mobile-${console.id}`}
+                        value={console.name}
+                        checked={selectedConsoles.includes(console.name)}
+                        onChange={handleConsolesChange}
+                      />
+                      <label htmlFor={`console-mobile-${console.id}`}>
+                        {console.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Aggiungi anche GENRE e PEGI come sopra */}
+              {/* E il bottone Reset */}
+              <div className="d-flex justify-content-end mt-3">
+                <button
+                  className="btn btn-danger"
+                  onClick={resetSelectedFilters}
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
             <div className="col">
               {isLoading ? (
                 <Loader />
               ) : (
                 <>
-                  <h2 className="text-center ">
-                    Lista videogiochi:
-                    <span className="fw-bold text-primary ms-2">
-                      {totalVideogames}
-                    </span>
-                  </h2>
+                  <div className="d-flex gap-3">
+                    <button
+                      className="btn btn-outline-secondary d-md-none me-2"
+                      onClick={toggleFilters}
+                    >
+                      ☰
+                    </button>
+                    <h2 className="text-center ">
+                      Lista videogiochi:
+                      <span className="fw-bold text-primary ms-2">
+                        {totalVideogames}
+                      </span>
+                    </h2>
+                  </div>
                   <div className="container">
                     <div className="row">
                       {videogames.length > 0 ? (
                         videogames.map((videogame) => (
-                          <div
-                            key={self.crypto.randomUUID()}
-                            className="col-12 col-lg-3 g-3"
-                          >
+                          <div className="col-12 col-lg-3 g-3">
                             <Card
                               data={videogame}
                               fileUrl={fileUrl}
