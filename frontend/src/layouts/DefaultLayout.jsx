@@ -11,7 +11,6 @@ export default function DefaultLayout() {
     <>
       <Header />
       <Navbar />
-      {isLoading && <Loader />}
       <main className="container my-3">
         <Outlet />
       </main>

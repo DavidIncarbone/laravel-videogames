@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { useGlobalContext } from '../contexts/GlobalContext';
 
 export default function Navbar() {
-  const { resetFilters, fetchVideogames, search } = useGlobalContext();
+  const { resetFilters, fetchVideogames, search, setPage } = useGlobalContext();
 
   return (
     <nav
@@ -16,6 +16,7 @@ export default function Navbar() {
             <NavLink
               to="/videogames?page=1"
               className="text-decoration-none text-white"
+              onClick={() => setPage(1)}
             >
               Tutti i videogiochi
             </NavLink>

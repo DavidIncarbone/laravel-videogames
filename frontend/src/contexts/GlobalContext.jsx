@@ -212,19 +212,10 @@ const GlobalProvider = ({ children }) => {
     );
   };
 
-  // const resetFilters = () => {
-  //   setVideogames([]);
-  //   setPagination({});
-  //   setSelectedConsoles([]);
-  //   setSelectedGenres([]);
-  //   setSelectedPegis([]);
-  // };
-
   // ALL
 
   const fetchAllVideogames = (query, page) => {
     startLoading();
-    // resetFilters();
 
     const params = {
       page,
@@ -265,6 +256,16 @@ const GlobalProvider = ({ children }) => {
         console.log('Chiamata ai videogiochi effettuata');
         stopLoading();
       });
+  };
+
+  // PAGINATION
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= pagination.last_page) {
+      setPage(newPage);
+      newParams.set('page', newPage);
+      setSearchParams(newParams);
+    }
   };
 
   // SHOW
@@ -326,7 +327,7 @@ const GlobalProvider = ({ children }) => {
 
   // ** OVERLAYS SLIDER **
 
-  //COVER
+  // COVER
 
   const handleCoverClick = () => {
     setCoverOverlayOpen(true);
@@ -359,6 +360,27 @@ const GlobalProvider = ({ children }) => {
   const goToNextSlide = (e) => {
     e.stopPropagation();
     setCurrentIndex((prev) => (prev + 1) % videogame.screenshots.length);
+  };
+
+  // OTHERS
+
+  const resetFilters = () => {
+    setSearch('');
+    setPage(1);
+    setVideogames([]);
+    setConsoles([]);
+    setGenres([]);
+    setPegis([]);
+  };
+
+  const resetSelectedFilters = () => {
+    setSearch('');
+    setPage(1);
+    setSelectedConsoles([]);
+    setSelectedGenres([]);
+    setSelectedPegis([]);
+    fetchVideogames();
+    setSearchParams('page=1');
   };
 
   // DATA
@@ -410,11 +432,12 @@ const GlobalProvider = ({ children }) => {
     setSearch,
     page,
     setPage,
-    // resetFilters,
     fetchAllVideogames,
     searchParams,
     setSearchParams,
     newParams,
+    handlePageChange,
+    resetSelectedFilters,
   };
 
   return (
