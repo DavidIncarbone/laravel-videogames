@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useGlobalContext } from '../contexts/GlobalContext';
 import Card from '../components/Card';
 import Paginator from '../components/Paginator';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+
 export default function Videogames() {
   // VARIABLES
 
@@ -15,23 +16,27 @@ export default function Videogames() {
     consoles,
     genres,
     pegis,
+    search,
+    setSearch,
+    page,
+    setPage,
     selectedConsoles,
+    setSelectedConsoles,
     selectedGenres,
+    setSelectedGenres,
     selectedPegis,
+    setSelectedPegis,
     handleConsolesChange,
     handleGenresChange,
     handlePegisChange,
-    fetchAllVideogames,
+    searchParams,
+    setSearchParams,
+    newParams,
   } = useGlobalContext();
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  // const querySearch = new URLSearchParams(location.search);
+  // const search = querySearch.get('search') || '';
 
-  const queryParams = new URLSearchParams();
-
-  const querySearch = new URLSearchParams(location.search);
-  const search = querySearch.get('search') || '';
-  const [page, setPage] = useState(+querySearch.get('page') || '');
   // const [page, setPage] = useState(1);
 
   // FUNCTIONS
@@ -39,26 +44,78 @@ export default function Videogames() {
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= pagination.last_page) {
       setPage(newPage);
+      newParams.set('page', newPage);
+      setSearchParams(newParams);
     }
   };
 
+  // // USE EFFECT PER SEARCHBAR GLOBALE
+
+  // useEffect(() => {
+  //   const newParams = new URLSearchParams(searchParams);
+
+  //   if (!page || page < 1) {
+  //     setPage(1);
+  //     return;
+  //   }
+
+  //   if (page) {
+  //     newParams.set('page', page);
+  //   }
+
+  //   if (search) {
+  //     newParams.set('search', search);
+  //   }
+
+  //   navigate(`?${newParams.toString()}`, { replace: true });
+  //   fetchVideogames(search, page);
+  // }, [page, search]);
+
+  // // USE EFFECT PER CONDIVISIONE LINK
+
+  // useEffect(() => {
+  //   const consolesFromUrl = searchParams.getAll('consoles[]');
+  //   const genresFromUrl = searchParams.getAll('genres[]');
+  //   const pegisFromUrl = searchParams.getAll('pegis[]');
+
+  //   setSelectedConsoles(consolesFromUrl);
+  //   setSelectedGenres(genresFromUrl);
+  //   setSelectedPegis(pegisFromUrl);
+  //   fetchVideogames(search, page);
+  // }, []);
+
+  // // USE EFFECT PER REFRESH VIDEOGIOCHI AL CARICAMENTE DEL COMPONENTE
+
+  // useEffect(() => {
+  //   if (
+  //     !searchParams.has('consoles[]') &&
+  //     !searchParams.has('genres[]') &&
+  //     !searchParams.has('pegis[]') &&
+  //     !searchParams.has('search')
+  //   ) {
+  //     setSelectedConsoles([]);
+  //     setSelectedGenres([]);
+  //     setSelectedPegis([]);
+  //     setSearch('');
+  //     // fetchAllVideogames('', 1);
+  //   }
+  // }, [searchParams]);
+
   useEffect(() => {
-    if (!page || page < 1) {
-      setPage(1);
-      return;
-    }
-    if (page) {
-      queryParams.set('page', page);
-    }
+    const consoles = searchParams.getAll('consoles[]');
+    const genres = searchParams.getAll('genres[]');
+    const pegis = searchParams.getAll('pegis[]');
+    const search = searchParams.get('search') || '';
+    // const page = Number(searchParams.get('page')) || 1;
 
-    if (search) {
-      queryParams.set('search', search);
-    }
+    setSelectedConsoles(consoles);
+    setSelectedGenres(genres);
+    setSelectedPegis(pegis);
+    setSearch(search);
+    // setPage(page);
 
-    navigate(`?${queryParams.toString()}`, { replace: true });
-    fetchAllVideogames(search, page);
-  }, [page]);
-
+    fetchVideogames(search, page, consoles, genres, pegis);
+  }, [searchParams, page]);
   return (
     <section id="videogames">
       <div className="container">
@@ -152,8 +209,10 @@ export default function Videogames() {
               </div>
             </div>
             <button
-              className="btn btn-primary"
-              onClick={() => fetchVideogames(search)}
+              className="btn btn-primary mb-3"
+              onClick={() =>
+                fetchVideogames(search, page, consoles, genres, pegis)
+              }
             >
               Filtra
             </button>

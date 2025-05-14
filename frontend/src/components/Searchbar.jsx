@@ -1,15 +1,19 @@
 import { useGlobalContext } from '../contexts/GlobalContext';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Searchbar = () => {
-  const { search, setSearch, fetchVideogames, currentPage, setCurrentPage } =
-    useGlobalContext();
+  const { search, setSearch, fetchVideogames, newParams } = useGlobalContext();
 
   const navigate = useNavigate();
+  console.log(newParams.get('search'));
+
   const filteredVideogames = () => {
     if (search) {
-      navigate(`/videogames?page=1&search=${search}`);
-      fetchVideogames(search);
+      newParams.set('search', search.trim().replace(/\s{2,}/g, ' '));
+      newParams.set('page', 1);
+      navigate(`/videogames?${newParams.toString()}`);
+      fetchVideogames(search, 1);
     }
   };
 
@@ -25,6 +29,7 @@ const Searchbar = () => {
         <input
           type="search"
           id="form1"
+          value={search}
           className="form-control"
           placeholder="Cerca per nome"
           onChange={(e) => setSearch(e.target.value)}

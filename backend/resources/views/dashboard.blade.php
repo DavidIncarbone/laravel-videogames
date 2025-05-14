@@ -14,7 +14,7 @@
         </div>
 
         <div class="card m-auto mb-3">
-            <a href="#">
+            <a href="http://localhost:5174/">
                 <div class="card-body">
                     <h5 class="card-title text-center">Vai alla WebApp <i class="bi bi-box-arrow-up-right me-2"></i> </h5>
                 </div>

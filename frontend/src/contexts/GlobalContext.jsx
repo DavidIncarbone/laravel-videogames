@@ -1,7 +1,7 @@
 // Creazione della GlobalContext che conterrà tutte le chiamate API al server
 import { createContext, useContext, useState, useRef } from 'react';
-
 import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
 
 //creo il Context e gli do il nome GlobalContext
 
@@ -29,16 +29,20 @@ const GlobalProvider = ({ children }) => {
   const [videogames, setVideogames] = useState([]);
   const [totalVideogames, setTotalVideogames] = useState(0);
 
-  // PAGINATION
+  // FILTER & QUERY STRING
 
-  const [pagination, setPagination] = useState({});
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // FILTER
+  const [searchParams, setSearchParams] = useSearchParams();
+  const newParams = new URLSearchParams(searchParams);
 
   const [selectedConsoles, setSelectedConsoles] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedPegis, setSelectedPegis] = useState([]);
+
+  // PAGINATION
+
+  const [page, setPage] = useState(+searchParams.get('page') || '');
+  const [pagination, setPagination] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
   // SHOW
 
@@ -103,15 +107,21 @@ const GlobalProvider = ({ children }) => {
 
   // VIDEOGAMES LIST
 
-  const fetchVideogames = (query, page) => {
+  const fetchVideogames = (
+    query,
+    page,
+    consoles = [],
+    genres = [],
+    pegis = [],
+  ) => {
     startLoading();
 
     const params = {
       page,
       search: query,
-      consoles: selectedConsoles,
-      genres: selectedGenres,
-      pegis: selectedPegis,
+      consoles,
+      genres,
+      pegis,
     };
     axios
       .get(`${apiUrl}${endpoint}`, { params })
@@ -152,40 +162,69 @@ const GlobalProvider = ({ children }) => {
 
   // FILTER
 
-  const handleCheckboxChange = (value, selectedList, setSelectedList) => {
+  const handleCheckboxChange = (key, value, selectedList, setSelectedList) => {
+    const newParams = new URLSearchParams(searchParams);
+    let newSelected;
+    newParams.set('page', 1);
+    setSearchParams(newParams);
+    setPage(1);
+
     if (selectedList.includes(value)) {
-      setSelectedList(selectedList.filter((item) => item !== value));
+      newSelected = selectedList.filter((item) => item !== value);
     } else {
-      setSelectedList([...selectedList, value]);
+      newSelected = [...selectedList, value];
     }
+
+    // Aggiorna lo stato React
+    setSelectedList(newSelected);
+
+    // Aggiorna i parametri della query string
+    newParams.delete(key); // cancella tutte le voci con quel nome
+    newSelected.forEach((val) => newParams.append(key, val));
+    setSearchParams(newParams);
   };
 
   const handleConsolesChange = (e) => {
-    handleCheckboxChange(e.target.value, selectedConsoles, setSelectedConsoles);
+    handleCheckboxChange(
+      e.target.name,
+      e.target.value,
+      selectedConsoles,
+      setSelectedConsoles,
+    );
   };
 
   const handleGenresChange = (e) => {
-    handleCheckboxChange(e.target.value, selectedGenres, setSelectedGenres);
+    handleCheckboxChange(
+      e.target.name,
+      e.target.value,
+      selectedGenres,
+      setSelectedGenres,
+    );
   };
 
   const handlePegisChange = (e) => {
     console.log(typeof e.target.value);
-    handleCheckboxChange(e.target.value, selectedPegis, setSelectedPegis);
+    handleCheckboxChange(
+      e.target.name,
+      e.target.value,
+      selectedPegis,
+      setSelectedPegis,
+    );
   };
 
-  const resetFilters = () => {
-    setVideogames([]);
-    setPagination({});
-    setSelectedConsoles([]);
-    setSelectedGenres([]);
-    setSelectedPegis([]);
-  };
+  // const resetFilters = () => {
+  //   setVideogames([]);
+  //   setPagination({});
+  //   setSelectedConsoles([]);
+  //   setSelectedGenres([]);
+  //   setSelectedPegis([]);
+  // };
 
   // ALL
 
   const fetchAllVideogames = (query, page) => {
     startLoading();
-    resetFilters();
+    // resetFilters();
 
     const params = {
       page,
@@ -341,8 +380,11 @@ const GlobalProvider = ({ children }) => {
     genres,
     pegis,
     selectedConsoles,
+    setSelectedConsoles,
     selectedGenres,
+    setSelectedGenres,
     selectedPegis,
+    setSelectedPegis,
     handleConsolesChange,
     handleGenresChange,
     handlePegisChange,
@@ -366,8 +408,13 @@ const GlobalProvider = ({ children }) => {
     goToNextSlide,
     search,
     setSearch,
-    resetFilters,
+    page,
+    setPage,
+    // resetFilters,
     fetchAllVideogames,
+    searchParams,
+    setSearchParams,
+    newParams,
   };
 
   return (
