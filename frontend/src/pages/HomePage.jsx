@@ -8,7 +8,7 @@ import Carousel from '../components/Carousel';
 export default function HomePage() {
   // Dichiarazione variabili
 
-  const { homepageVideogames, fetchHomepageVideogames, fileUrl } =
+  const { homepageVideogames, fetchHomepageVideogames, fileUrl, isLoading } =
     useGlobalContext();
 
   // Dichiarazione funzioni
@@ -19,10 +19,14 @@ export default function HomePage() {
 
   return (
     <section id="videogames">
-      <div className="container">
-        <h2 className="text-center mb-4">Nuove uscite</h2>
-        <Carousel data={homepageVideogames} fileUrl={fileUrl} />
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="container">
+          <h2 className="text-center mb-4">Nuove uscite</h2>
+          <Carousel data={homepageVideogames} fileUrl={fileUrl} />
+        </div>
+      )}
     </section>
   );
 }

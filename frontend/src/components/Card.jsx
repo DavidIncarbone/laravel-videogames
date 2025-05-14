@@ -8,8 +8,13 @@ export default function Card({ data, fileUrl }) {
         <img
           src={fileUrl + data.cover}
           alt={data.name}
-          className="rounded shadow-sm current-cover"
-          style={{ objectFit: 'contain', height: '50vh' }}
+          className="rounded  current-cover card-img-top "
+          style={{
+            objectFit: 'contain',
+            height: '30vh',
+            border: '3px,solid,white',
+          }}
+          loading="lazy"
         />
       </Link>
     </div>

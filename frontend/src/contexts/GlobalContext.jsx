@@ -75,9 +75,16 @@ const GlobalProvider = ({ children }) => {
 
   // LOADER
 
-  const startLoading = () => setLoadingCount((count) => count + 1);
-  const stopLoading = () => setLoadingCount((count) => count - 1);
-  const isLoading = loadingCount > 0;
+  const startLoading = () => setLoading(true);
+  const stopLoading = () => {
+    setLoading(false);
+    // setInitialLoader(false);
+  };
+  // const isLoading = loadingCount > 0;
+
+  const [isLoading, setLoading] = useState(false);
+
+  const [initialLoader, setInitialLoader] = useState(false);
 
   // GLOBAL SEARCH
 
@@ -157,6 +164,7 @@ const GlobalProvider = ({ children }) => {
       .finally(() => {
         console.log('Chiamata ai videogiochi effettuata');
         stopLoading();
+        setInitialLoader(false);
       });
   };
 
@@ -438,6 +446,10 @@ const GlobalProvider = ({ children }) => {
     newParams,
     handlePageChange,
     resetSelectedFilters,
+    startLoading,
+    stopLoading,
+    initialLoader,
+    setInitialLoader,
   };
 
   return (

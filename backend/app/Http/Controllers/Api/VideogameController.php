@@ -79,7 +79,7 @@ class VideogameController extends Controller
                     $relQuery->whereIn('age', $request->pegis);
                 });
             }
-            $videogames = $query->paginate(8);
+            $videogames = $query->paginate(12);
             $videogamesCount = $videogames->count();
 
             $consoles = Console::all();
