@@ -39,18 +39,10 @@ input[type='checkbox']:checked {
 
 /* HEADER */
 
-header {
-  height: 10vh;
-}
-
 /* Navbar */
 
 .navbar-brand {
   font-weight: bold;
-}
-
-nav {
-  height: 5vh;
 }
 
 /* MAIN */
@@ -86,7 +78,6 @@ main {
 /* Footer */
 
 footer {
-  height: 10vh;
   background: #222;
   color: white;
 }

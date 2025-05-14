@@ -149,9 +149,15 @@ export default function Videogames() {
             <div
               className={`${mobileStyles.mobileFilter} d-md-none ${isFilterOpen ? mobileStyles.open : ''}`}
             >
-              <button className={mobileStyles.closeBtn} onClick={closeFilters}>
-                ✖
-              </button>
+              <div className="d-flex justify-content-end">
+                <button
+                  className={`btn btn-outline-secondary`}
+                  onClick={closeFilters}
+                >
+                  ✖
+                </button>
+              </div>
+              {/* CONSOLES */}
 
               <div className="container p-3">
                 <div className={`row`}>
@@ -177,8 +183,57 @@ export default function Videogames() {
                 </div>
               </div>
 
-              {/* Aggiungi anche GENRE e PEGI come sopra */}
-              {/* E il bottone Reset */}
+              {/* GENRES */}
+
+              <div className="container p-3">
+                <div className={`row`}>
+                  <h5 className="fw-bold">Filtra per PEGI</h5>
+                  {genres.map((genre) => (
+                    <div
+                      key={genre.id}
+                      className="col-12 g-3 d-flex align-items-center gap-2"
+                    >
+                      <input
+                        type="checkbox"
+                        name="genres[]"
+                        id={`genre-mobile-${genre.id}`}
+                        value={genre.name}
+                        checked={selectedGenres.includes(genre.name)}
+                        onChange={handleGenresChange}
+                      />
+                      <label htmlFor={`genre-mobile-${genre.id}`}>
+                        {genre.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* PEGI */}
+
+              <div className="container p-3">
+                <div className={`row`}>
+                  <h5 className="fw-bold">Filtra per PEGI</h5>
+                  {pegis.map((pegi) => (
+                    <div
+                      key={pegi.id}
+                      className="col-12 g-3 d-flex align-items-center gap-2"
+                    >
+                      <input
+                        type="checkbox"
+                        name="pegis[]"
+                        id={`pegi-mobile-${pegi.id}`}
+                        value={pegi.age}
+                        checked={selectedPegis.includes(pegi.age.toString())}
+                        onChange={handlePegisChange}
+                      />
+                      <label htmlFor={`pegi-mobile-${pegi.id}`}>
+                        {pegi.age}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
               <div className="d-flex justify-content-end mt-3">
                 <button
                   className="btn btn-danger"
@@ -193,21 +248,23 @@ export default function Videogames() {
                 <Loader />
               ) : (
                 <>
-                  <div className="d-flex gap-3">
-                    <button
-                      className="btn btn-outline-secondary d-md-none me-2"
-                      onClick={toggleFilters}
-                    >
-                      ☰
-                    </button>
-                    <h2 className="text-center ">
-                      Lista videogiochi:
-                      <span className="fw-bold text-primary ms-2">
-                        {totalVideogames}
-                      </span>
-                    </h2>
-                  </div>
                   <div className="container">
+                    <div className="d-flex align-items-center justify-content-center gap-1">
+                      <div>
+                        <button
+                          className="btn btn-outline-secondary d-md-none me-2"
+                          onClick={toggleFilters}
+                        >
+                          <i class="fa-solid fa-filter"></i>
+                        </button>
+                      </div>
+                      <h2 className="mb-0">
+                        Lista videogiochi:
+                        <span className="fw-bold text-primary ms-2">
+                          {totalVideogames}
+                        </span>
+                      </h2>
+                    </div>
                     <div className="row">
                       {videogames.length > 0 ? (
                         videogames.map((videogame) => (
