@@ -1,0 +1,83 @@
+.sliderContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; /* per dispositivi mobili */
+  scroll-snap-type: x mandatory; /* obbliga a scrollare orizzontalmente */
+  white-space: nowrap; /* non manda a capo */
+  display: flex;
+  padding: 1rem 0;
+  /* Nasconde scrollbar in tutti i browser */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.slider-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.sliderTrack {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sliderItem {
+  flex: 0 0 auto;
+  width: 150px;
+  height: 150px;
+  scroll-snap-align: center; /*  aiuta il browser a posizionare meglio gli elementi durante lo scroll */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid white;
+  background-color: white;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border-radius: 8px; /* opzionale: per rendere più morbidi i bordi */
+}
+
+.sliderItem:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1; /* fa sì che l’elemento si posizioni sopra gli altri */
+}
+
+.sliderImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.arrowLeft,
+.arrowRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.arrowRight {
+  right: 0;
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ***** MEDIA QUERY ***** */
+
+@media screen and (max-width: 576px) {
+  .arrowLeft,
+  .arrowRight {
+    font-size: 1rem;
+  }
+}

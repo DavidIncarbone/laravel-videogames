@@ -1,44 +1,64 @@
-// Creazione della GlobalContext che conterrà tutte le chiamate API al server
 import { createContext, useContext, useState, useRef } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 
-//creo il Context e gli do il nome GlobalContext
-
 const GlobalContext = createContext();
 
-// Creo il provider customizzato:
 const GlobalProvider = ({ children }) => {
   // ***** VARIABLES *****
+
+  // *** GENERAL ***
 
   // ENV
 
   const apiUrl = import.meta.env.VITE_API_URL;
   const fileUrl = import.meta.env.VITE_BACKEND_FILE_URL;
 
-  // *** VIDEOGAMES ***
+  // GLOBAL SEARCH
 
-  // HOMEPAGE
+  const [search, setSearch] = useState('');
+
+  // LOADER
+
+  const [isLoading, setLoading] = useState(false);
+  const [initialLoader, setInitialLoader] = useState(false);
+
+  // *** HOMEPAGE ***
+
+  // NEW GAMES CAROUSEL
 
   const homepageEndpoint = 'videogames/homepage';
   const [homepageVideogames, setHomepageVideogames] = useState([]);
 
-  // VIDEOGAMES LIST
+  // CONSOLE SLIDER
+
+  const sliderRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  // *** ALL VIDEOGAMES PAGE ***
+
+  // ALL ENTITIES
 
   const endpoint = 'videogames';
   const [videogames, setVideogames] = useState([]);
   const [totalVideogames, setTotalVideogames] = useState(0);
+  const [consoles, setConsoles] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [pegis, setPegis] = useState([]);
 
-  // FILTER & QUERY STRING
+  // QUERY STRING
 
   const [searchParams, setSearchParams] = useSearchParams();
   const newParams = new URLSearchParams(searchParams);
+
+  // FILTERS
 
   const [selectedConsoles, setSelectedConsoles] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedPegis, setSelectedPegis] = useState([]);
 
-  // MOBILE
+  // MOBILE FILTER MENU
 
   const [isFilterOpen, setFilterOpen] = useState(false);
 
@@ -48,26 +68,10 @@ const GlobalProvider = ({ children }) => {
   const [pagination, setPagination] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
 
-  // SHOW
+  // *** SHOW PAGE ***
 
   const videogameEndpoint = `videogame/`;
   const [videogame, setVideogame] = useState({});
-
-  // LOADER
-
-  const [loadingCount, setLoadingCount] = useState(0);
-
-  // CONSOLE
-
-  const [consoles, setConsoles] = useState([]);
-
-  // GENRES
-
-  const [genres, setGenres] = useState([]);
-
-  // PEGI
-
-  const [pegis, setPegis] = useState([]);
 
   // OVERLAYS
 
@@ -77,26 +81,16 @@ const GlobalProvider = ({ children }) => {
 
   //   ***** FUNCTIONS *****
 
+  // *** GENERAL ***
+
   // LOADER
 
   const startLoading = () => setLoading(true);
-  const stopLoading = () => {
-    setLoading(false);
-    // setInitialLoader(false);
-  };
-  // const isLoading = loadingCount > 0;
+  const stopLoading = () => setLoading(false);
 
-  const [isLoading, setLoading] = useState(false);
+  // *** HOMEPAGE***
 
-  const [initialLoader, setInitialLoader] = useState(false);
-
-  // GLOBAL SEARCH
-
-  const [search, setSearch] = useState('');
-
-  // *** VIDEOGAMES ***
-
-  // HOMEPAGE
+  // GET NEW GAMES
 
   const fetchHomepageVideogames = () => {
     startLoading();
@@ -112,197 +106,6 @@ const GlobalProvider = ({ children }) => {
       })
       .finally(() => {
         console.log('Chiamata agli ultimi videogiochi effettuata');
-        stopLoading();
-      });
-  };
-
-  // VIDEOGAMES LIST
-
-  const fetchVideogames = (
-    query,
-    page,
-    consoles = [],
-    genres = [],
-    pegis = [],
-  ) => {
-    startLoading();
-
-    const params = {
-      page,
-      search: query,
-      consoles,
-      genres,
-      pegis,
-    };
-    axios
-      .get(`${apiUrl}${endpoint}`, { params })
-      .then((res) => {
-        const items = res.data.items || {};
-        const videogamesPagination = items.videogames || {};
-        const videogamesData = items.videogames?.data || [];
-
-        console.log('Risposta videogiochi:', videogamesData);
-
-        // Imposta comunque lo stato, anche se vuoto
-
-        if (items) {
-          setVideogames(videogamesPagination.data || []);
-          setTotalVideogames(videogamesPagination.total || 0);
-          setPagination(
-            {
-              current_page: videogamesPagination.current_page,
-              last_page: videogamesPagination.last_page,
-              next_page_url: videogamesPagination.next_page_url,
-              prev_page_url: videogamesPagination.prev_page_url,
-            } || {},
-          );
-          setConsoles(items.consoles || []);
-          setGenres(items.genres || []);
-          setPegis(items.pegis || []);
-        }
-      })
-      .catch((err) => {
-        console.error('Errore nella fetch:', err);
-        resetFilters();
-      })
-      .finally(() => {
-        console.log('Chiamata ai videogiochi effettuata');
-        stopLoading();
-        setInitialLoader(false);
-      });
-  };
-
-  // FILTER
-
-  const handleCheckboxChange = (key, value, selectedList, setSelectedList) => {
-    const newParams = new URLSearchParams(searchParams);
-    let newSelected;
-    newParams.set('page', 1);
-    setSearchParams(newParams);
-    setPage(1);
-
-    if (selectedList.includes(value)) {
-      newSelected = selectedList.filter((item) => item !== value);
-    } else {
-      newSelected = [...selectedList, value];
-    }
-
-    // Aggiorna lo stato React
-    setSelectedList(newSelected);
-
-    // Aggiorna i parametri della query string
-    newParams.delete(key); // cancella tutte le voci con quel nome
-    newSelected.forEach((val) => newParams.append(key, val));
-    setSearchParams(newParams);
-  };
-
-  const handleConsolesChange = (e) => {
-    handleCheckboxChange(
-      e.target.name,
-      e.target.value,
-      selectedConsoles,
-      setSelectedConsoles,
-    );
-  };
-
-  const handleGenresChange = (e) => {
-    handleCheckboxChange(
-      e.target.name,
-      e.target.value,
-      selectedGenres,
-      setSelectedGenres,
-    );
-  };
-
-  const handlePegisChange = (e) => {
-    console.log(typeof e.target.value);
-    handleCheckboxChange(
-      e.target.name,
-      e.target.value,
-      selectedPegis,
-      setSelectedPegis,
-    );
-  };
-
-  // MOBILE
-
-  const toggleFilters = () => setFilterOpen((prev) => !prev);
-  const closeFilters = () => setFilterOpen(false);
-
-  // ALL
-
-  const fetchAllVideogames = (query, page) => {
-    startLoading();
-
-    const params = {
-      page,
-      search: query,
-    };
-    axios
-      .get(`${apiUrl}${endpoint}`, { params })
-      .then((res) => {
-        const items = res.data.items || {};
-        const videogamesPagination = items.videogames || {};
-        const videogamesData = items.videogames?.data || [];
-
-        console.log('Risposta videogiochi:', videogamesData);
-
-        // Imposta comunque lo stato, anche se vuoto
-
-        if (items) {
-          setVideogames(videogamesPagination.data || []);
-          setTotalVideogames(videogamesPagination.total || 0);
-          setPagination(
-            {
-              current_page: videogamesPagination.current_page,
-              last_page: videogamesPagination.last_page,
-              next_page_url: videogamesPagination.next_page_url,
-              prev_page_url: videogamesPagination.prev_page_url,
-            } || {},
-          );
-          setConsoles(items.consoles || []);
-          setGenres(items.genres || []);
-          setPegis(items.pegis || []);
-        }
-      })
-      .catch((err) => {
-        console.error('Errore nella fetch:', err);
-        resetFilters();
-      })
-      .finally(() => {
-        console.log('Chiamata ai videogiochi effettuata');
-        stopLoading();
-      });
-  };
-
-  // PAGINATION
-
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= pagination.last_page) {
-      setPage(newPage);
-      newParams.set('page', newPage);
-      setSearchParams(newParams);
-    }
-  };
-
-  // SHOW
-
-  const fetchVideogame = (slug) => {
-    startLoading();
-    setVideogame({});
-    axios
-      .get(apiUrl + videogameEndpoint + slug)
-      .then((res) => {
-        console.log('Videogioco attuale', res.data);
-        const videogame = res.data.item;
-        console.log('pegi del videogioco', videogame.pegi.age);
-        setVideogame(videogame);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        console.log(`Chiamata al videogioco effettuata`);
         stopLoading();
       });
   };
@@ -342,7 +145,231 @@ const GlobalProvider = ({ children }) => {
     setActiveIndex(index);
   };
 
-  // ** OVERLAYS SLIDER **
+  // CONSOLE SLIDER
+
+  const checkScroll = () => {
+    const el = sliderRef.current;
+    if (!el) return;
+
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
+  };
+
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current?.scrollBy({ left: -150, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current?.scrollBy({ left: 150, behavior: 'smooth' });
+    }
+  };
+
+  // *** ALL VIDEOGAMES PAGE ***
+
+  // GET ALL ENTITIES
+
+  const fetchVideogames = (
+    search,
+    page,
+    consoles = [],
+    genres = [],
+    pegis = [],
+  ) => {
+    startLoading();
+
+    const params = {
+      page,
+      search,
+      consoles,
+      genres,
+      pegis,
+    };
+    axios
+      .get(`${apiUrl}${endpoint}`, { params })
+      .then((res) => {
+        const items = res.data.items || {};
+        const videogamesPagination = items.videogames || {};
+        const videogamesData = items.videogames?.data || [];
+        console.log('Risposta videogiochi:', videogamesData);
+        if (items) {
+          setVideogames(videogamesPagination.data || []);
+          setTotalVideogames(videogamesPagination.total || 0);
+          setPagination(
+            {
+              current_page: videogamesPagination.current_page,
+              last_page: videogamesPagination.last_page,
+              next_page_url: videogamesPagination.next_page_url,
+              prev_page_url: videogamesPagination.prev_page_url,
+            } || {},
+          );
+          setConsoles(items.consoles || []);
+          setGenres(items.genres || []);
+          setPegis(items.pegis || []);
+        }
+      })
+      .catch((err) => {
+        console.error('Errore nella fetch:', err);
+        resetFilters();
+      })
+      .finally(() => {
+        console.log('Chiamata ai videogiochi effettuata');
+        stopLoading();
+        setInitialLoader(false);
+      });
+  };
+
+  // FILTERS
+
+  const handleCheckboxChange = (key, value, selectedList, setSelectedList) => {
+    const newParams = new URLSearchParams(searchParams);
+    let newSelected;
+    newParams.set('page', 1);
+    setSearchParams(newParams);
+    setPage(1);
+    if (selectedList.includes(value)) {
+      newSelected = selectedList.filter((item) => item !== value);
+    } else {
+      newSelected = [...selectedList, value];
+    }
+    setSelectedList(newSelected);
+    newParams.delete(key);
+    newSelected.forEach((val) => newParams.append(key, val));
+    setSearchParams(newParams);
+  };
+
+  const handleConsolesChange = (e) => {
+    handleCheckboxChange(
+      e.target.name,
+      e.target.value,
+      selectedConsoles,
+      setSelectedConsoles,
+    );
+  };
+
+  const handleGenresChange = (e) => {
+    handleCheckboxChange(
+      e.target.name,
+      e.target.value,
+      selectedGenres,
+      setSelectedGenres,
+    );
+  };
+
+  const handlePegisChange = (e) => {
+    console.log(typeof e.target.value);
+    handleCheckboxChange(
+      e.target.name,
+      e.target.value,
+      selectedPegis,
+      setSelectedPegis,
+    );
+  };
+
+  // RESET FILTERS
+
+  const resetFilters = () => {
+    setSearch('');
+    setPage(1);
+    setVideogames([]);
+    setConsoles([]);
+    setGenres([]);
+    setPegis([]);
+  };
+
+  const resetSelectedFilters = () => {
+    setSearch('');
+    setPage(1);
+    setSelectedConsoles([]);
+    setSelectedGenres([]);
+    setSelectedPegis([]);
+    fetchVideogames();
+    setSearchParams('page=1');
+  };
+
+  // MOBILE FILTERS MENU
+
+  const toggleFilters = () => setFilterOpen((prev) => !prev);
+  const closeFilters = () => setFilterOpen(false);
+
+  // REFRESH VIDEOGAMES (NO PARAMS)
+
+  const fetchAllVideogames = (query, page) => {
+    startLoading();
+    const params = {
+      page,
+      search: query,
+    };
+    axios
+      .get(`${apiUrl}${endpoint}`, { params })
+      .then((res) => {
+        const items = res.data.items || {};
+        const videogamesPagination = items.videogames || {};
+        const videogamesData = items.videogames?.data || [];
+        console.log('Risposta videogiochi:', videogamesData);
+        if (items) {
+          setVideogames(videogamesPagination.data || []);
+          setTotalVideogames(videogamesPagination.total || 0);
+          setPagination(
+            {
+              current_page: videogamesPagination.current_page,
+              last_page: videogamesPagination.last_page,
+              next_page_url: videogamesPagination.next_page_url,
+              prev_page_url: videogamesPagination.prev_page_url,
+            } || {},
+          );
+          setConsoles(items.consoles || []);
+          setGenres(items.genres || []);
+          setPegis(items.pegis || []);
+        }
+      })
+      .catch((err) => {
+        console.error('Errore nella fetch:', err);
+        resetFilters();
+      })
+      .finally(() => {
+        console.log('Chiamata ai videogiochi effettuata');
+        stopLoading();
+      });
+  };
+
+  // PAGINATION
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= pagination.last_page) {
+      setPage(newPage);
+      newParams.set('page', newPage);
+      setSearchParams(newParams);
+    }
+  };
+
+  // *** SHOW PAGE ***
+
+  // GET SINGLE GAME
+
+  const fetchVideogame = (slug) => {
+    startLoading();
+    setVideogame({});
+    axios
+      .get(apiUrl + videogameEndpoint + slug)
+      .then((res) => {
+        console.log('Videogioco attuale', res.data);
+        const videogame = res.data.item;
+        console.log('pegi del videogioco', videogame.pegi.age);
+        setVideogame(videogame);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        console.log(`Chiamata al videogioco effettuata`);
+        stopLoading();
+      });
+  };
+
+  // * OVERLAYS SLIDER *
 
   // COVER
 
@@ -379,45 +406,61 @@ const GlobalProvider = ({ children }) => {
     setCurrentIndex((prev) => (prev + 1) % videogame.screenshots.length);
   };
 
-  // OTHERS
-
-  const resetFilters = () => {
-    setSearch('');
-    setPage(1);
-    setVideogames([]);
-    setConsoles([]);
-    setGenres([]);
-    setPegis([]);
-  };
-
-  const resetSelectedFilters = () => {
-    setSearch('');
-    setPage(1);
-    setSelectedConsoles([]);
-    setSelectedGenres([]);
-    setSelectedPegis([]);
-    fetchVideogames();
-    setSearchParams('page=1');
-  };
-
   // DATA
 
   const data = {
+    // *** GLOBAL ***
+    // URL
     apiUrl,
+    fileUrl,
     endpoint,
+
+    // LOADER
+    isLoading,
+    startLoading,
+    stopLoading,
+    initialLoader,
+    setInitialLoader,
+
+    // GLOBAL SEARCH
+    search,
+    setSearch,
+
+    // *** HOMEPAGE ***
+    // NEW GAMES
     homepageVideogames,
     fetchHomepageVideogames,
-    videogames,
+
+    // CAROUSEL
+    activeIndex,
+    setActiveIndex,
+    startAutoSlide,
+    stopAutoSlide,
+    goToPrev,
+    goToNext,
+    handleDotClick,
+
+    // CONSOLE SLIDER
+    sliderRef,
+    canScrollLeft,
+    setCanScrollLeft,
+    canScrollRight,
+    setCanScrollRight,
+    checkScroll,
+    scrollLeft,
+    scrollRight,
+
+    // *** ALL VIDEOGAMES PAGE ***
+    // ALL ENTITIES
     fetchVideogames,
-    pagination,
-    currentPage,
-    setCurrentPage,
     totalVideogames,
-    videogame,
-    fetchVideogame,
+    videogames,
     consoles,
     genres,
     pegis,
+    fetchAllVideogames /* Refresh to initial state */,
+
+    // FILTERS
     selectedConsoles,
     setSelectedConsoles,
     selectedGenres,
@@ -427,42 +470,45 @@ const GlobalProvider = ({ children }) => {
     handleConsolesChange,
     handleGenresChange,
     handlePegisChange,
-    isLoading,
-    fileUrl,
-    activeIndex,
-    setActiveIndex,
-    startAutoSlide,
-    stopAutoSlide,
-    goToPrev,
-    goToNext,
-    handleDotClick,
-    isCoverOverlayOpen,
-    isScreenshotOverlayOpen,
-    currentIndex,
-    handleCoverClick,
-    handleCoverOverlayClick,
-    handleScreenshotClick,
-    handleScreenshotOverlayClick,
-    goToPrevSlide,
-    goToNextSlide,
-    search,
-    setSearch,
-    page,
-    setPage,
-    fetchAllVideogames,
-    searchParams,
-    setSearchParams,
-    newParams,
-    handlePageChange,
     resetSelectedFilters,
-    startLoading,
-    stopLoading,
-    initialLoader,
-    setInitialLoader,
+
+    // FILTERS MOBILE MENU
     isFilterOpen,
     setFilterOpen,
     toggleFilters,
     closeFilters,
+
+    // QUERY STRING
+    searchParams,
+    setSearchParams,
+    newParams,
+
+    // PAGINATION
+    page,
+    setPage,
+    currentPage,
+    setCurrentPage,
+    pagination,
+    handlePageChange,
+
+    // *** SHOW PAGE ***
+    // VIDEOGAME
+    fetchVideogame,
+    videogame,
+
+    // * OVERLAYS *
+    // COVER
+    isCoverOverlayOpen,
+    handleCoverClick,
+    handleCoverOverlayClick,
+
+    // SCREENSHOT
+    isScreenshotOverlayOpen,
+    currentIndex,
+    handleScreenshotClick,
+    handleScreenshotOverlayClick,
+    goToPrevSlide,
+    goToNextSlide,
   };
 
   return (

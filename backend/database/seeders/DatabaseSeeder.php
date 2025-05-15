@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
 
-            PegisSeederTable::class,
+            //PegisSeederTable::class,
             // VideogamesSeederTable::class,
             //ScreenshotsSeederTable::class,
-            // ConsoleSeederTable::class,
+             ConsoleSeederTable::class,
             // ConsoleVideogameSeeder::class,
             // GenresSeederTable::class,
             // GenresVideogamesSeederTable::class,
