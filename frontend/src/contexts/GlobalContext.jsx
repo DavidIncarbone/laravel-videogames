@@ -296,11 +296,11 @@ const GlobalProvider = ({ children }) => {
 
   // REFRESH VIDEOGAMES (NO PARAMS)
 
-  const fetchAllVideogames = (query, page) => {
+  const fetchAllVideogames = (search, page) => {
     startLoading();
     const params = {
       page,
-      search: query,
+      search,
     };
     axios
       .get(`${apiUrl}${endpoint}`, { params })

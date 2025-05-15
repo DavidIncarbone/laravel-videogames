@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { useGlobalContext } from '../contexts/GlobalContext';
 import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
-import Carousel from '../components/Carousel';
-import Slider from '../components/Slider';
+import Carousel from '../components/homepage/Carousel';
+import Slider from '../components/homepage/Slider';
 
 export default function HomePage() {
   // Dichiarazione variabili

@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useGlobalContext } from '../contexts/GlobalContext';
 import Card from '../components/Card';
 import Paginator from '../components/Paginator';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../components/Loader';
 import mobileStyles from '../style/FilterMobile.module.css';
 
@@ -18,10 +17,8 @@ export default function Videogames() {
     consoles,
     genres,
     pegis,
-    search,
     setSearch,
     page,
-    setPage,
     selectedConsoles,
     setSelectedConsoles,
     selectedGenres,
@@ -38,7 +35,6 @@ export default function Videogames() {
     initialLoader,
     setInitialLoader,
     isFilterOpen,
-    setFilterOpen,
     toggleFilters,
     closeFilters,
   } = useGlobalContext();
@@ -60,6 +56,7 @@ export default function Videogames() {
   useEffect(() => {
     setInitialLoader(true);
   }, []);
+
   return (
     <section id="videogames">
       {initialLoader ? (

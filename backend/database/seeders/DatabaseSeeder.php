@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
             //PegisSeederTable::class,
-            // VideogamesSeederTable::class,
+            VideogamesSeederTable::class,
             //ScreenshotsSeederTable::class,
-             ConsoleSeederTable::class,
+             //ConsoleSeederTable::class,
             // ConsoleVideogameSeeder::class,
             // GenresSeederTable::class,
             // GenresVideogamesSeederTable::class,

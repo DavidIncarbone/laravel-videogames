@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from '../style/Carousel.module.css';
+import { useGlobalContext } from '../../contexts/GlobalContext';
 import { Container } from 'react-bootstrap';
-import { useGlobalContext } from '../contexts/GlobalContext';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import styles from '../../style/Carousel.module.css';
 
 const Carousel = ({ data, fileUrl }) => {
   const {
@@ -35,7 +35,7 @@ const Carousel = ({ data, fileUrl }) => {
             <div key={item.id} className={styles.slide}>
               <NavLink to={`/videogame/${item.slug}`}>
                 <img
-                  src={`${fileUrl}${item.screenshots[0].url}`}
+                  src={`${fileUrl}${item.screenshots[0].url} `}
                   alt={item.name}
                 />
               </NavLink>
