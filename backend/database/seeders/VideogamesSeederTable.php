@@ -28,6 +28,7 @@ class VideogamesSeederTable extends Seeder
             $newVideogame->cover = $videogame["cover"];
             $newVideogame->description = $videogame["description"];
             $newVideogame->publisher = $videogame["publisher"];
+            $newVideogame->placeholder = $videogame["placeholder"];
             $newVideogame->save();
         }
     }

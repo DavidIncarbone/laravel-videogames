@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("cover");
             $table->longtext("description");
             $table->string("publisher");
+            $table->longText("placeholder")->nullable();
             $table->string("slug")->unique();
             $table->timestamps();
         });

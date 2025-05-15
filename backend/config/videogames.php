@@ -12,6 +12,7 @@ return [
         'developer' => 'Nintendo EPD',
         'publisher' => 'Nintendo',
         'description' => 'Un’avventura open-world che reinventa la serie, offrendo un mondo vasto e interattivo da esplorare liberamente.',
+        'placeholder' => 'img/videogames/placeholder.jpg'
     ],
     [
         'name' => 'Elden Ring',
@@ -24,6 +25,7 @@ return [
         'developer' => 'FromSoftware',
         'publisher' => 'Bandai Namco Entertainment',
         'description' => 'Un action RPG che unisce la profondità narrativa di George R.R. Martin con il gameplay impegnativo tipico di FromSoftware.',
+        'placeholder' => 'img/videogames/placeholder.jpg'
     ],
     [
         'name' => 'Minecraft',
@@ -36,6 +38,7 @@ return [
         'developer' => 'Mojang Studios',
         'publisher' => 'Mojang Studios',
         'description' => 'Un gioco sandbox che permette ai giocatori di costruire e esplorare mondi generati proceduralmente.',
+        'placeholder' => 'img/videogames/placeholder.jpg'
     ],
     [
         'name' => 'FIFA 24',
@@ -48,6 +51,7 @@ return [
         'developer' => 'EA Sports',
         'publisher' => 'Electronic Arts',
         'description' => 'L\'ultima edizione della serie calcistica più realistica, con nuove modalità e squadre aggiornate.',
+        'placeholder' => 'img/videogames/placeholder.jpg'
     ],
     [
         'name' => 'Call of Duty: Modern Warfare III',
@@ -60,6 +64,7 @@ return [
         'developer' => 'Sledgehammer Games, Infinity Ward, Treyarch',
         'publisher' => 'Activision',
         'description' => 'Un FPS adrenalinico che continua la saga con una campagna intensa, multiplayer rinnovato e la modalità Zombies.',
+        'placeholder' => 'img/videogames/placeholder.jpg'
     ],
     [
         'name' => 'Super Mario Odyssey',
@@ -72,6 +77,7 @@ return [
         'developer' => 'Nintendo EPD',
         'publisher' => 'Nintendo',
         'description' => 'Un platform 3D colorato e creativo che accompagna Mario in un viaggio intorno al mondo per salvare Peach da Bowser.',
+        'placeholder' => 'img/videogames/placeholder.jpg'
     ],
     [
         'name' => 'Hogwarts Legacy',
@@ -84,6 +90,7 @@ return [
         'developer' => 'Portkey Games',
         'publisher' => 'Warner Bros. Games',
         'description' => 'Un gioco action RPG ambientato nell’universo di Harry Potter, che permette ai giocatori di vivere la propria avventura magica a Hogwarts.',
+        'placeholder' => 'img/videogames/placeholder.jpg'
     ],
     [
         'name' => 'Animal Crossing: New Horizons',
@@ -96,6 +103,7 @@ return [
         'developer' => 'Nintendo EPD',
         'publisher' => 'Nintendo',
         'description' => 'Un gioco sandbox rilassante dove i giocatori possono costruire e personalizzare la propria isola tropicale.',
+        'placeholder' => 'img/videogames/placeholder.jpg'
     ],
     [
         'name' => 'Gran Turismo 7',
@@ -108,6 +116,7 @@ return [
         'developer' => 'Polyphony Digital',
         'publisher' => 'Sony Interactive Entertainment',
         'description' => 'Un simulatore di guida realistico che offre una vasta selezione di auto e tracciati, pensato per gli appassionati di motori.',
+        'placeholder' => 'img/videogames/placeholder.jpg'
     ],
     [
         'name' => 'Resident Evil 4 Remake',
@@ -120,5 +129,6 @@ return [
         'developer' => 'Capcom',
         'publisher' => 'Capcom',
         'description' => 'Un remake moderno del celebre survival horror, con grafica aggiornata, gameplay rinnovato e atmosfera intensa.',
+        'placeholder' => 'img/videogames/placeholder.jpg'
     ],
 ];

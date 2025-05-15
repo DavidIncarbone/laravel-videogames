@@ -2,7 +2,8 @@
 
 return [
     // The Legend of Zelda: Breath of the Wild (id = 1)
-    ['videogame_id' => 1, 'url' => 'img/videogames/screenshots/the_legend_of_zelda_breath_of_the_wild_screenshot_1.jpg'],
+    ['videogame_id' => 1, 'url' => 'img/videogames/screenshots/the_legend_of_zelda_breath_of_the_wild_screenshot_1.jpg',
+    'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 1, 'url' => 'img/videogames/screenshots/the_legend_of_zelda_breath_of_the_wild_screenshot_2.jpg'],
     ['videogame_id' => 1, 'url' => 'img/videogames/screenshots/the_legend_of_zelda_breath_of_the_wild_screenshot_3.jpg'],
     ['videogame_id' => 1, 'url' => 'img/videogames/screenshots/the_legend_of_zelda_breath_of_the_wild_screenshot_4.jpg'],

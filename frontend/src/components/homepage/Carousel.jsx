@@ -31,20 +31,22 @@ const Carousel = ({ data, fileUrl }) => {
           className={styles.sliderTrack}
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
-          {data.map((item) => (
-            <div key={item.id} className={styles.slide}>
-              <NavLink to={`/videogame/${item.slug}`}>
-                <img
-                  src={`${fileUrl}${item.screenshots[0].url} `}
-                  alt={item.name}
-                />
-              </NavLink>
-              <div className={styles.overlay}>
-                <h2>{item.name}</h2>
-                <p>{item.description}</p>
+          {data.map((item) => {
+            return (
+              <div key={item.id} className={styles.slide}>
+                <NavLink to={`/videogame/${item.slug}`}>
+                  <img
+                    src={`${fileUrl}${item.screenshots.length > 0 ? item.screenshots[0].url : item.placeholder} `}
+                    alt={item.name}
+                  />
+                </NavLink>
+                <div className={styles.overlay}>
+                  <h2>{item.name}</h2>
+                  <p>{item.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <button className={styles.arrowLeft} onClick={goToPrev}>

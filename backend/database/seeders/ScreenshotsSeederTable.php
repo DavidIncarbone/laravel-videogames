@@ -21,6 +21,7 @@ class ScreenshotsSeederTable extends Seeder
 
             $newScreenshot->videogame_id = $screenshot['videogame_id'];
             $newScreenshot->url = $screenshot['url'];
+            
 
             $newScreenshot->save();
         }

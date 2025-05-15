@@ -4,8 +4,9 @@ import { useGlobalContext } from '../../contexts/GlobalContext';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import styles from '../../style/Slider.module.css';
 
-const Slider = ({ data, fileUrl }) => {
+const Slider = ({ data }) => {
   const {
+    fileUrl,
     sliderRef,
     canScrollLeft,
     canScrollRight,
@@ -15,14 +16,21 @@ const Slider = ({ data, fileUrl }) => {
   } = useGlobalContext();
 
   useEffect(() => {
-    checkScroll();
     const el = sliderRef.current;
     if (!el) return;
-    el.addEventListener('scroll', checkScroll);
-    window.addEventListener('resize', checkScroll);
+
+    const handleScroll = () => checkScroll();
+
+    setTimeout(() => {
+      checkScroll();
+    }, 1000);
+
+    el.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+
     return () => {
-      el.removeEventListener('scroll', checkScroll);
-      window.removeEventListener('resize', checkScroll);
+      el.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
   }, []);
 

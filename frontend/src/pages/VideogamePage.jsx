@@ -92,25 +92,34 @@ export default function VideogamePage() {
                     onClick={handleCoverClick}
                   />
                 </div>
-                <h5 className="text-center mb-3">Screenshot allegati:</h5>
-                <div className="d-flex gap-3 mb-3">
-                  {videogame.screenshots?.map((screenshot, index) => {
-                    return (
-                      <div
-                        key={screenshot.id}
-                        style={{ width: '144px', height: '62px' }}
-                      >
-                        <img
-                          src={fileUrl + screenshot.url}
-                          alt={videogame.name}
-                          className="current-screenshot"
-                          style={{ cursor: 'zoom-in' }}
-                          onClick={() => handleScreenshotClick(index)}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
+                {videogame?.screenshots?.length > 0 ? (
+                  <>
+                    <h5 className="text-center mb-3">Screenshot allegati:</h5>
+                    <div className="d-flex gap-3 mb-3">
+                      {videogame.screenshots?.map((screenshot, index) => {
+                        return (
+                          <div
+                            key={screenshot.id}
+                            style={{ width: '144px', height: '62px' }}
+                          >
+                            <img
+                              src={fileUrl + screenshot.url}
+                              alt={videogame.name}
+                              className="current-screenshot"
+                              style={{ cursor: 'zoom-in' }}
+                              onClick={() => handleScreenshotClick(index)}
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </>
+                ) : (
+                  <p className="fw-bold text-center">
+                    Nessuno screenshot presente
+                  </p>
+                )}
+
                 <h5>
                   <strong>Descrizione:</strong>
                 </h5>

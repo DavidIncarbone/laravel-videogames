@@ -1,7 +1,7 @@
 import { useGlobalContext } from '../contexts/GlobalContext';
 import styles from '../style/Paginator.module.css';
 
-const Paginator = ({ pageChange, currentPage, pagination }) => {
+const Paginator = ({ currentPage, pagination }) => {
   const {
     showInput,
     setShowInput,
@@ -9,6 +9,7 @@ const Paginator = ({ pageChange, currentPage, pagination }) => {
     totalPages,
     scrollTop,
     getPageNumbers,
+    handlePageChange,
     handlePageInputBlur,
     handlePageInputChange,
     handlePageInputKeyDown,
@@ -25,7 +26,7 @@ const Paginator = ({ pageChange, currentPage, pagination }) => {
           <button
             className={`${styles.pageLink} ${!pagination.prev_page_url ? styles.disabled : ''}`}
             onClick={() => {
-              pageChange(currentPage - 1);
+              handlePageChange(currentPage - 1);
               scrollTop();
             }}
             disabled={!pagination.prev_page_url}
@@ -36,7 +37,7 @@ const Paginator = ({ pageChange, currentPage, pagination }) => {
 
         {/* Page numbers with ellipsis */}
         {getPageNumbers().map((item, index) => (
-          <li key={index} className={styles.pageItem}>
+          <li key={index} className={`${styles.pageItem}`}>
             {item === '...' ? (
               <button
                 className={styles.pageLink}
@@ -48,7 +49,7 @@ const Paginator = ({ pageChange, currentPage, pagination }) => {
               <button
                 className={`${styles.pageLink} ${item === currentPage ? styles.active : ''}`}
                 onClick={() => {
-                  pageChange(item);
+                  handlePageChange(item);
                   scrollTop();
                 }}
               >
@@ -81,7 +82,7 @@ const Paginator = ({ pageChange, currentPage, pagination }) => {
           <button
             className={`${styles.pageLink} ${!pagination.next_page_url ? styles.disabled : ''}`}
             onClick={() => {
-              pageChange(currentPage + 1);
+              handlePageChange(currentPage + 1);
               scrollTop();
             }}
             disabled={!pagination.next_page_url}

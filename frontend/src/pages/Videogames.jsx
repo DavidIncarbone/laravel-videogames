@@ -302,11 +302,7 @@ export default function Videogames() {
                 </>
               )}
               {pagination.last_page > 1 && (
-                <Paginator
-                  pageChange={handlePageChange}
-                  currentPage={page}
-                  pagination={pagination}
-                />
+                <Paginator currentPage={page} pagination={pagination} />
               )}
             </div>
           </div>

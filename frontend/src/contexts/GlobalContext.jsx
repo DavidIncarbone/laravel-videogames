@@ -66,7 +66,7 @@ const GlobalProvider = ({ children }) => {
 
   const [page, setPage] = useState(+searchParams.get('page') || '');
   const [pagination, setPagination] = useState({});
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [page, setCurrentPage] = useState(1);
   const [showInput, setShowInput] = useState(false);
   const [pageInput, setPageInput] = useState('');
   const totalPages = pagination.last_page;
@@ -356,32 +356,30 @@ const GlobalProvider = ({ children }) => {
   }
 
   const getPageNumbers = () => {
-    const current = currentPage;
     let pages = [];
 
     if (totalPages <= 3) {
+      // Se il numero di pagine è 3 o inferiore, mostra tutte le pagine
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
       }
     } else {
-      if (current === 1 || current === 2) {
+      if (page === 1) {
         pages = [1, 2, 3, '...', totalPages];
-      } else if (current === totalPages || current === totalPages - 1) {
+      } else if (page === 2) {
+        pages = [1, 2, 3, '...', totalPages];
+      } else if (page === totalPages - 1) {
         pages = [1, '...', totalPages - 2, totalPages - 1, totalPages];
-      } else if (current >= 3 && current < totalPages - 1) {
-        pages = [
-          1,
-          '...',
-          current - 1,
-          current,
-          current + 1,
-          '...',
-          totalPages,
-        ];
+      } else if (page === totalPages) {
+        pages = [1, '...', totalPages - 2, totalPages - 1, totalPages];
+      } else if (page >= 3 && page < totalPages - 1) {
+        pages = [1, '...', page - 1, page, page + 1, '...', totalPages];
       }
     }
+
     return pages;
   };
+
   const handlePageInputChange = (e) => {
     const value = e.target.value;
     if (value === '' || /^[1-9][0-9]*$/.test(value)) {
@@ -551,8 +549,7 @@ const GlobalProvider = ({ children }) => {
     // PAGINATION
     page,
     setPage,
-    currentPage,
-    setCurrentPage,
+    page,
     pagination,
     handlePageChange,
     showInput,
