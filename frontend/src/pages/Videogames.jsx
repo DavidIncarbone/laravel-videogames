@@ -69,13 +69,16 @@ export default function Videogames() {
           <div className="row">
             {/* // FILTER MENU */}
 
-            <div className="col-4 d-none d-md-block gap-3 form-check">
+            <div className="col-4 d-none d-lg-block gap-3 form-check">
               <div className="container p-3">
                 <div className="row items-filters">
                   <h5 className="fw-bold">Filtra per console</h5>
                   {consoles.map((console) => {
                     return (
-                      <div className="col-6 g-3 d-flex align-items-center gap-2">
+                      <div
+                        key={console.id}
+                        className="col-6 g-3 d-flex align-items-center gap-2"
+                      >
                         <input
                           type="checkbox"
                           name="consoles[]"
@@ -97,7 +100,10 @@ export default function Videogames() {
                   <h5 className="fw-bold">Filtra per genere</h5>
                   {genres.map((genre) => {
                     return (
-                      <div className="col-6 g-3 d-flex align-items-center gap-2">
+                      <div
+                        key={genre.id}
+                        className="col-6 g-3 d-flex align-items-center gap-2"
+                      >
                         <input
                           type="checkbox"
                           name="genres[]"
@@ -119,7 +125,10 @@ export default function Videogames() {
                   <h5 className="fw-bold">Filtra per PEGI</h5>
                   {pegis.map((pegi) => {
                     return (
-                      <div className="col-6 g-3 d-flex align-items-center gap-2">
+                      <div
+                        key={pegi.id}
+                        className="col-6 g-3 d-flex align-items-center gap-2"
+                      >
                         <input
                           type="checkbox"
                           name="pegis[]"
@@ -147,7 +156,7 @@ export default function Videogames() {
             {/* FILTER MENU MOBILE */}
 
             <div
-              className={`${mobileStyles.mobileFilter} d-md-none ${isFilterOpen ? mobileStyles.open : ''}`}
+              className={`${mobileStyles.mobileFilter} d-lg-none ${isFilterOpen ? mobileStyles.open : ''}`}
             >
               <div className="d-flex justify-content-end">
                 <button
@@ -165,7 +174,7 @@ export default function Videogames() {
                   {consoles.map((console) => (
                     <div
                       key={console.id}
-                      className="col-12 g-3 d-flex align-items-center gap-2"
+                      className="col-12 col-md-4 g-3 d-flex align-items-center gap-2"
                     >
                       <input
                         type="checkbox"
@@ -191,7 +200,7 @@ export default function Videogames() {
                   {genres.map((genre) => (
                     <div
                       key={genre.id}
-                      className="col-12 g-3 d-flex align-items-center gap-2"
+                      className="col-12 col-md-4 g-3 d-flex align-items-center gap-2"
                     >
                       <input
                         type="checkbox"
@@ -217,7 +226,7 @@ export default function Videogames() {
                   {pegis.map((pegi) => (
                     <div
                       key={pegi.id}
-                      className="col-12 g-3 d-flex align-items-center gap-2"
+                      className="col-12 col-md-4 g-3 d-flex align-items-center gap-2"
                     >
                       <input
                         type="checkbox"
@@ -233,16 +242,23 @@ export default function Videogames() {
                     </div>
                   ))}
                 </div>
-              </div>
-              <div className="d-flex justify-content-end mt-3">
-                <button
-                  className="btn btn-danger"
-                  onClick={resetSelectedFilters}
-                >
-                  Reset
-                </button>
+                <div className="d-flex justify-content-end justify-content-md-star gap-3 mt-3 mt-md-5">
+                  <button
+                    className="btn btn-outline-secondary d-md-none"
+                    onClick={closeFilters}
+                  >
+                    Chiudi
+                  </button>
+                  <button
+                    className="btn btn-danger me-md-5"
+                    onClick={resetSelectedFilters}
+                  >
+                    Reset
+                  </button>
+                </div>
               </div>
             </div>
+
             <div className="col">
               {isLoading ? (
                 <Loader />
@@ -252,10 +268,10 @@ export default function Videogames() {
                     <div className="d-flex align-items-center justify-content-center gap-1">
                       <div>
                         <button
-                          className="btn btn-outline-secondary d-md-none me-2"
+                          className="btn btn-outline-secondary d-lg-none me-2"
                           onClick={toggleFilters}
                         >
-                          <i class="fa-solid fa-filter"></i>
+                          <i className="fa-solid fa-filter"></i>
                         </button>
                       </div>
                       <h2 className="mb-0">
@@ -268,7 +284,10 @@ export default function Videogames() {
                     <div className="row">
                       {videogames.length > 0 ? (
                         videogames.map((videogame) => (
-                          <div className="col-12 col-lg-3 g-3">
+                          <div
+                            key={videogame.id}
+                            className="col-12 col-md-6 col-lg-3 g-3"
+                          >
                             <Card
                               data={videogame}
                               fileUrl={fileUrl}
