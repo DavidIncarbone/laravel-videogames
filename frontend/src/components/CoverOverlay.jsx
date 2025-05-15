@@ -3,10 +3,7 @@ import styles from '../style/Overlay.module.css';
 const CoverOverlay = ({ title, src, alt, handleCoverOverlayClick }) => {
   return (
     <>
-      <div
-        className={`${styles.overlay} debug `}
-        onClick={handleCoverOverlayClick}
-      >
+      <div className={`${styles.overlay}`} onClick={handleCoverOverlayClick}>
         <h3 className="text-white mb-3">
           Cover di <span className="fw-bold text-primary">{title}</span>
         </h3>

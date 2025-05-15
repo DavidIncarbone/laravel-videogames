@@ -35,7 +35,7 @@ const ScreenshotOverlay = ({
         </div>
       </div>
 
-      <div className="text-white mt-3">
+      <div id={styles.index} className="text-white mt-3">
         {currentIndex} di {length}
       </div>
     </div>

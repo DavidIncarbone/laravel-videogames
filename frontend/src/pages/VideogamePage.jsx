@@ -70,9 +70,7 @@ export default function VideogamePage() {
         >
           {/* Header */}
           <div className="mb-4 text-center text-lg-start">
-            <div className="d-flex justify-content-between">
-              <h1 className="fs-2 text-center">{videogame.name}</h1>
-            </div>
+            <h1 className="fs-2">{videogame.name}</h1>
             <p className="text-muted">
               Esplora i dettagli completi del videogioco.
             </p>
