@@ -149,6 +149,7 @@ export default function VideogamePage() {
                         <li
                           key={console.id}
                           style={{ width: '75px', height: '75px' }}
+                          className=" d-flex align-items-center"
                         >
                           <img
                             src={fileUrl + console.logo}
@@ -165,9 +166,12 @@ export default function VideogamePage() {
                   <p>
                     <strong>Genere:</strong>
                   </p>
-                  <ul className="list-unstyled d-flex flex-wrap gap-1">
-                    {videogame.genres?.map((genre) => {
-                      return <li key={genre.id}>{genre.name}</li>;
+                  <ul className="list-unstyled d-flex flex-wrap gap-2">
+                    {videogame.genres?.map((genre, index) => {
+                      if (index === videogame.genres.length - 1) {
+                        return <li key={genre.id}>{genre.name}</li>;
+                      }
+                      return <li key={genre.id}>{genre.name} - </li>;
                     })}
                   </ul>
                 </div>
@@ -177,7 +181,7 @@ export default function VideogamePage() {
                     <strong>
                       Prezzo:{' '}
                       <span className="badge bg-primary p-2 fs-5">
-                        {videogame.price}$
+                        {videogame.price} €
                       </span>
                     </strong>
                   </p>

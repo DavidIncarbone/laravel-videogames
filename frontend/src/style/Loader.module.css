@@ -20,11 +20,3 @@
   color: #007bff;
   font-weight: 600;
 }
-
-/* *** MEDIA QUERY *** */
-
-@media (max-width: 576px) {
-  .loaderContainer {
-    display: none;
-  }
-}
