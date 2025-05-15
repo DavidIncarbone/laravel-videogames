@@ -11,12 +11,12 @@
   width: 3rem;
   height: 3rem;
   border-width: 0.3rem;
-  color: #007bff;
+  color: black;
 }
 
 .loadingText {
   margin-top: 15px;
   font-size: 1.2rem;
-  color: #007bff;
+  color: black;
   font-weight: 600;
 }

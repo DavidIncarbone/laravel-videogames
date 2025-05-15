@@ -67,6 +67,9 @@ const GlobalProvider = ({ children }) => {
   const [page, setPage] = useState(+searchParams.get('page') || '');
   const [pagination, setPagination] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [showInput, setShowInput] = useState(false);
+  const [pageInput, setPageInput] = useState('');
+  const totalPages = pagination.last_page;
 
   // *** SHOW PAGE ***
 
@@ -345,6 +348,68 @@ const GlobalProvider = ({ children }) => {
     }
   };
 
+  function scrollTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
+
+  const getPageNumbers = () => {
+    const current = currentPage;
+    let pages = [];
+
+    if (totalPages <= 3) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (current === 1 || current === 2) {
+        pages = [1, 2, 3, '...', totalPages];
+      } else if (current === totalPages || current === totalPages - 1) {
+        pages = [1, '...', totalPages - 2, totalPages - 1, totalPages];
+      } else if (current >= 3 && current < totalPages - 1) {
+        pages = [
+          1,
+          '...',
+          current - 1,
+          current,
+          current + 1,
+          '...',
+          totalPages,
+        ];
+      }
+    }
+    return pages;
+  };
+  const handlePageInputChange = (e) => {
+    const value = e.target.value;
+    if (value === '' || /^[1-9][0-9]*$/.test(value)) {
+      setPageInput(value);
+    }
+  };
+
+  const handlePageInputBlur = () => {
+    if (
+      pageInput &&
+      Number(pageInput) >= 1 &&
+      Number(pageInput) <= totalPages
+    ) {
+      handlePageChange(Number(pageInput));
+    }
+    setShowInput(false);
+  };
+
+  const handlePageInputKeyDown = (e) => {
+    if (e.key === 'Enter' && pageInput) {
+      const page = Number(pageInput);
+      if (page >= 1 && page <= totalPages) {
+        handlePageChange(page);
+        scrollTop();
+      }
+      setShowInput(false);
+    }
+  };
   // *** SHOW PAGE ***
 
   // GET SINGLE GAME
@@ -490,6 +555,16 @@ const GlobalProvider = ({ children }) => {
     setCurrentPage,
     pagination,
     handlePageChange,
+    showInput,
+    setShowInput,
+    pageInput,
+    setPageInput,
+    totalPages,
+    scrollTop,
+    getPageNumbers,
+    handlePageInputChange,
+    handlePageInputBlur,
+    handlePageInputKeyDown,
 
     // *** SHOW PAGE ***
     // VIDEOGAME
