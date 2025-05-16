@@ -27,4 +27,26 @@ class ProfileUpdateRequest extends FormRequest
             ],
         ];
     }
+
+     public function messages(): array
+     {
+         return[
+              // NAME
+
+             'name.required' => 'Il campo nome è obbligatorio.',
+             'name.string' => 'Il nome deve essere una stringa.',
+             'name.max' => 'Il nome non può superare i :max caratteri.',
+
+
+            //  EMAIL
+
+            'email.required' => 'Il campo email è obbligatorio.',
+            'email.string' => 'L\'email deve essere una stringa.',
+            'email.lowercase' => 'L\'email deve essere in lettere minuscole.',
+            'email.email' => 'L\'email inserita non è valida.',
+            'email.max' => 'L\'email non può superare i :max caratteri.',
+
+
+         ];
+     }
 }

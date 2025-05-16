@@ -20,12 +20,15 @@
         <div class="mb-2">
             <label for="name">{{ __('Nome') }}</label>
             <input class="form-control" type="text" name="name" id="name" autocomplete="name"
-                value="{{ old('name', $user->name) }}" required autofocus>
-            @error('name')
+                value="{{ old('name', $user->name) }}" autofocus>
+             {{-- @error('name')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->get('name') }}</strong>
                 </span>
-            @enderror
+            @enderror  --}}
+             @error('name')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror 
         </div>
 
         <div class="mb-2">
@@ -33,14 +36,12 @@
                 {{ __('Email') }}
             </label>
 
-            <input id="email" name="email" type="email" class="form-control"
-                value="{{ old('email', $user->email) }}" required autocomplete="username" />
+            <input id="email" name="email" type="text" class="form-control"
+                value="{{ old('email', $user->email) }}" autocomplete="username" />
 
-            @error('email')
-                <span class="alert alert-danger mt-2" role="alert">
-                    <strong>{{ $errors->get('email') }}</strong>
-                </span>
-            @enderror
+                @error('email')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror 
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
@@ -62,7 +63,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-4">
-            <button class="btn btn-primary" type="submit">{{ __('Salva') }}</button>
+            <button class="btn btn-dark mt-1" type="submit">{{ __('Salva') }}</button>
 
             @if (session('status') === 'profile-updated')
                 <script>

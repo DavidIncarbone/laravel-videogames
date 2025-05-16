@@ -14,12 +14,12 @@
 
                             <div class="mb-4 row">
                                 <label for="email"
-                                    class="col-lg-4 col-form-label text-lg-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-lg-4 col-form-label text-lg-right">{{ __('Indirizzo E-Mail') }}</label>
 
                                 <div class="col-lg-6">
-                                    <input id="email" type="email"
+                                    <input id="email" type="text"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                        value="{{ old('email') }}" autocomplete="email" autofocus>
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -36,7 +36,7 @@
                                 <div class="col-lg-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="current-password">
+                                         autocomplete="current-password">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -53,7 +53,7 @@
                                             {{ old('remember') ? 'checked' : '' }} style="width:15px; height:15px;">
 
                                         <label class="form-check-label" for="remember">
-                                            {{ __('Remember Me') }}
+                                            {{ __('Ricordami') }}
                                         </label>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                     </div>
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link text-dark" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
+                                            {{ __('Password dimenticata?') }}
                                         </a>
                                     @endif
                                 </div>

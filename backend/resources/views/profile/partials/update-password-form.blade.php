@@ -45,7 +45,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-4">
-            <button type="submit" class="btn btn-primary">{{ __('Salva') }}</button>
+            <button type="submit" class="btn btn-dark mt-1">{{ __('Salva') }}</button>
 
             @if (session('status') === 'password-updated')
                 <script>
