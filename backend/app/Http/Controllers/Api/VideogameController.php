@@ -16,7 +16,12 @@ class VideogameController extends Controller
     {
         try {
 
-            $latestFour = Videogame::with('screenshots')->orderBy('year_of_publication', 'desc')->take(4)->get();
+            $latestFour = Videogame::with('screenshots')
+            ->whereHas('screenshots') 
+            ->orderBy('year_of_publication', 'desc')
+            ->take(4)
+            ->get();
+
             $latestFourCount = $latestFour->count();
 
             if ($latestFour->isEmpty()) {

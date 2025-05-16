@@ -17,8 +17,8 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="/videogame/:slug" element={<VideogamePage />} />
             <Route path="/videogames" element={<Videogames />} />
-            <Route path="*" element={<NotFound />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </GlobalProvider>
     </BrowserRouter>

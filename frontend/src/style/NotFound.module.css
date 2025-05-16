@@ -1,0 +1,8 @@
+.notFound {
+  height: calc(100vh - 25vh);
+  width: 100%;
+  background-image: url('https://as2.ftcdn.net/jpg/06/35/89/11/1000_F_635891160_CBZigydcgiKIgRg61bGWd4meOMAaIhYD.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

@@ -39,7 +39,7 @@ class VideogameController extends Controller
         }
 
         $videogames = $query->paginate(5)->withQueryString();
-        $publishers = Videogame::all()->pluck("publisher")->toArray();
+        $publishers = Videogame::all()->pluck("publisher")->unique()->values()->toArray();
 
         $consoles = Console::all();
         return view("videogames.index", compact("videogames", "publishers"));

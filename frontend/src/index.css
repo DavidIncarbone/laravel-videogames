@@ -39,6 +39,30 @@ input[type='checkbox']:checked {
 
 /* HEADER */
 
+.site-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: black; /* oppure un altro colore principale */
+  text-align: center;
+  letter-spacing: -1px;
+  transition: transform 0.3s ease;
+
+  /* Effetto 3D multi-shadow */
+  text-shadow:
+    1px 1px 0 #b30000,
+    2px 2px 0 #990000,
+    3px 3px 0 #800000,
+    4px 4px 0 #660000;
+}
+
+.site-title:hover {
+  transform: scale(1.02);
+}
+
+.highlight {
+  color: #ff3c3c;
+}
+
 /* Navbar */
 
 .navbar-brand {
@@ -80,6 +104,10 @@ main {
 footer {
   background: #222;
   color: white;
+}
+
+footer li {
+  cursor: pointer;
 }
 
 /* ***** MEDIA QUERY ***** */
