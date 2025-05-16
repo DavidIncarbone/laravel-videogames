@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreGenreRequest;
+use App\Http\Requests\UpdateGenreRequest;
 use App\Models\Genre;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -45,35 +47,18 @@ class GenreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGenreRequest $request)
     {
 
         // VALIDATION
 
         // Name
 
-        $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'min:2',
-                'max:15',
-                'regex:/^[a-zA-Z0-9\s\-\&\']+$/u',
-
-            ],
-        ], [
-            'name.required' => 'Il campo nome è obbligatorio.',
-            'name.string' => 'Il campo nome deve essere una stringa.',
-            'name.min' => 'Il campo nome deve contenere almeno :min caratteri.',
-            'name.max' => 'Il campo nome non può superare i :max caratteri.',
-            'name.regex' => 'Il campo nome contiene caratteri non validi.',
-
-        ]);
-
+        $request->validated();
+            
         $data = $request->all();
         $newGenre = new Genre;
         $newGenre->name = Str::of($data["name"])->trim();;
-
 
         $newGenre->save();
         toastr()->success("<span class='fw-bold'>" . Str::limit($newGenre->name, 20) . '</span> è stato aggiunto con successo');
@@ -99,25 +84,15 @@ class GenreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, genre $genre)
+    public function update(UpdateGenreRequest $request, genre $genre)
     {
 
         // VALIDATION
 
-        // Name
-        $request->validate([
-            'name' => ['required', 'string', 'min:2', 'max:15', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
-        ], [
-            'name.required' => 'Il campo nome è obbligatorio.',
-            'name.string' => 'Il campo nome deve essere una stringa.',
-            'name.min' => 'Il campo nome deve contenere almeno :min caratteri.',
-            'name.max' => 'Il campo nome non può superare i :max caratteri.',
-            'name.regex' => 'Il campo nome contiene caratteri non validi.',
-
-        ]);
-
+     
+        $request->validated();
+            
         // DATABASE
-
 
         $data = $request->all();
         $genre->name = $data["name"];

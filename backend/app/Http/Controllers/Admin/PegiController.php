@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePegiRequest;
+use App\Http\Requests\UpdatePegiRequest;
 use App\Models\Pegi;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -44,41 +46,16 @@ class PegiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePegiRequest $request)
     {
 
         // VALIDATION
 
-        $request->validate(
-            [
-                'age' => [
-                    'required',
-                    'numeric',
-                    'min:1',
-                    'max:100',
+        $request->validated();
+           
 
-                ],
-                'logo' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
-            ],
-
-            // Age
-
-            [
-                'age.required' => 'Il campo età è obbligatorio.',
-                'age.numeric' => 'Il campo età deve essere un numero.',
-                'age.min' => 'L\'età minima non può essere inferiore ad :min anno.',
-                'age.max' => 'L\'età massima non può essere superiore a :max anni.',
-
-
-                // Logo
-
-
-                'logo.required' => 'Il logo è obbligatorio',
-                'logo.image' => 'Il file caricato deve essere un\'immagine.',
-                'logo.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
-                'logo.max' => 'La dimensione massima dell\'immagine è di 2MB.',
-            ]
-        );
+           
+        
         $data = $request->all();
         // dd($data);
 

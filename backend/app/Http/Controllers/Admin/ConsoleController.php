@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreConsoleRequest;
+use App\Http\Requests\UpdateConsoleRequest;
 use App\Models\Console;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -43,38 +45,13 @@ class ConsoleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Console $console)
+    public function store(StoreConsoleRequest $request, Console $console)
     {
 
         // VALIDATION
 
-        $request->validate(
-            [
-                'name' => ['required', 'string', 'min:2', 'max:20', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
-                'logo' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
-            ],
-
-            // Name
-
-            [
-                'name.required' => 'Il campo nome è obbligatorio.',
-                'name.string' => 'Il nome deve essere una stringa.',
-                'name.min' => 'Il nome deve contenere almeno :min caratteri.',
-                'name.max' => 'Il nome non può superare i :max caratteri.',
-                'name.regex' => 'Il nome contiene caratteri non validi.',
-
-
-                // Logo
-
-
-                'logo.required' => 'Il logo è obbligatorio',
-                'logo.image' => 'Il file caricato deve essere un\'immagine.',
-                'logo.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
-                'logo.max' => 'La dimensione massima dell\'immagine è di 2MB.',
-            ]
-        );
-
-
+        $request->validated();
+       
         $data = $request->all();
         $newConsole = new Console;
         $newConsole->name = Str::of($data["name"])->trim();
@@ -111,44 +88,15 @@ class ConsoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Console $console)
+    public function update(UpdateConsoleRequest $request, Console $console)
     {
         // VALIDATION
 
-        $request->validate(
-            [
-                'name' => ['required', 'string', 'min:2', 'max:20', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
-                'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            ],
-
-            // Name
-
-            [
-                'name.required' => 'Il campo nome è obbligatorio.',
-                'name.string' => 'Il nome deve essere una stringa.',
-                'name.min' => 'Il nome deve contenere almeno :min caratteri.',
-                'name.max' => 'Il nome non può superare i :max caratteri.',
-                'name.regex' => 'Il nome contiene caratteri non validi.',
-            ],
-
-            // Logo
-
-            [
-
-                'logo.image' => 'Il file caricato deve essere un\'immagine.',
-                'logo.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
-                'logo.max' => 'La dimensione massima dell\'immagine è di 2MB.',
-            ]
-        );
-
-
+        $request->validated();
+         
         $data = $request->all();
         // dd($data);
-
-
         $console->name = $data["name"];
-
-
 
         if (array_key_exists("logo", $data)) {
 
@@ -163,9 +111,7 @@ class ConsoleController extends Controller
             toastr()->success("<span class='fw-bold'>" . Str::limit($console->name, 20) . '</span> è stata modificata con successo');
         }
 
-
         $console->update();
-
 
         return redirect()->route("admin.consoles.index");
     }

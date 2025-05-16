@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreScreenshotRequest;
+use App\Http\Requests\UpdateScreenshotRequest;
 use App\Models\Screenshot;
 use App\Models\Videogame;
 use Illuminate\Support\Facades\Storage;
@@ -55,33 +57,11 @@ class ScreenshotController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreScreenshotRequest $request)
     {
 
-        $remainingCount = $request->query('remainingCount');
-        $isScreenshot = $remainingCount > 1 ? 'screenshots' : 'screenshot';
-
-
-
-        $request->validate(
-            [
-                'screenshots' => ['nullable', 'array', 'max:' . $remainingCount],
-
-                'screenshots.*' => ['image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
-            ],
-            [
-                // Screenshots array
-
-                'screenshots.array' => 'Il formato degli screenshot non è corretto',
-                'screenshots.max' => 'Non puoi caricare più di :max ' . $isScreenshot,
-
-                // Screenshots immagini
-                'screenshots.*.image' => 'Il file caricato deve essere un\'immagine.',
-                'screenshots.*.mimes' => 'L\'immagine deve essere nei formati: jpeg, png, jpg o webp.',
-                'screenshots.*.max' => 'L\'immagine non può superare i 2MB.',
-            ]
-        );
-
+        $request->validated();
+          
         $videogameId = $request->query('videogame_id');
 
         $data = $request->all();
@@ -128,26 +108,10 @@ class ScreenshotController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Screenshot $screenshot)
+    public function update(UpdateScreenshotRequest $request, Screenshot $screenshot)
     {
-        $request->validate(
-            [
-
-                'screenshot' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            ],
-
-
-            // Screenshot
-
-            [
-
-                'screenshot.image' => 'Il file caricato deve essere un\'immagine.',
-                'screenshot.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
-                'screenshot.max' => 'La dimensione massima dell\'immagine è di 2MB.',
-            ]
-        );
-
-
+        $request->validated();
+         
         $data = $request->all();
         // dd($data);
 
