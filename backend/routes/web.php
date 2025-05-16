@@ -35,9 +35,9 @@ Route::middleware(["auth", "verified"])
         // VIDEOGAMES
 
         Route::resource("videogames", VideogameController::class);
-        Route::delete("videogames/all/destroy", [VideogameController::class, "destroyAll"])->name("videogames.destroyAll");
-        Route::delete("videogames/selected/destroy", [VideogameController::class, "destroySelected"])->name("videogames.destroySelected");
-        Route::delete("videogames/show/{videogame:slug}", [VideogameController::class, "destroyShow"])->name("videogames.show.destroy");
+        // Route::delete("videogames/all/destroy", [VideogameController::class, "destroyAll"])->name("videogames.destroyAll");
+        // Route::delete("videogames/selected/destroy", [VideogameController::class, "destroySelected"])->name("videogames.destroySelected");
+        // Route::delete("videogames/show/{videogame:slug}", [VideogameController::class, "destroyShow"])->name("videogames.show.destroy");
 
 
         // CONSOLES

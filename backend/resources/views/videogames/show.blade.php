@@ -2,6 +2,14 @@
 
 @section('content')
     <div class="container-fluid px-3 px-lg-5 py-4 mb-3" style="background-color:#EBEDEF;">
+
+        @if ($videogame)
+
+        
+            
+        @else
+
+        
         <!-- Header -->
         <header class="mb-4 text-center text-lg-start">
             <div class="d-flex justify-content-between">

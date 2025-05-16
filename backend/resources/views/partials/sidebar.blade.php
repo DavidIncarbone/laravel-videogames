@@ -29,7 +29,7 @@
             <hr>
 
             @include('partials.sidebar.logout')
-            <hr>
+            
         </ul>
     </div>
 </nav>

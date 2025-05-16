@@ -14,7 +14,7 @@
             @if ($screenshot->url)
                 <div class="mt-3 fw-bold">Screenshot attuale:</div>
                 <div class="d-flex flex-wrap gap-3 align-items-center my-3">
-                    <div id="post-image" class="col-6 col-lg-12 g-3" style=" cursor:zoom-in">
+                    <div id="post-image"  style="width: 100px; height:50px cursor:zoom-in">
                         <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $screenshot->videogame->name }}"
                             class="current-cover">
                     </div>

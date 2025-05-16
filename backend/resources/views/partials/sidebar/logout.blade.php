@@ -6,4 +6,5 @@
              <i class="bi bi-box-arrow-right me-2"></i> Logout
          </button>
      </li>
+     <hr>
  @endauth

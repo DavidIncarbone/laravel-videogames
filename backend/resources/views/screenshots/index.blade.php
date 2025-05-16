@@ -179,21 +179,25 @@
     <script>
         const deleteModal = document.getElementById('deleteModal');
         deleteModal.addEventListener('show.bs.modal', function(event) {
+
             const button = event.relatedTarget;
             const screenshotSlug = button.getAttribute('data-screenshot-slug');
             const screenshotName = button.getAttribute('data-screenshot-name');
             const screenshotUrl = button.getAttribute('data-screenshot-url');
-
             const form = document.getElementById('deletescreenshotForm');
             form.action = `/admin/screenshots/${screenshotSlug}`;
             const screenshotNameToDelete = document.getElementById('screenshotNameToDelete');
             screenshotNameToDelete.textContent = screenshotName;
-
             const screenshotContainer = document.getElementById('screenshot-container');
+            screenshotContainer.innerHTML = '';
+            screenshotContainer.classList.add("d-flex", "list-unstyled", "gap-3", "flex-wrap");
             const screenshotToDelete = document.createElement('img');
+            screenshotToDelete.style = "width:124px; height:62px; object-fit:contain; cursor:zoom-in;";
+            screenshotToDelete.classList.add("new-cover");
             screenshotToDelete.src = `/storage/${screenshotUrl}`;
             screenshotToDelete.alt = screenshotName;
             screenshotContainer.appendChild(screenshotToDelete);
+            overlayScreenshots(".new-cover", "new-cover-overlay", "new-cover-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-cover");
 
         });
     </script>
@@ -226,11 +230,20 @@
 
     <x-new-screenshot-overlay>
         <x-slot:overlayTitle>Screenshot da eliminare</x-slot>
+        
         <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
-                class="rounded shadow-sm w-75 w-75">
+                class="rounded shadow-sm w-75">
         </x-slot>
         <x-slot:index></x-slot>
     </x-new-screenshot-overlay>
+
+    <x-new-cover-overlay>
+        <x-slot:overlayTitle>Screenshot da eliminare</x-slot>
+        <x-slot:img> <img src="" alt="" id="new-cover-overlay-img"
+                class="rounded shadow-sm w-75" style="height:75%">
+        </x-slot>
+        <x-slot:index></x-slot>
+    </x-new-cover-overlay>
 
 
 
