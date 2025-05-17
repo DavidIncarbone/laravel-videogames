@@ -14,6 +14,17 @@ class UpdateVideogameRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+
+        $this->merge([
+            'genre_ids' => $this->input('genre_ids', []),
+            'console_ids' => $this->input('console_ids', [])
+        ]);
+
+        //  dd($this);
+       
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -21,6 +32,9 @@ class UpdateVideogameRequest extends FormRequest
      */
     public function rules(): array
     {
+
+       
+        
         return [
             'name' => ['required', 'string', 'min:1', 'max:50'],
 

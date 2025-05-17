@@ -50,7 +50,7 @@ const GlobalProvider = ({ children }) => {
   // QUERY STRING
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const newParams = new URLSearchParams(searchParams);
+  let newParams = new URLSearchParams(searchParams);
 
   // FILTERS
 
@@ -194,8 +194,8 @@ const GlobalProvider = ({ children }) => {
       .get(`${apiUrl}${endpoint}`, { params })
       .then((res) => {
         const items = res.data.items || {};
-        const videogamesPagination = items.videogames || {};
-        const videogamesData = items.videogames?.data || [];
+        const videogamesPagination = items?.videogames || {};
+        const videogamesData = items?.videogames?.data || [];
         console.log('Risposta videogiochi:', videogamesData);
         if (items) {
           setVideogames(videogamesPagination.data || []);
@@ -309,8 +309,8 @@ const GlobalProvider = ({ children }) => {
       .get(`${apiUrl}${endpoint}`, { params })
       .then((res) => {
         const items = res.data.items || {};
-        const videogamesPagination = items.videogames || {};
-        const videogamesData = items.videogames?.data || [];
+        const videogamesPagination = items?.videogames || {};
+        const videogamesData = items?.videogames?.data || [];
         console.log('Risposta videogiochi:', videogamesData);
         if (items) {
           setVideogames(videogamesPagination.data || []);

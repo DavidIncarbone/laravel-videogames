@@ -1,12 +1,15 @@
 import { useGlobalContext } from '../contexts/GlobalContext';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Searchbar = () => {
   const {
     search,
     setSearch,
+    page,
+    setPage,
     fetchVideogames,
+    fetchAllVideogames,
     newParams,
     selectedConsoles,
     selectedGenres,
@@ -15,13 +18,23 @@ const Searchbar = () => {
   } = useGlobalContext();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const isVideogamesPage = location.pathname.startsWith('/videogames');
 
   const filteredVideogames = () => {
     newParams.set('search', search.trim().replace(/\s{2,}/g, ' '));
     newParams.set('page', 1);
-
+    setPage(1);
+    isVideogamesPage
+      ? fetchVideogames(
+          search,
+          1,
+          selectedConsoles,
+          selectedGenres,
+          selectedPegis,
+        )
+      : fetchAllVideogames(search, 1);
     navigate(`/videogames?${newParams.toString()}`);
-    fetchVideogames(search, 1, selectedConsoles, selectedGenres, selectedPegis);
   };
 
   const handleKeyDown = (e) => {

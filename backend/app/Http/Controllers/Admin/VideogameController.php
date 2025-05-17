@@ -145,10 +145,7 @@ class VideogameController extends Controller
 
         // ADD THIS ARRAYS ANYWAY
 
-        $request->merge([
-            'genre_ids' => $request->input('genre_ids', []),
-            'console_ids' => $request->input('console_ids', [])
-        ]);
+     
 
         // VALIDATION
 
