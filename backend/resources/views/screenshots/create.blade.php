@@ -1,12 +1,12 @@
-@php
-    $label = $remainingCount > 1 ? 'immagini' : 'immagine';
-@endphp
 
 @extends('layouts.master')
 
-
-
 @section('content')
+
+@if ($screenshots)
+@php
+    $label = $remainingCount > 1 ? 'immagini' : 'immagine';
+@endphp
     <h1>Aggiungi screenshots a <span class="text-primary">{{ $videogame->name }}</span></h1>
     <form
         action="{{ route('admin.screenshots.store', 'remainingCount=' . $remainingCount . '&videogame_id=' . $videogame->id) }}"
@@ -71,4 +71,10 @@
         </div>
         <x-loader></x-loader>
     </form>
+    @else
+
+    <p>Nessun gioco a cui aggiungere screenshot selezionato</p>
+
+    @endif
+
 @endsection

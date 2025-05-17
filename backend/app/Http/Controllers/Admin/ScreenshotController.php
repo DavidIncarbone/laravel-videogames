@@ -46,12 +46,16 @@ class ScreenshotController extends Controller
         $videogames = Videogame::all();
         $videogameSlug = $request->query('screenshots');
         $videogame = Videogame::where('slug', $videogameSlug)->first();
-        $screenshots = $videogame->screenshots;
-        $screenshotsCount = $videogame->screenshots->count();
-        $remainingCount = 4 - $screenshotsCount;
+        $screenshots = $videogame->screenshots ?? '';
+        if ($screenshots){
+             $screenshotsCount = $videogame->screenshots->count();
+             $remainingCount = 4 - $screenshotsCount;
+             return view('screenshots/create', compact('videogames', 'videogame', 'screenshots', 'screenshotsCount', 'remainingCount'));
+        }
 
-
-        return view('screenshots/create', compact('videogames', 'videogame', 'screenshots', 'screenshotsCount', 'remainingCount'));
+        return view('screenshots/no-content-to-create');
+    
+       
     }
 
     /**
