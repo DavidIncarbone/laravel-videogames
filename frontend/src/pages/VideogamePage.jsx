@@ -6,6 +6,7 @@ import { useGlobalContext } from '../contexts/GlobalContext';
 import Loader from '../components/Loader';
 import CoverOverlay from '../components/CoverOverlay';
 import ScreenshotOverlay from '../components/ScreenshotOverlay';
+import SkeletonImg from '../components/SkeletonImg';
 
 export default function VideogamePage() {
   // Dichiaro le variabili
@@ -84,11 +85,12 @@ export default function VideogamePage() {
 
               <div className="col-12 col-lg-6">
                 <div className=" mb-3" style={{ height: '50vh' }}>
-                  <img
+                  <SkeletonImg
                     src={fileUrl + videogame.cover}
                     alt={videogame.name}
-                    className="rounded shadow-sm current-cover"
-                    style={{ cursor: 'zoom-in', objectFit: 'contain' }}
+                    className={'rounded shadow-sm current-cover'}
+                    objectFit={'contain'}
+                    cursor={'zoom-in'}
                     onClick={handleCoverClick}
                   />
                 </div>
@@ -102,11 +104,10 @@ export default function VideogamePage() {
                             key={screenshot.id}
                             style={{ width: '144px', height: '62px' }}
                           >
-                            <img
+                            <SkeletonImg
                               src={fileUrl + screenshot.url}
                               alt={videogame.name}
                               className="current-screenshot"
-                              style={{ cursor: 'zoom-in' }}
                               onClick={() => handleScreenshotClick(index)}
                             />
                           </div>
@@ -131,7 +132,7 @@ export default function VideogamePage() {
               <div className="col-12 col-lg-6">
                 <div className="d-flex align-items-center gap-3 mb-4 flex-wrap">
                   <div style={{ width: '75px', height: '75px' }}>
-                    <img
+                    <SkeletonImg
                       src={fileUrl + videogame.pegi?.logo}
                       alt={`PEGI` + videogame.pegi?.age}
                       className="img-fluid"
@@ -160,7 +161,7 @@ export default function VideogamePage() {
                           style={{ width: '75px', height: '75px' }}
                           className=" d-flex align-items-center"
                         >
-                          <img
+                          <SkeletonImg
                             src={fileUrl + console.logo}
                             alt={console.name}
                             className="img-fluid"

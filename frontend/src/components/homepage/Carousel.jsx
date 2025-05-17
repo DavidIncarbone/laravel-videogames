@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useGlobalContext } from '../../contexts/GlobalContext';
 import { Container } from 'react-bootstrap';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import SkeletonImg from '../../components/SkeletonImg';
 import styles from '../../style/Carousel.module.css';
 
 const Carousel = ({ data, fileUrl }) => {
@@ -35,7 +36,7 @@ const Carousel = ({ data, fileUrl }) => {
             return (
               <div key={item.id} className={styles.slide}>
                 <NavLink to={`/videogame/${item.slug}`}>
-                  <img
+                  <SkeletonImg
                     src={`${fileUrl}${item.screenshots.length > 0 ? item.screenshots[0].url : item.placeholder} `}
                     alt={item.name}
                   />

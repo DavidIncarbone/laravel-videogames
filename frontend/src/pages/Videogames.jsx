@@ -51,7 +51,7 @@ export default function Videogames() {
     setSelectedPegis(pegisUrl);
     setSearch(search);
     fetchVideogames(search, page, consolesUrl, genresUrl, pegisUrl);
-  }, [searchParams, page]);
+  }, [searchParams]);
 
   useEffect(() => {
     setInitialLoader(true);
@@ -66,7 +66,10 @@ export default function Videogames() {
           <div className="row">
             {/* // FILTER MENU */}
 
-            <div className="col-4 d-none d-lg-block gap-3 form-check">
+            <div
+              className="col-4 d-none d-lg-block gap-3 form-check"
+              style={{ minHeight: '100vh' }}
+            >
               <div className="container p-3">
                 <div className="row items-filters">
                   <h5 className="fw-bold">Filtra per console</h5>
@@ -246,12 +249,15 @@ export default function Videogames() {
                   >
                     Chiudi
                   </button>
-                  <button
-                    className="btn btn-danger me-md-5"
-                    onClick={resetSelectedFilters}
-                  >
-                    Reset
-                  </button>
+
+                  {pegis && (
+                    <button
+                      className="btn btn-danger me-md-5"
+                      onClick={resetSelectedFilters}
+                    >
+                      Reset
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

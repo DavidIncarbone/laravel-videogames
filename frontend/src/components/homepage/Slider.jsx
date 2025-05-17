@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../../contexts/GlobalContext';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import SkeletonImg from '../../components/SkeletonImg';
 import styles from '../../style/Slider.module.css';
 
 const Slider = ({ data }) => {
@@ -48,7 +49,7 @@ const Slider = ({ data }) => {
               key={console.id}
               className={styles.sliderItem}
             >
-              <img
+              <SkeletonImg
                 src={fileUrl + console.logo}
                 alt={console.name}
                 className={styles.sliderImage}

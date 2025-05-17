@@ -25,15 +25,7 @@ const Searchbar = () => {
     newParams.set('search', search.trim().replace(/\s{2,}/g, ' '));
     newParams.set('page', 1);
     setPage(1);
-    isVideogamesPage
-      ? fetchVideogames(
-          search,
-          1,
-          selectedConsoles,
-          selectedGenres,
-          selectedPegis,
-        )
-      : fetchAllVideogames(search, 1);
+    // fetchVideogames(search, 1, selectedConsoles, selectedGenres, selectedPegis);
     navigate(`/videogames?${newParams.toString()}`);
   };
 
