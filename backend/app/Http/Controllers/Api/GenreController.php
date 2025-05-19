@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Genre;
 use Illuminate\Http\JsonResponse;
 
@@ -20,17 +19,17 @@ class GenreController extends Controller
             if ($genres->isEmpty()) {
 
                 return response()->json([
-                    "success" => true,
-                    "message" => "Richiesta effettuata con successo",
-                    "details" => "Non ci sono Generi nel database"
+                    'success' => true,
+                    'message' => 'Richiesta effettuata con successo',
+                    'details' => 'Non ci sono Generi nel database',
                 ], 200);
             }
 
             return response()->json([
-                "success" => true,
-                "message" => "Richiesta effettuata con successo",
-                "count" => $genresCount,
-                "items" => $genres
+                'success' => true,
+                'message' => 'Richiesta effettuata con successo',
+                'count' => $genresCount,
+                'items' => $genres,
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -38,6 +37,6 @@ class GenreController extends Controller
                 'message' => 'Errore interno del server.',
                 'details' => $e->getMessage(),
             ], 500);
-        };
+        }
     }
 }

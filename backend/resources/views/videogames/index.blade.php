@@ -7,7 +7,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <header class="header mb-3">
+               <header class="header mb-3">
         <h1>Lista dei videogiochi</h1>
     </header>
     <x-searchbar>

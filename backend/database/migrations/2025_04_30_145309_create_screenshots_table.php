@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('screenshots', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("videogame_id")->constrained()->onUpdate("CASCADE")->onDelete("CASCADE");
-            $table->longText("url")->nullable();
-            $table->string("slug")->unique();
+            $table->foreignId('videogame_id')->constrained()->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->longText('url')->nullable();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

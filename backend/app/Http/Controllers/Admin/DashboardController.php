@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Videogame;
 use App\Models\Console;
 use App\Models\Genre;
 use App\Models\Pegi;
 use App\Models\Screenshot;
+use App\Models\Videogame;
 
 class DashboardController extends Controller
 {
@@ -20,7 +19,6 @@ class DashboardController extends Controller
         $genresCount = Genre::all()->count();
         $pegisCount = PEGI::all()->count();
         $screenshotsCount = Screenshot::all()->count();
-
 
         $itemsCount = [
             [

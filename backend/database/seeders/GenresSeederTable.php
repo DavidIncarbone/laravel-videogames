@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\type\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
 use App\Models\Genre;
+use Illuminate\Database\Seeder;
 
 class GenresSeederTable extends Seeder
 {
@@ -15,7 +13,7 @@ class GenresSeederTable extends Seeder
     public function run(): void
     {
 
-        $genres = config("genres");
+        $genres = config('genres');
 
         foreach ($genres as $genre) {
 

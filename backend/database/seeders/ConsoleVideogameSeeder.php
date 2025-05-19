@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-
-use Illuminate\Database\Seeder;
 use App\Models\Videogame;
-
+use Illuminate\Database\Seeder;
 
 class ConsoleVideogameSeeder extends Seeder
 {
@@ -15,13 +13,12 @@ class ConsoleVideogameSeeder extends Seeder
     public function run(): void
     {
 
-
         $videogames = Videogame::all();
 
-        $videogames = config("videogames");
+        $videogames = config('videogames');
         foreach ($videogames as $videogame) {
-            $dbVideogame = Videogame::firstWhere("name", $videogame["name"]);
-            $dbVideogame->consoles()->attach($videogame["console_ids"]);
+            $dbVideogame = Videogame::firstWhere('name', $videogame['name']);
+            $dbVideogame->consoles()->attach($videogame['console_ids']);
         }
     }
 }

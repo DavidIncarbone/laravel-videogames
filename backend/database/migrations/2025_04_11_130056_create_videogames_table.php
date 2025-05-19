@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('videogames', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->decimal("price", 10, 2);
-            $table->year("year_of_publication");
-            $table->integer("pegi");
-            $table->string("cover");
-            $table->longtext("description");
-            $table->string("publisher");
-            $table->longText("placeholder")->nullable();
-            $table->string("slug")->unique();
+            $table->string('name');
+            $table->decimal('price', 10, 2);
+            $table->year('year_of_publication');
+            $table->integer('pegi');
+            $table->string('cover');
+            $table->longtext('description');
+            $table->string('publisher');
+            $table->longText('placeholder')->nullable();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

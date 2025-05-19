@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Screenshot;
+use Illuminate\Database\Seeder;
 
 class ScreenshotsSeederTable extends Seeder
 {
@@ -21,7 +20,6 @@ class ScreenshotsSeederTable extends Seeder
 
             $newScreenshot->videogame_id = $screenshot['videogame_id'];
             $newScreenshot->url = $screenshot['url'];
-            
 
             $newScreenshot->save();
         }

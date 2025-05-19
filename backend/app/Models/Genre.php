@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
-
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class genre extends Model
 {
-
     // UNIQUE SLUG
 
     protected static function booted()
@@ -21,7 +19,7 @@ class genre extends Model
             $i = 2;
 
             while (Genre::where('slug', $slug)->exists()) {
-                $slug = $baseSlug . '-' . $i++;
+                $slug = $baseSlug.'-'.$i++;
             }
 
             $genre->slug = $slug;
@@ -35,7 +33,7 @@ class genre extends Model
             $i = 2;
 
             while (Genre::where('slug', $slug)->exists()) {
-                $slug = $baseSlug . '-' . $i++;
+                $slug = $baseSlug.'-'.$i++;
             }
 
             $genre->slug = $slug;

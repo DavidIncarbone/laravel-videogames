@@ -1,3 +1,5 @@
+// CLEAR VIDEOGAME FORM
+
 const clearButtons = document.querySelectorAll('[id^="clear-btn-"]');
 
 window.clearVideogameForm = function () {

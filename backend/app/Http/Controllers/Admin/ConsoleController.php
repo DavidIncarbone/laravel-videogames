@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreConsoleRequest;
 use App\Http\Requests\UpdateConsoleRequest;
 use App\Models\Console;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
-
 
 class ConsoleController extends Controller
 {
@@ -21,17 +20,18 @@ class ConsoleController extends Controller
     {
         $query = Console::query();
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
-        };
-        if ($request->orderFor == "create" && $request->orderBy == "desc") {
-            $query->orderBy("created_at", "desc");
-        } else if ($request->orderFor == "edit" && $request->orderBy == "asc") {
-            $query->orderBy("updated_at");
-        } else if ($request->orderFor == "edit" && $request->orderBy == "desc") {
-            $query->orderBy("updated_at", "desc");
+            $query->where('name', 'like', '%'.$request->search.'%');
+        }
+        if ($request->orderFor == 'create' && $request->orderBy == 'desc') {
+            $query->orderBy('created_at', 'desc');
+        } elseif ($request->orderFor == 'edit' && $request->orderBy == 'asc') {
+            $query->orderBy('updated_at');
+        } elseif ($request->orderFor == 'edit' && $request->orderBy == 'desc') {
+            $query->orderBy('updated_at', 'desc');
         }
         $consoles = $query->paginate(5)->withQueryString();
-        return view("consoles/index", compact("consoles"));
+
+        return view('consoles/index', compact('consoles'));
     }
 
     /**
@@ -39,7 +39,7 @@ class ConsoleController extends Controller
      */
     public function create()
     {
-        return view("consoles/create");
+        return view('consoles/create');
     }
 
     /**
@@ -51,20 +51,21 @@ class ConsoleController extends Controller
         // VALIDATION
 
         $request->validated();
-       
+
         $data = $request->all();
         $newConsole = new Console;
-        $newConsole->name = Str::of($data["name"])->trim();
+        $newConsole->name = Str::of($data['name'])->trim();
 
-        if (array_key_exists("logo", $data)) {
+        if (array_key_exists('logo', $data)) {
 
-            $logo_url = Storage::putFile("img/consoles/logos", $data["logo"]);
+            $logo_url = Storage::putFile('img/consoles/logos', $data['logo']);
             $newConsole->logo = $logo_url;
         }
 
         $newConsole->save();
-        toastr()->success("<span class='fw-bold'>" . Str::limit($newConsole->name, 20) . '</span> è stata aggiunta con successo');
-        return redirect()->route("admin.consoles.index", $newConsole);
+        toastr()->success("<span class='fw-bold'>".Str::limit($newConsole->name, 20).'</span> è stata aggiunta con successo');
+
+        return redirect()->route('admin.consoles.index', $newConsole);
     }
 
     /**
@@ -72,7 +73,7 @@ class ConsoleController extends Controller
      */
     public function show(Console $console)
     {
-        return view("consoles.show", compact("console"));
+        return view('consoles.show', compact('console'));
     }
 
     /**
@@ -81,8 +82,7 @@ class ConsoleController extends Controller
     public function edit(Console $console)
     {
 
-
-        return view("consoles.edit", compact("console"));
+        return view('consoles.edit', compact('console'));
     }
 
     /**
@@ -93,27 +93,27 @@ class ConsoleController extends Controller
         // VALIDATION
 
         $request->validated();
-         
+
         $data = $request->all();
         // dd($data);
-        $console->name = $data["name"];
+        $console->name = $data['name'];
 
-        if (array_key_exists("logo", $data)) {
+        if (array_key_exists('logo', $data)) {
 
-            $logo_url = Storage::putFile("img/consoles/logos", $data["logo"]);
+            $logo_url = Storage::putFile('img/consoles/logos', $data['logo']);
             $console->logo = $logo_url;
         }
 
         $unchangedConsole = $console->isClean();
         if ($unchangedConsole) {
-            toastr()->info("Nessuna modifica effettuata");
+            toastr()->info('Nessuna modifica effettuata');
         } else {
-            toastr()->success("<span class='fw-bold'>" . Str::limit($console->name, 20) . '</span> è stata modificata con successo');
+            toastr()->success("<span class='fw-bold'>".Str::limit($console->name, 20).'</span> è stata modificata con successo');
         }
 
         $console->update();
 
-        return redirect()->route("admin.consoles.index");
+        return redirect()->route('admin.consoles.index');
     }
 
     /**
@@ -123,7 +123,8 @@ class ConsoleController extends Controller
     {
         $name = $console->name;
         $console->delete();
-        toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stata eliminata con successo');
+        toastr()->success("<span class='fw-bold'>".Str::limit($name, 20).'</span> è stata eliminata con successo');
+
         return back();
     }
 
@@ -141,16 +142,16 @@ class ConsoleController extends Controller
     public function destroySelected(Request $request)
     {
 
-        $ids = $request->input("selected_consoles", []);
+        $ids = $request->input('selected_consoles', []);
         // dd($slugs);
 
-        Console::whereIn("id", $ids)->delete();
+        Console::whereIn('id', $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('Le <span class="fw-bold">' . count($ids) . ' Console</span> selezionate sono state eliminate con successo');
+            toastr()->success('Le <span class="fw-bold">'.count($ids).' Console</span> selezionate sono state eliminate con successo');
         } else {
             toastr()->success('La console selezionata è stata eliminata con successo');
-        };
+        }
 
         return back();
     }

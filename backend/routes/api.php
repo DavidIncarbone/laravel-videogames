@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\VideogameController;
 use App\Http\Controllers\Api\ConsoleController;
 use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\Api\PegiController;
+use App\Http\Controllers\Api\VideogameController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Route;
 
 // VIDEOGAMES
 
-Route::get("videogames", [VideogameController::class, "index"]);
-Route::get("videogame/{videogame}", [VideogameController::class, "show"]);
-Route::get("videogames/homepage", [VideogameController::class, "homePage"]);
+Route::get('videogames', [VideogameController::class, 'index']);
+Route::get('videogame/{videogame}', [VideogameController::class, 'show']);
+Route::get('videogames/homepage', [VideogameController::class, 'homePage']);
 
 // CONSOLES
 
-Route::get("consoles", [ConsoleController::class, "index"]);
+Route::get('consoles', [ConsoleController::class, 'index']);
 
 // GENRES
 
-Route::get("genres", [GenreController::class, "index"]);
+Route::get('genres', [GenreController::class, 'index']);
 
 // PEGIS
 
-Route::get("pegis", [PegiController::class, "index"]);
+Route::get('pegis', [PegiController::class, 'index']);

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class screenshot-form extends Component
+class NewCoverOverlay extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class screenshot-form extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.screenshot-form');
+        return view('components.new-cover-overlay');
     }
 }

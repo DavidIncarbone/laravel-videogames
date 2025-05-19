@@ -22,30 +22,27 @@ class StorePegiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'age' => [ 'required',
-            'numeric',
-            'min:1',
-            'max:100',
-    ],
-                   
+            'age' => ['required',
+                'numeric',
+                'min:1',
+                'max:100',
+            ],
+
             'logo' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048'];
     }
 
     public function messages(): array
     {
-        return  [
-        
-             // Age
+        return [
 
-        
+            // Age
+
             'age.required' => 'Il campo età è obbligatorio.',
             'age.numeric' => 'Il campo età deve essere un numero.',
             'age.min' => 'L\'età minima non può essere inferiore ad :min anno.',
             'age.max' => 'L\'età massima non può essere superiore a :max anni.',
 
-
             // Logo
-
 
             'logo.required' => 'Il logo è obbligatorio',
             'logo.image' => 'Il file caricato deve essere un\'immagine.',

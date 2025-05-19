@@ -1,33 +1,51 @@
-@extends('layouts.master')
+@extends("layouts.master")
 
-@section('content')
+@section("content")
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Ripristina Password') }}</div>
+                    <div class="card-header">
+                        {{ __("Ripristina Password") }}
+                    </div>
 
                     <div class="card-body">
-                        @if (session('status'))
+                        @if (session("status"))
                             <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                                {{ session("status") }}
                             </div>
                         @endif
 
-                        <form method="POST" action="{{ route('password.email') }}">
+                        <form
+                            method="POST"
+                            action="{{ route("password.email") }}"
+                        >
                             @csrf
 
                             <div class="mb-4 row">
-                                <label for="email"
-                                    class="col-lg-4 col-form-label text-lg-right">{{ __('Indirizzo e-mail') }}</label>
+                                <label
+                                    for="email"
+                                    class="col-lg-4 col-form-label text-lg-right"
+                                >
+                                    {{ __("Indirizzo e-mail") }}
+                                </label>
 
                                 <div class="col-lg-6">
-                                    <input id="email" type="text"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" autocomplete="email" autofocus>
+                                    <input
+                                        id="email"
+                                        type="text"
+                                        class="form-control @error("email") is-invalid @enderror"
+                                        name="email"
+                                        value="{{ old("email") }}"
+                                        autocomplete="email"
+                                        autofocus
+                                    />
 
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
+                                    @error("email")
+                                        <span
+                                            class="invalid-feedback"
+                                            role="alert"
+                                        >
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -37,7 +55,7 @@
                             <div class="mb-4 row mb-0">
                                 <div class="col-lg-6 offset-lg-4">
                                     <button type="submit" class="btn btn-dark">
-                                        {{ __('Invia il link di ripristino password') }}
+                                        {{ __("Invia il link di ripristino password") }}
                                     </button>
                                 </div>
                             </div>

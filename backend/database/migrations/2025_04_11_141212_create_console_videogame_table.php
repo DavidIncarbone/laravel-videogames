@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('console_videogame', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId("videogame_id")->constrained()->onDelete("CASCADE")->onUpdate("CASCADE");
-            $table->foreignId("console_id")->constrained()->onDelete("CASCADE")->onUpdate("CASCADE");
+            $table->foreignId('videogame_id')->constrained()->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreignId('console_id')->constrained()->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->timestamps();
         });
@@ -26,7 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-
 
         Schema::dropIfExists('console_videogame');
     }

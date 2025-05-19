@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Videogame;
 use App\Models\Console;
 use App\Models\Genre;
 use App\Models\Pegi;
+use App\Models\Videogame;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class VideogameController extends Controller
 {
@@ -17,26 +17,26 @@ class VideogameController extends Controller
         try {
 
             $latestFour = Videogame::with('screenshots')
-            ->whereHas('screenshots') 
-            ->orderBy('year_of_publication', 'desc')
-            ->take(4)
-            ->get();
+                ->whereHas('screenshots')
+                ->orderBy('year_of_publication', 'desc')
+                ->take(4)
+                ->get();
 
             $latestFourCount = $latestFour->count();
 
             if ($latestFour->isEmpty()) {
 
                 return response()->json([
-                    "success" => true,
-                    "message" => "Non ci sono Videogiochi nel database",
+                    'success' => true,
+                    'message' => 'Non ci sono Videogiochi nel database',
                 ], 200);
             }
 
             return response()->json([
-                "success" => true,
-                "message" => "Richiesta effettuata con successo",
-                "count" => $latestFourCount,
-                "items" => $latestFour
+                'success' => true,
+                'message' => 'Richiesta effettuata con successo',
+                'count' => $latestFourCount,
+                'items' => $latestFour,
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -44,7 +44,7 @@ class VideogameController extends Controller
                 'message' => 'Errore interno del server.',
                 'details' => $e->getMessage(),
             ], 500);
-        };
+        }
     }
 
     public function index(Request $request): JsonResponse
@@ -58,7 +58,7 @@ class VideogameController extends Controller
             $query = Videogame::with('consoles', 'genres', 'pegi');
 
             if ($request->filled('search')) {
-                $query->where('name', 'like', '%' . $request->search . '%');
+                $query->where('name', 'like', '%'.$request->search.'%');
             }
 
             // CONSOLE FILTER
@@ -66,7 +66,7 @@ class VideogameController extends Controller
             if ($request->filled('consoles')) {
                 $query->whereHas('consoles', function ($relQuery) use ($request) {
                     $relQuery->whereIn('name', $request->consoles);
-                    
+
                 });
             }
 
@@ -92,15 +92,15 @@ class VideogameController extends Controller
             $pegis = Pegi::all();
 
             return response()->json([
-                "success" => true,
-                "message" => "Richiesta effettuata con successo",
-                "count" => $videogamesCount,
-                "items" => [
-                    "videogames" => $videogames,
-                    "consoles" => $consoles,
-                    "genres" => $genres,
-                    "pegis" => $pegis
-                            ]
+                'success' => true,
+                'message' => 'Richiesta effettuata con successo',
+                'count' => $videogamesCount,
+                'items' => [
+                    'videogames' => $videogames,
+                    'consoles' => $consoles,
+                    'genres' => $genres,
+                    'pegis' => $pegis,
+                ],
             ], 200);
         } catch (\Exception $error) {
 
@@ -109,31 +109,30 @@ class VideogameController extends Controller
                 'message' => 'Errore interno del server.',
                 'details' => $error->getMessage(),
             ], 500);
-        };
-
+        }
 
     }
 
     public function show(Videogame $videogame)
     {
 
-        $new = $videogame->load("consoles", "genres", "pegi", "screenshots");
+        $new = $videogame->load('consoles', 'genres', 'pegi', 'screenshots');
 
         try {
 
-            if (!$videogame) {
+            if (! $videogame) {
 
                 return response()->json([
-                    "success" => true,
-                    "message" => "Richiesta effettuata con successo",
-                    "details" => "Nessun videogioco soddisfa i criteri di ricerca"
+                    'success' => true,
+                    'message' => 'Richiesta effettuata con successo',
+                    'details' => 'Nessun videogioco soddisfa i criteri di ricerca',
                 ], 200);
             }
 
             return response()->json([
-                "success" => true,
-                "message" => "Richiesta effettuata con successo",
-                "item" => $new
+                'success' => true,
+                'message' => 'Richiesta effettuata con successo',
+                'item' => $new,
             ], 200);
         } catch (\Exception $error) {
 
@@ -142,6 +141,6 @@ class VideogameController extends Controller
                 'message' => 'Errore interno del server.',
                 'details' => $error->getMessage(),
             ], 500);
-        };
+        }
     }
 }

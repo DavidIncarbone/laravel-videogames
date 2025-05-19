@@ -28,15 +28,14 @@ class ProfileUpdateRequest extends FormRequest
         ];
     }
 
-     public function messages(): array
-     {
-         return[
-              // NAME
+    public function messages(): array
+    {
+        return [
+            // NAME
 
-             'name.required' => 'Il campo nome è obbligatorio.',
-             'name.string' => 'Il nome deve essere una stringa.',
-             'name.max' => 'Il nome non può superare i :max caratteri.',
-
+            'name.required' => 'Il campo nome è obbligatorio.',
+            'name.string' => 'Il nome deve essere una stringa.',
+            'name.max' => 'Il nome non può superare i :max caratteri.',
 
             //  EMAIL
 
@@ -46,7 +45,6 @@ class ProfileUpdateRequest extends FormRequest
             'email.email' => 'L\'email inserita non è valida.',
             'email.max' => 'L\'email non può superare i :max caratteri.',
 
-
-         ];
-     }
+        ];
+    }
 }

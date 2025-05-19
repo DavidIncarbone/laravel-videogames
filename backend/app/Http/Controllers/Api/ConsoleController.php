@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Console;
 use Illuminate\Http\JsonResponse;
 
@@ -20,17 +19,17 @@ class ConsoleController extends Controller
             if ($consoles->isEmpty()) {
 
                 return response()->json([
-                    "success" => true,
-                    "message" => "Richiesta effettuata con successo",
-                    "details" => "Non ci sono Console nel database"
+                    'success' => true,
+                    'message' => 'Richiesta effettuata con successo',
+                    'details' => 'Non ci sono Console nel database',
                 ], 200);
             }
 
             return response()->json([
-                "success" => true,
-                "message" => "Richiesta effettuata con successo",
-                "count" => $consolesCount,
-                "items" => $consoles
+                'success' => true,
+                'message' => 'Richiesta effettuata con successo',
+                'count' => $consolesCount,
+                'items' => $consoles,
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -38,6 +37,6 @@ class ConsoleController extends Controller
                 'message' => 'Errore interno del server.',
                 'details' => $e->getMessage(),
             ], 500);
-        };
+        }
     }
 }

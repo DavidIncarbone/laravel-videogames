@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Pegi;
-
+use Illuminate\Database\Seeder;
 
 class PegisSeederTable extends Seeder
 {
@@ -15,13 +13,13 @@ class PegisSeederTable extends Seeder
     public function run(): void
     {
 
-        $pegis = config("pegis");
+        $pegis = config('pegis');
 
         foreach ($pegis as $pegi) {
 
             $newPegi = new Pegi;
             $newPegi->age = $pegi;
-            $newPegi->logo = "img/pegis/logos/pegi" . $pegi . ".png";
+            $newPegi->logo = 'img/pegis/logos/pegi'.$pegi.'.png';
 
             $newPegi->save();
         }

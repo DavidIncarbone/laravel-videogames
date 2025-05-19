@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class new-screenshot-overlay extends Component
+class ModalSelected extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class new-screenshot-overlay extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.new-screenshot-overlay');
+        return view('components.modal-selected');
     }
 }

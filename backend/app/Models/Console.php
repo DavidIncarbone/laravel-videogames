@@ -19,7 +19,7 @@ class Console extends Model
             $i = 2;
 
             while (Console::where('slug', $slug)->exists()) {
-                $slug = $baseSlug . '-' . $i++;
+                $slug = $baseSlug.'-'.$i++;
             }
 
             $console->slug = $slug;
@@ -33,7 +33,7 @@ class Console extends Model
             $i = 2;
 
             while (Console::where('slug', $slug)->exists()) {
-                $slug = $baseSlug . '-' . $i++;
+                $slug = $baseSlug.'-'.$i++;
             }
 
             $console->slug = $slug;
@@ -44,7 +44,6 @@ class Console extends Model
     {
         return 'slug';
     }
-
 
     public function videogames()
     {

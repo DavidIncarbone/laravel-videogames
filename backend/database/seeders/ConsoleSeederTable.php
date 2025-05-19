@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-
-use Illuminate\Database\Seeder;
 use App\Models\Console;
+use Illuminate\Database\Seeder;
 
 class ConsoleSeederTable extends Seeder
 {
@@ -14,14 +13,14 @@ class ConsoleSeederTable extends Seeder
     public function run(): void
     {
 
-        $consoles = config("consoles");
+        $consoles = config('consoles');
 
         foreach ($consoles as $console) {
 
             $newConsole = new Console;
 
-            $newConsole->name = $console["name"];
-            $newConsole->logo = $console["logo"];
+            $newConsole->name = $console['name'];
+            $newConsole->logo = $console['logo'];
 
             $newConsole->save();
         }

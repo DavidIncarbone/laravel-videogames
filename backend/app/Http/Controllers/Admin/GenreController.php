@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
 use App\Models\Genre;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class GenreController extends Controller
 {
@@ -20,20 +20,20 @@ class GenreController extends Controller
 
         $query = Genre::query();
 
-        if ($request->filled("search")) {
-            $query->where("name", "like", "%" . $request->search . "%");
-        };
-        if ($request->orderFor == "create" && $request->orderBy == "desc") {
-            $query->orderBy("created_at", "desc");
-        } else if ($request->orderFor == "edit" && $request->orderBy == "asc") {
-            $query->orderBy("updated_at");
-        } else if ($request->orderFor == "edit" && $request->orderBy == "desc") {
-            $query->orderBy("updated_at", "desc");
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%'.$request->search.'%');
+        }
+        if ($request->orderFor == 'create' && $request->orderBy == 'desc') {
+            $query->orderBy('created_at', 'desc');
+        } elseif ($request->orderFor == 'edit' && $request->orderBy == 'asc') {
+            $query->orderBy('updated_at');
+        } elseif ($request->orderFor == 'edit' && $request->orderBy == 'desc') {
+            $query->orderBy('updated_at', 'desc');
         }
 
         $genres = $query->paginate(5)->withQueryString();
 
-        return view("genres/index", compact("genres"));
+        return view('genres/index', compact('genres'));
     }
 
     /**
@@ -41,7 +41,7 @@ class GenreController extends Controller
      */
     public function create()
     {
-        return view("genres.create");
+        return view('genres.create');
     }
 
     /**
@@ -55,14 +55,15 @@ class GenreController extends Controller
         // Name
 
         $request->validated();
-            
+
         $data = $request->all();
         $newGenre = new Genre;
-        $newGenre->name = Str::of($data["name"])->trim();;
+        $newGenre->name = Str::of($data['name'])->trim();
 
         $newGenre->save();
-        toastr()->success("<span class='fw-bold'>" . Str::limit($newGenre->name, 20) . '</span> è stato aggiunto con successo');
-        return redirect()->route("admin.genres.index", $newGenre);
+        toastr()->success("<span class='fw-bold'>".Str::limit($newGenre->name, 20).'</span> è stato aggiunto con successo');
+
+        return redirect()->route('admin.genres.index', $newGenre);
     }
 
     /**
@@ -70,7 +71,7 @@ class GenreController extends Controller
      */
     public function show(genre $genre)
     {
-        return view("genres.show", compact("genre"));
+        return view('genres.show', compact('genre'));
     }
 
     /**
@@ -78,7 +79,7 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
-        return view("genres.edit", compact("genre"));
+        return view('genres.edit', compact('genre'));
     }
 
     /**
@@ -89,23 +90,22 @@ class GenreController extends Controller
 
         // VALIDATION
 
-     
         $request->validated();
-            
+
         // DATABASE
 
         $data = $request->all();
-        $genre->name = $data["name"];
+        $genre->name = $data['name'];
 
         if ($genre->isClean()) {
-            toastr()->info("Nessuna modifica effettuata");
+            toastr()->info('Nessuna modifica effettuata');
         } else {
-            toastr()->success("<span class='fw-bold'>" . Str::limit($genre->name, 20) . '</span> è stato modificato con successo');
+            toastr()->success("<span class='fw-bold'>".Str::limit($genre->name, 20).'</span> è stato modificato con successo');
         }
 
         $genre->update();
 
-        return redirect()->route("admin.genres.index");
+        return redirect()->route('admin.genres.index');
     }
 
     /**
@@ -116,7 +116,8 @@ class GenreController extends Controller
         $name = $genre->name;
         // dd($name);
         $genre->delete();
-        toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stato eliminato con successo');
+        toastr()->success("<span class='fw-bold'>".Str::limit($name, 20).'</span> è stato eliminato con successo');
+
         return back();
     }
 
@@ -134,16 +135,16 @@ class GenreController extends Controller
     public function destroySelected(Request $request)
     {
 
-        $ids = $request->input("selected_genres", []);
+        $ids = $request->input('selected_genres', []);
         // dd($slugs);
 
-        Genre::whereIn("id", $ids)->delete();
+        Genre::whereIn('id', $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('I <span class="fw-bold">' . count($ids) . ' Generi</span> selezionati sono stati eliminati con successo');
+            toastr()->success('I <span class="fw-bold">'.count($ids).' Generi</span> selezionati sono stati eliminati con successo');
         } else {
             toastr()->success('Il genere selezionato è stato eliminato con successo');
-        };
+        }
 
         return back();
     }

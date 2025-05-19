@@ -30,7 +30,7 @@ class StoreVideogameRequest extends FormRequest
 
             'publisher' => ['required', 'string', 'min:2', 'max:50'],
 
-            'year_of_publication' => ['required', 'integer', 'between:1970,' . date('Y')],
+            'year_of_publication' => ['required', 'integer', 'between:1970,'.date('Y')],
 
             'price' => ['required', 'numeric', 'min:0.01'],
 
@@ -42,19 +42,18 @@ class StoreVideogameRequest extends FormRequest
 
             'screenshots' => ['nullable', 'array', 'max:4'],
 
-            'screenshots.*' => ['image', 'mimes:jpeg,png,jpg,webp', 'max:2048']
+            'screenshots.*' => ['image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
         ];
     }
 
-    public function messages() :array
+    public function messages(): array
     {
-       return [
+        return [
             // Name
             'name.required' => 'Il campo nome del videogioco è obbligatorio.',
             'name.string' => 'Il nome del videogioco deve essere una stringa.',
             'name.min' => 'Il nome del videogioco deve contenere almeno :min caratteri.',
             'name.max' => 'Il nome del videogioco non può superare i :max caratteri.',
-
 
             // Console
             'console_ids.required' => 'Seleziona almeno una console.',
@@ -67,7 +66,6 @@ class StoreVideogameRequest extends FormRequest
             'genre_ids.array' => 'Il formato dei generi non è corretto.',
             'genre_ids.min' => 'Seleziona almeno un genere.',
             'genre_ids.*.exists' => 'Uno o più generi selezionati non sono validi.',
-
 
             // Publisher
             'publisher.required' => 'Il campo casa produttrice è obbligatorio.',
@@ -84,7 +82,6 @@ class StoreVideogameRequest extends FormRequest
             'price.required' => 'Il prezzo è obbligatorio.',
             'price.numeric' => 'Il prezzo deve essere un numero.',
             'price.min' => 'Il prezzo non può essere negativo.',
-
 
             // PEGI
             'pegi_id.required' => 'Seleziona un\' età minima.',

@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\StorePegiRequest;
-use App\Http\Requests\UpdatePegiRequest;
 use App\Models\Pegi;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PegiController extends Controller
 {
@@ -19,20 +18,21 @@ class PegiController extends Controller
     {
         $query = Pegi::query();
 
-        if ($request->filled("search")) {
+        if ($request->filled('search')) {
             // dd((int)$request->search);
-            $query->where("age", ">=", $request->search);
+            $query->where('age', '>=', $request->search);
         }
-        if ($request->orderFor == "create" && $request->orderBy == "desc") {
-            $query->orderBy("created_at", "desc");
-        } else if ($request->orderFor == "edit" && $request->orderBy == "asc") {
-            $query->orderBy("updated_at");
-        } else if ($request->orderFor == "edit" && $request->orderBy == "desc") {
-            $query->orderBy("updated_at", "desc");
+        if ($request->orderFor == 'create' && $request->orderBy == 'desc') {
+            $query->orderBy('created_at', 'desc');
+        } elseif ($request->orderFor == 'edit' && $request->orderBy == 'asc') {
+            $query->orderBy('updated_at');
+        } elseif ($request->orderFor == 'edit' && $request->orderBy == 'desc') {
+            $query->orderBy('updated_at', 'desc');
         }
 
         $pegis = $query->paginate(5)->withQueryString();
-        return view("pegis.index", compact("pegis"));
+
+        return view('pegis.index', compact('pegis'));
     }
 
     /**
@@ -40,7 +40,7 @@ class PegiController extends Controller
      */
     public function create()
     {
-        return view("pegis.create");
+        return view('pegis.create');
     }
 
     /**
@@ -52,26 +52,23 @@ class PegiController extends Controller
         // VALIDATION
 
         $request->validated();
-           
 
-           
-        
         $data = $request->all();
         // dd($data);
 
-
         $newPegi = new Pegi;
 
-        $newPegi->age = $data["age"];
+        $newPegi->age = $data['age'];
 
-        if (array_key_exists("logo", $data)) {
-            $logo_url = Storage::putFile("img/pegis/logos", $data["logo"]);
+        if (array_key_exists('logo', $data)) {
+            $logo_url = Storage::putFile('img/pegis/logos', $data['logo']);
             $newPegi->logo = $logo_url;
         }
 
         $newPegi->save();
-        toastr()->success("<span class='fw-bold'> PEGI " . $newPegi->age . '</span> è stato aggiunto con successo');
-        return redirect()->route("admin.pegis.index");
+        toastr()->success("<span class='fw-bold'> PEGI ".$newPegi->age.'</span> è stato aggiunto con successo');
+
+        return redirect()->route('admin.pegis.index');
     }
 
     /**
@@ -88,7 +85,7 @@ class PegiController extends Controller
     public function edit(Pegi $pegi)
     {
 
-        return view("pegis.edit", compact("pegi"));
+        return view('pegis.edit', compact('pegi'));
     }
 
     /**
@@ -98,7 +95,6 @@ class PegiController extends Controller
     {
 
         // VALIDATION
-
 
         $request->validate(
             [
@@ -132,26 +128,24 @@ class PegiController extends Controller
 
         // Logo
 
-
         $data = $request->all();
 
-        $pegi->age = $data["age"];
+        $pegi->age = $data['age'];
 
-        if (array_key_exists("logo", $data)) {
-            $logo_url = Storage::putFile("img/pegis/logos", $data["logo"]);
+        if (array_key_exists('logo', $data)) {
+            $logo_url = Storage::putFile('img/pegis/logos', $data['logo']);
             $pegi->logo = $logo_url;
         }
 
         if ($pegi->isClean()) {
-            toastr()->info("Nessuna modifica effettuata");
+            toastr()->info('Nessuna modifica effettuata');
         } else {
-            toastr()->success("<span class='fw-bold'> PEGI " . $pegi->age . '</span> è stato modificato con successo');
+            toastr()->success("<span class='fw-bold'> PEGI ".$pegi->age.'</span> è stato modificato con successo');
         }
 
         $pegi->update();
 
-
-        return redirect()->route("admin.pegis.index");
+        return redirect()->route('admin.pegis.index');
     }
 
     /**
@@ -161,7 +155,8 @@ class PegiController extends Controller
     {
         $age = $pegi->age;
         $pegi->delete();
-        toastr()->success("<span class='fw-bold'> PEGI " . $age . '</span> è stato eliminato con successo');
+        toastr()->success("<span class='fw-bold'> PEGI ".$age.'</span> è stato eliminato con successo');
+
         return back();
     }
 
@@ -179,16 +174,16 @@ class PegiController extends Controller
     public function destroySelected(Request $request)
     {
 
-        $ids = $request->input("selected_pegis", []);
+        $ids = $request->input('selected_pegis', []);
         // dd($slugs);
 
-        Pegi::whereIn("id", $ids)->delete();
+        Pegi::whereIn('id', $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('I <span class="fw-bold">' . count($ids) . ' PEGI</span> selezionati sono stati eliminati con successo');
+            toastr()->success('I <span class="fw-bold">'.count($ids).' PEGI</span> selezionati sono stati eliminati con successo');
         } else {
             toastr()->success('Il PEGI selezionato è stato eliminato con successo');
-        };
+        }
 
         return back();
     }

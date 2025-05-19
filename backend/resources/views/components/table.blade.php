@@ -1,29 +1,27 @@
-   <tr>
-       <td>
-           <div class="d-flex justify-content-center w-100" style="height:66px">
-               {{ $checkbox }}
-           </div>
-       </td>
-       <td>
-           {{ $show }}
-           <a class=" text-decoration-none text-dark" {{ $edit }}>
-               <i id="pencil" class="bi bi-pencil"></i>
-           </a>
-           {{ $delete }}
-       </td>
+<tr>
+    <td>
+        <div class="d-flex justify-content-center w-100" style="height: 66px">
+            {{ $checkbox }}
+        </div>
+    </td>
+    <td>
+        {{ $show }}
+        <a class="text-decoration-none text-dark" {{ $edit }}>
+            <i id="pencil" class="bi bi-pencil"></i>
+        </a>
+        {{ $delete }}
+    </td>
 
-       {{-- FIRST TD --}}
+    {{-- FIRST TD --}}
 
-       <td id="table-videogame-name" class="w-25">{{ $firstTd }}</td>
+    <td id="table-videogame-name" class="w-25">{{ $firstTd }}</td>
 
-       {{-- SECOND TD --}}
+    {{-- SECOND TD --}}
 
+    {{ $secondTd }}
 
-       {{ $secondTd }}
+    {{-- CREATED AND UPDATED TD --}}
 
-
-       {{-- CREATED AND UPDATED TD --}}
-
-       <td class="not-break">{{ $created }}</td>
-       <td class="not-break">{{ $updated }}</td>
-   </tr>
+    <td class="not-break">{{ $created }}</td>
+    <td class="not-break">{{ $updated }}</td>
+</tr>

@@ -96,29 +96,29 @@ return [
     ['videogame_id' => 16, 'url' => 'img/videogames/screenshots/assassins_creed_shadows_screenshot_2.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 16, 'url' => 'img/videogames/screenshots/assassins_creed_shadows_screenshot_3.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 16, 'url' => 'img/videogames/screenshots/assassins_creed_shadows_screenshot_4.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
-    
-       // Avowed (id = 17)
+
+    // Avowed (id = 17)
     ['videogame_id' => 17, 'url' => 'img/videogames/screenshots/avowed_screenshot_1.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 17, 'url' => 'img/videogames/screenshots/avowed_screenshot_2.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 17, 'url' => 'img/videogames/screenshots/avowed_screenshot_3.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 17, 'url' => 'img/videogames/screenshots/avowed_screenshot_4.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
-    
+
     // Pokémon Legends: Z-A (id = 18)
     ['videogame_id' => 18, 'url' => 'img/videogames/screenshots/pokemon_legends_z_a_screenshot_1.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 18, 'url' => 'img/videogames/screenshots/pokemon_legends_z_a_screenshot_2.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 18, 'url' => 'img/videogames/screenshots/pokemon_legends_z_a_screenshot_3.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 18, 'url' => 'img/videogames/screenshots/pokemon_legends_z_a_screenshot_4.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
-    
+
     // Monster Hunter Wilds (id = 19)
     ['videogame_id' => 19, 'url' => 'img/videogames/screenshots/monster_hunter_wilds_screenshot_1.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 19, 'url' => 'img/videogames/screenshots/monster_hunter_wilds_screenshot_2.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 19, 'url' => 'img/videogames/screenshots/monster_hunter_wilds_screenshot_3.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 19, 'url' => 'img/videogames/screenshots/monster_hunter_wilds_screenshot_4.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
-    
+
     // Ghost of Yotei (id = 20)
     ['videogame_id' => 20, 'url' => 'img/videogames/screenshots/ghost_of_yotei_screenshot_1.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 20, 'url' => 'img/videogames/screenshots/ghost_of_yotei_screenshot_2.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 20, 'url' => 'img/videogames/screenshots/ghost_of_yotei_screenshot_3.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
     ['videogame_id' => 20, 'url' => 'img/videogames/screenshots/ghost_of_yotei_screenshot_4.jpg', 'placeholder' => 'img/videogames/placeholder.jpg'],
-    
+
 ];

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('videogames', function (Blueprint $table) {
-            $table->dropColumn("pegi");
+            $table->dropColumn('pegi');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('videogames', function (Blueprint $table) {
-            $table->integer("pegi")->nullable()->after("year_of_publication");
+            $table->integer('pegi')->nullable()->after('year_of_publication');
         });
     }
 };

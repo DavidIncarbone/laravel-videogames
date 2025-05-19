@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 
 class Videogame extends Model
 {
-
     // SLUG
 
     protected static function booted()
@@ -28,7 +27,7 @@ class Videogame extends Model
             $i = 2;
 
             while (Videogame::where('slug', $slug)->exists()) {
-                $slug = $baseSlug . '-' . $i++;
+                $slug = $baseSlug.'-'.$i++;
             }
 
             $videogame->slug = $slug;
@@ -39,8 +38,6 @@ class Videogame extends Model
     {
         return 'slug';
     }
-
-
 
     // FOREIGN
 

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class overlay-dynamic.img extends Component
+class NewScreenshotOverlay extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class overlay-dynamic.img extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.overlay-dynamic.img');
+        return view('components.new-screenshot-overlay');
     }
 }

@@ -1,0 +1,11 @@
+{
+    "preset": "laravel",
+    "exclude": ["storage", "bootstrap/cache"],
+    "rules": {
+        "array_syntax": {
+            "syntax": "short"
+        },
+        "single_quote": true,
+        "no_unused_imports": true
+    }
+}

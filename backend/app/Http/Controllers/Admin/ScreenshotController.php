@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreScreenshotRequest;
 use App\Http\Requests\UpdateScreenshotRequest;
 use App\Models\Screenshot;
 use App\Models\Videogame;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 
 class ScreenshotController extends Controller
 {
@@ -21,21 +21,20 @@ class ScreenshotController extends Controller
     {
         $query = Screenshot::query();
         if ($request->filled('search')) {
-            $query->whereHas("videogame", function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%');
+            $query->whereHas('videogame', function ($q) use ($request) {
+                $q->where('name', 'like', '%'.$request->search.'%');
             });
-        };
-        if ($request->orderFor == "create" && $request->orderBy == "desc") {
-            $query->orderBy("created_at", "desc");
-        } else if ($request->orderFor == "edit" && $request->orderBy == "asc") {
-            $query->orderBy("updated_at");
-        } else if ($request->orderFor == "edit" && $request->orderBy == "desc") {
-            $query->orderBy("updated_at", "desc");
+        }
+        if ($request->orderFor == 'create' && $request->orderBy == 'desc') {
+            $query->orderBy('created_at', 'desc');
+        } elseif ($request->orderFor == 'edit' && $request->orderBy == 'asc') {
+            $query->orderBy('updated_at');
+        } elseif ($request->orderFor == 'edit' && $request->orderBy == 'desc') {
+            $query->orderBy('updated_at', 'desc');
         }
         $screenshots = $query->paginate(5)->withQueryString();
 
-
-        return view("screenshots/index", compact("screenshots"));
+        return view('screenshots/index', compact('screenshots'));
     }
 
     /**
@@ -47,15 +46,15 @@ class ScreenshotController extends Controller
         $videogameSlug = $request->query('screenshots');
         $videogame = Videogame::where('slug', $videogameSlug)->first();
         $screenshots = $videogame->screenshots ?? '';
-        if ($screenshots){
-             $screenshotsCount = $videogame->screenshots->count();
-             $remainingCount = 4 - $screenshotsCount;
-             return view('screenshots/create', compact('videogames', 'videogame', 'screenshots', 'screenshotsCount', 'remainingCount'));
+        if ($screenshots) {
+            $screenshotsCount = $videogame->screenshots->count();
+            $remainingCount = 4 - $screenshotsCount;
+
+            return view('screenshots/create', compact('videogames', 'videogame', 'screenshots', 'screenshotsCount', 'remainingCount'));
         }
 
         return view('screenshots/no-content-to-create');
-    
-       
+
     }
 
     /**
@@ -65,30 +64,30 @@ class ScreenshotController extends Controller
     {
 
         $request->validated();
-          
+
         $videogameId = $request->query('videogame_id');
 
         $data = $request->all();
 
-        if (array_key_exists("screenshots", $data)) {
+        if (array_key_exists('screenshots', $data)) {
 
             $screenshots = $data['screenshots'];
             foreach ($screenshots as $screenshot) {
                 $newScreenshots = new Screenshot;
                 $newScreenshots->videogame_id = $videogameId;
-                $screenshots_url = Storage::putFile("img/videogames/screenshots", $screenshot);
+                $screenshots_url = Storage::putFile('img/videogames/screenshots', $screenshot);
                 $newScreenshots->url = $screenshots_url;
                 $newScreenshots->save();
             }
 
-            if (count($screenshots) > 1)
+            if (count($screenshots) > 1) {
                 toastr()->success('Screenshot aggiunti con successo!');
-            else {
+            } else {
                 toastr()->success('Screenshot aggiunto con successo!');
             }
         } else {
             toastr()->info('Nessuno screenshot aggiunto');
-        };
+        }
 
         return redirect()->route('admin.screenshots.index');
     }
@@ -106,7 +105,7 @@ class ScreenshotController extends Controller
      */
     public function edit(Screenshot $screenshot)
     {
-        return view("screenshots.edit", compact("screenshot"));
+        return view('screenshots.edit', compact('screenshot'));
     }
 
     /**
@@ -115,27 +114,27 @@ class ScreenshotController extends Controller
     public function update(UpdateScreenshotRequest $request, Screenshot $screenshot)
     {
         $request->validated();
-         
+
         $data = $request->all();
         // dd($data);
 
-        if (array_key_exists("screenshot", $data)) {
+        if (array_key_exists('screenshot', $data)) {
 
             Storage::delete($screenshot->url);
-            $image_url = Storage::putFile("img/videogames/screenshots", $data["screenshot"]);
+            $image_url = Storage::putFile('img/videogames/screenshots', $data['screenshot']);
             $screenshot->url = $image_url;
         }
 
         $unchangedScreenshot = $screenshot->isClean();
         if ($unchangedScreenshot) {
-            toastr()->info("Nessuna modifica effettuata");
+            toastr()->info('Nessuna modifica effettuata');
         } else {
-            toastr()->success("Lo screenshot di <span class='fw-bold'>" . Str::limit($screenshot->videogame->name, 20) . '</span> è stato modificato con successo');
+            toastr()->success("Lo screenshot di <span class='fw-bold'>".Str::limit($screenshot->videogame->name, 20).'</span> è stato modificato con successo');
         }
 
         $screenshot->update();
 
-        return redirect()->route("admin.screenshots.index");
+        return redirect()->route('admin.screenshots.index');
     }
 
     /**
@@ -145,7 +144,8 @@ class ScreenshotController extends Controller
     {
         $name = $screenshot->videogame->name;
         $screenshot->delete();
-        toastr()->success("Lo screenshot di <span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stato eliminato con successo');
+        toastr()->success("Lo screenshot di <span class='fw-bold'>".Str::limit($name, 20).'</span> è stato eliminato con successo');
+
         return back();
     }
 
@@ -163,16 +163,16 @@ class ScreenshotController extends Controller
     public function destroySelected(Request $request)
     {
 
-        $ids = $request->input("selected_screenshots", []);
+        $ids = $request->input('selected_screenshots', []);
         // dd($slugs);
 
-        Screenshot::whereIn("id", $ids)->delete();
+        Screenshot::whereIn('id', $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('I <span class="fw-bold">' . count($ids) . ' screenshot</span> selezionati sono stati eliminati con successo');
+            toastr()->success('I <span class="fw-bold">'.count($ids).' screenshot</span> selezionati sono stati eliminati con successo');
         } else {
             toastr()->success('Lo screenshot selezionato è stata eliminato con successo');
-        };
+        }
 
         return back();
     }

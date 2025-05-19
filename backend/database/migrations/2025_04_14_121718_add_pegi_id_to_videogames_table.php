@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('videogames', function (Blueprint $table) {
-            $table->foreignId("pegi_id")->after("id")->constrained()->onUpdate("CASCADE")->onDelete("CASCADE");
+            $table->foreignId('pegi_id')->after('id')->constrained()->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -22,8 +22,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('videogames', function (Blueprint $table) {
-            $table->dropForeign(["pegi_id"]);
-            $table->dropColumn("pegi_id");
+            $table->dropForeign(['pegi_id']);
+            $table->dropColumn('pegi_id');
         });
     }
 };

@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Pegi extends Model
 {
-
     // UNIQUE SLUG
 
     protected static function booted()
@@ -15,12 +14,12 @@ class Pegi extends Model
     // CREATE
     {
         static::creating(function ($pegi) {
-            $baseSlug = Str::slug("PEGI " . $pegi->age);
+            $baseSlug = Str::slug('PEGI '.$pegi->age);
             $slug = $baseSlug;
             $i = 2;
 
             while (Pegi::where('slug', $slug)->exists()) {
-                $slug = $baseSlug . '-' . $i++;
+                $slug = $baseSlug.'-'.$i++;
             }
 
             $pegi->slug = $slug;
@@ -29,12 +28,12 @@ class Pegi extends Model
         // UPDATE
 
         static::updating(function ($pegi) {
-            $baseSlug = Str::slug("PEGI " . $pegi->age);
+            $baseSlug = Str::slug('PEGI '.$pegi->age);
             $slug = $baseSlug;
             $i = 2;
 
             while (Pegi::where('slug', $slug)->exists()) {
-                $slug = $baseSlug . '-' . $i++;
+                $slug = $baseSlug.'-'.$i++;
             }
 
             $pegi->slug = $slug;

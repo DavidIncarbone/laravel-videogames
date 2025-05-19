@@ -197,7 +197,8 @@
             screenshotToDelete.src = `/storage/${screenshotUrl}`;
             screenshotToDelete.alt = screenshotName;
             screenshotContainer.appendChild(screenshotToDelete);
-            overlayScreenshots(".new-cover", "new-cover-overlay", "new-cover-overlay-img", "arrow-left-new", "arrow-right-new", "index-new-cover");
+            overlayScreenshots(".new-cover", "new-cover-overlay", "new-cover-overlay-img", "arrow-left-new",
+                "arrow-right-new", "index-new-cover");
 
         });
     </script>
@@ -230,7 +231,7 @@
 
     <x-new-screenshot-overlay>
         <x-slot:overlayTitle>Screenshot da eliminare</x-slot>
-        
+
         <x-slot:img> <img src="" alt="" id="new-screenshot-overlay-img"
                 class="rounded shadow-sm w-75">
         </x-slot>
@@ -239,8 +240,8 @@
 
     <x-new-cover-overlay>
         <x-slot:overlayTitle>Screenshot da eliminare</x-slot>
-        <x-slot:img> <img src="" alt="" id="new-cover-overlay-img"
-                class="rounded shadow-sm w-75" style="height:75%">
+        <x-slot:img> <img src="" alt="" id="new-cover-overlay-img" class="rounded shadow-sm w-75"
+                style="height:75%">
         </x-slot>
         <x-slot:index></x-slot>
     </x-new-cover-overlay>

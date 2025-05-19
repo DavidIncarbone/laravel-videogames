@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pegis', function (Blueprint $table) {
-            $table->longtext("logo")->after("age");
+            $table->longtext('logo')->after('age');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pegis', function (Blueprint $table) {
-            $table->dropColumn("logo");
+            $table->dropColumn('logo');
         });
     }
 };
