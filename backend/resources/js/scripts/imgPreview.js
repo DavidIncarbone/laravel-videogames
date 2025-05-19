@@ -9,7 +9,6 @@ const input = document.getElementById("screenshots");
 const previewContainer = document.getElementById("previewContainer");
 const newScreenshots = document.getElementById("new-screenshots");
 let previewArray = [];
-let images = [];
 
 // ** EVENT LISTENER **
 

@@ -21,6 +21,6 @@ class screenshotForm extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.screenshot-form');
+        return view('components.forms.screenshot-form');
     }
 }

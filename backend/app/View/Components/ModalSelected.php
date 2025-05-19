@@ -21,6 +21,6 @@ class ModalSelected extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.modal-selected');
+        return view('components.modals.modal-selected');
     }
 }

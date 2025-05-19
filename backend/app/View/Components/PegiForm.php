@@ -21,6 +21,6 @@ class PegiForm extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.pegi-form');
+        return view('components.forms.pegi-form');
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreVideogameRequest;
-use App\Http\Requests\UpdateVideogameRequest;
+use App\Http\Requests\Store\StoreVideogameRequest;
+use App\Http\Requests\Update\UpdateVideogameRequest;
 use App\Models\Console;
 use App\Models\Genre;
 use App\Models\Pegi;
@@ -23,7 +23,7 @@ class VideogameController extends Controller
         $query = Videogame::query();
 
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%'.$request->search.'%');
+            $query->where('name', 'like', '%' . $request->search . '%');
         }
         if ($request->filled('publisher')) {
             $query->where('publisher', $request->publisher);
@@ -56,13 +56,9 @@ class VideogameController extends Controller
     public function store(StoreVideogameRequest $request)
     {
 
-        // VALIDATION
-
-        $request->validated();
-
         // DATABASE
 
-        $data = $request->all();
+        $data = $request->validated();
         $newVideogame = new Videogame;
 
         $newVideogame->pegi_id = $data['pegi_id'];
@@ -106,7 +102,7 @@ class VideogameController extends Controller
             }
         }
 
-        toastr()->success("<span class='fw-bold'>".Str::limit($newVideogame->name, 20).'</span> è stato aggiunto con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($newVideogame->name, 20) . '</span> è stato aggiunto con successo');
 
         return redirect()->route('admin.videogames.show', $newVideogame);
     }
@@ -149,7 +145,6 @@ class VideogameController extends Controller
             $cover = $data['cover'];
             $oldCover = $videogame->cover;
             Storage::delete($oldCover);
-
             $cover_url = Storage::putFile('img/videogames/covers', $cover);
             $videogame->cover = $cover_url;
         }
@@ -180,8 +175,8 @@ class VideogameController extends Controller
         $originalConsoleIds = $videogame->consoles->pluck('id')->sort()->values()->toArray();
         $originalGenreIds = $videogame->genres->pluck('id')->sort()->values()->toArray();
 
-        $newConsoleIds = collect($data['console_ids'])->map(fn ($id) => (int) $id)->sort()->values()->toArray();
-        $newGenreIds = collect($data['genre_ids'])->map(fn ($id) => (int) $id)->sort()->values()->toArray();
+        $newConsoleIds = collect($data['console_ids'])->map(fn($id) => (int) $id)->sort()->values()->toArray();
+        $newGenreIds = collect($data['genre_ids'])->map(fn($id) => (int) $id)->sort()->values()->toArray();
 
         $videogameUnchanged = $videogame->isClean();
         $consoleUnchanged = $originalConsoleIds === $newConsoleIds;
@@ -192,7 +187,7 @@ class VideogameController extends Controller
         if ($videogameUnchanged && $consoleUnchanged && $genreUnchanged && ! array_key_exists('screenshots', $data)) {
             toastr()->info('Nessuna modifica effettuata');
         } else {
-            toastr()->success('<span class="fw-bold">'.Str::limit($videogame->name, 20).'</span> è stato modificato con successo', ['title' => '']);
+            toastr()->success('<span class="fw-bold">' . Str::limit($videogame->name, 20) . '</span> è stato modificato con successo', ['title' => '']);
         }
 
         $videogame->update();
@@ -222,7 +217,7 @@ class VideogameController extends Controller
         $name = $videogame->name;
         $videogame->delete();
 
-        toastr()->success("<span class='fw-bold'>".Str::limit($name, 20).'</span> è stato eliminato con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stato eliminato con successo');
 
         return back();
     }
@@ -249,7 +244,7 @@ class VideogameController extends Controller
         Videogame::whereIn('slug', $slugs)->delete();
 
         if (count($slugs) > 1) {
-            toastr()->success('I <span class="fw-bold">'.count($slugs).' Videogiochi</span> selezionati sono stati eliminati con successo');
+            toastr()->success('I <span class="fw-bold">' . count($slugs) . ' Videogiochi</span> selezionati sono stati eliminati con successo');
         } else {
             toastr()->success('Il videogioco selezionato è stato eliminato con successo');
         }
@@ -264,7 +259,7 @@ class VideogameController extends Controller
 
         $videogame->delete();
 
-        toastr()->success("<span class='fw-bold'>".Str::limit($name, 20).'</span> è stato eliminato con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stato eliminato con successo');
 
         return redirect()->route('admin.videogames.index');
     }

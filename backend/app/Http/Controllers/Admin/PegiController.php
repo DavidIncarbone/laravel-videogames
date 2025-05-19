@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePegiRequest;
+use App\Http\Requests\Store\StorePegiRequest;
+use App\Http\Requests\Update\UpdatePegiRequest;
 use App\Models\Pegi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -49,11 +50,7 @@ class PegiController extends Controller
     public function store(StorePegiRequest $request)
     {
 
-        // VALIDATION
-
-        $request->validated();
-
-        $data = $request->all();
+        $data = $request->validated();
         // dd($data);
 
         $newPegi = new Pegi;
@@ -66,7 +63,7 @@ class PegiController extends Controller
         }
 
         $newPegi->save();
-        toastr()->success("<span class='fw-bold'> PEGI ".$newPegi->age.'</span> è stato aggiunto con successo');
+        toastr()->success("<span class='fw-bold'> PEGI " . $newPegi->age . '</span> è stato aggiunto con successo');
 
         return redirect()->route('admin.pegis.index');
     }
@@ -91,44 +88,10 @@ class PegiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pegi $pegi)
+    public function update(UpdatePegiRequest $request, Pegi $pegi)
     {
 
-        // VALIDATION
-
-        $request->validate(
-            [
-                'age' => [
-                    'required',
-                    'numeric',
-                    'min:1',
-                    'max:100',
-
-                ],
-                'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            ],
-
-            // Age
-
-            [
-                'age.required' => 'Il campo età è obbligatorio.',
-                'age.numeric' => 'Il campo età deve essere un numero.',
-                'age.min' => 'L\'età minima non può essere inferiore ad :min anno.',
-                'age.max' => 'L\'età massima non può essere superiore a :max anni.',
-            ],
-
-            // Logo
-
-            [
-                'logo.image' => 'Il file caricato deve essere un\'immagine.',
-                'logo.mimes' => 'Sono ammessi solo file JPEG, PNG, JPG o WEBP.',
-                'logo.max' => 'La dimensione massima dell\'immagine è di 2MB.',
-            ]
-        );
-
-        // Logo
-
-        $data = $request->all();
+        $data = $request->validated();
 
         $pegi->age = $data['age'];
 
@@ -140,7 +103,7 @@ class PegiController extends Controller
         if ($pegi->isClean()) {
             toastr()->info('Nessuna modifica effettuata');
         } else {
-            toastr()->success("<span class='fw-bold'> PEGI ".$pegi->age.'</span> è stato modificato con successo');
+            toastr()->success("<span class='fw-bold'> PEGI " . $pegi->age . '</span> è stato modificato con successo');
         }
 
         $pegi->update();
@@ -155,7 +118,7 @@ class PegiController extends Controller
     {
         $age = $pegi->age;
         $pegi->delete();
-        toastr()->success("<span class='fw-bold'> PEGI ".$age.'</span> è stato eliminato con successo');
+        toastr()->success("<span class='fw-bold'> PEGI " . $age . '</span> è stato eliminato con successo');
 
         return back();
     }
@@ -180,7 +143,7 @@ class PegiController extends Controller
         Pegi::whereIn('id', $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('I <span class="fw-bold">'.count($ids).' PEGI</span> selezionati sono stati eliminati con successo');
+            toastr()->success('I <span class="fw-bold">' . count($ids) . ' PEGI</span> selezionati sono stati eliminati con successo');
         } else {
             toastr()->success('Il PEGI selezionato è stato eliminato con successo');
         }

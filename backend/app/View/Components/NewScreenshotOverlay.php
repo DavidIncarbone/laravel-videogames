@@ -21,6 +21,6 @@ class NewScreenshotOverlay extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.new-screenshot-overlay');
+        return view('components.overlays.new-screenshot-overlay');
     }
 }

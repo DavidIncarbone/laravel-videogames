@@ -1,40 +1,33 @@
-@extends("layouts.master")
+@extends('layouts.master')
 
-@section("content")
+@section('content')
     <x-videogame-form>
         <x-slot:videogameName>
             <span class="fw-bold text-primary">{{ $videogame->name }}</span>
         </x-slot>
 
         <x-slot:route>
-            {{ route("admin.videogames.update", $videogame) }}
+            {{ route('admin.videogames.update', $videogame) }}
         </x-slot>
 
-        <x-slot:method>@method("PUT")</x-slot>
+        <x-slot:method>@method('PUT')</x-slot>
 
         <x-slot:name>
-            {{ old("name", $videogame->name) }}
+            {{ old('name', $videogame->name) }}
         </x-slot>
 
         @php
             $hasValidationErrors = $errors->any();
             $selectedConsoles = $hasValidationErrors
-                ? old("console_ids", [])
-                : $videogame->consoles->pluck("id")->toArray();
+                ? old('console_ids', [])
+                : $videogame->consoles->pluck('id')->toArray();
         @endphp
 
         <x-slot:consoles>
             @foreach ($consoles as $console)
-                <div
-                    class="form-check g-3 g-lg-0 gap-3 col-6 col-lg-3 d-flex align-items-center"
-                >
-                    <input
-                        type="checkbox"
-                        name="console_ids[]"
-                        value="{{ $console->id }}"
-                        id="console-{{ $console->id }}"
-                        {{ in_array($console->id, $selectedConsoles) ? "checked" : "" }}
-                    />
+                <div class="form-check g-3 g-lg-0 gap-3 col-6 col-lg-3 d-flex align-items-center">
+                    <input type="checkbox" name="console_ids[]" value="{{ $console->id }}" id="console-{{ $console->id }}"
+                        {{ in_array($console->id, $selectedConsoles) ? 'checked' : '' }} />
                     <label for="console-{{ $console->id }}">
                         {{ $console->name }}
                     </label>
@@ -44,23 +37,14 @@
 
         @php
             $hasValidationErrors = $errors->any();
-            $selectedGenres = $hasValidationErrors
-                ? old("genre_ids", [])
-                : $videogame->genres->pluck("id")->toArray();
+            $selectedGenres = $hasValidationErrors ? old('genre_ids', []) : $videogame->genres->pluck('id')->toArray();
         @endphp
 
         <x-slot:genres>
             @foreach ($genres as $genre)
-                <div
-                    class="form-check d-flex align-items-center gap-3 g-3 g-lg-0 col-6 col-lg-3"
-                >
-                    <input
-                        type="checkbox"
-                        name="genre_ids[]"
-                        value="{{ $genre->id }}"
-                        id="genre-{{ $genre->id }}"
-                        {{ in_array($genre->id, $selectedGenres) ? "checked" : "" }}
-                    />
+                <div class="form-check d-flex align-items-center gap-3 g-3 g-lg-0 col-6 col-lg-3">
+                    <input type="checkbox" name="genre_ids[]" value="{{ $genre->id }}" id="genre-{{ $genre->id }}"
+                        {{ in_array($genre->id, $selectedGenres) ? 'checked' : '' }} />
                     <label for="genre-{{ $genre->id }}">
                         {{ $genre->name }}
                     </label>
@@ -69,11 +53,11 @@
         </x-slot>
 
         <x-slot:publisher>
-            {{ old("publisher", $videogame->publisher) }}
+            {{ old('publisher', $videogame->publisher) }}
         </x-slot>
 
         <x-slot:year_of_publication>
-            {{ old("year_of_publication", $videogame->year_of_publication) }}
+            {{ old('year_of_publication', $videogame->year_of_publication) }}
         </x-slot>
 
         <x-slot:price>
@@ -82,17 +66,15 @@
 
         <x-slot:pegis>
             @foreach ($pegis as $pegi)
-                <option
-                    value="{{ $pegi->id }}"
-                    {{ old("pegi_id", $videogame->pegi_id) == $pegi->id ? "selected" : "" }}
-                >
+                <option value="{{ $pegi->id }}"
+                    {{ old('pegi_id', $videogame->pegi_id) == $pegi->id ? 'selected' : '' }}>
                     {{ $pegi->age }}
                 </option>
             @endforeach
         </x-slot>
 
         <x-slot:description>
-            {{ old("description", $videogame->description) }}
+            {{ old('description', $videogame->description) }}
         </x-slot>
 
         <x-slot:cover>
@@ -100,11 +82,8 @@
                 <div class="mt-3">Cover attuale:</div>
                 <div class="d-flex gap-3 align-items-center mt-3">
                     <div id="post-image" style="width: 100px; height: 100px">
-                        <img
-                            src="{{ asset("storage/" . $videogame->cover) }}"
-                            alt="{{ $videogame->name }}"
-                            class="current-cover"
-                        />
+                        <img src="{{ asset('storage/' . $videogame->cover) }}" alt="{{ $videogame->name }}"
+                            class="current-cover" />
                     </div>
                 </div>
             @endif
@@ -118,11 +97,8 @@
                 <div class="d-flex flex-wrap gap-3 align-items-center my-3">
                     @foreach ($videogame->screenshots as $screenshot)
                         <div id="post-image" style="cursor: zoom-in">
-                            <img
-                                src="{{ asset("storage/" . $screenshot->url) }}"
-                                alt="{{ $videogame->name }}"
-                                class="current-screenshot"
-                            />
+                            <img src="{{ asset('storage/' . $screenshot->url) }}" alt="{{ $videogame->name }}"
+                                class="current-screenshot" />
                         </div>
                     @endforeach
                 </div>
@@ -137,12 +113,7 @@
                     Cover da aggiungere
                 </x-slot>
                 <x-slot:img>
-                    <img
-                        src=""
-                        alt=""
-                        id="new-cover-overlay-img"
-                        class="rounded shadow-sm w-75 w-75"
-                    />
+                    <img src="" alt="" id="new-cover-overlay-img" class="rounded shadow-sm w-75 w-75" />
                 </x-slot>
                 <x-slot:index></x-slot>
             </x-new-cover-overlay>
@@ -150,12 +121,7 @@
             <x-current-cover-overlay>
                 <x-slot:overlayTitle>Cover attuale</x-slot>
                 <x-slot:img>
-                    <img
-                        src=""
-                        alt=""
-                        id="current-cover-overlay-img"
-                        class="rounded shadow-sm w-75 w-75"
-                    />
+                    <img src="" alt="" id="current-cover-overlay-img" class="rounded shadow-sm w-75 w-75" />
                 </x-slot>
             </x-current-cover-overlay>
 
@@ -164,12 +130,8 @@
                     Nuovi screenshots
                 </x-slot>
                 <x-slot:img>
-                    <img
-                        src=""
-                        alt=""
-                        id="new-screenshot-overlay-img"
-                        class="rounded shadow-sm w-75 w-75"
-                    />
+                    <img src="" alt="" id="new-screenshot-overlay-img"
+                        class="rounded shadow-sm w-75 w-75" />
                 </x-slot>
                 <x-slot:index></x-slot>
             </x-new-screenshot-overlay>
@@ -179,12 +141,8 @@
                     Screenshot attuali
                 </x-slot>
                 <x-slot:img>
-                    <img
-                        src=""
-                        alt=""
-                        id="current-screenshot-overlay-img"
-                        class="rounded shadow-sm w-75 w-75"
-                    />
+                    <img src="" alt="" id="current-screenshot-overlay-img"
+                        class="rounded shadow-sm w-75 w-75" />
                 </x-slot>
                 <x-slot:index></x-slot>
             </x-current-screenshot-overlay>

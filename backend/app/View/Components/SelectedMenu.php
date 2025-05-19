@@ -21,6 +21,6 @@ class selectedMenu extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.selected-menu');
+        return view('components.tables.selected-menu');
     }
 }

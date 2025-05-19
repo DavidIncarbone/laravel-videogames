@@ -21,6 +21,6 @@ class NewCoverOverlay extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.new-cover-overlay');
+        return view('components.overlays.new-cover-overlay');
     }
 }

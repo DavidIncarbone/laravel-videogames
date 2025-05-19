@@ -21,6 +21,6 @@ class GenresForm extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.genres-form');
+        return view('components.forms.genres-form');
     }
 }

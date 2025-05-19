@@ -21,6 +21,6 @@ class ErrorsInfo extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.errors-info');
+        return view('components.forms.errors-info');
     }
 }

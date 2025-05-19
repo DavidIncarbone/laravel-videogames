@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreConsoleRequest;
-use App\Http\Requests\UpdateConsoleRequest;
+use App\Http\Requests\Store\StoreConsoleRequest;
+use App\Http\Requests\Update\UpdateConsoleRequest;
 use App\Models\Console;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +20,7 @@ class ConsoleController extends Controller
     {
         $query = Console::query();
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%'.$request->search.'%');
+            $query->where('name', 'like', '%' . $request->search . '%');
         }
         if ($request->orderFor == 'create' && $request->orderBy == 'desc') {
             $query->orderBy('created_at', 'desc');
@@ -50,9 +50,7 @@ class ConsoleController extends Controller
 
         // VALIDATION
 
-        $request->validated();
-
-        $data = $request->all();
+        $data = $request->validated();
         $newConsole = new Console;
         $newConsole->name = Str::of($data['name'])->trim();
 
@@ -63,7 +61,7 @@ class ConsoleController extends Controller
         }
 
         $newConsole->save();
-        toastr()->success("<span class='fw-bold'>".Str::limit($newConsole->name, 20).'</span> è stata aggiunta con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($newConsole->name, 20) . '</span> è stata aggiunta con successo');
 
         return redirect()->route('admin.consoles.index', $newConsole);
     }
@@ -92,9 +90,7 @@ class ConsoleController extends Controller
     {
         // VALIDATION
 
-        $request->validated();
-
-        $data = $request->all();
+        $data = $request->validated();
         // dd($data);
         $console->name = $data['name'];
 
@@ -108,7 +104,7 @@ class ConsoleController extends Controller
         if ($unchangedConsole) {
             toastr()->info('Nessuna modifica effettuata');
         } else {
-            toastr()->success("<span class='fw-bold'>".Str::limit($console->name, 20).'</span> è stata modificata con successo');
+            toastr()->success("<span class='fw-bold'>" . Str::limit($console->name, 20) . '</span> è stata modificata con successo');
         }
 
         $console->update();
@@ -123,7 +119,7 @@ class ConsoleController extends Controller
     {
         $name = $console->name;
         $console->delete();
-        toastr()->success("<span class='fw-bold'>".Str::limit($name, 20).'</span> è stata eliminata con successo');
+        toastr()->success("<span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stata eliminata con successo');
 
         return back();
     }
@@ -148,7 +144,7 @@ class ConsoleController extends Controller
         Console::whereIn('id', $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('Le <span class="fw-bold">'.count($ids).' Console</span> selezionate sono state eliminate con successo');
+            toastr()->success('Le <span class="fw-bold">' . count($ids) . ' Console</span> selezionate sono state eliminate con successo');
         } else {
             toastr()->success('La console selezionata è stata eliminata con successo');
         }

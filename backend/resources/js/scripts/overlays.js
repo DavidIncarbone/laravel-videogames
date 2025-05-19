@@ -1,3 +1,7 @@
+// GET ELEMENTS
+
+let images = [];
+
 // ADD EVENT LISTENERS
 
 document.addEventListener("DOMContentLoaded", () => {

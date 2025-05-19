@@ -21,6 +21,6 @@ class Searchbar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.searchbar');
+        return view('components.general.searchbar');
     }
 }

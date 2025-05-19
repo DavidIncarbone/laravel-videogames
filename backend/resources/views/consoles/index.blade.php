@@ -17,8 +17,6 @@
             <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
         </x-searchbar>
 
-
-
         @if (count($consoles) < 1)
             <h5>Nessuna console presente</h5>
         @else

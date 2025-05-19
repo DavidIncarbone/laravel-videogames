@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreScreenshotRequest;
-use App\Http\Requests\UpdateScreenshotRequest;
+use App\Http\Requests\Store\StoreScreenshotRequest;
+use App\Http\Requests\Update\UpdateScreenshotRequest;
 use App\Models\Screenshot;
 use App\Models\Videogame;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class ScreenshotController extends Controller
         $query = Screenshot::query();
         if ($request->filled('search')) {
             $query->whereHas('videogame', function ($q) use ($request) {
-                $q->where('name', 'like', '%'.$request->search.'%');
+                $q->where('name', 'like', '%' . $request->search . '%');
             });
         }
         if ($request->orderFor == 'create' && $request->orderBy == 'desc') {
@@ -54,7 +54,6 @@ class ScreenshotController extends Controller
         }
 
         return view('screenshots/no-content-to-create');
-
     }
 
     /**
@@ -63,11 +62,11 @@ class ScreenshotController extends Controller
     public function store(StoreScreenshotRequest $request)
     {
 
-        $request->validated();
+
 
         $videogameId = $request->query('videogame_id');
 
-        $data = $request->all();
+        $data = $request->validated();
 
         if (array_key_exists('screenshots', $data)) {
 
@@ -113,9 +112,8 @@ class ScreenshotController extends Controller
      */
     public function update(UpdateScreenshotRequest $request, Screenshot $screenshot)
     {
-        $request->validated();
 
-        $data = $request->all();
+        $data = $request->validated();
         // dd($data);
 
         if (array_key_exists('screenshot', $data)) {
@@ -129,7 +127,7 @@ class ScreenshotController extends Controller
         if ($unchangedScreenshot) {
             toastr()->info('Nessuna modifica effettuata');
         } else {
-            toastr()->success("Lo screenshot di <span class='fw-bold'>".Str::limit($screenshot->videogame->name, 20).'</span> è stato modificato con successo');
+            toastr()->success("Lo screenshot di <span class='fw-bold'>" . Str::limit($screenshot->videogame->name, 20) . '</span> è stato modificato con successo');
         }
 
         $screenshot->update();
@@ -144,7 +142,7 @@ class ScreenshotController extends Controller
     {
         $name = $screenshot->videogame->name;
         $screenshot->delete();
-        toastr()->success("Lo screenshot di <span class='fw-bold'>".Str::limit($name, 20).'</span> è stato eliminato con successo');
+        toastr()->success("Lo screenshot di <span class='fw-bold'>" . Str::limit($name, 20) . '</span> è stato eliminato con successo');
 
         return back();
     }
@@ -169,7 +167,7 @@ class ScreenshotController extends Controller
         Screenshot::whereIn('id', $ids)->delete();
 
         if (count($ids) > 1) {
-            toastr()->success('I <span class="fw-bold">'.count($ids).' screenshot</span> selezionati sono stati eliminati con successo');
+            toastr()->success('I <span class="fw-bold">' . count($ids) . ' screenshot</span> selezionati sono stati eliminati con successo');
         } else {
             toastr()->success('Lo screenshot selezionato è stata eliminato con successo');
         }

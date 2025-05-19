@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\GenreController;
 use App\Http\Controllers\Admin\PegiController;
 use App\Http\Controllers\Admin\ScreenshotController;
 use App\Http\Controllers\Admin\VideogameController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -63,4 +63,4 @@ Route::middleware(['auth', 'verified'])
         Route::delete('screenshots/selected/destroy', [ScreenshotController::class, 'destroySelected'])->name('screenshots.destroySelected');
     });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

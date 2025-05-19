@@ -17,8 +17,6 @@
             <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
         </x-searchbar>
 
-
-
         @if (count($screenshots) < 1)
             <h5>Nessuno screenshot presente</h5>
             <p>Aggiungi gli screenshots dal menu di aggiunta/modifica dei videogiochi</p>
@@ -77,15 +75,12 @@
 
                                 {{-- ICONS --}}
                                 <x-slot:show>
-
-
                                     @if (count($screenshot->videogame->screenshots) < 4)
                                         <button type="button" class="btn p-0"
                                             onclick='submitCreate(@json($screenshot->videogame->slug))'>
                                             <i id="plus" class="fa-solid fa-plus"></i>
                                         </button>
                                     @endif
-
                                 </x-slot>
                                 <x-slot:edit>
                                     href="{{ route('admin.screenshots.edit', $screenshot) }}"
@@ -131,13 +126,10 @@
                     <x-slot:delete>Elimina gli screenshots selezionati</x-slot>
                     <x-slot:wantDelete>I seguenti screenshots saranno eliminati:
                         <ul id="selected-videogames-list">
-
                         </ul>
                     </x-slot>
                     <x-slot:deleteBtn>
-
                         <input type="submit" value="Elimina definitivamente" class="btn btn-danger">
-
                     </x-slot>
                 </x-modal-selected>
             </form>
@@ -145,7 +137,6 @@
             {{-- PAGINATION --}}
 
             <div class="d-flex align-items-start justify-content-between">
-
                 <div class="pagination">
                     {{ $screenshots->links() }}
                 </div>
@@ -161,7 +152,6 @@
         </x-slot>
         <x-slot:wantDelete>Vuoi eliminare questo screenshot?
             <div id="screenshot-container" class="mt-3" style="">
-
             </div>
         </x-slot>
         <x-slot:deleteBtn>
@@ -179,7 +169,6 @@
     <script>
         const deleteModal = document.getElementById('deleteModal');
         deleteModal.addEventListener('show.bs.modal', function(event) {
-
             const button = event.relatedTarget;
             const screenshotSlug = button.getAttribute('data-screenshot-slug');
             const screenshotName = button.getAttribute('data-screenshot-name');
@@ -218,7 +207,7 @@
     </x-modal-all>
 
 
-    {{-- OVERLAY --}}
+    {{-- OVERLAYS --}}
 
     <x-current-screenshot-overlay>
         <x-slot:overlayTitle>Screenshot attuali </x-slot>
