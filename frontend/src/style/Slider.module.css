@@ -24,8 +24,8 @@
 
 .sliderItem {
   flex: 0 0 auto;
-  width: 150px;
-  height: 150px;
+  width: 125px;
+  height: 125px;
   scroll-snap-align: center; /*  aiuta il browser a posizionare meglio gli elementi durante lo scroll */
   display: flex;
   align-items: center;
@@ -48,7 +48,6 @@
   max-height: 100%;
   object-fit: contain;
   border: 3px solid white;
-  background-color: white;
 }
 
 .arrowLeft,

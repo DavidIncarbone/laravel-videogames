@@ -37,6 +37,7 @@ export default function Videogames() {
     isFilterOpen,
     toggleFilters,
     closeFilters,
+    scrollTop,
   } = useGlobalContext();
 
   // FUNCTIONS
@@ -55,6 +56,7 @@ export default function Videogames() {
 
   useEffect(() => {
     setInitialLoader(true);
+    scrollTop();
   }, []);
 
   return (

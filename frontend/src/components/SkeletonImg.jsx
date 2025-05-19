@@ -24,19 +24,21 @@ const SkeletonImg = ({
           highlightColor="#f0f0f0"
         />
       )}
-      <img
-        src={src}
-        alt={alt}
-        style={{
-          objectFit,
-          border,
-          cursor,
-          display: isImgLoading ? 'none' : 'block',
-        }}
-        onLoad={() => setisImgLoading(false)}
-        onClick={onClick}
-        className={className}
-      />
+      <div className="h-100 d-flex align-items-center">
+        <img
+          src={src}
+          alt={alt}
+          style={{
+            objectFit,
+            border,
+            cursor,
+            display: isImgLoading ? 'none' : 'block',
+          }}
+          onLoad={() => setisImgLoading(false)}
+          onClick={onClick}
+          className={`${className}`}
+        />
+      </div>
     </div>
   );
 };

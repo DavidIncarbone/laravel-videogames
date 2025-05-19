@@ -1,4 +1,5 @@
 <h1 class="text-center pb-3">{{ $actionToDo }} {{ $screenshotName }}</h1>
+<x-errors-info></x-errors-info>
 
 <form id="screenshotForm" action="{{ $action }}" method="POST" enctype="multipart/form-data">
 

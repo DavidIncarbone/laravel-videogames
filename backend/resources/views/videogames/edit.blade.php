@@ -1,6 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
+
+
+        
     <x-videogame-form>
 
         <x-slot:videogameName><span class="fw-bold text-primary">{{ $videogame->name }}</span></x-slot>
@@ -8,24 +11,41 @@
         <x-slot:route>{{ route('admin.videogames.update', $videogame) }}</x-slot>
 
         <x-slot:method>@method('PUT')</x-slot>
+
+      
         <x-slot:name>{{ old('name', $videogame->name) }}</x-slot>
+
+        @php
+        $hasValidationErrors = $errors->any();
+        $selectedConsoles = $hasValidationErrors
+      ? old('console_ids', [])   
+      : $videogame->consoles->pluck('id')->toArray(); 
+       @endphp
+
 
         <x-slot:consoles>
             @foreach ($consoles as $console)
                 <div class="form-check g-3 g-lg-0 gap-3 col-6 col-lg-3 d-flex align-items-center">
                     <input type="checkbox" name="console_ids[]" value="{{ $console->id }}" id="console-{{ $console->id }}"
-                        {{ in_array($console->id, old('console_ids', $videogame->consoles->pluck('id')->toArray())) ? 'checked' : '' }}>
+                        {{ in_array($console->id, $selectedConsoles) ? 'checked' : '' }}>
                     <label for="console-{{ $console->id }}">{{ $console->name }}</label>
                 </div>
             @endforeach
 
         </x-slot>
 
+        @php
+          $hasValidationErrors = $errors->any();
+          $selectedGenres = $hasValidationErrors
+        ? old('genre_ids', [])   
+        : $videogame->genres->pluck('id')->toArray(); 
+         @endphp
+
         <x-slot:genres>
             @foreach ($genres as $genre)
                 <div class="form-check d-flex align-items-center gap-3 g-3 g-lg-0 col-6 col-lg-3">
                     <input type="checkbox" name="genre_ids[]" value="{{ $genre->id }}" id="genre-{{ $genre->id }}"
-                        {{ in_array($genre->id, old('genre_ids', $videogame->genres->pluck('id')->toArray())) ? 'checked' : '' }}>
+                        {{ in_array($genre->id, $selectedGenres) ? 'checked' : '' }}>
                     <label for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
                 </div>
             @endforeach

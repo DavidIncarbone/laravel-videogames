@@ -8,6 +8,7 @@
     $label = $remainingCount > 1 ? 'immagini' : 'immagine';
 @endphp
     <h1>Aggiungi screenshots a <span class="text-primary">{{ $videogame->name }}</span></h1>
+    <x-errors-info></x-errors-info>
     <form
         action="{{ route('admin.screenshots.store', 'remainingCount=' . $remainingCount . '&videogame_id=' . $videogame->id) }}"
         method="POST" enctype="multipart/form-data">

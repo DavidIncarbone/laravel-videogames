@@ -14,17 +14,7 @@ class UpdateVideogameRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
-    {
 
-        $this->merge([
-            'genre_ids' => $this->input('genre_ids', []),
-            'console_ids' => $this->input('console_ids', [])
-        ]);
-
-        //  dd($this);
-       
-    }
     /**
      * Get the validation rules that apply to the request.
      *

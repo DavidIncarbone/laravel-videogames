@@ -1,5 +1,7 @@
  <h1 class="text-center pb-3">{{ $actionToDo }} {{ $genreName }}</h1>
 
+ <x-errors-info></x-errors-info>
+
  <form id="genresForm" action="{{ $action }}" method="POST">
 
      @csrf

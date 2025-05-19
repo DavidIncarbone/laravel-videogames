@@ -1,5 +1,8 @@
 <h2 class="pb-3">{{ $actionToDo }} {{ $videogameName }}</h2>
 
+<x-errors-info></x-errors-info>
+
+
 <form id="videogameForm" action="{{ $route }}" method="POST" enctype="multipart/form-data" class="mb-3">
 
     @csrf
@@ -19,7 +22,7 @@
             <input type="text" name="name" id="name" value="{{ $name }}"
                 placeholder="Inserisci quì il nome del videogioco" class="form-control pr-5 bg-white ps-5 pe-5"
                 oninput="toggleClearButton('name')">
-            <span id="clear-btn-name" class="position-absolute end-0 pe-3" style="cursor: pointer; display: none;"
+            <span id="clear-btn-name" class="position-absolute end-0 pe-3" style="cursor: pointer;"
                 onclick="clearInput('name')"><i class="fas fa-times"></i></span>
         </div>
         @error('name')

@@ -1,20 +1,36 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../../contexts/GlobalContext';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import SkeletonImg from '../../components/SkeletonImg';
 import styles from '../../style/Slider.module.css';
 
-const Slider = ({ data }) => {
-  const {
-    fileUrl,
-    sliderRef,
-    canScrollLeft,
-    canScrollRight,
-    checkScroll,
-    scrollLeft,
-    scrollRight,
-  } = useGlobalContext();
+const Slider = ({ data, urlKey }) => {
+  const { fileUrl } = useGlobalContext();
+
+  const sliderRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const checkScroll = () => {
+    const el = sliderRef.current;
+    if (!el) return;
+
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
+  };
+
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current?.scrollBy({ left: -150, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current?.scrollBy({ left: 150, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const el = sliderRef.current;
@@ -38,22 +54,28 @@ const Slider = ({ data }) => {
   return (
     <div className={styles.sliderContainer} ref={sliderRef}>
       <ul className={`${styles.sliderTrack} gap-5 `}>
-        {data.map((console) => {
-          const consoleParam = encodeURIComponent(console.name).replace(
+        {data.map((item) => {
+          const itemParam = encodeURIComponent(item.name ?? item.age).replace(
             /%20/g,
             '+',
           );
           return (
             <Link
-              to={`videogames?page=1&consoles[]=${consoleParam}`}
-              key={console.id}
+              to={`videogames?page=1&${urlKey}[]=${itemParam}`}
+              key={item.id}
               className={styles.sliderItem}
             >
-              <SkeletonImg
-                src={fileUrl + console.logo}
-                alt={console.name}
-                className={styles.sliderImage}
-              />
+              {item.logo ? (
+                <SkeletonImg
+                  src={fileUrl + item.logo}
+                  alt={item.name}
+                  className={styles.sliderImage}
+                />
+              ) : (
+                <div className="fw-bold d-flex justify-content-center align-items-center w-100 h-100 border border-3 border-white fs-5">
+                  <div className="text-dark">{item.name}</div>
+                </div>
+              )}
             </Link>
           );
         })}

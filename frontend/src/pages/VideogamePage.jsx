@@ -108,6 +108,7 @@ export default function VideogamePage() {
                               src={fileUrl + screenshot.url}
                               alt={videogame.name}
                               className="current-screenshot"
+                              cursor={'zoom-in'}
                               onClick={() => handleScreenshotClick(index)}
                             />
                           </div>

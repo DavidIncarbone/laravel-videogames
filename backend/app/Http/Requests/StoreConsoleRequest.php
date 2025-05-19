@@ -23,7 +23,7 @@ class StoreConsoleRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:2', 'max:20', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ];
     }
 

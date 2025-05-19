@@ -30,12 +30,6 @@ const GlobalProvider = ({ children }) => {
   const homepageEndpoint = 'videogames/homepage';
   const [homepageVideogames, setHomepageVideogames] = useState([]);
 
-  // CONSOLE SLIDER
-
-  const sliderRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
   // *** ALL VIDEOGAMES PAGE ***
 
   // ALL ENTITIES
@@ -109,7 +103,7 @@ const GlobalProvider = ({ children }) => {
       })
       .finally(() => {
         console.log('Chiamata agli ultimi videogiochi effettuata');
-        stopLoading();
+        // stopLoading();
       });
   };
 
@@ -146,28 +140,6 @@ const GlobalProvider = ({ children }) => {
 
   const handleDotClick = (index) => {
     setActiveIndex(index);
-  };
-
-  // CONSOLE SLIDER
-
-  const checkScroll = () => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    setCanScrollLeft(el.scrollLeft > 0);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
-  };
-
-  const scrollLeft = () => {
-    if (sliderRef.current) {
-      sliderRef.current?.scrollBy({ left: -150, behavior: 'smooth' });
-    }
-  };
-
-  const scrollRight = () => {
-    if (sliderRef.current) {
-      sliderRef.current?.scrollBy({ left: 150, behavior: 'smooth' });
-    }
   };
 
   // *** ALL VIDEOGAMES PAGE ***
@@ -502,16 +474,6 @@ const GlobalProvider = ({ children }) => {
     goToPrev,
     goToNext,
     handleDotClick,
-
-    // CONSOLE SLIDER
-    sliderRef,
-    canScrollLeft,
-    setCanScrollLeft,
-    canScrollRight,
-    setCanScrollRight,
-    checkScroll,
-    scrollLeft,
-    scrollRight,
 
     // *** ALL VIDEOGAMES PAGE ***
     // ALL ENTITIES

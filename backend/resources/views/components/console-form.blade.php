@@ -1,5 +1,7 @@
 <h1 class="text-center pb-3">{{ $actionToDo }} {{ $consoleName }}</h1>
 
+<x-errors-info></x-errors-info>
+
 <form id="consoleForm" action="{{ $action }}" method="POST" enctype="multipart/form-data">
 
     @csrf

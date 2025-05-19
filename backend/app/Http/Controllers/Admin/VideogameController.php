@@ -143,17 +143,9 @@ class VideogameController extends Controller
 
         // dd($request);
 
-        // ADD THIS ARRAYS ANYWAY
-
-     
-
-        // VALIDATION
-
-        $request->validated();
-
         // SAVE TO DB
 
-        $data = $request->all();
+        $data = $request->validated();
 
 
         $videogame->pegi_id = $data["pegi_id"];
