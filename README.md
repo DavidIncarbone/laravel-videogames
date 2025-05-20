@@ -1,4 +1,4 @@
-videogioco Finale 
+Progetto Finale 
 Descrizione
 L’obiettivo di questo videogioco è creare un backoffice in Laravel e un frontend in React per gestire e visualizzare un insieme di dati a vostra scelta.
 Parte 1: Backoffice in Laravel
