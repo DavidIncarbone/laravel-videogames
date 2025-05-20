@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useGlobalContext } from '../contexts/GlobalContext';
+import { useFilterContext } from '../contexts/FilterContext';
+import { usePaginationContext } from '../contexts/PaginationContext';
 import Card from '../components/filter-page/Card';
 import Paginator from '../components/filter-page/Paginator';
 import Loader from '../components/general/Loader';
@@ -9,16 +11,16 @@ export default function Videogames() {
   // VARIABLES
 
   const {
-    fileUrl,
+    // ENTITIES
     fetchVideogames,
     videogames,
-    pagination,
     totalVideogames,
     consoles,
     genres,
     pegis,
+    // SEARCH
     setSearch,
-    page,
+    // CHECKBOX
     selectedConsoles,
     setSelectedConsoles,
     selectedGenres,
@@ -28,16 +30,21 @@ export default function Videogames() {
     handleConsolesChange,
     handleGenresChange,
     handlePegisChange,
-    searchParams,
-    isLoading,
     resetSelectedFilters,
-    initialLoader,
-    setInitialLoader,
+    // QUERY STRING
+    searchParams,
+    // MOBILE
     isFilterOpen,
     toggleFilters,
     closeFilters,
-    scrollTop,
-  } = useGlobalContext();
+    // EXCEPTION
+    pagination,
+  } = useFilterContext();
+
+  const { fileUrl, isLoading, initialLoader, setInitialLoader } =
+    useGlobalContext();
+
+  const { page, scrollTop, setPage } = usePaginationContext();
 
   // FUNCTIONS
 
@@ -55,6 +62,7 @@ export default function Videogames() {
 
   useEffect(() => {
     setInitialLoader(true);
+    setPage(1);
     scrollTop();
   }, []);
 

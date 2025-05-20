@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGlobalContext } from '../contexts/GlobalContext';
+import { useShowContext } from '../contexts/ShowContext';
 import Loader from '../components/general/Loader';
 import CoverOverlay from '../components/details-page/CoverOverlay';
 import ScreenshotOverlay from '../components/details-page/ScreenshotOverlay';
@@ -8,11 +9,9 @@ import SkeletonImg from '../components/general/SkeletonImg';
 
 export default function VideogamePage() {
   // Dichiaro le variabili
-
   const {
     videogame,
     fetchVideogame,
-    fileUrl,
     isCoverOverlayOpen,
     isScreenshotOverlayOpen,
     currentIndex,
@@ -22,8 +21,9 @@ export default function VideogamePage() {
     handleScreenshotOverlayClick,
     goToPrevSlide,
     goToNextSlide,
-    isLoading,
-  } = useGlobalContext();
+  } = useShowContext();
+
+  const { fileUrl, isLoading } = useGlobalContext();
 
   const { slug } = useParams();
   console.log(slug);

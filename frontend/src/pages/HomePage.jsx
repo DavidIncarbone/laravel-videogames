@@ -1,24 +1,19 @@
 import { useEffect } from 'react';
 import { useGlobalContext } from '../contexts/GlobalContext';
+import { useFilterContext } from '../contexts/FilterContext';
 import Loader from '../components/general/Loader';
 import Carousel from '../components/homepage/Carousel';
 import Slider from '../components/homepage/Slider';
 
 export default function HomePage() {
   // Dichiarazione variabili
+  const { homepageVideogames, fetchHomepageVideogames, fileUrl, isLoading } =
+    useGlobalContext();
 
-  const {
-    homepageVideogames,
-    fetchHomepageVideogames,
-    fetchVideogames,
-    fileUrl,
-    isLoading,
-    consoles,
-    genres,
-  } = useGlobalContext();
+  const { consoles, genres, fetchVideogames, resetFilters } =
+    useFilterContext();
 
   // Dichiarazione funzioni
-
   useEffect(() => {
     fetchHomepageVideogames();
     fetchVideogames();
@@ -51,32 +46,13 @@ export default function HomePage() {
           <section className="my-5">
             <h2 className="text-center fw-bold mb-3">Seleziona per genere</h2>
             <div className="position-relative">
-              <Slider data={genres} urlKey={'genres'} />
+              <Slider
+                data={genres}
+                urlKey={'genres'}
+                resetFilters={resetFilters}
+              />
             </div>
           </section>
-
-          {/* <section className="my-5 d-block d-lg-none">
-            <h2 className="text-center fw-bold mb-3">Seleziona per PEGI</h2>
-            <div className="position-relative">
-              <Slider data={pegis} urlKey={'pegis'} />
-            </div>
-          </section>
-
-          <section className="my-5 d-none d-lg-block">
-            <h2 className="text-center fw-bold mb-4">Seleziona per PEGI</h2>
-            <div className="d-flex justify-content-around flex-wrap">
-              {pegis.map((pegi) => (
-                <Link
-                  to={`videogames?page=1&pegis[]=${pegi.age}`}
-                  key={pegi.id}
-                  className={styles.sliderItem}
-                  style={{ width: '110px', height: '110px' }}
-                >
-                  <SkeletonImg src={fileUrl + pegi.logo} alt={pegi.age} />
-                </Link>
-              ))}
-            </div>
-          </section> */}
         </>
       )}
     </>

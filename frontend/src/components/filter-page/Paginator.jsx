@@ -1,4 +1,5 @@
-import { useGlobalContext } from '../../contexts/GlobalContext';
+import { usePaginationContext } from '../../contexts/PaginationContext';
+import { useEffect } from 'react';
 import styles from '../../style/Paginator.module.css';
 
 const Paginator = ({ currentPage, pagination }) => {
@@ -13,7 +14,7 @@ const Paginator = ({ currentPage, pagination }) => {
     handlePageInputBlur,
     handlePageInputChange,
     handlePageInputKeyDown,
-  } = useGlobalContext();
+  } = usePaginationContext();
 
   return (
     <nav
@@ -50,7 +51,7 @@ const Paginator = ({ currentPage, pagination }) => {
                 className={`${styles.pageLink} ${item === currentPage ? styles.active : ''}`}
                 onClick={() => {
                   handlePageChange(item);
-                  scrollTop();
+                  item !== currentPage && scrollTop();
                 }}
               >
                 {item}

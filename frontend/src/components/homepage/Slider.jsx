@@ -5,7 +5,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import SkeletonImg from '../../components/general/SkeletonImg';
 import styles from '../../style/Slider.module.css';
 
-const Slider = ({ data, urlKey }) => {
+const Slider = ({ data, urlKey, resetFilters }) => {
   // VARIABLES
 
   const { fileUrl } = useGlobalContext();
@@ -67,6 +67,7 @@ const Slider = ({ data, urlKey }) => {
               to={`videogames?page=1&${urlKey}[]=${itemParam}`}
               key={item.id}
               className={styles.sliderItem}
+              onClick={resetFilters}
             >
               {item.logo ? (
                 <SkeletonImg

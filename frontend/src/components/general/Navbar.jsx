@@ -1,15 +1,9 @@
 import styles from '../../style/videogameDetails.module.css';
 import { NavLink } from 'react-router-dom';
-import { useGlobalContext } from '../../contexts/GlobalContext';
+import { useFilterContext } from '../../contexts/FilterContext';
 
 export default function Navbar() {
-  const {
-    resetFilters,
-    fetchVideogames,
-    search,
-    setPage,
-    resetSelectedFilters,
-  } = useGlobalContext();
+  const { resetSelectedFilters } = useFilterContext();
 
   return (
     <nav

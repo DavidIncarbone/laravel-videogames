@@ -1,8 +1,10 @@
-import { useGlobalContext } from '../../contexts/GlobalContext';
+import { useFilterContext } from '../../contexts/FilterContext';
+import { usePaginationContext } from '../../contexts/PaginationContext';
 import { useNavigate } from 'react-router-dom';
 
 const Searchbar = () => {
-  const { search, setSearch, setPage, newParams } = useGlobalContext();
+  const { search, setSearch, newParams } = useFilterContext();
+  const { setPage } = usePaginationContext();
 
   const navigate = useNavigate();
 
