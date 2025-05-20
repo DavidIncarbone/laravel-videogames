@@ -109,11 +109,3 @@ footer {
 footer li {
   cursor: pointer;
 }
-
-/* ***** MEDIA QUERY ***** */
-
-@media screen and (max-width: 480px) {
-  /* h1 {
-        display: none;
-    } */
-}

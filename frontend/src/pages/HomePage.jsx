@@ -1,12 +1,8 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useGlobalContext } from '../contexts/GlobalContext';
-import { Link } from 'react-router-dom';
-import Loader from '../components/Loader';
+import Loader from '../components/general/Loader';
 import Carousel from '../components/homepage/Carousel';
 import Slider from '../components/homepage/Slider';
-import SkeletonImg from '../components/SkeletonImg';
-import styles from '../style/Slider.module.css';
 
 export default function HomePage() {
   // Dichiarazione variabili
@@ -19,7 +15,6 @@ export default function HomePage() {
     isLoading,
     consoles,
     genres,
-    pegis,
   } = useGlobalContext();
 
   // Dichiarazione funzioni

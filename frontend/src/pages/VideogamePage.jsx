@@ -1,12 +1,10 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from '../style/videogameDetails.module.css';
 import { useGlobalContext } from '../contexts/GlobalContext';
-import Loader from '../components/Loader';
-import CoverOverlay from '../components/CoverOverlay';
-import ScreenshotOverlay from '../components/ScreenshotOverlay';
-import SkeletonImg from '../components/SkeletonImg';
+import Loader from '../components/general/Loader';
+import CoverOverlay from '../components/details-page/CoverOverlay';
+import ScreenshotOverlay from '../components/details-page/ScreenshotOverlay';
+import SkeletonImg from '../components/general/SkeletonImg';
 
 export default function VideogamePage() {
   // Dichiaro le variabili

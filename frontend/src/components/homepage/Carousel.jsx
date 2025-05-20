@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useGlobalContext } from '../../contexts/GlobalContext';
 import { Container } from 'react-bootstrap';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import SkeletonImg from '../../components/SkeletonImg';
+import SkeletonImg from '../../components/general/SkeletonImg';
 import styles from '../../style/Carousel.module.css';
 
 const Carousel = ({ data, fileUrl }) => {

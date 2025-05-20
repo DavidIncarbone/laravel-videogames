@@ -1,4 +1,4 @@
-import styles from '../style/Overlay.module.css';
+import styles from '../../style/Overlay.module.css';
 
 const CoverOverlay = ({ title, src, alt, handleCoverOverlayClick }) => {
   return (

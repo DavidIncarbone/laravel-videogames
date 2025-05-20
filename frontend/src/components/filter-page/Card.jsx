@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import styles from '../style/Card.module.css';
-import SkeletonImg from '../components/SkeletonImg';
+import styles from '../../style/Card.module.css';
+import SkeletonImg from '../general/SkeletonImg';
 
 export default function Card({ data, fileUrl }) {
   return (

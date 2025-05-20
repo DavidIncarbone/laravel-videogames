@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useGlobalContext } from '../contexts/GlobalContext';
-import Card from '../components/Card';
-import Paginator from '../components/Paginator';
-import Loader from '../components/Loader';
+import Card from '../components/filter-page/Card';
+import Paginator from '../components/filter-page/Paginator';
+import Loader from '../components/general/Loader';
 import mobileStyles from '../style/FilterMobile.module.css';
 
 export default function Videogames() {
@@ -29,7 +29,6 @@ export default function Videogames() {
     handleGenresChange,
     handlePegisChange,
     searchParams,
-    handlePageChange,
     isLoading,
     resetSelectedFilters,
     initialLoader,

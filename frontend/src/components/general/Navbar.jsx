@@ -1,6 +1,6 @@
-import styles from '../style/videogameDetails.module.css';
-import { NavLink, Link } from 'react-router-dom';
-import { useGlobalContext } from '../contexts/GlobalContext';
+import styles from '../../style/videogameDetails.module.css';
+import { NavLink } from 'react-router-dom';
+import { useGlobalContext } from '../../contexts/GlobalContext';
 
 export default function Navbar() {
   const {

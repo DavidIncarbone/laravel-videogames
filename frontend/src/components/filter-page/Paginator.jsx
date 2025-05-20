@@ -1,5 +1,5 @@
-import { useGlobalContext } from '../contexts/GlobalContext';
-import styles from '../style/Paginator.module.css';
+import { useGlobalContext } from '../../contexts/GlobalContext';
+import styles from '../../style/Paginator.module.css';
 
 const Paginator = ({ currentPage, pagination }) => {
   const {

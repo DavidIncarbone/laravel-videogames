@@ -60,7 +60,6 @@ const GlobalProvider = ({ children }) => {
 
   const [page, setPage] = useState(+searchParams.get('page') || '');
   const [pagination, setPagination] = useState({});
-  // const [page, setCurrentPage] = useState(1);
   const [showInput, setShowInput] = useState(false);
   const [pageInput, setPageInput] = useState('');
   const totalPages = pagination.last_page;

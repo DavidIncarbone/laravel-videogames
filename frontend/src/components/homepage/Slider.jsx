@@ -2,15 +2,18 @@ import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../../contexts/GlobalContext';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import SkeletonImg from '../../components/SkeletonImg';
+import SkeletonImg from '../../components/general/SkeletonImg';
 import styles from '../../style/Slider.module.css';
 
 const Slider = ({ data, urlKey }) => {
-  const { fileUrl } = useGlobalContext();
+  // VARIABLES
 
+  const { fileUrl } = useGlobalContext();
   const sliderRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+
+  // FUNCTIONS
 
   const checkScroll = () => {
     const el = sliderRef.current;

@@ -1,25 +1,10 @@
-import { useGlobalContext } from '../contexts/GlobalContext';
-import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useGlobalContext } from '../../contexts/GlobalContext';
+import { useNavigate } from 'react-router-dom';
 
 const Searchbar = () => {
-  const {
-    search,
-    setSearch,
-    page,
-    setPage,
-    fetchVideogames,
-    fetchAllVideogames,
-    newParams,
-    selectedConsoles,
-    selectedGenres,
-    selectedPegis,
-    toggleFilters,
-  } = useGlobalContext();
+  const { search, setSearch, setPage, newParams } = useGlobalContext();
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const isVideogamesPage = location.pathname.startsWith('/videogames');
 
   const filteredVideogames = () => {
     newParams.set('search', search.trim().replace(/\s{2,}/g, ' '));
