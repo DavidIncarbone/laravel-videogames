@@ -9,6 +9,10 @@
 
 // GENERAL
 
+html {
+    overflow-y: scroll;
+}
+
 body {
     font-family: "Arial", sans-serif;
     background-color: #f4f4f4;
@@ -50,6 +54,7 @@ select {
     background-color: #212529;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 1030;
+    scrollbar-gutter: stable;
 }
 
 .sidebar h3 {

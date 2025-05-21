@@ -25,6 +25,7 @@ class UpdatePegiRequest extends FormRequest
             'age' => [
                 'required',
                 'numeric',
+                'unique:pegis,age',
                 'min:1',
                 'max:100',
 
@@ -40,6 +41,7 @@ class UpdatePegiRequest extends FormRequest
 
             'age.required' => 'Il campo età è obbligatorio.',
             'age.numeric' => 'Il campo età deve essere un numero.',
+            'age.unique' => 'L\'età minima scelta è già presente nel sistema',
             'age.min' => 'L\'età minima non può essere inferiore ad :min anno.',
             'age.max' => 'L\'età massima non può essere superiore a :max anni.',
 

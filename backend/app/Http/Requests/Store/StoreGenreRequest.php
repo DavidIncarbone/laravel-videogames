@@ -25,6 +25,7 @@ class StoreGenreRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
+                'unique:genres,name',
                 'min:2',
                 'max:15',
                 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u',
@@ -38,6 +39,7 @@ class StoreGenreRequest extends FormRequest
         return [
             'name.required' => 'Il campo nome è obbligatorio.',
             'name.string' => 'Il campo nome deve essere una stringa.',
+            'name.unique' => 'Questo nome è già presente nel sistema',
             'name.min' => 'Il campo nome deve contenere almeno :min caratteri.',
             'name.max' => 'Il campo nome non può superare i :max caratteri.',
             'name.regex' => 'Il campo nome contiene caratteri non validi.',

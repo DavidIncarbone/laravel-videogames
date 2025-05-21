@@ -5,7 +5,7 @@
 
 <nav class="sidebar bg-dark text-white p-2 p-lg-4">
     <div class="d-flex flex-lg-column justify-content-around">
-        @include("partials.sidebar.dashboard")
+        @include('partials.sidebar.dashboard')
     </div>
 
     {{-- <hr class="d-none d-lg-block"> --}}
@@ -17,16 +17,16 @@
                 <hr>
             --}}
             <hr />
-            @include("partials.sidebar.videogames")
+            @include('partials.sidebar.videogames')
             <hr />
-            @include("partials.sidebar.consoles")
+            @include('partials.sidebar.consoles')
             <hr />
-            @include("partials.sidebar.genres")
+            @include('partials.sidebar.genres')
             <hr />
-            @include("partials.sidebar.pegis")
+            @include('partials.sidebar.pegis')
             <hr />
 
-            @include("partials.sidebar.logout")
+            @include('partials.sidebar.logout')
         </ul>
     </div>
 </nav>

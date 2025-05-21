@@ -22,7 +22,7 @@ class StoreConsoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:2', 'max:20', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
+            'name' => ['required', 'string', 'unique:consoles,name', 'min:2', 'max:20', 'regex:/^[a-zA-Z0-9\s\-\&\']+$/u'],
             'logo' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ];
     }
@@ -36,6 +36,7 @@ class StoreConsoleRequest extends FormRequest
             'name.required' => 'Il campo nome è obbligatorio.',
             'name.string' => 'Il nome deve essere una stringa.',
             'name.min' => 'Il nome deve contenere almeno :min caratteri.',
+            'name.unique' => 'Questo nome è già presente nel sistema',
             'name.max' => 'Il nome non può superare i :max caratteri.',
             'name.regex' => 'Il nome contiene caratteri non validi.',
 

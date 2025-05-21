@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pegis', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('age');
+            $table->smallInteger('age')->unique();
             $table->string('slug')->unique();
             $table->timestamps();
         });
