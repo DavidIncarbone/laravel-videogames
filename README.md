@@ -16,28 +16,39 @@
 
 <h3>BACK OFFICE</h3>
 
-<!-- IMMAGINE QUI -->
+ <img src="https://github.com/user-attachments/assets/7c622646-0148-4e5c-b477-9d64b530d36a" alt="Demo" width="600" />
 
 <p>Il <b>Back Office</b> si presenta con una <b>sidebar</b> onnipresente, che permette di navigare agevolmente fra tutte le entità del <b>Database</b>.</br>
 La realizzazione del <b>Back Office</b> è stata eseguita in <b>Laravel</b> con autenticazione gestita da <b>Laravel Breeze</b>, che garantisce l'accesso solo agli utenti registrati.
-Il <b>Back Office</b> consente agevolmente di applicare tutte le <b>CRUD</b> alle entità del <b>Database</b>, con possibilità anche di <b>eliminazione mirata</b> (grazie ad una <b>searchbar</b> e a dei <b>filtri specifici</b> per ogni entità) ed <b>eliminazione multipla</b> (con delle <b>checkbox</b> per la <b>multi-selezione<b>) </p>
+Il <b>Back Office</b> consente agevolmente di applicare tutte le <b>CRUD</b> alle entità del <b>Database</b>, con possibilità anche di <b>eliminazione mirata</b> (grazie ad una <b>searchbar</b> e a dei <b>filtri specifici</b> per ogni entità) ed <b>eliminazione multipla</b> (con delle <b>checkbox</b> per la <b>multi-selezione<b>)</br>
+Sia il <b>Back Office</b> che la <b>Landing Page</b> sono totalmente <b>responsive</b>, quindi agevolmente navigabili sia da <b>tablet</b> che da <b>smartphone</b>.
 
 <p>Il <b>Back End</b> mette inoltre a disposizione delle <b>rotte API</b> per il fetch delle risorse.</p>
 
 <h4>TECONOLOGIE UTILIZZATE</h4>
 
 <ul>
-<li><b>PHP/Laravel,</b> con l'<b>ORM Eloquent</b> per le query al Database</li>
-<li><b>Laravel Breeze</b> per la gestione dell'<b>autenticazione</b></li>
-<li><b>HTML, CSS + Bootstrap</b> per le <b>views</b> del <b>Back Office</b></li>
-<li><b>Javascript Vanilla</b> per gestire l'interattività delle <b>views</b></li>
+<li>PHP/Laravel, con l'ORM Eloquent per le query al Database</li>
+<li>Laravel Breeze per la gestione dell'autenticazione</li>
+<li>HTML, CSS + Bootstrap per le views del Back Office</li>
+<li>Javascript Vanilla per gestire l'interattività delle views</li>
 </ul>
 
 <h2>FRONTEND</h2>
 
-<!-- IMMAGINE QUI -->
+ <img src="https://github.com/user-attachments/assets/4ab3084d-5b5d-4c7b-84ec-d02c41cfbe04" alt="Demo" width="600" />
 
-<p>Fronted realizzato con <b>React.js</b> costituito da un' <b>Homepage</b>   <b></b></p>
+<p>Fronted realizzato con <b>React.js</b> costituito da un'<b>Homepage</b> che mostra un <b>Carosello</b> con le ultime uscite e due <b>slider<b> che permettono già di filtrare per console e generi. Una <b>searchbar globale<b> è presente in qualsiasi pagina dell'applicazione, facendo parte dell'header, che ci permetterà di effettuare una <b>ricerca rapida</b> inserendo il nome del videogioco.</br>
+Inoltre è presente una pagina di <b>filtro avanzato</b>, dove è possibile utilizzare dei <b>filtri multipli</b> per ricerche <b>super mirate</b>. </br>
+Conclude la <b>Landing Page</b> una <b>pagina di dettaglio</b> per ogni singolo videogioco, con annesse tutte le caratteristiche correlate</p>
+
+<h4>TECONOLOGIE UTILIZZATE</h4>
+
+<ul>
+<li>HTML</li>
+<li>CSS + Bootstrap</li>
+<li>React.js</li>
+</ul>
 
 <h1>TASK</h1>
 
