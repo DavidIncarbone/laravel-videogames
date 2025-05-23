@@ -101,7 +101,7 @@
                                 <x-slot:firstTd>
                                     <div class="d-flex w-100 justify-content-center" style="height:66px;">
                                         <div id="post-image" class="align-self-center">
-                                            <img id="logo" class="current-screenshot"
+                                            <img class="current-screenshot"
                                                 src="{{ asset('storage/' . $screenshot->url) }}"
                                                 alt="{{ $screenshot->name }}">
                                         </div>
