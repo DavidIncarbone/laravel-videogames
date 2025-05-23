@@ -119,7 +119,6 @@ window.clearCover = function () {
 
 function showScreenshotsPreviewAsync(file) {
     return new Promise((resolve) => {
-        showLoader();
         const reader = new FileReader();
         reader.onload = function (e) {
             if (previewArray.length > 0) {
@@ -169,7 +168,6 @@ function showScreenshotsPreviewAsync(file) {
             previewContainer.appendChild(preview);
 
             resolve();
-            hideLoader();
         };
         reader.readAsDataURL(file);
     });
