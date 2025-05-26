@@ -35,6 +35,9 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
+
+        toastr()->success('Informazioni aggiornate con successo');
+
         return Redirect::route('admin.profile.edit')->with('status', 'profile-updated');
     }
 
@@ -43,9 +46,14 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+        $request->validate(
+            [
+                'deletion_password' => ['required', 'current_password'],
+            ],
+            [
+                'deletion_password.required' => 'Password richiesta',
+            ]
+        );
 
         $user = $request->user();
 
@@ -55,6 +63,8 @@ class ProfileController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        toastr()->success('Account eliminato con successo');
 
         return Redirect::to('/');
     }
