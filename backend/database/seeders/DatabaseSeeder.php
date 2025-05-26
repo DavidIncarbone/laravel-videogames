@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             ConsoleVideogameSeeder::class,
             GenresSeederTable::class,
             GenresVideogamesSeederTable::class,
+            UsersTempSeederTable::class,
         ]);
     }
 }
