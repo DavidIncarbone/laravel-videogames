@@ -15,7 +15,7 @@
                             <!-- Password Reset Token -->
                             <input type="hidden" name="token" value="{{ $request->route('token') }}" />
 
-                            <div class="form-group row">
+                            <div class="form-group row my-3">
                                 <label for="email" class="col-lg-4 col-form-label text-lg-right">
                                     {{ __('E-Mail Address') }}
                                 </label>
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row my-3">
                                 <label for="password" class="col-lg-4 col-form-label text-lg-right">
                                     {{ __('Password') }}
                                 </label>
@@ -41,7 +41,7 @@
                                 <div class="col-lg-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password" />
+                                        autocomplete="new-password" />
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -51,14 +51,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row my-3">
                                 <label for="password-confirm" class="col-lg-4 col-form-label text-lg-right">
                                     {{ __('Confirm Password') }}
                                 </label>
 
                                 <div class="col-lg-6">
                                     <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" required autocomplete="new-password" />
+                                        name="password_confirmation" autocomplete="new-password" />
                                 </div>
                             </div>
 
