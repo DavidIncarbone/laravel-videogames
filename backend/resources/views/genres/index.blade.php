@@ -26,11 +26,20 @@
             <div class="d-flex justify-content-between align-items-center w-100 mt-3">
                 <p class="mt-3 fw-bold">Numero di Generi: <span class="fw-bold text-primary">{{ $genres->total() }}</span></p>
                 <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
-                        class="bi bi-trash"></i> <span class="d-none d-lg-inline">Elimina
+                        class="bi bi-trash"></i> <span class="">Elimina
                         tutti</span></button>
             </div>
-            <p class="{{ $genres->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina {{ $genres->currentPage() }} di
-                {{ $genres->lastPage() }}</p>
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="{{ $genres->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina
+                    {{ $genres->currentPage() }} di
+                    {{ $genres->lastPage() }}</div>
+
+                <x-paginate-query>
+                    <x-slot:id>genresForm</x-slot:id>
+                    <x-slot:route>{{ route('admin.genres.index') }}</x-slot:id>
+                    <x-slot:hiddenPublisher></x-slot:id>
+                </x-paginate-query>
+            </div>
 
             <form action="{{ route('admin.genres.destroySelected') }}" method="POST">
                 @csrf
@@ -43,10 +52,11 @@
                             <th class="my-auto">
                                 <input type="checkbox" class="select-all mt-1">
                             </th>
-                            <th></th>
+
                             <th>Genere</th>
                             <th>Data creazione</th>
                             <th>Data ultima modifica</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,8 +67,8 @@
                                 {{-- CHECKBOX --}}
                                 <x-slot:checkbox>
                                     <input type="checkbox" id="{{ $genre->id }}" name="selected_genres[]"
-                                        value="{{ $genre->id }}"class="align-self-center" data-name="{{ $genre->name }}"
-                                        data-id="{{ $genre->id }}">
+                                        value="{{ $genre->id }}"class="align-self-center"
+                                        data-name="{{ $genre->name }}" data-id="{{ $genre->id }}">
                                 </x-slot>
 
                                 {{-- ICONS --}}

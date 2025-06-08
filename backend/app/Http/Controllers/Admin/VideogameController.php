@@ -36,12 +36,14 @@ class VideogameController extends Controller
             $query->orderBy('updated_at', 'desc');
         }
 
-        $videogames = $query->paginate(5)->withQueryString();
+        $paginate = request()->paginate;
+
+        $videogames = $query->paginate($paginate ?? 5)->withQueryString();
         $publishers = Videogame::all()->pluck('publisher')->unique()->values()->toArray();
 
         $consoles = Console::all();
 
-        return view('videogames.index', compact('videogames', 'publishers'));
+        return view('videogames.index', compact('videogames', 'publishers', 'paginate'));
     }
 
     public function create()

@@ -31,7 +31,9 @@ class PegiController extends Controller
             $query->orderBy('updated_at', 'desc');
         }
 
-        $pegis = $query->paginate(5)->withQueryString();
+        $paginate = request()->paginate;
+
+        $pegis = $query->paginate($paginate ?? 5)->withQueryString();
 
         return view('pegis.index', compact('pegis'));
     }

@@ -58,7 +58,7 @@ php -S localhost:8000 -t public
 # Dopo aver avviato il server spostarsi con il browser al link:
 http://127.0.0.1:8000
 
-# Nella pagina che si arpirà dovrebbe comparire il seguente avvertimento, che richiede di avviare una migration del database:
+# Nella pagina che si aprirà dovrebbe comparire il seguente avvertimento, che richiede di avviare una migration del database:
 
 A table was not found
 Run migrations
@@ -142,7 +142,7 @@ import.meta.glob([
 ##Installiamo laravel/breeze:
 composer require laravel/breeze --dev
 
-##Creiamo lo scaffolding di defaul con blade:
+##Creiamo lo scaffolding di default con blade:
 php artisan breeze:install
 ##DURANTE QUESTA INSTALLAZIONE CI VERRANNO RICHIESTI I SEGUENTI STEP A CUI RISPONDERE:
 

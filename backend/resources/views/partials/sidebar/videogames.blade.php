@@ -16,7 +16,9 @@
         @endguest
     </a>
     @auth
-        <div class="collapse {{ request()->is('admin/videogames*') ? 'show' : '' }}" id="videogamesSubmenu">
+        <div class="collapse {{ request()->is('admin/videogames*') || request()->is('admin/screenshots*') ? 'show' : '' }}
+            "
+            id="videogamesSubmenu">
             <div class="ps-3">
                 <ul class="nav flex-column small">
                     <li>

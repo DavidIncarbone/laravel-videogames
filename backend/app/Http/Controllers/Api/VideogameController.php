@@ -58,7 +58,7 @@ class VideogameController extends Controller
             $query = Videogame::with('consoles', 'genres', 'pegi');
 
             if ($request->filled('search')) {
-                $query->where('name', 'like', '%'.$request->search.'%');
+                $query->where('name', 'like', '%' . $request->search . '%');
             }
 
             // CONSOLE FILTER
@@ -66,7 +66,6 @@ class VideogameController extends Controller
             if ($request->filled('consoles')) {
                 $query->whereHas('consoles', function ($relQuery) use ($request) {
                     $relQuery->whereIn('name', $request->consoles);
-
                 });
             }
 
@@ -110,7 +109,6 @@ class VideogameController extends Controller
                 'details' => $error->getMessage(),
             ], 500);
         }
-
     }
 
     public function show(Videogame $videogame)

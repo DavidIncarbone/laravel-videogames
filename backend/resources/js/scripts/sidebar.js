@@ -2,6 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     const collapseElements = document.querySelectorAll(".collapse");
+    console.log(collapseElements);
     collapseElements.forEach((collapse) => {
         const icons = collapse.previousElementSibling.querySelectorAll("i.bi");
         const toggleIcon = icons[icons.length - 1];

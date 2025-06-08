@@ -32,7 +32,9 @@ class ScreenshotController extends Controller
         } elseif ($request->orderFor == 'edit' && $request->orderBy == 'desc') {
             $query->orderBy('updated_at', 'desc');
         }
-        $screenshots = $query->paginate(5)->withQueryString();
+        $paginate = request()->paginate;
+
+        $screenshots = $query->paginate($paginate ?? 5)->withQueryString();
 
         return view('screenshots/index', compact('screenshots'));
     }

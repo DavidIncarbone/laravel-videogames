@@ -28,11 +28,20 @@
                         class="fw-bold text-primary">{{ $screenshots->total() }}</span>
                 </p>
                 <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
-                        class="bi bi-trash"></i> <span class="d-none d-lg-inline">Elimina
+                        class="bi bi-trash"></i> <span class="">Elimina
                         tutti</span></button>
             </div>
-            <p class="{{ $screenshots->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina {{ $screenshots->currentPage() }} di
-                {{ $screenshots->lastPage() }}</p>
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="{{ $screenshots->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina
+                    {{ $screenshots->currentPage() }} di
+                    {{ $screenshots->lastPage() }}</div>
+
+                <x-paginate-query>
+                    <x-slot:id>screenshotsForm</x-slot:id>
+                    <x-slot:route>{{ route('admin.screenshots.index') }}</x-slot:id>
+                    <x-slot:hiddenPublisher></x-slot:id>
+                </x-paginate-query>
+            </div>
 
             {{-- INVISIBLE FORM FOR CREATE ROUTE --}}
 
@@ -53,11 +62,12 @@
                             <th class="my-auto">
                                 <input type="checkbox" class="select-all mt-1">
                             </th>
-                            <th></th>
+
                             <th>Screenshot</th>
                             <th class="d-none d-lg-table-cell">Nome videogioco</th>
                             <th>Data creazione</th>
                             <th>Data ultima modifica</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,7 +111,7 @@
                                 <x-slot:firstTd>
                                     <div class="d-flex w-100 justify-content-center" style="height:66px;">
                                         <div id="post-image" class="align-self-center">
-                                            <img class="current-screenshot"
+                                            <img class="current-screenshot"style="width: 100px; height:50px"
                                                 src="{{ asset('storage/' . $screenshot->url) }}"
                                                 alt="{{ $screenshot->name }}">
                                         </div>

@@ -26,11 +26,20 @@
                 <p class="mt-3 fw-bold">Numero di console: <span class="fw-bold text-primary">{{ $consoles->total() }}</span>
                 </p>
                 <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
-                        class="bi bi-trash"></i> <span class="d-none d-lg-inline">Elimina
+                        class="bi bi-trash"></i> <span class="">Elimina
                         tutti</span></button>
             </div>
-            <p class="{{ $consoles->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina {{ $consoles->currentPage() }} di
-                {{ $consoles->lastPage() }}</p>
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="{{ $consoles->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina
+                    {{ $consoles->currentPage() }} di
+                    {{ $consoles->lastPage() }}</div>
+
+                <x-paginate-query>
+                    <x-slot:id>consolesForm</x-slot>
+                    <x-slot:route>{{ route('admin.consoles.index') }}</x-slot>
+                    <x-slot:hiddenPublisher></x-slot>
+                </x-paginate-query>
+            </div>
 
             <form action="{{ route('admin.consoles.destroySelected') }}" method="POST">
                 @csrf
@@ -44,11 +53,12 @@
                             <th class="my-auto">
                                 <input type="checkbox" class="select-all mt-1">
                             </th>
-                            <th></th>
+
                             <th>Console</th>
                             <th class="d-none d-lg-table-cell">Logo</th>
                             <th>Data creazione</th>
                             <th>Data ultima modifica</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

@@ -41,6 +41,14 @@ select {
     border: 1px solid #ccc;
 }
 
+.modal {
+    margin-left: 20vh;
+}
+
+body.modal-open {
+    padding-right: 0 !important; /* o il valore corretto per il tuo layout */
+}
+
 // SIDEBAR
 
 .sidebar {
@@ -554,5 +562,9 @@ td:not(.not-break) {
 
     h2 {
         font-size: 1.25rem;
+    }
+
+    .modal {
+        margin-left: 0;
     }
 }

@@ -29,7 +29,9 @@ class ConsoleController extends Controller
         } elseif ($request->orderFor == 'edit' && $request->orderBy == 'desc') {
             $query->orderBy('updated_at', 'desc');
         }
-        $consoles = $query->paginate(5)->withQueryString();
+        $paginate = request()->paginate;
+
+        $consoles = $query->paginate($paginate ?? 5)->withQueryString();
 
         return view('consoles/index', compact('consoles'));
     }

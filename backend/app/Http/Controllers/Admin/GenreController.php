@@ -31,7 +31,9 @@ class GenreController extends Controller
             $query->orderBy('updated_at', 'desc');
         }
 
-        $genres = $query->paginate(5)->withQueryString();
+        $paginate = request()->paginate;
+
+        $genres = $query->paginate($paginate ?? 5)->withQueryString();
 
         return view('genres/index', compact('genres'));
     }

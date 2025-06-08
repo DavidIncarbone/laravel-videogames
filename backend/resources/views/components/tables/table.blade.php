@@ -4,13 +4,7 @@
             {{ $checkbox }}
         </div>
     </td>
-    <td>
-        {{ $show }}
-        <a class="text-decoration-none text-dark" {{ $edit }}>
-            <i id="pencil" class="bi bi-pencil"></i>
-        </a>
-        {{ $delete }}
-    </td>
+
 
     {{-- FIRST TD --}}
 
@@ -24,4 +18,11 @@
 
     <td class="not-break">{{ $created }}</td>
     <td class="not-break">{{ $updated }}</td>
+    <td>
+        {{ $show }}
+        <a class="text-decoration-none text-dark" {{ $edit }}>
+            <i id="pencil" class="bi bi-pencil"></i>
+        </a>
+        {{ $delete }}
+    </td>
 </tr>
