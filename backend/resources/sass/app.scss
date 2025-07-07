@@ -380,6 +380,13 @@ td:not(.not-break) {
     margin-right: 0.21rem;
 }
 
+.btn:disabled {
+    pointer-events: auto !important;
+    cursor: not-allowed !important;
+    border: none !important;
+    opacity: 0.2;
+}
+
 // SCREENSHOTS INPUT
 
 .preview-container {

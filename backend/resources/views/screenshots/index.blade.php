@@ -45,6 +45,7 @@
                     <span class="d-none d-md-inline">Elimina
                         tutti</span></button>
             </div>
+            <p class="fw-bold">N.B Un gioco può avere al massimo 4 screenshot</p>
 
             {{-- INVISIBLE FORM FOR CREATE ROUTE --}}
 
@@ -88,12 +89,16 @@
 
                                 {{-- ICONS --}}
                                 <x-slot:show>
-                                    @if (count($screenshot->videogame->screenshots) < 4)
-                                        <button type="button" class="btn p-0"
-                                            onclick='submitCreate(@json($screenshot->videogame->slug))'>
-                                            <i id="plus" class="fa-solid fa-plus"></i>
-                                        </button>
-                                    @endif
+
+                                    @php
+                                        $full = count($screenshot->videogame->screenshots) >= 4;
+                                    @endphp
+
+                                    <button type="button" class="btn p-0 text-opacity-50"
+                                        onclick='submitCreate(@json($screenshot->videogame->slug))' @disabled($full)>
+                                        <i id="plus" class="fa-solid fa-plus"></i>
+                                    </button>
+
                                 </x-slot>
                                 <x-slot:edit>
                                     href="{{ route('admin.screenshots.edit', $screenshot) }}"

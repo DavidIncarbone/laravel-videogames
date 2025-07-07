@@ -36,6 +36,7 @@ class ScreenshotController extends Controller
 
         $screenshots = $query->paginate($paginate ?? 5)->withQueryString();
 
+
         return view('screenshots/index', compact('screenshots'));
     }
 
