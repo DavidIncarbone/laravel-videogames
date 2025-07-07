@@ -159,6 +159,8 @@
                 <div class="pagination">
                     {{ $videogames->links() }}
                 </div>
+
+                {{-- MENU FOR DELETE --}}
                 <x-selected-menu></x-selected-menu>
 
             </div>
