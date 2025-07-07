@@ -1,8 +1,12 @@
 /* GENERAL  */
 
 body {
-  font-family: 'Arial', sans-serif;
+  /* font-family: 'Arial', sans-serif; */
   background-color: #ebedef;
+  font-family: 'Montserrat', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
 }
 
 .debug {

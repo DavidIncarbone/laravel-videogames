@@ -50,11 +50,16 @@ export default function Videogames() {
 
   // FUNCTIONS
 
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
+
   useEffect(() => {
     const consolesUrl = searchParams.getAll('consoles[]');
     const genresUrl = searchParams.getAll('genres[]');
     const pegisUrl = searchParams.getAll('pegis[]');
     const search = searchParams.get('search');
+    console.log(page);
     setSelectedConsoles(consolesUrl);
     setSelectedGenres(genresUrl);
     setSelectedPegis(pegisUrl);
@@ -64,7 +69,7 @@ export default function Videogames() {
 
   useEffect(() => {
     setInitialLoader(true);
-    setPage(1);
+    setPage(page && String(page).length ? page : 1);
     scrollTop();
   }, []);
 
