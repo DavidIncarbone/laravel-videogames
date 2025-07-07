@@ -17,8 +17,6 @@
             <x-slot:disabled>{{ !request('search') ? 'disabled' : '' }}</x-slot>
         </x-searchbar>
 
-
-
         @if (count($pegis) < 1)
             <h5>Nessun PEGI presente</h5>
         @else
@@ -26,20 +24,22 @@
 
             <div class="d-flex justify-content-between align-items-center w-100 mt-3">
                 <p class="mt-3 fw-bold">Numero di PEGI: <span class="fw-bold text-primary">{{ $pegis->total() }}</span></p>
-                <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
+            </div>
+            <div class="d-flex align-items-start justify-content-between">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="{{ $pegis->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina
+                        {{ $pegis->currentPage() }} di
+                        {{ $pegis->lastPage() }}</div>
+
+                    <x-paginate-query>
+                        <x-slot:id>pegisForm</x-slot:id>
+                        <x-slot:route>{{ route('admin.pegis.index') }}</x-slot:id>
+                        <x-slot:hiddenPublisher></x-slot:id>
+                    </x-paginate-query>
+                </div>
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
                         class="bi bi-trash"></i> <span class="">Elimina
                         tutti</span> </button>
-            </div>
-            <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="{{ $pegis->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina
-                    {{ $pegis->currentPage() }} di
-                    {{ $pegis->lastPage() }}</div>
-
-                <x-paginate-query>
-                    <x-slot:id>pegisForm</x-slot:id>
-                    <x-slot:route>{{ route('admin.pegis.index') }}</x-slot:id>
-                    <x-slot:hiddenPublisher></x-slot:id>
-                </x-paginate-query>
             </div>
 
             <form action="{{ route('admin.pegis.destroySelected') }}" method="POST">
@@ -60,15 +60,11 @@
                             <th>Data creazione</th>
                             <th>Data ultima modifica</th>
                             <th></th>
-
-
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach ($pegis as $pegi)
                             <x-table>
-
                                 {{-- CHECKBOX --}}
                                 <x-slot:checkbox>
                                     <input type="checkbox" id="{{ $pegi->id }}" name="selected_pegis[]"

@@ -25,20 +25,23 @@
 
             <div class="d-flex justify-content-between align-items-center w-100 mt-3">
                 <p class="mt-3 fw-bold">Numero di Generi: <span class="fw-bold text-primary">{{ $genres->total() }}</span></p>
-                <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
-                        class="bi bi-trash"></i> <span class="">Elimina
-                        tutti</span></button>
             </div>
-            <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="{{ $genres->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina
-                    {{ $genres->currentPage() }} di
-                    {{ $genres->lastPage() }}</div>
+            <div class="d-flex align-items-start justify-content-between">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="{{ $genres->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina
+                        {{ $genres->currentPage() }} di
+                        {{ $genres->lastPage() }}</div>
 
-                <x-paginate-query>
-                    <x-slot:id>genresForm</x-slot:id>
-                    <x-slot:route>{{ route('admin.genres.index') }}</x-slot:id>
-                    <x-slot:hiddenPublisher></x-slot:id>
-                </x-paginate-query>
+                    <x-paginate-query>
+                        <x-slot:id>genresForm</x-slot:id>
+                        <x-slot:route>{{ route('admin.genres.index') }}</x-slot:id>
+                        <x-slot:hiddenPublisher></x-slot:id>
+                    </x-paginate-query>
+                </div>
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
+                        class="bi bi-trash"></i>
+                    <span class="">Elimina
+                        tutti</span></button>
             </div>
 
             <form action="{{ route('admin.genres.destroySelected') }}" method="POST">

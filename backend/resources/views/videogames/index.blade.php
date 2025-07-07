@@ -39,26 +39,27 @@
                 <div class="d-flex gap-3">
                     <p class="mt-3 fw-bold">Numero di videogiochi: <span
                             class="fw-bold text-primary">{{ $videogames->total() }}</span></p>
-
-
-
                 </div>
-                <button class="btn btn-danger me-3 d-flex" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
+            </div>
+
+            <div class="d-flex align-items-start justify-content-between">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="{{ $videogames->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina
+                        {{ $videogames->currentPage() }} di
+                        {{ $videogames->lastPage() }}
+                    </div>
+                    <x-paginate-query>
+                        <x-slot:id>videogamesForm</x-slot>
+                        <x-slot:route>{{ route('admin.videogames.index') }}</x-slot>
+                        <x-slot:hiddenPublisher><input type="hidden" name="publisher"
+                                value="{{ request('publisher') }}"></x-slot>
+                    </x-paginate-query>
+                </div>
+                <button class="btn btn-danger d-flex" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
                         class="bi bi-trash"></i> <span class="">Elimina
                         tutti</span> </button>
             </div>
 
-            <div class="d-flex align-items-center gap-3 mb-3">
-                <div class="{{ $videogames->lastPage() > 1 ? 'd-block' : 'd-none' }}">Pagina
-                    {{ $videogames->currentPage() }} di
-                    {{ $videogames->lastPage() }}</div>
-
-                <x-paginate-query>
-                    <x-slot:id>videogamesForm</x-slot>
-                    <x-slot:route>{{ route('admin.videogames.index') }}</x-slot>
-                    <x-slot:hiddenPublisher><input type="hidden" name="publisher" value="{{ request('publisher') }}"></x-slot>
-                </x-paginate-query>
-            </div>
 
             {{-- TABLE --}}
 
