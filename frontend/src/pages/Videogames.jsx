@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { useGlobalContext } from '../contexts/GlobalContext';
 import { useFilterContext } from '../contexts/FilterContext';
-import { usePaginationContext } from '../contexts/PaginationContext';
+// import { usePaginationContext } from '../contexts/PaginationContext';
 import Paginator from '../components/filter-page/Paginator';
 import Loader from '../components/general/Loader';
 import FilterBlock from '../components/filter-page/FilterBlock';
 import FilterBlockMobile from '../components/filter-page/FilterBlockMobile';
 import CardList from '../components/filter-page/CardList';
 import mobileStyles from '../style/FilterMobile.module.css';
+import { usePagination } from '../hooks/usePagination';
 
 export default function Videogames() {
   // VARIABLES
@@ -46,7 +47,8 @@ export default function Videogames() {
   const { fileUrl, isLoading, initialLoader, setInitialLoader } =
     useGlobalContext();
 
-  const { page, scrollTop, setPage } = usePaginationContext();
+  // const { page, scrollTop, setPage } = usePaginationContext();
+  const { page, scrollTop, setPage } = usePagination();
 
   // FUNCTIONS
 

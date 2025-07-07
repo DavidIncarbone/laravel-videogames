@@ -1,13 +1,7 @@
-// ***** VARIABLES *****
+import { useState } from 'react';
+import { useFilterContext } from '../contexts/FilterContext';
 
-import { createContext, useContext, useState, useRef } from 'react';
-import axios from 'axios';
-import { useSearchParams } from 'react-router-dom';
-import { useFilterContext } from './FilterContext';
-
-const PaginationContext = createContext();
-
-const PaginationProvider = ({ children }) => {
+export const usePagination = () => {
   const {
     newParams,
     searchParams,
@@ -95,8 +89,7 @@ const PaginationProvider = ({ children }) => {
     }
   };
 
-  const data = {
-    // PAGINATION
+  return {
     page,
     setPage,
     page,
@@ -113,22 +106,4 @@ const PaginationProvider = ({ children }) => {
     handlePageInputBlur,
     handlePageInputKeyDown,
   };
-
-  return (
-    <PaginationContext.Provider value={data}>
-      {children}
-    </PaginationContext.Provider>
-  );
 };
-
-// function usePaginationContext() {
-//   const context = useContext(PaginationContext);
-//   if (!context) {
-//     throw new Error(
-//       'usePaginationContext is not inside the context provider PaginationProvider',
-//     );
-//   }
-//   return context;
-// }
-
-// export { PaginationProvider, usePaginationContext };
