@@ -48,7 +48,7 @@
 
         <div>
             <button type="submit" id="searchBtn" class="btn btn-primary rounded-3">
-                Filtra
+                Applica <span class="d-none d-md-inline">filtri</span>
             </button>
         </div>
     </div>

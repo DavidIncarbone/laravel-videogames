@@ -55,8 +55,8 @@
                                 value="{{ request('publisher') }}"></x-slot>
                     </x-paginate-query>
                 </div>
-                <button class="btn btn-danger d-flex" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
-                        class="bi bi-trash"></i> <span class="">Elimina
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAllModal"><i
+                        class="bi bi-trash"></i> <span class="d-none d-md-inline">Elimina
                         tutti</span> </button>
             </div>
 
