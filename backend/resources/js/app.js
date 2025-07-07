@@ -1,6 +1,8 @@
-import "./bootstrap";
-import "~icons/bootstrap-icons.scss";
+// import "./bootstrap";
+// import "~icons/bootstrap-icons.scss";
 import * as bootstrap from "bootstrap";
+
+window.bootstrap = bootstrap; // rende disponibile globalmente
 
 import.meta.glob(["../img/**"]);
 
