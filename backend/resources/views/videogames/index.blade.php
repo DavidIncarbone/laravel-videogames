@@ -81,7 +81,7 @@
                             <th class="d-none d-lg-table-cell">Casa produttrice</th>
                             <th>Data creazione</th>
                             <th>Data ultima modifica</th>
-                            <th></th>
+                            <th><span class="d-none d-md-inline">Actions</span></th>
 
                         </tr>
                     </thead>

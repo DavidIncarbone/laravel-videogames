@@ -352,12 +352,19 @@ td:not(.not-break) {
     font-size: xx-large;
 }
 
-#pencil:hover {
+#pencil:hover,
+#show-pencil:hover {
     color: orange;
 }
 
-#trash:hover:not(.deleteAll) {
+#trash:hover:not(.deleteAll),
+#show-trash:hover {
     color: red;
+}
+
+#show-pencil,
+#show-trash {
+    font-size: xx-large;
 }
 
 #eye:hover {
@@ -540,6 +547,11 @@ td:not(.not-break) {
     .fa-sharp,
     .bi-trash {
         margin-right: 0;
+    }
+
+    #show-pencil,
+    #show-trash {
+        font-size: medium;
     }
 
     // OVERLAY
