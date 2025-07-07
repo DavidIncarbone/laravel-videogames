@@ -8,7 +8,7 @@
 
     {{-- FIRST TD --}}
 
-    <td id="table-videogame-name" class="w-25">{{ $firstTd }}</td>
+    <td id="table-videogame-name" class="">{{ $firstTd }}</td>
 
     {{-- SECOND TD --}}
 

@@ -70,7 +70,7 @@
                             <th class="d-none d-lg-table-cell">Nome videogioco</th>
                             <th>Data creazione</th>
                             <th>Data ultima modifica</th>
-                            <th></th>
+                            <th><span class="d-none d-md-inline">Actions</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,9 +112,9 @@
                                 {{-- TD --}}
 
                                 <x-slot:firstTd>
-                                    <div class="d-flex w-100 justify-content-center" style="height:66px;">
+                                    <div class="d-flex justify-content-center" style=" height:66px;">
                                         <div id="post-image" class="align-self-center">
-                                            <img class="current-screenshot"style="width: 100px; height:50px"
+                                            <img class="current-screenshot"style="width:90px; height:50px"
                                                 src="{{ asset('storage/' . $screenshot->url) }}"
                                                 alt="{{ $screenshot->name }}">
                                         </div>

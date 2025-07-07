@@ -59,7 +59,7 @@
                             <th class="d-none d-lg-table-cell">Età minima (anni)</th>
                             <th>Data creazione</th>
                             <th>Data ultima modifica</th>
-                            <th></th>
+                            <th><span class="d-none d-md-inline">Actions</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,7 +90,7 @@
 
                                 <x-slot:firstTd>
                                     <div class="d-flex w-100 justify-content-center align-items-center">
-                                        <div id="post-image" style="width: 100px; height:50px">
+                                        <div id="post-image" style="width: 90px; height:50px">
                                             <img id="logo" class="current-screenshot w-auto"
                                                 src="{{ asset('storage/' . $pegi->logo) }}" alt="{{ $pegi->age }}">
                                         </div>
@@ -192,7 +192,7 @@
     <x-current-screenshot-overlay>
         <x-slot:overlayTitle>Loghi attuali</x-slot>
         <x-slot:img> <img src="" alt="" id="current-screenshot-overlay-img"
-                class="rounded shadow-sm w-75 w-75">
+                class="rounded shadow-sm w-50 w-50">
         </x-slot>
         <x-slot:index></x-slot>
     </x-current-screenshot-overlay>
