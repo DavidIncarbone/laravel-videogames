@@ -63,6 +63,7 @@ const FilterProvider = ({ children }) => {
         const items = res.data.items || {};
         const videogamesPagination = items?.videogames || {};
         const videogamesData = items?.videogames?.data || [];
+        console.log(res.data.items);
         console.log('Risposta videogiochi:', videogamesData);
         if (items) {
           setVideogames(videogamesPagination.data || []);

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useRef } from 'react';
 import axios from 'axios';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useGlobalContext } from './GlobalContext';
 
 const ShowContext = createContext();
@@ -18,6 +18,7 @@ const ShowProvider = ({ children }) => {
   const [isCoverOverlayOpen, setCoverOverlayOpen] = useState(false);
   const [isScreenshotOverlayOpen, setScreenshotOverlayOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   //   ***** FUNCTIONS *****
 
@@ -36,6 +37,7 @@ const ShowProvider = ({ children }) => {
       })
       .catch((err) => {
         console.log(err);
+        navigate('*');
       })
       .finally(() => {
         console.log(`Chiamata al videogioco effettuata`);

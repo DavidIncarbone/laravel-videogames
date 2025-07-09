@@ -1,21 +1,9 @@
-// import { usePaginationContext } from '../../contexts/PaginationContext';
+import { usePaginationContext } from '../../contexts/PaginationContext';
 import { useEffect } from 'react';
 import styles from '../../style/Paginator.module.css';
-import { usePagination } from '../../hooks/usePagination';
+// import { usePagination } from '../../hooks/usePagination';
 
 const Paginator = ({ currentPage, pagination }) => {
-  // const {
-  //   showInput,
-  //   setShowInput,
-  //   pageInput,
-  //   totalPages,
-  //   scrollTop,
-  //   getPageNumbers,
-  //   handlePageChange,
-  //   handlePageInputBlur,
-  //   handlePageInputChange,
-  //   handlePageInputKeyDown,
-  // } = usePaginationContext();
   const {
     showInput,
     setShowInput,
@@ -27,7 +15,19 @@ const Paginator = ({ currentPage, pagination }) => {
     handlePageInputBlur,
     handlePageInputChange,
     handlePageInputKeyDown,
-  } = usePagination();
+  } = usePaginationContext();
+  // const {
+  //   showInput,
+  //   setShowInput,
+  //   pageInput,
+  //   totalPages,
+  //   scrollTop,
+  //   getPageNumbers,
+  //   handlePageChange,
+  //   handlePageInputBlur,
+  //   handlePageInputChange,
+  //   handlePageInputKeyDown,
+  // } = usePagination();
 
   return (
     <nav

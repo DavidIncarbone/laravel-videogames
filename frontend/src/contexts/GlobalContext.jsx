@@ -21,11 +21,14 @@ const GlobalProvider = ({ children }) => {
 
   // *** HOMEPAGE ***
 
-  // NEW GAMES CAROUSEL
+  // VARS
 
   const homepageEndpoint = 'videogames/homepage';
   const [homepageVideogames, setHomepageVideogames] = useState([]);
-
+  const consolesEndpoint = 'consoles';
+  const [consoles, setConsoles] = useState([]);
+  const genresEndpoint = 'genres';
+  const [genres, setGenres] = useState([]);
   //   ***** FUNCTIONS *****
 
   // *** GENERAL ***
@@ -54,6 +57,41 @@ const GlobalProvider = ({ children }) => {
       .finally(() => {
         console.log('Chiamata agli ultimi videogiochi effettuata');
         // stopLoading();
+      });
+  };
+
+  // GET CONSOLES
+
+  const fetchConsoles = () => {
+    axios
+      .get(apiUrl + consolesEndpoint)
+      .then((res) => {
+        console.log(res.data);
+        const items = res.data.items || {};
+        setConsoles(items || []);
+      })
+      .catch((err) => {
+        console.err(err);
+      })
+      .finally(() => {
+        console.log('Chiamata alle console effettuata');
+        stopLoading();
+      });
+  };
+  const fetchGenres = () => {
+    axios
+      .get(apiUrl + genresEndpoint)
+      .then((res) => {
+        console.log(res.data);
+        const items = res.data.items || {};
+        setGenres(items || []);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        console.log('Chiamata alle console effettuata');
+        stopLoading();
       });
   };
 
@@ -111,6 +149,10 @@ const GlobalProvider = ({ children }) => {
     // NEW GAMES
     homepageVideogames,
     fetchHomepageVideogames,
+    fetchConsoles,
+    consoles,
+    fetchGenres,
+    genres,
 
     // CAROUSEL
     activeIndex,

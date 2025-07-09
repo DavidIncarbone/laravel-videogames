@@ -1,12 +1,12 @@
 import { useFilterContext } from '../../contexts/FilterContext';
-// import { usePaginationContext } from '../../contexts/PaginationContext';
+import { usePaginationContext } from '../../contexts/PaginationContext';
 import { useNavigate } from 'react-router-dom';
-import { usePagination } from '../../hooks/usePagination';
+// import { usePagination } from '../../hooks/usePagination';
 
 const Searchbar = () => {
   const { search, setSearch, newParams } = useFilterContext();
-  // const { setPage } = usePaginationContext();
-  const { setPage } = usePagination();
+  const { setPage } = usePaginationContext();
+  // const { setPage } = usePagination();
 
   const navigate = useNavigate();
 

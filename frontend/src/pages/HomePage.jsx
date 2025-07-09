@@ -6,17 +6,26 @@ import Carousel from '../components/homepage/Carousel';
 import Slider from '../components/homepage/Slider';
 
 export default function HomePage() {
+  console.log('homepage render');
   // Dichiarazione variabili
-  const { homepageVideogames, fetchHomepageVideogames, fileUrl, isLoading } =
-    useGlobalContext();
+  const {
+    homepageVideogames,
+    fetchHomepageVideogames,
+    fetchConsoles,
+    consoles,
+    fetchGenres,
+    genres,
+    fileUrl,
+    isLoading,
+  } = useGlobalContext();
 
-  const { consoles, genres, fetchVideogames, resetFilters } =
-    useFilterContext();
+  const { resetFilters } = useFilterContext();
 
   // Dichiarazione funzioni
   useEffect(() => {
     fetchHomepageVideogames();
-    fetchVideogames();
+    fetchConsoles();
+    fetchGenres();
   }, []);
 
   return (
@@ -38,7 +47,11 @@ export default function HomePage() {
                 Seleziona per console
               </h2>
               <div className="position-relative">
-                <Slider data={consoles} urlKey={'consoles'} />
+                <Slider
+                  data={consoles}
+                  urlKey={'consoles'}
+                  resetFilters={resetFilters}
+                />
               </div>
             </>
           </section>

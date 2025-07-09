@@ -121,14 +121,14 @@ const PaginationProvider = ({ children }) => {
   );
 };
 
-// function usePaginationContext() {
-//   const context = useContext(PaginationContext);
-//   if (!context) {
-//     throw new Error(
-//       'usePaginationContext is not inside the context provider PaginationProvider',
-//     );
-//   }
-//   return context;
-// }
+function usePaginationContext() {
+  const context = useContext(PaginationContext);
+  if (!context) {
+    throw new Error(
+      'usePaginationContext is not inside the context provider PaginationProvider',
+    );
+  }
+  return context;
+}
 
-// export { PaginationProvider, usePaginationContext };
+export { PaginationProvider, usePaginationContext };

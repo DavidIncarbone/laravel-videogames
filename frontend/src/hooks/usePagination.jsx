@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useFilterContext } from '../contexts/FilterContext';
 
-export const usePagination = () => {
+const usePagination = () => {
   const {
     newParams,
     searchParams,
