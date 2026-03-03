@@ -186,7 +186,7 @@ class VideogameController extends Controller
 
         // TOASTR
 
-        if ($videogameUnchanged && $consoleUnchanged && $genreUnchanged && ! array_key_exists('screenshots', $data)) {
+        if ($videogameUnchanged && $consoleUnchanged && $genreUnchanged && !array_key_exists('screenshots', $data)) {
             toastr()->info('Nessuna modifica effettuata');
         } else {
             toastr()->success('<span class="fw-bold">' . Str::limit($videogame->name, 20) . '</span> è stato modificato con successo', ['title' => '']);
@@ -198,14 +198,10 @@ class VideogameController extends Controller
 
         if ($request->has('genre_ids')) {
             $videogame->genres()->sync($data['genre_ids']);
-        } else {
-            $videogame->genres()->detach();
         }
 
         if ($request->has('console_ids')) {
             $videogame->consoles()->sync($data['console_ids']);
-        } else {
-            $videogame->consoles()->detach();
         }
 
         return redirect()->route('admin.videogames.show', $videogame);

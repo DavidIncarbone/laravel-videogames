@@ -114,11 +114,11 @@ class VideogameController extends Controller
     public function show(Videogame $videogame)
     {
 
-        $new = $videogame->load('consoles', 'genres', 'pegi', 'screenshots');
+        $videogame->load('consoles', 'genres', 'pegi', 'screenshots');
 
         try {
 
-            if (! $videogame) {
+            if (!$videogame) {
 
                 return response()->json([
                     'success' => true,
@@ -130,7 +130,7 @@ class VideogameController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Richiesta effettuata con successo',
-                'item' => $new,
+                'item' => $videogame,
             ], 200);
         } catch (\Exception $error) {
 

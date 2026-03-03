@@ -66,10 +66,8 @@ class ScreenshotController extends Controller
     {
 
 
-
-        $videogameId = $request->query('videogame_id');
-
         $data = $request->validated();
+        $videogameId = $request->query('videogame_id');
 
         if (array_key_exists('screenshots', $data)) {
 
