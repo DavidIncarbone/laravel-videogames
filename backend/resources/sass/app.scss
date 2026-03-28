@@ -467,6 +467,14 @@ td:not(.not-break) {
 
 // ********************* MEDIA QUERY *********************
 
+@media (min-width: 770px) {
+
+    #selected-content{
+        width: 10vw;
+    }
+
+}
+
 @media (max-width: 769px) {
     // GENERAL
 
@@ -575,6 +583,13 @@ td:not(.not-break) {
     #screenshot-details {
         height: 25vh;
     }
+
+      #selected-content{
+        width: 100%;
+    }
+       .modal {
+        margin-left: 0;
+    }
 }
 
 @media (max-width: 576px) {
@@ -586,7 +601,6 @@ td:not(.not-break) {
         font-size: 1.25rem;
     }
 
-    .modal {
-        margin-left: 0;
-    }
+ 
+
 }

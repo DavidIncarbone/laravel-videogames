@@ -49,11 +49,7 @@ class DashboardController extends Controller
             ],
         ];
 
-        $job = new Simplejob('bello');
-        $job->handle();
-
-        SimpleJob::dispatch('dispatch')->delay(now()->addMinutes(1));
-
+        // SimpleJob::dispatch('test');
         return view('dashboard', compact('itemsCount'));
     }
 }

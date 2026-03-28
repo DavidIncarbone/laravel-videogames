@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\GenreController;
 use App\Http\Controllers\Api\PegiController;
 use App\Http\Controllers\Api\VideogameController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/user', function (Request $request) {
