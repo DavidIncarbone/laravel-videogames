@@ -183,3 +183,18 @@ npm i
 npm run dev
 
 ## --------------------------------------------------------------- END AUTENTICAZIONE CON LARAVEL BREEZE Modulo 11 della specializzazione ---------------------------------------------------------------
+
+## Deploy su runaway
+
+### Build command:
+
+- composer install --no-dev --optimize-autoloader && php artisan config:cache
+
+### Run command:
+
+- php artisan serve --host=0.0.0.0 --port=$PORT
+-
+
+### VARIABLES:
+
+COMPOSER_ALLOW_SUPERUSER=1
