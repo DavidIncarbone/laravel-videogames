@@ -61,6 +61,8 @@ Route::middleware(['auth', 'verified'])
         Route::resource('screenshots', ScreenshotController::class);
         Route::delete('screenshots/all/destroy', [ScreenshotController::class, 'destroyAll'])->name('screenshots.destroyAll');
         Route::delete('screenshots/selected/destroy', [ScreenshotController::class, 'destroySelected'])->name('screenshots.destroySelected');
+
+        Route::get('esercizio', fn() => view('esercizio'));
     });
 
 require __DIR__ . '/auth.php';

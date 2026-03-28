@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\Simplejob;
 use App\Models\Console;
 use App\Models\Genre;
 use App\Models\Pegi;
@@ -47,6 +48,11 @@ class DashboardController extends Controller
                 'count' => $screenshotsCount,
             ],
         ];
+
+        $job = new Simplejob('bello');
+        $job->handle();
+
+        SimpleJob::dispatch('dispatch')->delay(now()->addMinutes(1));
 
         return view('dashboard', compact('itemsCount'));
     }
