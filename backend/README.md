@@ -197,10 +197,13 @@ npm run dev
 
 ### VARIABLES:
 
+(SE NON CI SONO, CREARLE)
+
 - COMPOSER_ALLOW_SUPERUSER=1
 - APP_ENV=production
 - APP_URL="l'url del backend"
-- DB_URL="L'url del db"
+- ASSET_URL="l'url del backend"
+- DB_URL="L'url del db" (In alternativa tutte le variabili con le credenziali)
 
 Copiare:
 
