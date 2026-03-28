@@ -207,7 +207,7 @@ npm run dev
 
 Copiare:
 
-````javascript
+```javascript
  plugins: [
         laravel({
             // edit the first value of the array input to point to our new sass files and folder.
@@ -215,9 +215,14 @@ Copiare:
             input: ["resources/sass/app.scss", "resources/js/app.js"], <----
             refresh: true,
         }),
-    ],```
+    ],
+```
+
 all'interno del file vite.config.js
 
+in storage/public/app/img aggiungere:
 
-Spostare vite e vite-laravel-plugin da devDependencies a dependencies
-````
+- !img/
+- !img/\*\*
+
+per caricare le immagini di scaffolding del progetto
