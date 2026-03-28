@@ -188,7 +188,7 @@ npm run dev
 
 ### Build command:
 
-- composer install --no-dev --optimize-autoloader && php artisan config:cache
+- npm install && npm run build && composer install --no-dev --optimize-autoloader
 
 ### Run command:
 
@@ -197,4 +197,24 @@ npm run dev
 
 ### VARIABLES:
 
-COMPOSER_ALLOW_SUPERUSER=1
+- COMPOSER_ALLOW_SUPERUSER=1
+- APP_ENV=production
+- APP_URL="l'url del backend"
+- DB_URL="L'url del db"
+
+Copiare:
+
+````javascript
+ plugins: [
+        laravel({
+            // edit the first value of the array input to point to our new sass files and folder.
+            input: ["resources/scss/app.scss", "resources/js/app.js"],
+            input: ["resources/sass/app.scss", "resources/js/app.js"], <----
+            refresh: true,
+        }),
+    ],```
+all'interno del file vite.config.js
+
+
+Spostare vite e vite-laravel-plugin da devDependencies a dependencies
+````
