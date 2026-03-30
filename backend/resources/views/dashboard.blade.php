@@ -14,7 +14,7 @@
         </div>
 
         <div class="card m-auto mb-3">
-            <a href="http://localhost:5174/" target="_blank" rel="noopener noreferrer">
+            <a href="https://reactvideogames.netlify.app/" target="_blank" rel="noopener noreferrer">
                 <div class="card-body rounded">
                     <h5 class="card-title text-center">Vai alla WebApp <i class="bi bi-box-arrow-up-right me-2"></i> </h5>
                 </div>
